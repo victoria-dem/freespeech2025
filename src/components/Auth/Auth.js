@@ -5,7 +5,11 @@ import {auth, db} from '../../utils/firebase'
 
 function Auth() {
     
-    const [isSubmitClicked, setIsSubmitClicked] = useState(false)
+    const [isSignUpClicked, setIsSignUpClicked] = useState(false)
+    const [isLogOutClicked, setIsLogOutClicked] = useState(false)
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [currentUser, setCurrentUser] = useState('Unknown')
+    
     const [values, setValues] = useState({
         email: '',
         password: ''
@@ -15,78 +19,95 @@ function Auth() {
         url: 'https://freespeech2025.com',
         handleCodeInApp: true
     };
-    
-// определяем юзер на сайте или нет
-    auth.onAuthStateChanged(function(user) {
+
+    // определяем юзер на сайте или нет
+    auth.onAuthStateChanged(function (user) {
         if (user) {
-            console.log('User is signed in', user)
+            setIsLoggedIn(true)
+            setCurrentUser(user.email)
+            console.log('User is signed in', user.email, user)
         } else {
+            setIsLoggedIn(false)
             console.log('No user is signed in')
         }
     });
-
-// Confirm the link is a sign-in with email link.
-    if (auth.isSignInWithEmailLink(window.location.href)) {
-        // Additional state parameters can also be passed via URL.
-        // This can be used to continue the user's intended action before triggering
-        // the sign-in operation.
-        // Get the email if available. This should be available if the user completes
-        // the flow on the same device where they started it.
-        let email = window.localStorage.getItem('emailForSignIn');
-        console.log('email', email);
-        
-        if (!email) {
-            // User opened the link on a different device. To prevent session fixation
-            // attacks, ask the user to provide the associated email again. For example:
-            email = window.prompt('Please provide your email for confirmation');
-        }
-        // The client SDK will parse the code from the link for you.
-        auth.signInWithEmailLink(email, window.location.href)
-            .then(function(result) {
-                console.log('result', result)
-                // Clear email from storage.
-                window.localStorage.removeItem('emailForSignIn');
-                // You can access the new user via result.user
-                // Additional user info profile not available via:
-                // result.additionalUserInfo.profile == null
-                // You can check if the user is new or existing:
-                // result.additionalUserInfo.isNewUser
-            })
-            .catch(function(error) {
-                console.error(error);
-                // Some error occurred, you can inspect the code: error.code
-                // Common errors could be invalid email and invalid or expired OTPs.
-            });
-    }
+    
     
     useEffect(() => {
-        if (isSubmitClicked) {
+        // Confirm the link is a sign-in with email link.
+        if (auth.isSignInWithEmailLink(window.location.href)) {
+            console.log('window.location.href from isSignInWithEmailLink', window.location.href)
+            let email = window.localStorage.getItem('emailForSignIn');
+            console.log('email', email);
+        
+            if (!email) {
+                console.log('User opened the link on a different device.')
+                email = window.prompt('Please provide your email for confirmation');
+            }
+
+        // The client SDK will parse the code from the link for you.
+            auth.signInWithEmailLink(email, window.location.href)
+                .then(function (result) {
+                    console.log('window.location.href from signInWithEmailLink', window.location.href)
+                    console.log('Clear email from storage')
+                    window.localStorage.removeItem('emailForSignIn');
+                    console.log('result', result)
+                    console.log('result-user', result.user)
+                    console.log('result.additionalUserInfo.profile', result.additionalUserInfo.profile)
+                    console.log('result.additionalUserInfo.isNewUser', result.additionalUserInfo.isNewUser)
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+    }, [isLoggedIn])
+    
+    useEffect(() => {
+        if (isSignUpClicked) {
             auth.sendSignInLinkToEmail(values.email, actionCodeSettings)
-                .then(function () {
+                .then(function (...args) {
+                    console.log('...args', ...args)
                     console.log('The link was successfully sent')
                     window.localStorage.setItem('emailForSignIn', values.email);
                 })
                 .catch(function (error) {
-                    console.error(error);
+                    console.log(error);
                 });
-            setIsSubmitClicked(false)
+            setIsSignUpClicked(false)
         }
-    }, [isSubmitClicked])
+    }, [isSignUpClicked])
+    
+    useEffect(() => {
+        if (isLogOutClicked) {
+            auth.signOut().then(function() {
+                console.log('Sign-out successful');
+            }).catch(function(error) {
+                console.log(error);
+            });
+            setIsLogOutClicked(false)
+        }
+    }, [isLogOutClicked])
     
     const handleChange = e => {
         const {name, value} = e.target;
         setValues({...values, [name]: value});
     }
     
-    function handleSubmit(e) {
+    function handleSignUp(e) {
         e.preventDefault();
-        setIsSubmitClicked(true)
+        setIsSignUpClicked(true)
+    }
+    
+    function handleLogout(e) {
+        e.preventDefault();
+        setIsLogOutClicked(true)
     }
     
     return (
         <div className="authForm">
             <form className="form form-sign-up" name="form-signup" noValidate>
                 <h2 className="form__heading">Sign UP With Email Link</h2>
+                <h2 className="form__heading">Current User: {currentUser}</h2>
                 <fieldset className="form__fields">
                     <label className="form__field-input">
                         <input
@@ -103,7 +124,8 @@ function Auth() {
                         />
                         <span className="form__field"/>
                     </label>
-                    <button type="submit" className="form__submit-button" onClick={handleSubmit}>Submit</button>
+                    <button type="submit" className="form__submit-button" onClick={handleSignUp}>Sign Up</button>
+                    <button type="submit" className="form__submit-button" onClick={handleLogout}>Log Out</button>
                 </fieldset>
             </form>
         </div>
