@@ -1,3 +1,4 @@
+// здесь находится тестовый код для регистрации пользователя по линку в e-mail
 import React, {useState, useEffect} from 'react';
 import './auth.css'
 import {auth, db} from '../../utils/firebase'
@@ -14,7 +15,15 @@ function Auth() {
         url: 'https://freespeech2025.com',
         handleCodeInApp: true
     };
-
+    
+// определяем юзер на сайте или нет
+    auth.onAuthStateChanged(function(user) {
+        if (user) {
+            console.log('User is signed in', user)
+        } else {
+            console.log('No user is signed in')
+        }
+    });
 
 // Confirm the link is a sign-in with email link.
     if (auth.isSignInWithEmailLink(window.location.href)) {

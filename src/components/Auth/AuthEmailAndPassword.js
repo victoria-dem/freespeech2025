@@ -1,3 +1,5 @@
+// здесь находится тестовый код для регистрации пользователя по паролю и e-mail
+
 // import React, {useState, useEffect} from 'react';
 // import './auth.css'
 // import {auth, db} from '../../utils/firebase'
