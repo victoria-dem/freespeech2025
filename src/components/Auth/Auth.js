@@ -1,6 +1,6 @@
 // здесь находится тестовый код для регистрации пользователя по линку в e-mail
 import React, {useState, useEffect} from 'react';
-import { useHistory } from "react-router";
+import {useHistory} from "react-router";
 import './auth.css'
 import {auth, db} from '../../utils/firebase'
 
@@ -34,22 +34,23 @@ function Auth() {
     // });
     
     
-    // useEffect(() => {
-    // Confirm the link is a sign-in with email link.
-    function handleSignIn() {
-        const history = useHistory();
+    useEffect(() => {
+        // Confirm the link is a sign-in with email link.
+        // function handleSignIn() {
+        
         if (auth.isSignInWithEmailLink(window.location.href)) {
             console.log('if again')
             console.log('window.location.href from isSignInWithEmailLink', window.location.href)
             let email = window.localStorage.getItem('emailForSignIn');
             console.log('email', email);
-        
+            
             if (!email) {
                 email = window.prompt('Please provide your email for confirmation');
             }
             // The client SDK will parse the code from the link for you.
             if (email) {
-                auth.signInWithEmailLink(email, window.location.href).then(function(result) {
+                const history = useHistory();
+                auth.signInWithEmailLink(email, window.location.href).then(function (result) {
                     // Clear the URL to remove the sign-in link parameters.
                     if (history && history.replaceState) {
                         window.history.replaceState({}, document.title, window.location.href.split('?')[0]);
@@ -60,7 +61,7 @@ function Auth() {
                     let user = result.user;
                     let isNewUser = result.additionalUserInfo.isNewUser;
                     console.log(result)
-                }).catch(function(error) {
+                }).catch(function (error) {
                     // Handle Errors here.
                     let errorCode = error.code;
                     let errorMessage = error.message;
@@ -69,10 +70,10 @@ function Auth() {
                 });
             }
         }
-    }
-    handleSignIn();
-    
-    // }, [isLoggedIn])
+        // }
+        // handleSignIn();
+        
+    }, [])
     
     useEffect(() => {
         if (isSignUpClicked) {
