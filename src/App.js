@@ -1,10 +1,11 @@
 import './App.css';
 import Auth from "./components/Auth/Auth";
 import Form from "./components/Form/Form";
-// import manageJson from "./utils/managejson"   /* util for loading json to firebase
+import React from "react";
+// import manageJson from "./utils/manageJson"   /* util for loading json to firebase */
 
 function App() {
-    //uncomment if needed to load json into firebase
+//     /* uncomment if needed to load json into firebase.database */
 // React.useEffect(() => {
 //     manageJson();
 // },[]);
