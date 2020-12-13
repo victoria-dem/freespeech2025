@@ -1,5 +1,6 @@
 // здесь находится тестовый код для регистрации пользователя по линку в e-mail
 import React, {useState, useEffect} from 'react';
+import { useHistory } from "react-router";
 import './auth.css'
 import {auth, db} from '../../utils/firebase'
 
@@ -36,6 +37,7 @@ function Auth() {
     // useEffect(() => {
     // Confirm the link is a sign-in with email link.
     function handleSignIn() {
+        const history = useHistory();
         if (auth.isSignInWithEmailLink(window.location.href)) {
             console.log('if again')
             console.log('window.location.href from isSignInWithEmailLink', window.location.href)
