@@ -1,14 +1,38 @@
 import './App.css';
-import Auth from "./components/Auth/Auth";
+import React, { useState, useContext } from 'react';
+import IntroPage from './components/IntroPage/IntroPage';
+import FuturePage from './components/FuturePage/FuturePage';
+import { useTransition, animated } from 'react-spring';
+import { Switch, Route } from 'react-router-dom';
+import { __RouterContext } from 'react-router';
 
 function App() {
+    const { location } = useContext(__RouterContext);
+    const transitions = useTransition(location, location => location.pathname, {
+        from: { opacity: 0, transform: "translate(100%, 0)", display: "none" },
+        enter: { opacity: 1, transform: "translate(0%, 0)", display: "flex " },
+        leave: { opacity: 0, transform: "translate(-50%, 0)", display: "none"  } 
+    });
+
     return (
         <div className="App">
-            <header className="App-header">
-                FREE SPEECH 2025 SITE IS HERE -)))))
-            </header>
-            <Auth/>
+            {transitions.map(({ item, props, key }) => (
+                <animated.div key={key} style={props}>
+                    <Switch location={item}>
+                        {/* Вступительная страница с кнопкой "Поехали" */}
+                        <Route exact path="/">
+                            <IntroPage/>
+                        </Route>
+
+                        {/* Страница 2025 года - пока там хедер и форма авторизации */}
+                        <Route exact path="/future">
+                            <FuturePage/>
+                        </Route>
+                    </Switch>
+                </animated.div>
+            ))}
         </div>
+
     );
 }
 
