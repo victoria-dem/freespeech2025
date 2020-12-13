@@ -11,16 +11,15 @@ function PetitionForm(props) {
         secondTag: ''
     })
     const [petition, setPetition] = useState('')
-    console.log(props.currentUserId)
     
     useEffect(() => {
         if (isPetitionSubmitted && props.currentUserId) {
-            console.log('petition')
             db.collection("petitions").add({
                     uid: props.currentUserId,
                     petition: values.petition,
                     firstTag: values.firstTag,
-                    secondTag: values.secondTag
+                    secondTag: values.secondTag,
+                    isPublic: false
                 })
                 .then(function (docRef) {
                     console.log("Document written with ID: ", docRef.id);
@@ -28,17 +27,13 @@ function PetitionForm(props) {
                 .catch(function (error) {
                     console.error("Error adding document: ", error);
                 });
-            console.log(values)
         }
-        console.log(values.petition)
-        
     }, [isPetitionSubmitted])
     
     
     const handleChange = e => {
         const {name, value} = e.target;
         setValues({...values, [name]: value})
-        // setValues(e.target.value);
     }
     
     function handleSubmitPetition(e) {

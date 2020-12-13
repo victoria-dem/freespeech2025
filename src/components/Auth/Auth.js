@@ -73,6 +73,7 @@ function Auth() {
         if (isLogOutClicked) {
             auth.signOut().then(function () {
                 console.log('Sign-out successful');
+                setCurrentUserId('')
             }).catch(function (error) {
                 console.log(error);
             });
