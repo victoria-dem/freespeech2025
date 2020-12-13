@@ -16,7 +16,7 @@ function Auth() {
     })
     
     const actionCodeSettings = {
-        url: 'https://freespeech2025.com',
+        url: window.location.href,
         handleCodeInApp: true
     };
     
@@ -34,43 +34,50 @@ function Auth() {
     
     
     // useEffect(() => {
-    //     console.log('inside auth useEffect')
     // Confirm the link is a sign-in with email link.
-    if (auth.isSignInWithEmailLink(window.location.href)) {
-        console.log('if again')
-        console.log('window.location.href from isSignInWithEmailLink', window.location.href)
-        let email = window.localStorage.getItem('emailForSignIn');
-        console.log('email', email);
+    function handleSignIn() {
+        if (auth.isSignInWithEmailLink(window.location.href)) {
+            console.log('if again')
+            console.log('window.location.href from isSignInWithEmailLink', window.location.href)
+            let email = window.localStorage.getItem('emailForSignIn');
+            console.log('email', email);
         
-        if (!email) {
-            console.log('User opened the link on a different device.')
-            
-            // email = window.prompt('Please provide your email for confirmation');
+            if (!email) {
+                email = window.prompt('Please provide your email for confirmation');
+            }
+            // The client SDK will parse the code from the link for you.
+            if (email) {
+                auth.signInWithEmailLink(email, window.location.href).then(function(result) {
+                    // Clear the URL to remove the sign-in link parameters.
+                    if (history && history.replaceState) {
+                        window.history.replaceState({}, document.title, window.location.href.split('?')[0]);
+                    }
+                    // Clear email from storage.
+                    window.localStorage.removeItem('emailForSignIn');
+                    // Signed-in user's information.
+                    let user = result.user;
+                    let isNewUser = result.additionalUserInfo.isNewUser;
+                    console.log(result)
+                }).catch(function(error) {
+                    // Handle Errors here.
+                    let errorCode = error.code;
+                    let errorMessage = error.message;
+                    // handleError(error);
+                    console.log(error)
+                });
+            }
         }
-        
-        // The client SDK will parse the code from the link for you.
-        auth.signInWithEmailLink(email, window.location.href)
-            .then(function (result) {
-                console.log('window.location.href from signInWithEmailLink', window.location.href)
-                console.log('Clear email from storage')
-                window.localStorage.removeItem('emailForSignIn');
-                console.log('result', result)
-                console.log('result-user', result.user)
-                console.log('result.additionalUserInfo.profile', result.additionalUserInfo.profile)
-                console.log('result.additionalUserInfo.isNewUser', result.additionalUserInfo.isNewUser)
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
     }
+    handleSignIn();
+    
     // }, [isLoggedIn])
     
     useEffect(() => {
         if (isSignUpClicked) {
             auth.sendSignInLinkToEmail(values.email, actionCodeSettings)
                 .then(function () {
-                    console.log('The link was successfully sent')
                     window.localStorage.setItem('emailForSignIn', values.email);
+                    console.log('The link was successfully sent')
                 })
                 .catch(function (error) {
                     console.log(error);
