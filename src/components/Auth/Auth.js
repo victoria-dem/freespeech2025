@@ -22,25 +22,23 @@ function Auth() {
     };
     
     // определяем юзер на сайте или нет
-    auth.onAuthStateChanged(function (user) {
-        if (user) {
-            setIsLoggedIn(true)
-            setCurrentUser(user.email)
-            console.log('User is signed in', user.email, user)
-        } else {
-            setIsLoggedIn(false)
-            console.log('No user is signed in')
-        }
-    });
+    useEffect(() => {
+        auth.onAuthStateChanged(function (user) {
+            if (user) {
+                setIsLoggedIn(true)
+                setCurrentUser(user.email)
+            } else {
+                setIsLoggedIn(false)
+                setCurrentUser('Unknown')
+            }
+        });
+    }, [isLoggedIn])
     
-    
-    // useEffect(() => {
-        // Confirm the link is a sign-in with email link.
-        function handleSignIn() {
-        
+    // Confirm the link is a sign-in with email link.
+    useEffect(() => {
         if (auth.isSignInWithEmailLink(window.location.href)) {
-            console.log('if again')
-            console.log('window.location.href from isSignInWithEmailLink', window.location.href)
+            console.log('if again');
+            console.log('window.location.href from isSignInWithEmailLink', window.location.href);
             let email = window.localStorage.getItem('emailForSignIn');
             console.log('email', email);
             
@@ -49,8 +47,10 @@ function Auth() {
             }
             // The client SDK will parse the code from the link for you.
             if (email) {
-                // const history = useHistory();
+                
                 auth.signInWithEmailLink(email, window.location.href).then(function (result) {
+                    console.log(window.location.href)
+                    // const history = useHistory();
                     // Clear the URL to remove the sign-in link parameters.
                     // if (history && history.replaceState) {
                     //     window.history.replaceState({}, document.title, window.location.href.split('?')[0]);
@@ -70,10 +70,7 @@ function Auth() {
                 });
             }
         }
-        }
-        handleSignIn();
-        
-    // }, [])
+    }, [])
     
     useEffect(() => {
         if (isSignUpClicked) {
@@ -118,7 +115,7 @@ function Auth() {
     return (
         <div className="authForm">
             <form className="form form-sign-up" name="form-signup" noValidate>
-                <h2 className="form__heading">Sign UP With Email Link 3</h2>
+                <h2 className="form__heading">Sign UP With Email Link 7</h2>
                 <h2 className="form__heading">Current User: {currentUser}</h2>
                 <fieldset className="form__fields">
                     <label className="form__field-input">
