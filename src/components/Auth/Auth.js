@@ -33,8 +33,8 @@ function Auth() {
     });
     
     
-    useEffect(() => {
-        console.log('inside auth useEffect')
+    // useEffect(() => {
+    //     console.log('inside auth useEffect')
         // Confirm the link is a sign-in with email link.
         if (auth.isSignInWithEmailLink(window.location.href)) {
             console.log('window.location.href from isSignInWithEmailLink', window.location.href)
@@ -61,7 +61,7 @@ function Auth() {
                     console.log(error);
                 });
         }
-    }, [isLoggedIn])
+    // }, [isLoggedIn])
     
     useEffect(() => {
         if (isSignUpClicked) {
