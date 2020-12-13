@@ -19,56 +19,56 @@ function Auth() {
         url: 'https://freespeech2025.com',
         handleCodeInApp: true
     };
-
+    
     // определяем юзер на сайте или нет
-    auth.onAuthStateChanged(function (user) {
-        if (user) {
-            setIsLoggedIn(true)
-            setCurrentUser(user.email)
-            console.log('User is signed in', user.email, user)
-        } else {
-            setIsLoggedIn(false)
-            console.log('No user is signed in')
-        }
-    });
+    // auth.onAuthStateChanged(function (user) {
+    //     if (user) {
+    //         setIsLoggedIn(true)
+    //         setCurrentUser(user.email)
+    //         console.log('User is signed in', user.email, user)
+    //     } else {
+    //         setIsLoggedIn(false)
+    //         console.log('No user is signed in')
+    //     }
+    // });
     
     
     // useEffect(() => {
     //     console.log('inside auth useEffect')
-        // Confirm the link is a sign-in with email link.
-        if (auth.isSignInWithEmailLink(window.location.href)) {
-            console.log('window.location.href from isSignInWithEmailLink', window.location.href)
-            let email = window.localStorage.getItem('emailForSignIn');
-            console.log('email', email);
+    // Confirm the link is a sign-in with email link.
+    if (auth.isSignInWithEmailLink(window.location.href)) {
+        console.log('if again')
+        console.log('window.location.href from isSignInWithEmailLink', window.location.href)
+        let email = window.localStorage.getItem('emailForSignIn');
+        console.log('email', email);
         
-            if (!email) {
-                console.log('User opened the link on a different device.')
-                
-                // email = window.prompt('Please provide your email for confirmation');
-            }
-
-        // The client SDK will parse the code from the link for you.
-            auth.signInWithEmailLink(email, window.location.href)
-                .then(function (result) {
-                    console.log('window.location.href from signInWithEmailLink', window.location.href)
-                    console.log('Clear email from storage')
-                    window.localStorage.removeItem('emailForSignIn');
-                    console.log('result', result)
-                    console.log('result-user', result.user)
-                    console.log('result.additionalUserInfo.profile', result.additionalUserInfo.profile)
-                    console.log('result.additionalUserInfo.isNewUser', result.additionalUserInfo.isNewUser)
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+        if (!email) {
+            console.log('User opened the link on a different device.')
+            
+            // email = window.prompt('Please provide your email for confirmation');
         }
+        
+        // The client SDK will parse the code from the link for you.
+        auth.signInWithEmailLink(email, window.location.href)
+            .then(function (result) {
+                console.log('window.location.href from signInWithEmailLink', window.location.href)
+                console.log('Clear email from storage')
+                window.localStorage.removeItem('emailForSignIn');
+                console.log('result', result)
+                console.log('result-user', result.user)
+                console.log('result.additionalUserInfo.profile', result.additionalUserInfo.profile)
+                console.log('result.additionalUserInfo.isNewUser', result.additionalUserInfo.isNewUser)
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
     // }, [isLoggedIn])
     
     useEffect(() => {
         if (isSignUpClicked) {
             auth.sendSignInLinkToEmail(values.email, actionCodeSettings)
-                .then(function (...args) {
-                    console.log('...args', ...args)
+                .then(function () {
                     console.log('The link was successfully sent')
                     window.localStorage.setItem('emailForSignIn', values.email);
                 })
@@ -81,9 +81,9 @@ function Auth() {
     
     useEffect(() => {
         if (isLogOutClicked) {
-            auth.signOut().then(function() {
+            auth.signOut().then(function () {
                 console.log('Sign-out successful');
-            }).catch(function(error) {
+            }).catch(function (error) {
                 console.log(error);
             });
             setIsLogOutClicked(false)
