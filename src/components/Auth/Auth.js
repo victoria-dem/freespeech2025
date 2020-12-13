@@ -1,6 +1,5 @@
 // здесь находится тестовый код для регистрации пользователя по линку в e-mail
 import React, {useState, useEffect} from 'react';
-import {useHistory} from "react-router";
 import './auth.css'
 import {auth, db} from '../../utils/firebase'
 
@@ -11,10 +10,7 @@ function Auth() {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [currentUser, setCurrentUser] = useState('Unknown')
     
-    const [values, setValues] = useState({
-        email: '',
-        password: ''
-    })
+    const [values, setValues] = useState({ email: '' })
     
     const actionCodeSettings = {
         url: window.location.href,
@@ -37,35 +33,16 @@ function Auth() {
     // Confirm the link is a sign-in with email link.
     useEffect(() => {
         if (auth.isSignInWithEmailLink(window.location.href)) {
-            console.log('if again');
-            console.log('window.location.href from isSignInWithEmailLink', window.location.href);
             let email = window.localStorage.getItem('emailForSignIn');
-            console.log('email', email);
-            
             if (!email) {
                 email = window.prompt('Please provide your email for confirmation');
             }
             // The client SDK will parse the code from the link for you.
             if (email) {
-                
                 auth.signInWithEmailLink(email, window.location.href).then(function (result) {
-                    console.log(window.location.href)
-                    // const history = useHistory();
-                    // Clear the URL to remove the sign-in link parameters.
-                    // if (history && history.replaceState) {
-                    //     window.history.replaceState({}, document.title, window.location.href.split('?')[0]);
-                    // }
-                    // Clear email from storage.
+                    window.location.href = "https://freespeech2025.com/"
                     window.localStorage.removeItem('emailForSignIn');
-                    // Signed-in user's information.
-                    let user = result.user;
-                    let isNewUser = result.additionalUserInfo.isNewUser;
-                    console.log(result)
                 }).catch(function (error) {
-                    // Handle Errors here.
-                    let errorCode = error.code;
-                    let errorMessage = error.message;
-                    // handleError(error);
                     console.log(error)
                 });
             }
@@ -115,8 +92,8 @@ function Auth() {
     return (
         <div className="authForm">
             <form className="form form-sign-up" name="form-signup" noValidate>
-                <h2 className="form__heading">Sign UP With Email Link 7</h2>
-                <h2 className="form__heading">Current User: {currentUser}</h2>
+                <h2 className="form__heading">Sign UP With Email Link 11</h2>
+                <h2 className="form__heading">User: {currentUser}</h2>
                 <fieldset className="form__fields">
                     <label className="form__field-input">
                         <input
