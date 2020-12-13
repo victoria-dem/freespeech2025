@@ -43,7 +43,8 @@ function Auth() {
         
             if (!email) {
                 console.log('User opened the link on a different device.')
-                email = window.prompt('Please provide your email for confirmation');
+                
+                // email = window.prompt('Please provide your email for confirmation');
             }
 
         // The client SDK will parse the code from the link for you.
