@@ -26,3 +26,4 @@ yarn-error.log*
 .idea
 .firebase
 /.firebase
+data/all_django.json
