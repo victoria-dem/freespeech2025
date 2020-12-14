@@ -22,6 +22,7 @@ function PetitionForm(props) {
     useEffect(() => {
         if (isPetitionSubmitted && props.currentUserId) {
             const timestamp = Date.now().toString()
+            // TODO: обсудить использование ключа isPublic
             db.collection("petitions").add({
                     uid: props.currentUserId,
                     petition: values.petition,
