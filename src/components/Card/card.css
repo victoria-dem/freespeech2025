@@ -1,0 +1,12 @@
+.photo {
+  margin: 20px auto;
+  padding: 0;
+  width: 430px;
+  height: 600px;
+  object-fit: cover;
+}
+
+.card {
+  margin: 0;
+  padding: 0;
+}

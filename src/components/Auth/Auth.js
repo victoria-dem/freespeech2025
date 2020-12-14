@@ -1,7 +1,10 @@
 // здесь находится тестовый код для регистрации пользователя по линку в e-mail
 import React, {useState, useEffect} from 'react';
 import './auth.css'
-import {auth, db} from '../../utils/firebase'
+import '../PetitionForm/petitionform.css'
+import {auth} from '../../utils/firebase'
+import PetitionForm from "../PetitionForm/PetitionForm";
+
 
 function Auth() {
     
@@ -9,8 +12,10 @@ function Auth() {
     const [isLogOutClicked, setIsLogOutClicked] = useState(false)
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [currentUser, setCurrentUser] = useState('Unknown')
+    const [currentUserId, setCurrentUserId] = useState('')
     
-    const [values, setValues] = useState({ email: '' })
+    
+    const [values, setValues] = useState({email: ''})
     
     const actionCodeSettings = {
         url: window.location.href,
@@ -23,6 +28,7 @@ function Auth() {
             if (user) {
                 setIsLoggedIn(true)
                 setCurrentUser(user.email)
+                setCurrentUserId(user.uid)
             } else {
                 setIsLoggedIn(false)
                 setCurrentUser('Unknown')
@@ -67,6 +73,7 @@ function Auth() {
         if (isLogOutClicked) {
             auth.signOut().then(function () {
                 console.log('Sign-out successful');
+                setCurrentUserId('')
             }).catch(function (error) {
                 console.log(error);
             });
@@ -90,33 +97,36 @@ function Auth() {
     }
     
     return (
-        <div className="authForm">
-            <form className="form form-sign-up" name="form-signup" noValidate>
-                <h2 className="form__heading">Sign UP With Email Link 11</h2>
-                <h2 className="form__heading">User: {currentUser}</h2>
-                <fieldset className="form__fields">
-                    <label className="form__field-input">
-                        <input
-                            className="form__input form__input-first-field"
-                            type="email"
-                            id="first-field-place"
-                            placeholder="e-mail"
-                            name="email"
-                            minLength="5"
-                            maxLength="130"
-                            required
-                            autoComplete="username"
-                            onChange={handleChange}
-                        />
-                        <span className="form__field"/>
-                    </label>
-                    <button type="submit" className="form__submit-button" onClick={handleSignUp}>Sign Up</button>
-                    <button type="submit" className="form__submit-button" onClick={handleLogout}>Log Out</button>
-                </fieldset>
-            </form>
-        </div>
+        <>
+            <div className="authForm">
+                <form className="form form-sign-up" name="form-signup" noValidate>
+                    <h2 className="form__heading">Sign UP With Email Link 11</h2>
+                    <h2 className="form__heading">User: {currentUser}</h2>
+                    <fieldset className="form__fields">
+                        <label className="form__field-input">
+                            <input
+                                className="form__input form__input-first-field"
+                                type="email"
+                                id="first-field-place"
+                                placeholder="e-mail"
+                                name="email"
+                                minLength="5"
+                                maxLength="130"
+                                required
+                                autoComplete="username"
+                                onChange={handleChange}
+                            />
+                            <span className="form__field"/>
+                        </label>
+                        <button type="submit" className="form__submit-button" onClick={handleSignUp}>Sign Up</button>
+                        <button type="submit" className="form__submit-button" onClick={handleLogout}>Log Out</button>
+                    </fieldset>
+                </form>
+            </div>
+            <PetitionForm currentUserId={currentUserId}/>
+        </>
     )
-}
+};
 
 export default Auth
 
