@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './petitionform.css'
 import {db, storage} from '../../utils/firebase'
+import Card from "../Card/Card";
 
 function PetitionForm(props) {
     
@@ -20,18 +21,20 @@ function PetitionForm(props) {
     
     useEffect(() => {
         if (isPetitionSubmitted && props.currentUserId) {
+            const timestamp = Date.now().toString()
             db.collection("petitions").add({
                     uid: props.currentUserId,
                     petition: values.petition,
                     firstTag: values.firstTag,
                     secondTag: values.secondTag,
                     isPublic: false,
-                    picFullPath: picturesRef.fullPath,
-                    picName: picturesRef.name,
-                    picBucket: picturesRef.bucket
+                    picFullPath: picturesRef.fullPath || '1.jpeg',
+                    picName: picturesRef.name || '1.jpeg',
+                    picBucket: picturesRef.bucket || 'freespeech2025-46bc5.appspot.com',
+                    timestamp: timestamp
                 })
                 .then(function (docRef) {
-                    console.log("Document written with ID: ", docRef.id);
+                    console.log("Document written with ID: ", docRef);
                 })
                 .catch(function (error) {
                     console.error("Error adding document: ", error);
@@ -44,6 +47,7 @@ function PetitionForm(props) {
         if (isPicturesReady && props.currentUserId) {
             const storageRef = storage.ref();
             const thisRef = storageRef.child(pictures.name);
+            console.log(thisRef.bucket, thisRef.name, thisRef.fullPath);
             setPicturesRef(thisRef);
             // TODO: сейчас картинка загружается под своим именем -
             //  надо попробовать загружать ее под именем timestamp+имя
@@ -125,9 +129,7 @@ function PetitionForm(props) {
                         />
                         <span className="form__field"/>
                     </label>
-                    
                     <label>
-                        
                         <input className="form__input" type="file" id="files" multiple
                                onChange={handleChoosePictures} name="files[]"
                                placeholder="Выберите картинку"
@@ -136,15 +138,14 @@ function PetitionForm(props) {
                             картинку
                         </button>
                     </label>
-                    
-                    
                     <button type="submit" className="form__submit-button" onClick={handleSubmitPetition}>Подать
                         петицию
                     </button>
                 </fieldset>
             </form>
+            <Card currentUser={props.currentUser}/>
         </div>
     )
-}
+};
 
 export default PetitionForm
