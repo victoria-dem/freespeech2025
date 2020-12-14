@@ -62,7 +62,7 @@ function App() {
                         </Switch>
                     </animated.div>
                 ))}
-                {/*<Form/>*/}
+                <Form/>
             </div>
         </CurrentUserContext.Provider>
 
