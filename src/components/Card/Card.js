@@ -34,7 +34,7 @@ function Card(props) {
         .getDownloadURL()
         .then(function(url) {
             console.log(url);
-            // setUrl(url)
+            setUrl(url)
         })
         .catch(function(error) {
             console.log("error encountered");
