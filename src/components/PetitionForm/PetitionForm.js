@@ -1,9 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import './petitionform.css'
 import {db, storage} from '../../utils/firebase'
 import Card from "../Card/Card";
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function PetitionForm(props) {
+    const currentUser = useContext(CurrentUserContext);
     
     const [isPetitionSubmitted, setIsPetitionSubmitted] = useState(false)
     const [values, setValues] = useState({
@@ -20,10 +22,12 @@ function PetitionForm(props) {
     const [picturesRef, setPicturesRef] = useState({})
     
     useEffect(() => {
+        //TODO: вот здесь заменить props.currentUSerId на currentUser.uid
         if (isPetitionSubmitted && props.currentUserId) {
             const timestamp = Date.now().toString()
             // TODO: обсудить использование ключа isPublic
             db.collection("petitions").add({
+                //TODO: и здесь заменить props.currentUSerId на currentUser.uid
                     uid: props.currentUserId,
                     petition: values.petition,
                     firstTag: values.firstTag,
@@ -45,6 +49,7 @@ function PetitionForm(props) {
     
     useEffect(() => {
         // TODO: подумать надо ли нам сделать внутренний backed для картинок
+        //TODO: вот здесь заменить props.currentUSerId на currentUser.uid
         if (isPicturesReady && props.currentUserId) {
             const storageRef = storage.ref();
             const thisRef = storageRef.child(pictures.name);
@@ -144,7 +149,8 @@ function PetitionForm(props) {
                     </button>
                 </fieldset>
             </form>
-            <Card currentUser={props.currentUser}/>
+            {/* <Card currentUser={props.currentUser}/> */}
+            <Card/>
         </div>
     )
 }

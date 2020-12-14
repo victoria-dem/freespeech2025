@@ -1,41 +1,45 @@
 // здесь находится тестовый код для регистрации пользователя по линку в e-mail
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './auth.css'
 import '../PetitionForm/petitionform.css'
-import {auth} from '../../utils/firebase'
+import { auth } from '../../utils/firebase'
 import PetitionForm from "../PetitionForm/PetitionForm";
+import SignUpForm from '../SignUpForm/SignUpForm';
 
 
-function Auth() {
-    
+function Auth({ onUpdateUser }) {
     const [isSignUpClicked, setIsSignUpClicked] = useState(false)
     const [isLogOutClicked, setIsLogOutClicked] = useState(false)
     const [isLoggedIn, setIsLoggedIn] = useState(false)
-    const [currentUser, setCurrentUser] = useState('Unknown')
+    //current user устанавливается в методе onUpdateUser
+    // const [currentUser, setCurrentUser] = useState('Unknown')
     const [currentUserId, setCurrentUserId] = useState('')
-    
-    
-    const [values, setValues] = useState({email: ''})
-    
+
+
+    const [values, setValues] = useState({ email: '' })
+
     const actionCodeSettings = {
         url: window.location.href,
         handleCodeInApp: true
     };
-    
+
+
     // определяем юзер на сайте или нет
     useEffect(() => {
         auth.onAuthStateChanged(function (user) {
             if (user) {
                 setIsLoggedIn(true)
-                setCurrentUser(user.email)
+                // setCurrentUser(user.email)
                 setCurrentUserId(user.uid)
+                onUpdateUser({ user });
             } else {
                 setIsLoggedIn(false)
-                setCurrentUser('Unknown')
+                // setCurrentUser('Unknown')
+                onUpdateUser({});
             }
         });
     }, [isLoggedIn])
-    
+
     // Confirm the link is a sign-in with email link.
     useEffect(() => {
         if (auth.isSignInWithEmailLink(window.location.href)) {
@@ -46,7 +50,7 @@ function Auth() {
             // The client SDK will parse the code from the link for you.
             if (email) {
                 auth.signInWithEmailLink(email, window.location.href).then(function (result) {
-                    window.location.href = "https://freespeech2025.com/"
+                    window.location.href = "https://freespeech2025.com/future"
                     window.localStorage.removeItem('emailForSignIn');
                 }).catch(function (error) {
                     console.log(error)
@@ -54,7 +58,7 @@ function Auth() {
             }
         }
     }, [])
-    
+
     useEffect(() => {
         if (isSignUpClicked) {
             auth.sendSignInLinkToEmail(values.email, actionCodeSettings)
@@ -68,66 +72,47 @@ function Auth() {
             setIsSignUpClicked(false)
         }
     }, [isSignUpClicked])
-    
+
     useEffect(() => {
         if (isLogOutClicked) {
             auth.signOut().then(function () {
                 console.log('Sign-out successful');
                 setCurrentUserId('')
+                onUpdateUser({});
             }).catch(function (error) {
                 console.log(error);
             });
             setIsLogOutClicked(false)
         }
     }, [isLogOutClicked])
-    
+
     const handleChange = e => {
-        const {name, value} = e.target;
-        setValues({...values, [name]: value});
+        const { name, value } = e.target;
+        setValues({ ...values, [name]: value });
     }
-    
+
     function handleSignUp(e) {
         e.preventDefault();
         setIsSignUpClicked(true)
     }
-    
+
     function handleLogout(e) {
         e.preventDefault();
         setIsLogOutClicked(true)
     }
-    
+
     return (
         <>
-            <div className="authForm">
-                <form className="form form-sign-up" name="form-signup" noValidate>
-                    <h2 className="form__heading">Sign UP With Email Link 11</h2>
-                    <h2 className="form__heading">User: {currentUser}</h2>
-                    <fieldset className="form__fields">
-                        <label className="form__field-input">
-                            <input
-                                className="form__input form__input-first-field"
-                                type="email"
-                                id="first-field-place"
-                                placeholder="e-mail"
-                                name="email"
-                                minLength="5"
-                                maxLength="130"
-                                required
-                                autoComplete="username"
-                                onChange={handleChange}
-                            />
-                            <span className="form__field"/>
-                        </label>
-                        <button type="submit" className="form__submit-button" onClick={handleSignUp}>Sign Up</button>
-                        <button type="submit" className="form__submit-button" onClick={handleLogout}>Log Out</button>
-                    </fieldset>
-                </form>
-            </div>
+            {/* currentUser теперь берется в самом компоненте формы из контекста */}
+            <SignUpForm onChange={handleChange} onSignUp={handleSignUp} onLogout={handleLogout} />
+
+            {/* TODO: возможно,имеет смысл в этой форме тоже находить currentUser через контест 
+                и брать его ID */}
             <PetitionForm currentUserId={currentUserId}/>
         </>
     )
 };
 
-export default Auth
+export default Auth;
 
 
