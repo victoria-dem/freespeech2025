@@ -9,11 +9,11 @@ function PetitionForm(props) {
     const [values, setValues] = useState({
         petition: '',
         firstTag: '',
-        secondTag: ''
+        secondTag: '',
+        pictureReference: {}
     })
     const [pictures, setPictures] = useState([])
     const [isPicturesReady, setIsPicturesReady] = useState(false)
-    console.log(pictures.length)
     
     useEffect(() => {
         if (isPetitionSubmitted && props.currentUserId) {
@@ -34,32 +34,17 @@ function PetitionForm(props) {
     }, [isPetitionSubmitted])
     
     useEffect(() => {
+        // TODO: подумать надо ли нам сделать внутренний backed для картинок
         if (isPicturesReady && props.currentUserId) {
-            for (let i = 0; i < pictures.length; i++) {
-                //create a storage reference
-                let storageRef = storage.ref(pictures[i].name);
-        
-                //upload file
-                let upload = storageRef.put(pictures[i]);
-        
-                //update progress bar
-                upload.on(
-                    "state_changed",
-                    function progress(snapshot) {
-                        document.getElementById("progress").value = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    },
-            
-                    function error() {
-                        alert("error uploading file");
-                    },
-            
-                    function complete() {
-                        document.getElementById(
-                            "uploading"
-                        ).innerHTML += `${pictures[i].name} uploaded <br />`;
-                    }
-                );
-            }
+            const storageRef = storage.ref();
+            const thisRef = storageRef.child(pictures.name);
+            console.log(thisRef)
+            console.log(thisRef.fullPath)
+            console.log(thisRef.name)
+            console.log(thisRef.bucket)
+            thisRef.put(pictures).then(function (snapshot) {
+                // TODO: обработать визуализацию загрузки картинки при помощи snapshot
+            }).catch((err) => console.log(err));
         }
     }, [isPicturesReady])
     
@@ -75,8 +60,8 @@ function PetitionForm(props) {
     
     function handleChoosePictures(e) {
         e.preventDefault();
-        console.log(e.target, e.target.files)
-        setPictures(e.target.files)
+        console.log(e.target, e.target.files[0])
+        setPictures(e.target.files[0])
     }
     
     function handleSubmitPictures(e) {
@@ -138,13 +123,15 @@ function PetitionForm(props) {
                     </label>
                     
                     <label>
-                        <p>Выберите картинку</p>
-                        <input type="file" id="files" multiple onChange={handleChoosePictures}/>
-                        <button id="send" onClick={handleSubmitPictures}>Загрузить картинку</button>
-                        <p id="uploading"/>
-                        <progress value="0" max="100" id="progress"/>
+                        
+                        <input className="form__input" type="file" id="files" multiple
+                               onChange={handleChoosePictures} name="files[]"
+                               placeholder="Выберите картинку"
+                        />
+                        <button className="form__submit-button" id="send" onClick={handleSubmitPictures}>Загрузить
+                            картинку
+                        </button>
                     </label>
-                    
                     
                     
                     <button type="submit" className="form__submit-button" onClick={handleSubmitPetition}>Подать
