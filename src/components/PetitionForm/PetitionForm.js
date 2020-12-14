@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import './petitionform.css'
-import {auth, db} from '../../utils/firebase'
+import {db, storage} from '../../utils/firebase'
 
 function PetitionForm(props) {
+    
     
     const [isPetitionSubmitted, setIsPetitionSubmitted] = useState(false)
     const [values, setValues] = useState({
@@ -10,7 +11,9 @@ function PetitionForm(props) {
         firstTag: '',
         secondTag: ''
     })
-    const [petition, setPetition] = useState('')
+    const [pictures, setPictures] = useState([])
+    const [isPicturesReady, setIsPicturesReady] = useState(false)
+    console.log(pictures.length)
     
     useEffect(() => {
         if (isPetitionSubmitted && props.currentUserId) {
@@ -30,6 +33,35 @@ function PetitionForm(props) {
         }
     }, [isPetitionSubmitted])
     
+    useEffect(() => {
+        if (isPicturesReady && props.currentUserId) {
+            for (let i = 0; i < pictures.length; i++) {
+                //create a storage reference
+                let storageRef = storage.ref(pictures[i].name);
+        
+                //upload file
+                let upload = storageRef.put(pictures[i]);
+        
+                //update progress bar
+                upload.on(
+                    "state_changed",
+                    function progress(snapshot) {
+                        document.getElementById("progress").value = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    },
+            
+                    function error() {
+                        alert("error uploading file");
+                    },
+            
+                    function complete() {
+                        document.getElementById(
+                            "uploading"
+                        ).innerHTML += `${pictures[i].name} uploaded <br />`;
+                    }
+                );
+            }
+        }
+    }, [isPicturesReady])
     
     const handleChange = e => {
         const {name, value} = e.target;
@@ -39,6 +71,18 @@ function PetitionForm(props) {
     function handleSubmitPetition(e) {
         e.preventDefault();
         setIsPetitionSubmitted(true)
+    }
+    
+    function handleChoosePictures(e) {
+        e.preventDefault();
+        console.log(e.target, e.target.files)
+        setPictures(e.target.files)
+    }
+    
+    function handleSubmitPictures(e) {
+        console.log('submit Picture')
+        e.preventDefault();
+        setIsPicturesReady(!isPicturesReady)
     }
     
     return (
@@ -92,6 +136,16 @@ function PetitionForm(props) {
                         />
                         <span className="form__field"/>
                     </label>
+                    
+                    <label>
+                        <p>Выберите картинку</p>
+                        <input type="file" id="files" multiple onChange={handleChoosePictures}/>
+                        <button id="send" onClick={handleSubmitPictures}>Загрузить картинку</button>
+                        <p id="uploading"/>
+                        <progress value="0" max="100" id="progress"/>
+                    </label>
+                    
+                    
                     
                     <button type="submit" className="form__submit-button" onClick={handleSubmitPetition}>Подать
                         петицию
