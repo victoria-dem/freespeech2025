@@ -45,12 +45,11 @@ function PetitionForm(props) {
             const storageRef = storage.ref();
             const thisRef = storageRef.child(pictures.name);
             setPicturesRef(thisRef);
-            console.log(thisRef);
-            console.log(thisRef.fullPath);
-            console.log(thisRef.name);
-            console.log(thisRef.bucket);
+            // TODO: сейчас картинка загружается под своим именем -
+            //  надо попробовать загружать ее под именем timestamp+имя
             thisRef.put(pictures).then(function (snapshot) {
-                // TODO: обработать визуализацию загрузки картинки при помощи snapshot
+                // TODO: наду будет попробовать обработать визуализацию загрузки картинки при помощи snapshot.
+                //  В файле test.html есть пример как получить данные для отображения загрузки.
             }).catch((err) => console.log(err));
         }
     }, [isPicturesReady])
@@ -67,12 +66,10 @@ function PetitionForm(props) {
     
     function handleChoosePictures(e) {
         e.preventDefault();
-        console.log(e.target, e.target.files[0])
         setPictures(e.target.files[0])
     }
     
     function handleSubmitPictures(e) {
-        console.log('submit Picture')
         e.preventDefault();
         setIsPicturesReady(!isPicturesReady)
     }

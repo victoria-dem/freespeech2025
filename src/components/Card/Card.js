@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import './card.css'
-import {storage} from '../../utils/firebase'
+import {storage, db} from '../../utils/firebase'
 
 function Card() {
+    
+    
     
     const [url, setUrl] = useState('')
     
