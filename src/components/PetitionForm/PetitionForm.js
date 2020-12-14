@@ -146,6 +146,6 @@ function PetitionForm(props) {
             <Card currentUser={props.currentUser}/>
         </div>
     )
-};
+}
 
 export default PetitionForm
