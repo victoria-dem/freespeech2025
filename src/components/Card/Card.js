@@ -1,47 +1,27 @@
 import React, {useEffect, useState} from 'react';
 import './card.css'
-import {db, storage} from '../../utils/firebase'
+import {storage} from '../../utils/firebase'
 
-function Card(props) {
+function Card() {
     
-    // Points to the root reference
-    // const storageRef = storage.ref();
-
-// Points to 'images'
-// let imagesRef = storageRef.child('images');
-
-// Points to 'images/space.jpg'
-// Note that you can use variables to create child values
-//     let fileName = 'space.jpg';
-//     let spaceRef = imagesRef.child(fileName);
-
-// File path is 'images/space.jpg'
-//     let path = spaceRef.fullPath
-
-// File name is 'space.jpg'
-//     let name = spaceRef.name
-
-// Points to 'images'
-//     imagesRef = spaceRef.parent;
+    const [url, setUrl] = useState('')
     
+    const storagePic = storage.ref('photo-1607888051999-8f28fb8ae37e.jpeg');
     
-    
-    // const storage = storage.ref(filename);
-    //
-    // //get file url
-    // storage
-    //     .getDownloadURL()
-    //     .then(function(url) {
-    //         console.log(url);
-    //     })
-    //     .catch(function(error) {
-    //         console.log("error encountered");
-    //     });
+    storagePic
+        .getDownloadURL()
+        .then(function(url) {
+            console.log(url);
+            setUrl(url)
+        })
+        .catch(function(error) {
+            console.log("error encountered");
+        });
     
     
     return (
-        <div className="card">Place for picture
-            {/*<img src={} alt={}/>*/}
+        <div className="card">
+            <img className="photo" src={url} alt={'test'}/>
         </div>
 )
 }

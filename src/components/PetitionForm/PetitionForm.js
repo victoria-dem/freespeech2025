@@ -4,16 +4,19 @@ import {db, storage} from '../../utils/firebase'
 
 function PetitionForm(props) {
     
-    
     const [isPetitionSubmitted, setIsPetitionSubmitted] = useState(false)
     const [values, setValues] = useState({
         petition: '',
         firstTag: '',
         secondTag: '',
-        pictureReference: {}
+        picFullPath: '',
+        picName: '',
+        picBucket: ''
+        
     })
     const [pictures, setPictures] = useState([])
     const [isPicturesReady, setIsPicturesReady] = useState(false)
+    const [picturesRef, setPicturesRef] = useState({})
     
     useEffect(() => {
         if (isPetitionSubmitted && props.currentUserId) {
@@ -22,7 +25,10 @@ function PetitionForm(props) {
                     petition: values.petition,
                     firstTag: values.firstTag,
                     secondTag: values.secondTag,
-                    isPublic: false
+                    isPublic: false,
+                    picFullPath: picturesRef.fullPath,
+                    picName: picturesRef.name,
+                    picBucket: picturesRef.bucket
                 })
                 .then(function (docRef) {
                     console.log("Document written with ID: ", docRef.id);
@@ -38,10 +44,11 @@ function PetitionForm(props) {
         if (isPicturesReady && props.currentUserId) {
             const storageRef = storage.ref();
             const thisRef = storageRef.child(pictures.name);
-            console.log(thisRef)
-            console.log(thisRef.fullPath)
-            console.log(thisRef.name)
-            console.log(thisRef.bucket)
+            setPicturesRef(thisRef);
+            console.log(thisRef);
+            console.log(thisRef.fullPath);
+            console.log(thisRef.name);
+            console.log(thisRef.bucket);
             thisRef.put(pictures).then(function (snapshot) {
                 // TODO: обработать визуализацию загрузки картинки при помощи snapshot
             }).catch((err) => console.log(err));
