@@ -2,6 +2,7 @@ import './FuturePage.css';
 import Auth from '../Auth/Auth';
 import { Link } from 'react-router-dom';
 import Form from "../Form/Form";
+import Card from "../Card/Card"
 
 
 
@@ -14,7 +15,7 @@ const FuturePage = () => {
       </header>
       <Auth />
       <Form/>
-      
+      <Card/>
     </div>
   );
 }
