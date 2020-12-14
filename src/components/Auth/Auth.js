@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react';
 import './auth.css'
 import '../PetitionForm/petitionform.css'
 import {auth} from '../../utils/firebase'
-import PetitionForm from "../PetitionForm/PetitionForm";
+import Petition from "../Petition/Petition";
 
 
 function Auth() {
@@ -123,10 +123,12 @@ function Auth() {
                     </fieldset>
                 </form>
             </div>
-            <PetitionForm currentUserId={currentUserId}/>
+            <Petition currrentUser={currentUser}/>
+        
+        
         </>
     )
-};
+}
 
 export default Auth
 

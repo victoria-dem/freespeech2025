@@ -49,6 +49,7 @@ function Card(props) {
             <p>Второй тег: {secondTag}</p>
             <p>Время (пока условное): {petitionData}</p>
             <img className="photo" src={url} alt={'картинка'}/>
+            {/*<button type="submit" className="form__submit-button" onClick={handleSubmitPetition}>Готово</button>*/}
         </div>
 )
 }
