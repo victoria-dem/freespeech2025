@@ -1,8 +1,9 @@
-.form-complaint {
+.complaint {
     margin: 0 50px 0 200px;
     /*position: relative;*/
     /*top: -300px;*/
     /*left: 300px;*/
+    display: flex;
 }
 
 .form_complaint {
