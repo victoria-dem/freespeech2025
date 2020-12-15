@@ -37,7 +37,7 @@ function CardPreview(props) {
                 .then(function (docRef) {
                     console.log("Document written with ID: ", docRef);
                 }).then(function () {
-                    const storagePic = storage.ref(picRef.picFullPath);
+                    const storagePic = storage.ref(picRef.picFullPath || '1.jpeg');
                     storagePic
                         .getDownloadURL()
                         .then(function (url) {
@@ -54,6 +54,7 @@ function CardPreview(props) {
         }
     }, [isPetitionSubmitted])
     
+    // предварительная загрузка (до того, как пользователь нажал на submit)
     useEffect(()=>{
         if (isPicUploaded) {
             const storagePic = storage.ref(picRef.picFullPath);
