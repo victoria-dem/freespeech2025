@@ -1,10 +1,8 @@
-// здесь находится тестовый код для регистрации пользователя по линку в e-mail
 import React, {useState, useEffect} from 'react';
 import './auth.css'
 import '../PetitionForm/petitionform.css'
 import {auth} from '../../utils/firebase'
 import Petition from "../Petition/Petition";
-
 
 function Auth() {
     
@@ -13,16 +11,12 @@ function Auth() {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [currentUser, setCurrentUser] = useState('Unknown')
     const [currentUserId, setCurrentUserId] = useState('')
-    
-    
     const [values, setValues] = useState({email: ''})
     
     const actionCodeSettings = {
         url: window.location.href,
         handleCodeInApp: true
     };
-    
-    console.log(currentUserId)
     
     // определяем юзер на сайте или нет
     useEffect(() => {
@@ -48,7 +42,7 @@ function Auth() {
             // The client SDK will parse the code from the link for you.
             if (email) {
                 auth.signInWithEmailLink(email, window.location.href).then(function (result) {
-                    window.location.href = "https://freespeech2025.com/"
+                    window.location.href = "https://freespeech2025.com/future"
                     window.localStorage.removeItem('emailForSignIn');
                 }).catch(function (error) {
                     console.log(error)
@@ -126,8 +120,6 @@ function Auth() {
                 </form>
             </div>
             <Petition currentUserId={currentUserId}/>
-        
-        
         </>
     )
 }
