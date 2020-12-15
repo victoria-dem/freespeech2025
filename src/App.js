@@ -16,7 +16,6 @@ function App() {
     // React.useEffect(() => {
     //     manageJson();
     // },[]);
-
     const [currentUser, setCurrentUser] = useState({});
     const [isUserLoggedIn, setIsUserLoggedin] = useState(false);
     const { location } = useContext(__RouterContext);
@@ -25,6 +24,8 @@ function App() {
         enter: { opacity: 1, transform: "translate(0%, 0)", display: "flex " },
         leave: { opacity: 0, transform: "translate(-50%, 0)", display: "none" }
     });
+
+    console.log('app', currentUser.uid);
 
     const checkIsUserLoggedIn = (user) => {
         if(Object.keys(user).length===0) {
