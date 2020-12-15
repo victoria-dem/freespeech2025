@@ -1,12 +1,12 @@
-.form-complaint {
+.form-petition {
   margin: 20px auto;
 }
-.complaint {
-    margin: 0 50px 0 200px;
-    display: flex;
+
+.petition_object {
+  display: flex;
 }
 
-.form_complaint {
+.form_petition {
     width: 430px;
     background: #fff;
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);

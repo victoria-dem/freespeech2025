@@ -40,7 +40,6 @@ function App() {
                     </Switch>
                 </animated.div>
             ))}
-            {/*<Form/>*/}
         </div>
     );
 }
