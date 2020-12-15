@@ -6,16 +6,18 @@ import { useTransition, animated } from 'react-spring';
 import { Switch, Route } from 'react-router-dom';
 import { __RouterContext } from 'react-router';
 import Auth from "./components/Auth/Auth";
-import Form from "./components/Form/Form";
+import PetitionForm from "./components/PetitionForm/PetitionForm";
 import { CurrentUserContext } from './contexts/CurrentUserContext';
 
 // import manageJson from "./utils/manageJson"   /* util for loading json to firebase */
 
 function App() {
-    //     /* uncomment if needed to load json into firebase.database */
+    
+    // uncomment if needed to load json into firebase.database
     // React.useEffect(() => {
     //     manageJson();
     // },[]);
+    
     const [currentUser, setCurrentUser] = useState({}); // {email: ... , uid: ... }
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
     const { location } = useContext(__RouterContext);
@@ -25,7 +27,7 @@ function App() {
         leave: { opacity: 0, transform: "translate(-50%, 0)", display: "none" }
     });
 
-    console.log('app user uid', currentUser.uid);
+    // console.log('app user uid', currentUser.uid);
 
     const handleUserUpdate = (user) => {
         setCurrentUser(user);
@@ -33,7 +35,7 @@ function App() {
     }
 
     useEffect(() => {
-        console.log('user log in', isUserLoggedIn);
+        // console.log('user log in', isUserLoggedIn);
     }, [isUserLoggedIn]);
 
     return (

@@ -2,7 +2,7 @@ import React, {useState, useEffect, useContext} from 'react';
 import './auth.css'
 import {auth} from '../../utils/firebase'
 import SignUpForm from '../SignUpForm/SignUpForm';
-import '../PetitionForm/petitionform.css'
+import '../PetitionFormOld/petitionform.css'
 import Petition from "../Petition/Petition";
 
 function Auth({onUpdateUser, isLoggedIn}) {
