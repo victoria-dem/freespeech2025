@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
-import './card-preview.css'
+import './petition-preview.css'
 import { storage, db, auth } from '../../utils/firebase'
 import PoemLine from "../PoemLine/PoemLine";
 import { v4 as uuidv4 } from 'uuid';
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function CardPreview(props) {
+function PetitionPreview(props) {
     const currentUser = useContext(CurrentUserContext);
     const {
         poemText,
@@ -77,7 +77,7 @@ function CardPreview(props) {
         setIsPetitionSubmitted(true)
     }
 
-    console.log(poemText, typeof poemText)
+    console.log(poemText, poemText===true, typeof poemText)
 
     return (
         <div className="card">
@@ -85,7 +85,7 @@ function CardPreview(props) {
             <p>Тег: {petitionTag}</p>
             <div>
                 Текст петиции:
-                {isPoemReady && isPetitionReady && poemText.map((line, i) => <PoemLine key={uuidv4()} line={line} />)}
+                {poemText && isPoemReady && isPetitionReady && poemText.map((line, i) => <PoemLine key={uuidv4()} line={line} />)}
             </div>
             <p>Дата публикации (условная): {petitionDate}</p>
             {url ? <img className="photo" src={url} alt={'картинка'} /> : null}
@@ -100,6 +100,6 @@ function CardPreview(props) {
     )
 }
 
-export default CardPreview
+export default PetitionPreview
 
 

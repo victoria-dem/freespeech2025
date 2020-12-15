@@ -1,12 +1,12 @@
 import React from 'react';
 import './petition.css'
-import Form from "../Form/Form";
+import PetitionForm from "../PetitionForm/PetitionForm";
 
 function Petition() {
     
     return (
         <div className="petition">
-            <Form/>
+            <PetitionForm/>
         </div>
     )
 }
