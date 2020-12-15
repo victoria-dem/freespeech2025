@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './card-preview.css'
 import {storage, db, auth} from '../../utils/firebase'
 import PoemLine from "../PoemLine/PoemLine";
+import { v4 as uuidv4 } from 'uuid';
 
 function CardPreview(props) {
     
@@ -18,11 +19,12 @@ function CardPreview(props) {
     
     const [isPetitionSubmitted, setIsPetitionSubmitted] = useState(false)
     const [url, setUrl] = useState('')
+    const [petitionDate, setPetitionDate] = useState('')
     
     useEffect(() => {
         if (isPetitionSubmitted && currentUserId) {
             const timestamp = Date.now().toString()
-            
+            setPetitionDate(timestamp)
             // TODO: обсудить использование ключа isPublic
             db.collection("petitions").add({
                     uid: currentUserId,
@@ -37,6 +39,7 @@ function CardPreview(props) {
                 .then(function (docRef) {
                     console.log("Document written with ID: ", docRef);
                 }).then(function () {
+                    // загрузка картинки (после того, как пользователь нажал на submit)
                     const storagePic = storage.ref(picRef.picFullPath || '1.jpeg');
                     storagePic
                         .getDownloadURL()
@@ -54,7 +57,7 @@ function CardPreview(props) {
         }
     }, [isPetitionSubmitted])
     
-    // предварительная загрузка (до того, как пользователь нажал на submit)
+    // предварительная загрузка картинки (до того, как пользователь нажал на submit)
     useEffect(()=>{
         if (isPicUploaded) {
             const storagePic = storage.ref(picRef.picFullPath);
@@ -83,8 +86,8 @@ function CardPreview(props) {
             <p>Актуальная петиция</p>
             <p>Тег: {petitionTag}</p>
             <div>Текст петиции: {isPoemReady && isPetitionReady &&
-            poemText.map((line, i) => <PoemLine key={i} line={line}/>)}</div>
-            {/*<p>Время (пока условное): {petitionData}</p>*/}
+            poemText.map((line, i) => <PoemLine key={uuidv4()} line={line}/>)}</div>
+            <p>Дата публикации (условная): {petitionDate}</p>
             {url ? <img className="photo" src={url} alt={'картинка'}/> : null}
             <button type="submit" className="form__submit-button" onClick={handleSubmitPetition}>Готово</button>
         </div>

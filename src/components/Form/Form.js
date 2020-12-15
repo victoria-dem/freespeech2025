@@ -4,8 +4,6 @@ import {db, storage} from '../../utils/firebase'
 import CardPreview from "../CardPreview/CardPreview";
 
 function Form(props) {
-    console.log(props.currentUserId)
-    // const [isSubmitClicked, setIsSubmitClicked] = React.useState(false)
     const [petitionValues, setPetitionValues] = React.useState({
         petitionTag: '',
         petition: 'none',
@@ -17,6 +15,7 @@ function Form(props) {
     const [pictures, setPictures] = useState([])
     const [isPicturesReady, setIsPicturesReady] = useState(false)
     const [isPicUploaded, setIsPicUploaded] = useState(false)
+    const [progressBar, setProgressBar] = useState(0)
     const [isTagReady, setIsTagReady] = useState(false)
     const [isPoemReady, setIsPoemReady] = useState(false)
     const [isPetitionReady, setIsPetitionReady] = useState(false)
@@ -52,6 +51,8 @@ function Form(props) {
             //  надо попробовать загружать ее под именем timestamp+имя
             thisRef.put(pictures).then(function (snapshot) {
                 setIsPicUploaded(true)
+                const percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                setProgressBar(percentage)
                 // TODO: надо будет попробовать обработать визуализацию загрузки картинки при помощи snapshot.
                 //  В файле test.html есть пример как получить данные для отображения загрузки.
             }).catch((err) => console.log(err));
@@ -60,7 +61,6 @@ function Form(props) {
     
     
     const getPoemText = (word) => {
-        console.log(word)
         const poemsRef = db.collection("poems");
         const query = poemsRef.where("tagText", "array-contains", word)
         const docIds = []
@@ -69,7 +69,6 @@ function Form(props) {
             .get()
             .then(function (querySnapshot) {
                     querySnapshot.forEach(function (doc) {
-                        console.log(doc.data().arrayText)
                         docIds.push({[doc.id]: doc.data().arrayText})
                         // TODO: надо попробовать установить setIsPoemReady одни раз вне forEach
                         setIsPoemReady(true)
@@ -81,12 +80,12 @@ function Form(props) {
                         const randomPoemLength = randomPoem.length
                         // TODO: стих меньше 6 строк
                         // TODO: если стих не найден
-                        
                         let baseString = -1
                         const poemText = []
                         let firstLine = 0
                         let lastLine = 0
                         let string = ''
+                        // TODO: надо протестировать на стихах разной длины и там, где нужное слово находиться вначале и в конце
                         randomPoem.forEach((line, i, arr) => {
                             string = line.toLowerCase()
                             if ((string.indexOf(word) !== -1) && (baseString === -1)) {
@@ -110,7 +109,8 @@ function Form(props) {
                         setPoemText(poemText)
                         
                     } else {
-                        setPoemText(['Строчка первая', 'Строчка вторая', 'Строчка первая', 'Строчка вторая', 'Строчка первая', 'Строчка вторая', 'Строчка первая', 'Строчка вторая'])
+                        setPoemText(['Строчка первая', 'Строчка вторая', 'Строчка первая',
+                            'Строчка вторая', 'Строчка первая', 'Строчка вторая'])
                         setIsPoemReady(true)
                     }
                 }
@@ -141,7 +141,7 @@ function Form(props) {
         setPictures(e.target.files[0])
         setIsPicturesReady(!isPicturesReady)
     }
-
+    
     function handleFocus(e) {
         console.log('tag not ready')
         setIsTagReady(false)
@@ -160,7 +160,6 @@ function Form(props) {
             <form className="form form_petition" name="form-petition" noValidate>
                 <h2 className="form__heading">Ваш текст петиции</h2>
                 <fieldset className="form__fields">
-                    
                     <label className="form__field-input">
                         <input
                             className="form__input form__input-first-field"
@@ -177,7 +176,6 @@ function Form(props) {
                         />
                         <span className="form__field"/>
                     </label>
-                    
                     <label className="form__field-input">
                         <input
                             className="form__input form__input-first-field"
@@ -192,18 +190,13 @@ function Form(props) {
                         />
                         <span className="form__field"/>
                     </label>
-                    
                     <label>
                         <input className="form__input" type="file" id="files" multiple
                                onChange={handleChoosePictures} name="files[]"
                                placeholder="Выберите картинку"
                         />
-                        {/*<button className="form__submit-button" id="send" onClick={handleSubmitPictures}>Загрузить*/}
-                        {/*    картинку*/}
-                        {/*</button>*/}
                     </label>
-                    
-                    
+                    <p>Прогресс загрузки картинки: {progressBar}</p>
                 </fieldset>
             </form>
             <CardPreview
