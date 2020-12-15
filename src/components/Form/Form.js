@@ -1,9 +1,13 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import './form.css'
 import {db, storage} from '../../utils/firebase'
 import CardPreview from "../CardPreview/CardPreview";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-function Form(props) {
+function Form() {
+    
+    const currentUser = useContext(CurrentUserContext);
+    
     const [petitionValues, setPetitionValues] = React.useState({
         petitionTag: '',
         petition: 'none',
@@ -36,7 +40,7 @@ function Form(props) {
     useEffect(() => {
         console.log(isPicturesReady)
         // TODO: подумать надо ли нам сделать внутренний bucket для картинок
-        if (isPicturesReady && props.currentUserId) {
+        if (isPicturesReady && currentUser.uid) {
             const storageRef = storage.ref();
             const thisRef = storageRef.child(pictures.name);
             setPicRef({
@@ -200,7 +204,6 @@ function Form(props) {
                 </fieldset>
             </form>
             <CardPreview
-                currentUserId={props.currentUserId}
                 poemText={poemText}
                 petitionTag={petitionValues.petitionTag}
                 isPoemReady={isPoemReady}

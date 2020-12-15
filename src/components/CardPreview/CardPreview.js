@@ -1,19 +1,18 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import './card-preview.css'
 import {storage, db, auth} from '../../utils/firebase'
 import PoemLine from "../PoemLine/PoemLine";
 import { v4 as uuidv4 } from 'uuid';
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function CardPreview(props) {
-    
+    const currentUser = useContext(CurrentUserContext);
     const {
-        currentUserId,
         poemText,
         petitionTag,
         isPoemReady,
         isPetitionReady,
         picRef,
-        petitionValues,
         isPicUploaded
     } = props
     
@@ -22,12 +21,12 @@ function CardPreview(props) {
     const [petitionDate, setPetitionDate] = useState('')
     
     useEffect(() => {
-        if (isPetitionSubmitted && currentUserId) {
+        if (isPetitionSubmitted && currentUser.uid) {
             const timestamp = Date.now().toString()
             setPetitionDate(timestamp)
             // TODO: обсудить использование ключа isPublic
             db.collection("petitions").add({
-                    uid: currentUserId,
+                    uid: currentUser.uid,
                     petition: poemText,
                     petitionTag: petitionTag,
                     isPublic: false,
