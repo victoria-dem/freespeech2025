@@ -73,7 +73,6 @@ function CardPreview(props) {
         }
     }, [isPicUploaded])
     
-    
     function handleSubmitPetition(e) {
         e.preventDefault()
         setIsPetitionSubmitted(true)
@@ -83,13 +82,21 @@ function CardPreview(props) {
     
     return (
         <div className="card">
-            <p>Актуальная петиция</p>
+            <p>Вид, в котором петиция будет опубликована</p>
             <p>Тег: {petitionTag}</p>
-            <div>Текст петиции: {isPoemReady && isPetitionReady &&
-            poemText.map((line, i) => <PoemLine key={uuidv4()} line={line}/>)}</div>
+            <div>
+                Текст петиции:
+                {isPoemReady && isPetitionReady && poemText.map((line, i) => <PoemLine key={uuidv4()} line={line}/>)}
+            </div>
             <p>Дата публикации (условная): {petitionDate}</p>
             {url ? <img className="photo" src={url} alt={'картинка'}/> : null}
-            <button type="submit" className="form__submit-button" onClick={handleSubmitPetition}>Готово</button>
+            <button
+                type="submit"
+                className="form__submit-button"
+                onClick={handleSubmitPetition}
+            >
+                Готово
+            </button>
         </div>
     )
 }
