@@ -1,10 +1,10 @@
 import { useContext } from 'react';
-import CurrentUserContext from '../../contexts/CurrentUserContext';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './SignUpForm.css';
 
-const SignUpForm = ({  onChange, onSignUp, onLogout }) => {
+const SignUpForm = ({ onChange, onSignUp, onLogout }) => {
   const currentUser = useContext(CurrentUserContext);
-
+  
   return (
     <div className="authForm">
       <form className="form form-sign-up" name="form-signup" noValidate>

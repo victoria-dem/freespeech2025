@@ -1,6 +1,6 @@
 import {db, storage} from '../../utils/firebase'
 import Card from "../Card/Card";
-import CurrentUserContext from '../../contexts/CurrentUserContext';
+import {CurrentUserContext} from '../../contexts/CurrentUserContext';
 
 
     // const [isPetitionSubmitted, setIsPetitionSubmitted] = useState(false)

@@ -5,10 +5,10 @@ import SignUpForm from '../SignUpForm/SignUpForm';
 import '../PetitionForm/petitionform.css'
 import Petition from "../Petition/Petition";
 
-function Auth({onUpdateUser}) {
+function Auth({onUpdateUser, isLoggedIn}) {
     const [isSignUpClicked, setIsSignUpClicked] = useState(false)
     const [isLogOutClicked, setIsLogOutClicked] = useState(false)
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    // const [isLoggedIn, setIsLoggedIn] = useState(false)
     //current user устанавливается в методе onUpdateUser
     // const [currentUser, setCurrentUser] = useState('Unknown')
     const [currentUserId, setCurrentUserId] = useState('')
@@ -24,12 +24,12 @@ function Auth({onUpdateUser}) {
     useEffect(() => {
         auth.onAuthStateChanged(function (user) {
             if (user) {
-                setIsLoggedIn(true)
+                // setIsLoggedIn(true)
                 // setCurrentUser(user.email)
                 // setCurrentUserId(user.uid)
-                onUpdateUser({user});
+                onUpdateUser({email: user.email, uid: user.uid});
             } else {
-                setIsLoggedIn(false)
+                // setIsLoggedIn(false)
                 // setCurrentUser('Unknown')
                 onUpdateUser({});
             }
@@ -74,8 +74,9 @@ function Auth({onUpdateUser}) {
             auth.signOut().then(function () {
                 console.log('Sign-out successful');
                 // setCurrentUserId('')
-                // onUpdateUser({});
-                setIsLoggedIn(false)
+                onUpdateUser({});
+                // setIsLoggedIn(false)
+                console.log('logout');
             }).catch(function (error) {
                 console.log(error);
             });
