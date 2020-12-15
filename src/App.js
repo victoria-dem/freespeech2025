@@ -17,7 +17,7 @@ function App() {
     //     manageJson();
     // },[]);
     const [currentUser, setCurrentUser] = useState({}); // {email: ... , uid: ... }
-    const [isUserLoggedIn, setIsUserLoggedin] = useState(false);
+    const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
     const { location } = useContext(__RouterContext);
     const transitions = useTransition(location, location => location.pathname, {
         from: { opacity: 0, transform: "translate(100%, 0)", display: "none" },
@@ -27,18 +27,9 @@ function App() {
 
     console.log('app user uid', currentUser.uid);
 
-    // const checkIsUserLoggedIn = () => {
-    //     if (!currentUser.uid) {
-    //         setIsUserLoggedin(false);
-    //     } else {
-    //         setIsUserLoggedin(true);
-    //     }
-    //     console.log('user log in',isUserLoggedIn.toString());
-    // }
-
     const handleUserUpdate = (user) => {
         setCurrentUser(user);
-        user.uid ? setIsUserLoggedin(true) : setIsUserLoggedin(false);
+        user.uid ? setIsUserLoggedIn(true) : setIsUserLoggedIn(false);
     }
 
     useEffect(() => {
