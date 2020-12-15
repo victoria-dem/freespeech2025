@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './card.css'
 import {storage, db, auth} from '../../utils/firebase'
 
-function Card(props) {
+function CardDisplay(props) {
     
     const [url, setUrl] = useState('')
     const [petition, setPetition] = useState('')
@@ -49,8 +49,9 @@ function Card(props) {
             <p>Второй тег: {secondTag}</p>
             <p>Время (пока условное): {petitionData}</p>
             <img className="photo" src={url} alt={'картинка'}/>
+            {/*<button type="submit" className="form__submit-button" onClick={handleSubmitPetition}>Готово</button>*/}
         </div>
 )
 }
 
-export default Card
+export default CardDisplay

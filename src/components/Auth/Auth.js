@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react';
 import './auth.css'
 import '../PetitionForm/petitionform.css'
 import {auth} from '../../utils/firebase'
-import PetitionForm from "../PetitionForm/PetitionForm";
+import Petition from "../Petition/Petition";
 
 
 function Auth() {
@@ -21,6 +21,8 @@ function Auth() {
         url: window.location.href,
         handleCodeInApp: true
     };
+    
+    console.log(currentUserId)
     
     // определяем юзер на сайте или нет
     useEffect(() => {
@@ -123,10 +125,12 @@ function Auth() {
                     </fieldset>
                 </form>
             </div>
-            <PetitionForm currentUserId={currentUserId}/>
+            <Petition currentUserId={currentUserId}/>
+        
+        
         </>
     )
-};
+}
 
 export default Auth
 

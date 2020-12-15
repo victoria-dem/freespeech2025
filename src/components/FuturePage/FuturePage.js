@@ -11,7 +11,7 @@ const FuturePage = () => {
         <p>FREE SPEECH 2025 SITE IS HERE -)))))</p>
       </header>
       <Auth />
-      <Form/>
+      
     </div>
   );
 }
