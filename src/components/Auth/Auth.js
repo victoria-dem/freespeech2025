@@ -22,6 +22,8 @@ function Auth() {
         handleCodeInApp: true
     };
     
+    console.log(currentUserId)
+    
     // определяем юзер на сайте или нет
     useEffect(() => {
         auth.onAuthStateChanged(function (user) {
@@ -123,7 +125,7 @@ function Auth() {
                     </fieldset>
                 </form>
             </div>
-            <Petition currrentUser={currentUser}/>
+            <Petition currentUserId={currentUserId}/>
         
         
         </>

@@ -1,14 +1,13 @@
 import React from 'react';
 import './petition.css'
 import Form from "../Form/Form";
-import Card from "../Card/Card";
+// import petitionDisplay from "../Card/Card";
 
-function Petition(props) {
-    
+function Petition({currentUserId}) {
     return (
         <div className="petition">
-            <Form currentUserId={props.currentUserId}/>
-            <Card currentUser={props.currentUser}/>
+            <Form currentUserId={currentUserId}/>
+            
         </div>
     )
 }

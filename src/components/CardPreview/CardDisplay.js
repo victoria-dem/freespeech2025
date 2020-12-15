@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './card.css'
 import {storage, db, auth} from '../../utils/firebase'
 
-function Card(props) {
+function CardDisplay(props) {
     
     const [url, setUrl] = useState('')
     const [petition, setPetition] = useState('')
@@ -54,4 +54,4 @@ function Card(props) {
 )
 }
 
-export default Card
+export default CardDisplay

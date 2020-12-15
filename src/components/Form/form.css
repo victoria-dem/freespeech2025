@@ -2,6 +2,9 @@
   margin: 20px auto;
 }
 
+.petition_object {
+  display: flex;
+}
 
 .form_petition {
     width: 430px;
