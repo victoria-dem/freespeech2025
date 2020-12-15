@@ -1,9 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './form.css'
-import {db, storage} from '../../utils/firebase'
+import { db, storage } from '../../utils/firebase'
 import CardPreview from "../CardPreview/CardPreview";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function Form(props) {
+function Form() {
+    const currentUser = useContext(CurrentUserContext);
+
     const [petitionValues, setPetitionValues] = React.useState({
         petitionTag: '',
         petition: 'none',
@@ -24,7 +27,7 @@ function Form(props) {
         picName: '',
         picBucket: ''
     })
-    
+
     useEffect(() => {
         if (isTagReady) {
             // TODO : строго буквы русского алфавита
@@ -32,11 +35,11 @@ function Form(props) {
             setIsTagReady(false)
         }
     }, [isTagReady])
-    
+
     useEffect(() => {
         console.log(isPicturesReady)
         // TODO: подумать надо ли нам сделать внутренний bucket для картинок
-        if (isPicturesReady && props.currentUserId) {
+        if (isPicturesReady && currentUser.uid) {
             const storageRef = storage.ref();
             const thisRef = storageRef.child(pictures.name);
             setPicRef({
@@ -44,7 +47,7 @@ function Form(props) {
                 picName: thisRef.name,
                 picBucket: thisRef.bucket
             })
-            
+
             console.log('thisRef.bucket, thisRef.name, thisRef.fullPath');
             console.log(thisRef.bucket, thisRef.name, thisRef.fullPath);
             // TODO: сейчас картинка загружается под своим именем -
@@ -58,8 +61,8 @@ function Form(props) {
             }).catch((err) => console.log(err));
         }
     }, [isPicturesReady])
-    
-    
+
+
     const getPoemText = (word) => {
         const poemsRef = db.collection("poems");
         const query = poemsRef.where("tagText", "array-contains", word)
@@ -68,61 +71,61 @@ function Form(props) {
             .where("tagText", "array-contains", word)
             .get()
             .then(function (querySnapshot) {
-                    querySnapshot.forEach(function (doc) {
-                        docIds.push({[doc.id]: doc.data().arrayText})
-                        // TODO: надо попробовать установить setIsPoemReady одни раз вне forEach
-                        setIsPoemReady(true)
-                    });
-                    
-                    if (docIds.length !== 0) {
-                        const randomPoemObj = docIds[Math.floor(Math.random() * docIds.length)]
-                        const randomPoem = Object.values(randomPoemObj)[0]
-                        const randomPoemLength = randomPoem.length
-                        // TODO: стих меньше 6 строк
-                        // TODO: если стих не найден
-                        let baseString = -1
-                        const poemText = []
-                        let firstLine = 0
-                        let lastLine = 0
-                        let string = ''
-                        // TODO: надо протестировать на стихах разной длины и там, где нужное слово находиться вначале и в конце
-                        randomPoem.forEach((line, i, arr) => {
-                            string = line.toLowerCase()
-                            if ((string.indexOf(word) !== -1) && (baseString === -1)) {
-                                baseString = i
-                                if (baseString < 2 && randomPoemLength > 5) {
-                                    firstLine = 0
-                                    lastLine = 5
-                                } else if (baseString > randomPoemLength - 3) {
-                                    firstLine = randomPoemLength - 7
-                                    lastLine = randomPoemLength - 1
-                                } else {
-                                    firstLine = baseString - 2
-                                    lastLine = baseString + 3
-                                }
+                querySnapshot.forEach(function (doc) {
+                    docIds.push({ [doc.id]: doc.data().arrayText })
+                    // TODO: надо попробовать установить setIsPoemReady одни раз вне forEach
+                    setIsPoemReady(true)
+                });
+
+                if (docIds.length !== 0) {
+                    const randomPoemObj = docIds[Math.floor(Math.random() * docIds.length)]
+                    const randomPoem = Object.values(randomPoemObj)[0]
+                    const randomPoemLength = randomPoem.length
+                    // TODO: стих меньше 6 строк
+                    // TODO: если стих не найден
+                    let baseString = -1
+                    const poemText = []
+                    let firstLine = 0
+                    let lastLine = 0
+                    let string = ''
+                    // TODO: надо протестировать на стихах разной длины и там, где нужное слово находиться вначале и в конце
+                    randomPoem.forEach((line, i, arr) => {
+                        string = line.toLowerCase()
+                        if ((string.indexOf(word) !== -1) && (baseString === -1)) {
+                            baseString = i
+                            if (baseString < 2 && randomPoemLength > 5) {
+                                firstLine = 0
+                                lastLine = 5
+                            } else if (baseString > randomPoemLength - 3) {
+                                firstLine = randomPoemLength - 7
+                                lastLine = randomPoemLength - 1
+                            } else {
+                                firstLine = baseString - 2
+                                lastLine = baseString + 3
                             }
-                        })
-                        
-                        for (let i = firstLine; i < lastLine; i++) {
-                            poemText.push(randomPoem[i])
                         }
-                        setPoemText(poemText)
-                        
-                    } else {
-                        setPoemText(['Строчка первая', 'Строчка вторая', 'Строчка первая',
-                            'Строчка вторая', 'Строчка первая', 'Строчка вторая'])
-                        setIsPoemReady(true)
+                    })
+
+                    for (let i = firstLine; i < lastLine; i++) {
+                        poemText.push(randomPoem[i])
                     }
+                    setPoemText(poemText)
+
+                } else {
+                    setPoemText(['Строчка первая', 'Строчка вторая', 'Строчка первая',
+                        'Строчка вторая', 'Строчка первая', 'Строчка вторая'])
+                    setIsPoemReady(true)
                 }
+            }
             )
             .catch(function (error) {
                 console.log("Error getting documents: ", error);
             }).finally(() => console.log('done')
-        );
+            );
     }
-    
+
     const handleChange = e => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
         setPetitionValues(currentValue => {
             return {
                 ...currentValue,
@@ -135,26 +138,26 @@ function Form(props) {
             setIsPetitionReady(false)
         }
     }
-    
+
     function handleChoosePictures(e) {
         e.preventDefault();
         setPictures(e.target.files[0])
         setIsPicturesReady(!isPicturesReady)
     }
-    
+
     function handleFocus(e) {
         console.log('tag not ready')
         setIsTagReady(false)
         setIsPoemReady(false)
     }
-    
+
     function handleOnBlur(e) {
         if (petitionValues.petitionTag) {
             console.log('ready')
             setIsTagReady(true)
         }
     }
-    
+
     return (
         <div className="petition_object">
             <form className="form form_petition" name="form-petition" noValidate>
@@ -174,7 +177,7 @@ function Form(props) {
                             onFocus={handleFocus}
                             onBlur={handleOnBlur}
                         />
-                        <span className="form__field"/>
+                        <span className="form__field" />
                     </label>
                     <label className="form__field-input">
                         <input
@@ -188,19 +191,18 @@ function Form(props) {
                             required
                             onChange={handleChange}
                         />
-                        <span className="form__field"/>
+                        <span className="form__field" />
                     </label>
                     <label>
                         <input className="form__input" type="file" id="files" multiple
-                               onChange={handleChoosePictures} name="files[]"
-                               placeholder="Выберите картинку"
+                            onChange={handleChoosePictures} name="files[]"
+                            placeholder="Выберите картинку"
                         />
                     </label>
                     <p>Прогресс загрузки картинки: {progressBar}</p>
                 </fieldset>
             </form>
             <CardPreview
-                currentUserId={props.currentUserId}
                 poemText={poemText}
                 petitionTag={petitionValues.petitionTag}
                 isPoemReady={isPoemReady}

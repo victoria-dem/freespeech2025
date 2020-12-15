@@ -1,8 +1,8 @@
-/* .authForm {
+.authForm {
   margin: 20px auto;
 }
 
-.form-complaint {
+.form {
   width: 430px;
   background: #fff;
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
@@ -173,4 +173,4 @@
   line-height: 15px;
   color: #ff0000;
   transition: opacity 0.3s;
-} */
+}

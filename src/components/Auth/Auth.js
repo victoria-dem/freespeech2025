@@ -1,15 +1,16 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import './auth.css'
-import '../PetitionForm/petitionform.css'
 import {auth} from '../../utils/firebase'
+import SignUpForm from '../SignUpForm/SignUpForm';
+import '../PetitionForm/petitionform.css'
 import Petition from "../Petition/Petition";
 
-function Auth() {
-    
+function Auth({onUpdateUser, isLoggedIn}) {
     const [isSignUpClicked, setIsSignUpClicked] = useState(false)
     const [isLogOutClicked, setIsLogOutClicked] = useState(false)
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
-    const [currentUser, setCurrentUser] = useState('Unknown')
+    // const [isLoggedIn, setIsLoggedIn] = useState(false)
+    //current user устанавливается в методе onUpdateUser
+    // const [currentUser, setCurrentUser] = useState('Unknown')
     const [currentUserId, setCurrentUserId] = useState('')
     const [values, setValues] = useState({email: ''})
     
@@ -18,16 +19,19 @@ function Auth() {
         handleCodeInApp: true
     };
     
+    
     // определяем юзер на сайте или нет
     useEffect(() => {
         auth.onAuthStateChanged(function (user) {
             if (user) {
-                setIsLoggedIn(true)
-                setCurrentUser(user.email)
-                setCurrentUserId(user.uid)
+                // setIsLoggedIn(true)
+                // setCurrentUser(user.email)
+                // setCurrentUserId(user.uid)
+                onUpdateUser({email: user.email, uid: user.uid});
             } else {
-                setIsLoggedIn(false)
-                setCurrentUser('Unknown')
+                // setIsLoggedIn(false)
+                // setCurrentUser('Unknown')
+                onUpdateUser({});
             }
         });
     }, [isLoggedIn])
@@ -69,7 +73,10 @@ function Auth() {
         if (isLogOutClicked) {
             auth.signOut().then(function () {
                 console.log('Sign-out successful');
-                setCurrentUserId('')
+                // setCurrentUserId('')
+                onUpdateUser({});
+                // setIsLoggedIn(false)
+                console.log('logout');
             }).catch(function (error) {
                 console.log(error);
             });
@@ -94,36 +101,16 @@ function Auth() {
     
     return (
         <>
-            <div className="authForm">
-                <form className="form form-sign-up" name="form-signup" noValidate>
-                    <h2 className="form__heading">Sign UP With Email Link 11</h2>
-                    <h2 className="form__heading">User: {currentUser}</h2>
-                    <fieldset className="form__fields">
-                        <label className="form__field-input">
-                            <input
-                                className="form__input form__input-first-field"
-                                type="email"
-                                id="first-field-place"
-                                placeholder="e-mail"
-                                name="email"
-                                minLength="5"
-                                maxLength="130"
-                                required
-                                autoComplete="username"
-                                onChange={handleChange}
-                            />
-                            <span className="form__field"/>
-                        </label>
-                        <button type="submit" className="form__submit-button" onClick={handleSignUp}>Sign Up</button>
-                        <button type="submit" className="form__submit-button" onClick={handleLogout}>Log Out</button>
-                    </fieldset>
-                </form>
-            </div>
-            <Petition currentUserId={currentUserId}/>
+            {/* currentUser теперь берется в самом компоненте формы из контекста */}
+            <SignUpForm onChange={handleChange} onSignUp={handleSignUp} onLogout={handleLogout}/>
+            
+            {/* TODO: возможно,имеет смысл в этой форме тоже находить currentUser через контест 
+                и брать его ID */}
+            <Petition />
         </>
     )
 }
 
-export default Auth
+export default Auth;
 
 
