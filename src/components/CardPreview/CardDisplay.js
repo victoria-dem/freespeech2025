@@ -1,8 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import './card.css'
 import {storage, db, auth} from '../../utils/firebase'
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function CardDisplay(props) {
+    const currentUser = useContext(CurrentUserContext);
     
     const [url, setUrl] = useState('')
     const [petition, setPetition] = useState('')
@@ -29,7 +31,8 @@ function CardDisplay(props) {
     
     
     const storagePic = storage.ref(path);
-    console.log(props.currentUser)
+    // console.log(currentUser);
+    // console.log(props.currentUser)
     storagePic
         .getDownloadURL()
         .then(function(url) {

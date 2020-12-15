@@ -2,10 +2,11 @@ import React from 'react';
 import './petition.css'
 import Form from "../Form/Form";
 
-function Petition({currentUserId}) {
+function Petition() {
+    
     return (
         <div className="petition">
-            <Form currentUserId={currentUserId}/>
+            <Form/>
         </div>
     )
 }
