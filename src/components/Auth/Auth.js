@@ -39,12 +39,11 @@ function Auth({onUpdateUser, isLoggedIn, isAccountPageOpen, emailLinkStatus}) {
             if (email) {
                 auth.signInWithEmailLink(email, window.location.href).then(function (result) {
     
-                    const link = window.location.href.replace(/\?.*/,'')
-                    console.log(link)
-                    window.location.href = link
+                    // const link = window.location.href.replace(/\?.*/,'')
+                    // console.log(link)
+                    // window.location.href = link
+                    // window.location.href = "https://freespeech2025.com/future"
                     
-                    
-                    window.location.href = "https://freespeech2025.com/future"
                     window.localStorage.removeItem('emailForSignIn');
                 }).catch(function (error) {
                     console.log(error)
