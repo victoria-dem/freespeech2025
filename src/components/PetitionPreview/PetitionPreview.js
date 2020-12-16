@@ -98,31 +98,31 @@ function PetitionPreview(props) {
             });
     }
     
-    function handleSubmitPetition(e) {
-        e.preventDefault()
-        setIsPetitionSubmitted(true)
-    }
-    
+    // function handleSubmitPetition(e) {
+    //     e.preventDefault()
+    //     setIsPetitionSubmitted(true)
+    // }
+    //
     // console.log(poemText, poemText === true, typeof poemText)
     
     return (
         <div className="card">
-            <p>Вид, в котором петиция будет опубликована</p>
-            <p>Тег: {petitionTag}</p>
+            <p>Ваша инициатива в стихах</p>
+            {/*<p>Тег: {petitionTag}</p>*/}
             <div>
                 Текст петиции:
                 {poemText && isPoemReady && isPetitionReady && poemText.map((line, i) => <PoemLine key={uuidv4()}
                                                                                                    line={line}/>)}
             </div>
-            <p>Дата публикации (условная): {petitionDate}</p>
-            {url ? <img className="photo" src={url} alt={'картинка'}/> : null}
-            <button
-                type="submit"
-                className="form__submit-button"
-                onClick={handleSubmitPetition}
-            >
-                {petitionBtnTitle}
-            </button>
+            {/*<p>Дата публикации (условная): {petitionDate}</p>*/}
+            {/*{url ? <img className="photo" src={url} alt={'картинка'}/> : null}*/}
+            {/*<button*/}
+            {/*    type="submit"*/}
+            {/*    className="form__submit-button"*/}
+            {/*    onClick={handleSubmitPetition}*/}
+            {/*>*/}
+            {/*    {petitionBtnTitle}*/}
+            {/*</button>*/}
         </div>
     )
 }
