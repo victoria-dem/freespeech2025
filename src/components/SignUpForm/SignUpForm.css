@@ -174,3 +174,7 @@
   color: #ff0000;
   transition: opacity 0.3s;
 }
+
+.form__field_hide {
+  display:none;
+}

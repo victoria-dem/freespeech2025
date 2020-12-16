@@ -5,14 +5,11 @@ import SignUpForm from '../SignUpForm/SignUpForm';
 import '../PetitionFormOld/petitionform.css'
 import Petition from "../Petition/Petition";
 
-function Auth({onUpdateUser, isLoggedIn}) {
+function Auth({onUpdateUser, isLoggedIn, isAccountPageOpen, emailLinkStatus}) {
     const [isSignUpClicked, setIsSignUpClicked] = useState(false)
     const [isLogOutClicked, setIsLogOutClicked] = useState(false)
-    // const [isLoggedIn, setIsLoggedIn] = useState(false)
-    //current user устанавливается в методе onUpdateUser
-    // const [currentUser, setCurrentUser] = useState('Unknown')
-    const [currentUserId, setCurrentUserId] = useState('')
     const [values, setValues] = useState({email: ''})
+    
     
     const actionCodeSettings = {
         url: window.location.href,
@@ -24,13 +21,8 @@ function Auth({onUpdateUser, isLoggedIn}) {
     useEffect(() => {
         auth.onAuthStateChanged(function (user) {
             if (user) {
-                // setIsLoggedIn(true)
-                // setCurrentUser(user.email)
-                // setCurrentUserId(user.uid)
                 onUpdateUser({email: user.email, uid: user.uid});
             } else {
-                // setIsLoggedIn(false)
-                // setCurrentUser('Unknown')
                 onUpdateUser({});
             }
         });
@@ -60,6 +52,7 @@ function Auth({onUpdateUser, isLoggedIn}) {
             auth.sendSignInLinkToEmail(values.email, actionCodeSettings)
                 .then(function () {
                     window.localStorage.setItem('emailForSignIn', values.email);
+                    emailLinkStatus(true)
                     console.log('The link was successfully sent')
                 })
                 .catch(function (error) {
@@ -73,9 +66,7 @@ function Auth({onUpdateUser, isLoggedIn}) {
         if (isLogOutClicked) {
             auth.signOut().then(function () {
                 console.log('Sign-out successful');
-                // setCurrentUserId('')
                 onUpdateUser({});
-                // setIsLoggedIn(false)
                 console.log('logout');
             }).catch(function (error) {
                 console.log(error);
@@ -102,7 +93,13 @@ function Auth({onUpdateUser, isLoggedIn}) {
     return (
         <>
             {/* currentUser теперь берется в самом компоненте формы из контекста */}
-            <SignUpForm onChange={handleChange} onSignUp={handleSignUp} onLogout={handleLogout}/>
+            {isAccountPageOpen &&
+            <SignUpForm
+                onChange={handleChange}
+                onSignUp={handleSignUp}
+                onLogout={handleLogout}
+                isAccountPageOpen={isAccountPageOpen}
+            />}
             
             {/* TODO: возможно,имеет смысл в этой форме тоже находить currentUser через контест 
                 и брать его ID */}
