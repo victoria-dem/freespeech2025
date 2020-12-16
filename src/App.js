@@ -5,8 +5,6 @@ import FuturePage from './components/FuturePage/FuturePage';
 import { useTransition, animated } from 'react-spring';
 import { Switch, Route } from 'react-router-dom';
 import { __RouterContext } from 'react-router';
-import Auth from "./components/Auth/Auth";
-import PetitionForm from "./components/PetitionForm/PetitionForm";
 import { CurrentUserContext } from './contexts/CurrentUserContext';
 
 // import manageJson from "./utils/manageJson"   /* util for loading json to firebase */
@@ -26,8 +24,6 @@ function App() {
         enter: { opacity: 1, transform: "translate(0%, 0)", display: "flex " },
         leave: { opacity: 0, transform: "translate(-50%, 0)", display: "none" }
     });
-
-    // console.log('app user uid', currentUser.uid);
 
     const handleUserUpdate = (user) => {
         setCurrentUser(user);
@@ -49,7 +45,6 @@ function App() {
                             <Route exact path="/">
                                 <IntroPage />
                             </Route>
-
                             {/* Страница 2025 года - пока там хедер и форма авторизации */}
                             <Route exact path="/future">
                                 <FuturePage onUpdateUser={handleUserUpdate} isLoggedIn={isUserLoggedIn}/>

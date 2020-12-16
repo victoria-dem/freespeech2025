@@ -67,7 +67,6 @@ function Auth({onUpdateUser, isLoggedIn, isAccountPageOpen, emailLinkStatus}) {
             auth.signOut().then(function () {
                 console.log('Sign-out successful');
                 onUpdateUser({});
-                console.log('logout');
             }).catch(function (error) {
                 console.log(error);
             });
@@ -92,7 +91,6 @@ function Auth({onUpdateUser, isLoggedIn, isAccountPageOpen, emailLinkStatus}) {
     
     return (
         <>
-            {/* currentUser теперь берется в самом компоненте формы из контекста */}
             {isAccountPageOpen &&
             <SignUpForm
                 onChange={handleChange}
@@ -100,9 +98,7 @@ function Auth({onUpdateUser, isLoggedIn, isAccountPageOpen, emailLinkStatus}) {
                 onLogout={handleLogout}
                 isAccountPageOpen={isAccountPageOpen}
             />}
-            
-            {/* TODO: возможно,имеет смысл в этой форме тоже находить currentUser через контест 
-                и брать его ID */}
+            {/* TODO: возможно,имеет смысл в этой форме тоже находить currentUser через контест и брать его ID */}
             <Petition />
         </>
     )
