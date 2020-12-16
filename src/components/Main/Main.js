@@ -1,11 +1,11 @@
-import './FuturePage.css';
+import './main.css';
 import Auth from '../Auth/Auth';
 import {Link} from 'react-router-dom';
 import {useState, useContext, useEffect} from "react";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import PetitionCardList from '../PetitionCardList/PetitionCardList';
 
-const FuturePage = ({onUpdateUser, isLoggedIn, petitions}) => {
+const Main = ({onUpdateUser, isLoggedIn, petitions}) => {
     
     const currentUser = useContext(CurrentUserContext);
     const [isAccountPageOpen, setIsAccountPageOpen] = useState(false)
@@ -51,4 +51,4 @@ const FuturePage = ({onUpdateUser, isLoggedIn, petitions}) => {
     );
 }
 
-export default FuturePage;
+export default Main;
