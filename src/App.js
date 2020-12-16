@@ -10,14 +10,21 @@ import PetitionForm from "./components/PetitionForm/PetitionForm";
 import { CurrentUserContext } from './contexts/CurrentUserContext';
 
 // import manageJson from "./utils/manageJson"   /* util for loading json to firebase */
+// import manageJson from "./utils/loadAuthorData"   /* util for loading json to firebase */
 
 function App() {
-    
+
     // uncomment if needed to load json into firebase.database
     // React.useEffect(() => {
     //     manageJson();
     // },[]);
-    
+
+    // uncomment if needed to load authors into firebase */
+// React.useEffect(() => {
+//     loadAuthorData();
+// },[]);
+
+
     const [currentUser, setCurrentUser] = useState({}); // {email: ... , uid: ... }
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
     const { location } = useContext(__RouterContext);
