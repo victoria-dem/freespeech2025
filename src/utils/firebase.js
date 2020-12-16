@@ -17,3 +17,16 @@ firebase.initializeApp(firebaseConfig);
 export const auth = firebase.auth();
 export const db = firebase.firestore();
 export const storage = firebase.storage();
+
+export const getPetitionsFromDb = () => {
+    return db.collection('petitions')
+            .orderBy("timestamp", "desc")
+            .limit(6)
+            .get();
+}
+
+export const pictureUpload = (path) => {
+    const storagePic = storage.ref(path || '1.jpeg');
+    return storagePic
+        .getDownloadURL();
+}

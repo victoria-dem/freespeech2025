@@ -6,18 +6,20 @@ import { useTransition, animated } from 'react-spring';
 import { Switch, Route } from 'react-router-dom';
 import { __RouterContext } from 'react-router';
 import { CurrentUserContext } from './contexts/CurrentUserContext';
+import { db, getPetitionsFromDb } from './utils/firebase';
 
 // import manageJson from "./utils/manageJson"   /* util for loading json to firebase */
 
 function App() {
-    
+
     // uncomment if needed to load json into firebase.database
     // React.useEffect(() => {
     //     manageJson();
     // },[]);
-    
+
     const [currentUser, setCurrentUser] = useState({}); // {email: ... , uid: ... }
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+    const [petitions, setPetitions] = useState([]);
     const { location } = useContext(__RouterContext);
     const transitions = useTransition(location, location => location.pathname, {
         from: { opacity: 0, transform: "translate(100%, 0)", display: "none" },
@@ -34,6 +36,19 @@ function App() {
         // console.log('user log in', isUserLoggedIn);
     }, [isUserLoggedIn]);
 
+    useEffect(() => {
+        getPetitionsFromDb()
+            .then(newPetitions => {
+                newPetitions.forEach(doc => {
+                    setPetitions(petitions => [...petitions, doc.data()])
+                });
+            })
+            .catch(err => console.log(err));
+
+    }, []);
+
+    
+
     return (
 
         <CurrentUserContext.Provider value={currentUser}>
@@ -47,7 +62,8 @@ function App() {
                             </Route>
                             {/* Страница 2025 года - пока там хедер и форма авторизации */}
                             <Route exact path="/future">
-                                <FuturePage onUpdateUser={handleUserUpdate} isLoggedIn={isUserLoggedIn}/>
+                                <FuturePage onUpdateUser={handleUserUpdate} isLoggedIn={isUserLoggedIn}
+                                    petitions={petitions}  />
                             </Route>
                         </Switch>
                     </animated.div>
