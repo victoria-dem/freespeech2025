@@ -3,8 +3,9 @@ import Auth from '../Auth/Auth';
 import {Link} from 'react-router-dom';
 import {useState, useContext, useEffect} from "react";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
+import PetitionCardList from '../PetitionCardList/PetitionCardList';
 
-const FuturePage = ({onUpdateUser, isLoggedIn}) => {
+const FuturePage = ({onUpdateUser, isLoggedIn, petitions}) => {
     
     const currentUser = useContext(CurrentUserContext);
     const [isAccountPageOpen, setIsAccountPageOpen] = useState(false)
@@ -31,7 +32,7 @@ const FuturePage = ({onUpdateUser, isLoggedIn}) => {
     function emailLinkStatus(props) {
         setIsLinkSent(props)
     }
-    
+   
     return (
         <div className="future-page">
             <header className="future-page__header">
@@ -45,6 +46,7 @@ const FuturePage = ({onUpdateUser, isLoggedIn}) => {
                   emailLinkStatus={emailLinkStatus}
             />
             {/*TODO: перенести форму или петицию в эту точку*/}
+            <PetitionCardList petitions={petitions}  />
         </div>
     );
 }
