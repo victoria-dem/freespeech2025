@@ -161,7 +161,7 @@ function PetitionForm() {
                 return {[errorKey]: errorResult};
             }
         ).reduce((acc,el) =>({ ...acc,...el}),{})
-        console.log(petitionTagValidationResult,petitionValidationResult)
+        // console.log(petitionTagValidationResult,petitionValidationResult)
         setErrors({
             petitionTag: petitionTagValidationResult,
             petition: petitionValidationResult
@@ -181,8 +181,8 @@ function PetitionForm() {
 
     }, [petitionValues, setErrors]);
 
-    console.log('errormessage',errorMessage)
-    console.log("errors",errors)
+    // console.log('errormessage',errorMessage)
+    // console.log("errors",errors)
 
     function handleChoosePictures(e) {
         e.preventDefault();
@@ -191,14 +191,14 @@ function PetitionForm() {
     }
 
     function handleFocus(e) {
-        console.log('tag not ready')
+        // console.log('tag not ready')
         setIsTagReady(false)
         setIsPoemReady(false)
     }
 
     function handleOnBlur(e) {
         if (petitionValues.petitionTag) {
-            console.log('ready')
+            // console.log('ready')
             setIsTagReady(true)
         }
     }
