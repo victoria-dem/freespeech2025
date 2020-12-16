@@ -6,7 +6,7 @@ const IntroPage = () => {
     <div className="intro-page">
       <p className="intro-page__text">Это машина времени. Хотите оказаться в 2025 году и отправить 
         вашу просьбу правительству будущего?</p>
-      <Link to="/future" className="into-page__button">Поехали!</Link>
+      <Link to="/main" className="into-page__button">Поехали!</Link>
     </div>
   );
 }
