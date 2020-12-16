@@ -67,7 +67,7 @@ function App() {
                                 <IntroPage/>
                             </Route>
                             {/* Страница 2025 года - пока там хедер и форма авторизации */}
-                            <Route exact path="/future">
+                            <Route exact path="/main">
                                 <Main onUpdateUser={handleUserUpdate} isLoggedIn={isUserLoggedIn}
                                       petitions={petitions}/>
                             </Route>
