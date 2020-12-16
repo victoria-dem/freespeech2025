@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useEffect, useState} from 'react';
 import './auth.css'
 import {auth} from '../../utils/firebase'
 import SignUpForm from '../SignUpForm/SignUpForm';
@@ -38,7 +38,7 @@ function Auth({onUpdateUser, isLoggedIn, isAccountPageOpen, emailLinkStatus}) {
             // The client SDK will parse the code from the link for you.
             if (email) {
                 auth.signInWithEmailLink(email, window.location.href).then(function (result) {
-                    window.location.href = "https://freespeech2025.com/future"
+                window.location.href = window.location.href.replace(/\?.*/, '')
                     window.localStorage.removeItem('emailForSignIn');
                 }).catch(function (error) {
                     console.log(error)

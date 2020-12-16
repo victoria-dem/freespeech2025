@@ -68,7 +68,7 @@ function PetitionPreview(props) {
         }
     }, [isPicUploaded])
     
-    console.log(isPetitionReady, isLoaded, isPicUploaded)
+    // console.log(isPetitionReady, isLoaded, isPicUploaded)
     
     useEffect(() => {
         if (!isPetitionReady && !isLoaded) {
@@ -90,7 +90,7 @@ function PetitionPreview(props) {
         storagePic
             .getDownloadURL()
             .then(function (url) {
-                console.log(url);
+                // console.log(url);
                 setUrl(url)
             })
             .catch(function (error) {
@@ -103,7 +103,7 @@ function PetitionPreview(props) {
         setIsPetitionSubmitted(true)
     }
     
-    console.log(poemText, poemText === true, typeof poemText)
+    // console.log(poemText, poemText === true, typeof poemText)
     
     return (
         <div className="card">

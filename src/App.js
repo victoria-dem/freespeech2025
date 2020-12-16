@@ -1,7 +1,7 @@
 import './App.css';
 import React, {useState, useContext, useEffect} from 'react';
 import IntroPage from './components/IntroPage/IntroPage';
-import FuturePage from './components/FuturePage/FuturePage';
+import Main from './components/Main/Main';
 import {useTransition, animated} from 'react-spring';
 import {Switch, Route} from 'react-router-dom';
 import {__RouterContext} from 'react-router';
@@ -67,9 +67,9 @@ function App() {
                                 <IntroPage/>
                             </Route>
                             {/* Страница 2025 года - пока там хедер и форма авторизации */}
-                            <Route exact path="/future">
-                                <FuturePage onUpdateUser={handleUserUpdate} isLoggedIn={isUserLoggedIn}
-                                            petitions={petitions}/>
+                            <Route exact path="/main">
+                                <Main onUpdateUser={handleUserUpdate} isLoggedIn={isUserLoggedIn}
+                                      petitions={petitions}/>
                             </Route>
                         </Switch>
                     </animated.div>
