@@ -38,6 +38,12 @@ function Auth({onUpdateUser, isLoggedIn, isAccountPageOpen, emailLinkStatus}) {
             // The client SDK will parse the code from the link for you.
             if (email) {
                 auth.signInWithEmailLink(email, window.location.href).then(function (result) {
+    
+                    const link = window.location.href.replace(/\?.*/,'')
+                    console.log(link)
+                    window.location.href = link
+                    
+                    
                     window.location.href = "https://freespeech2025.com/future"
                     window.localStorage.removeItem('emailForSignIn');
                 }).catch(function (error) {
