@@ -7,6 +7,7 @@ import { Switch, Route } from 'react-router-dom';
 import { __RouterContext } from 'react-router';
 import { CurrentUserContext } from './contexts/CurrentUserContext';
 import { db, getPetitionsFromDb } from './utils/firebase';
+import { v4 as uuidv4 } from 'uuid';
 
 // import manageJson from "./utils/manageJson"   /* util for loading json to firebase */
 // import manageJson from "./utils/loadAuthorData"   /* util for loading json to firebase */
@@ -52,8 +53,11 @@ function App() {
                 });
             })
             .catch(err => console.log(err));
-
     }, []);
+
+    const handleAddPetition = (petition) => {
+        setPetitions(petitions => [petition, ...petitions])
+    }
 
     const handleLikeClick = (petition) => {
         const isLiked = petition.data.likes.some(i => i.uid === currentUser.uid);
@@ -66,20 +70,18 @@ function App() {
                 disLikes: !isLiked ? petition.data.disLikes.filter(i => i.uid !== currentUser.uid) :
                     [...petition.data.disLikes]
             })
-            .then((res) => {
-                console.log(res);
-                // const newPetitions = petitions.slice();
-                // setPetitions(petitions.map((p) => p.data.uid === petition.data.uid ? petition : p));
-                //setPetitions(petitions.slice());
+            .then(() => {
+                //setPetitions(petitions.map((p) => p.id === petition.id ? petition : p));
             })
             .catch((err) => {
                 console.log(err);
             });
+
     }
 
     const handleDislikeClick = (petition) => {
         const isDisliked = petition.data.disLikes.some(i => i.uid === currentUser.uid);
-        return db.collection("petitions")
+        db.collection("petitions")
             .doc(petition.id)
             .update({
                 disLikes: isDisliked ?
@@ -94,9 +96,8 @@ function App() {
             .catch((err) => {
                 console.log(err);
             });
-
-
     }
+
 
     return (
         <CurrentUserContext.Provider value={currentUser}>
@@ -111,7 +112,7 @@ function App() {
                             {/* Страница 2025 года - пока там хедер и форма авторизации */}
                             <Route exact path="/main">
                                 <Main onUpdateUser={handleUserUpdate} isLoggedIn={isUserLoggedIn} petitions={petitions}
-                                    onLikeClick={handleLikeClick} onDislikeClick={handleDislikeClick} />
+                                    onLikeClick={handleLikeClick} onDislikeClick={handleDislikeClick} onAddPetition={handleAddPetition}/>
                             </Route>
                         </Switch>
                     </animated.div>

@@ -5,7 +5,7 @@ import SignUpForm from '../SignUpForm/SignUpForm';
 import '../PetitionFormOld/petitionform.css'
 import Petition from "../Petition/Petition";
 
-function Auth({onUpdateUser, isLoggedIn, isAccountPageOpen, emailLinkStatus}) {
+function Auth({onUpdateUser, isLoggedIn, isAccountPageOpen, emailLinkStatus, onAddPetition}) {
     const [isSignUpClicked, setIsSignUpClicked] = useState(false)
     const [isLogOutClicked, setIsLogOutClicked] = useState(false)
     const [values, setValues] = useState({email: ''})
@@ -99,7 +99,7 @@ function Auth({onUpdateUser, isLoggedIn, isAccountPageOpen, emailLinkStatus}) {
                 isAccountPageOpen={isAccountPageOpen}
             />}
             {/* TODO: возможно,имеет смысл в этой форме тоже находить currentUser через контест и брать его ID */}
-            <Petition />
+            <Petition onAddPetition={onAddPetition}/>
         </>
     )
 }
