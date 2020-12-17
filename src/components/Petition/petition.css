@@ -1,5 +1,97 @@
-.petition {
+.petition-form {
   display: flex;
   margin: 50px auto;
+  flex-direction: column;
   border: 1px solid blue;
+}
+
+.petition-form__title {
+  color: blue;
+}
+
+.petition-form__content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.petition-form__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px #324f10 solid;
+
+}
+
+.petition-form__picture {
+  display: flex;
+  flex-direction: column;
+  border: 1px red solid;
+}
+
+.petition-form__user-picture {
+  margin: 20px;
+  width: 300px;
+  height: 300px;
+  background-color: #a2a2a5;
+}
+
+
+.petition-form__default-pictures {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.petition-form__default-picture {
+  margin: 10px;
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+/*!!!!!!!!!!!!!!!!!!!!!!!!!*/
+
+
+.form-petition {
+  margin: 20px auto;
+}
+
+.petition_object {
+  display: flex;
+}
+
+.form_petition {
+  width: 430px;
+  background: #fff;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  z-index: 5;
+}
+
+.form__submit-button {
+  border: 0;
+  width: 358px;
+  height: 50.15px;
+  background: #6a6a6a;
+  color: #fff;
+  border-radius: 2px;
+  margin: 20px 0 37px 0;
+  padding: 0;
+  text-align: center;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.form__submit-button:hover {
+  opacity: 0.8;
+  transition: 2s ease;
 }
