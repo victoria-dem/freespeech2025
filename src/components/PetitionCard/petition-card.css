@@ -2,15 +2,16 @@
   display: flex;
   flex-direction: row;
   width: 800px; 
-  min-height: 500px;
+  min-height: 450px;
   border: 1px solid grey;
   background-color: white;
+  border-radius: 20px;
 }
 
 .petition-card__image {
   object-fit: cover;
   width: 400px;
-  height: 500px;
+  height: 450px;
 }
 
 .petition-card__info {

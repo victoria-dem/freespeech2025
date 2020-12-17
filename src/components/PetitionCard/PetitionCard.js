@@ -33,7 +33,7 @@ const PetitionCard = ({ petition, onLikeClick, onDislikeClick }) => {
 
   return (
       <div className="petition-card">
-        <div className="petition-card__image" style={{background:`center/cover url(${url})`}}></div>
+        <div className="petition-card__image" style={{background:`center/cover url(${url})`, borderRadius:"20px 0 0 20px"}}></div>
         <div className="petition-card__info">
           <p className="petition-card__timestamp">{`Time: ${petition.data.timestamp}`}</p>
           <p className="petition-card__tag">{`Тэг: ${petition.data.petitionTag}`}</p>
