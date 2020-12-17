@@ -67,7 +67,8 @@ function App() {
 
     //лайк петиции
     const handleLikeClick = (petition) => {
-        const isLiked = petition.data.likes.some(i => i.uid === currentUser.uid);
+        if(currentUser.uid) {
+            const isLiked = petition.data.likes.some(i => i.uid === currentUser.uid);
         db.collection("petitions")
             .doc(petition.id)
             .update({
@@ -83,12 +84,16 @@ function App() {
             .catch((err) => {
                 console.log(err);
             });
-
+        } else {
+            console.log('please log in');
+        }
+        
     }
 
     //дислайк петиции
     const handleDislikeClick = (petition) => {
-        const isDisliked = petition.data.disLikes.some(i => i.uid === currentUser.uid);
+        if(currentUser.uid) {
+            const isDisliked = petition.data.disLikes.some(i => i.uid === currentUser.uid);
         db.collection("petitions")
             .doc(petition.id)
             .update({
@@ -104,6 +109,10 @@ function App() {
             .catch((err) => {
                 console.log(err);
             });
+        } else {
+            console.log('please log in');
+        }
+        
     }
 
 

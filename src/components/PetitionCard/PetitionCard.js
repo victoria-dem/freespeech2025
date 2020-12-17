@@ -7,7 +7,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 const PetitionCard = ({ petition, onLikeClick, onDislikeClick }) => {
   const [url, setUrl] = useState('');
   const currentUser = useContext(CurrentUserContext);
-  
+
   //получение ссылки на картинку
   useEffect(() => {
     let cleanUp = false;
@@ -32,24 +32,26 @@ const PetitionCard = ({ petition, onLikeClick, onDislikeClick }) => {
   }
 
   return (
-      <div className="petition-card">
-        <div className="petition-card__image" style={{background:`center/cover url(${url})`, borderRadius:"20px 0 0 20px"}}></div>
-        <div className="petition-card__info">
-          <p className="petition-card__timestamp">{`Time: ${petition.data.timestamp}`}</p>
-          <p className="petition-card__tag">{`Тэг: ${petition.data.petitionTag}`}</p>
-          <ul className="petition-card__poem">
-            {
+    <div className="petition-card">
+      <div className="petition-card__image" style={{ background: `center/cover url(${url})`, borderRadius: "20px 0 0 20px" }}></div>
+      <div className="petition-card__info">
+        <p className="petition-card__timestamp">{`Time: ${petition.data.timestamp}`}</p>
+        <p className="petition-card__tag">{`Тэг: ${petition.data.petitionTag}`}</p>
+        <ul className="petition-card__poem">
+          {
+            Array.isArray(petition.data.petition) ?
               petition.data.petition.map((line) => {
                 return <p key={uuidv4()}>{line}</p>
-              })
+              }) :
+              'Вы не ввели жалобу'
             }
-          </ul>
-          <button className="petition-card__reaction petition-card__reaction_type_like"
-            onClick={handleLikeClick}>{`Likes: ${petition.data.likes.length}`}</button>
-          <button className="petition-card__reaction petition-card__reaction_type_dislike"
-            onClick={handleDisLikeClick}>{`Dislikes: ${petition.data.disLikes.length}`}</button>
-        </div>
+        </ul>
+        <button className="petition-card__reaction petition-card__reaction_type_like"
+          onClick={handleLikeClick}>{`Likes: ${petition.data.likes.length}`}</button>
+        <button className="petition-card__reaction petition-card__reaction_type_dislike"
+          onClick={handleDisLikeClick}>{`Dislikes: ${petition.data.disLikes.length}`}</button>
       </div>
+    </div>
   );
 }
 
