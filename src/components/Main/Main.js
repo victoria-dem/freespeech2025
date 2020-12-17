@@ -5,7 +5,7 @@ import {useState, useContext, useEffect} from "react";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import PetitionCardList from '../PetitionCardList/PetitionCardList';
 
-const Main = ({onUpdateUser, isLoggedIn, petitions}) => {
+const Main = ({onUpdateUser, isLoggedIn, petitions, onLikeClick, onDislikeClick, onAddPetition}) => {
     
     const currentUser = useContext(CurrentUserContext);
     const [isAccountPageOpen, setIsAccountPageOpen] = useState(false)
@@ -44,9 +44,10 @@ const Main = ({onUpdateUser, isLoggedIn, petitions}) => {
                   isLoggedIn={isLoggedIn}
                   isAccountPageOpen={isAccountPageOpen}
                   emailLinkStatus={emailLinkStatus}
+                  onAddPetition={onAddPetition}
             />
             {/*TODO: перенести форму или петицию в эту точку*/}
-            <PetitionCardList petitions={petitions}  />
+            <PetitionCardList petitions={petitions} onLikeClick={onLikeClick} onDislikeClick={onDislikeClick} />
         </div>
     );
 }

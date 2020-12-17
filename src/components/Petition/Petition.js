@@ -8,7 +8,7 @@ import PetitionDefaultPicture from "../PetitionDefaultPicture/PetitionDefaultPic
 import {db} from "../../utils/firebase";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 
-function Petition() {
+function Petition({onAddPetition}) {
     const currentUser = useContext(CurrentUserContext);
     const [poemText, setPoemText] = useState('')
     const [tagText, setTagText] = useState('')
@@ -18,8 +18,7 @@ function Petition() {
     const [isLoaded, setIsLoaded] = useState(false)
     const [isPetitionPublished, setIsPetitionPublished] = useState(false)
     const [isPictureReady, setIsPictureReady] = useState(false)
-    
-    
+
     function getPetitionTextData(petitionTextData) {
         setPoemText(petitionTextData.poemText)
         setTagText(petitionTextData.tagText)
@@ -45,24 +44,38 @@ function Petition() {
             // setPetitionDate(timestamp)
             // TODO: обсудить использование ключа isPublic
             // TODO: setTimeout поставил специально, для отслеживания статуса загрузки
-            
+            const data = {
+                uid: currentUser.uid,
+                petition: poemText,
+                petitionTag: tagText,
+                isPublic: false,
+                picFullPath: pictureData.picFullPath || '1.jpeg',
+                picName: pictureData.picName || '1.jpeg',
+                picBucket: pictureData.picBucket || 'freespeech2025-46bc5.appspot.com',
+                timestamp: timestamp,
+                likes: [],
+                disLikes: []
+            }
             setTimeout(() => {
-                db.collection("petitions").add({
-                        uid: currentUser.uid,
-                        petition: poemText,
-                        petitionTag: tagText,
-                        isPublic: false,
-                        picFullPath: pictureData.picFullPath || '1.jpeg',
-                        picName: pictureData.picName || '1.jpeg',
-                        picBucket: pictureData.picBucket || 'freespeech2025-46bc5.appspot.com',
-                        timestamp: timestamp,
-                        likes: [],
-                        disLikes: []
-                    })
+                db.collection("petitions")
+                // .add({
+                //         uid: currentUser.uid,
+                //         petition: poemText,
+                //         petitionTag: tagText,
+                //         isPublic: false,
+                //         picFullPath: pictureData.picFullPath || '1.jpeg',
+                //         picName: pictureData.picName || '1.jpeg',
+                //         picBucket: pictureData.picBucket || 'freespeech2025-46bc5.appspot.com',
+                //         timestamp: timestamp,
+                //         likes: [],
+                //         disLikes: []
+                //     })
+                    .add(data)
                     .then(function (docRef) {
                         console.log("Document written with ID: ", docRef.id);
                         setIsLoaded(false)
                         setIsPetitionPublished(true)
+                        onAddPetition({data: data, id: docRef.id});
                     }).then(function () {
                         // загрузка картинки (после того, как пользователь нажал на submit)
                         // pictureUpload()
