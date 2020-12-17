@@ -59,6 +59,13 @@ function App() {
         setPetitions(petitions => [petition, ...petitions])
     }
 
+    //добавление петиции после обновления инфо в ней (лайки)
+    const updatePetitions = (petition) => db.collection("petitions")
+        .doc(petition.id).onSnapshot((doc) => {
+            setPetitions(petitions.map((p) => p.id === petition.id ? { data: doc.data(), id: doc.id } : p));
+        }).catch(err => console.log(err));
+
+    //лайк петиции
     const handleLikeClick = (petition) => {
         const isLiked = petition.data.likes.some(i => i.uid === currentUser.uid);
         db.collection("petitions")
@@ -71,7 +78,7 @@ function App() {
                     [...petition.data.disLikes]
             })
             .then(() => {
-                //setPetitions(petitions.map((p) => p.id === petition.id ? petition : p));
+                updatePetitions(petition);
             })
             .catch((err) => {
                 console.log(err);
@@ -79,6 +86,7 @@ function App() {
 
     }
 
+    //дислайк петиции
     const handleDislikeClick = (petition) => {
         const isDisliked = petition.data.disLikes.some(i => i.uid === currentUser.uid);
         db.collection("petitions")
@@ -91,7 +99,7 @@ function App() {
                     [...petition.data.likes]
             })
             .then(() => {
-                // setPetitions(petitions.map((p) => p.data.uid === petition.data.uid ? petition : p));
+                updatePetitions(petition);
             })
             .catch((err) => {
                 console.log(err);
@@ -112,7 +120,7 @@ function App() {
                             {/* Страница 2025 года - пока там хедер и форма авторизации */}
                             <Route exact path="/main">
                                 <Main onUpdateUser={handleUserUpdate} isLoggedIn={isUserLoggedIn} petitions={petitions}
-                                    onLikeClick={handleLikeClick} onDislikeClick={handleDislikeClick} onAddPetition={handleAddPetition}/>
+                                    onLikeClick={handleLikeClick} onDislikeClick={handleDislikeClick} onAddPetition={handleAddPetition} />
                             </Route>
                         </Switch>
                     </animated.div>
