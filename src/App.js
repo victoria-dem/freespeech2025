@@ -63,7 +63,7 @@ function App() {
     const updatePetitions = (petition) => db.collection("petitions")
         .doc(petition.id).onSnapshot((doc) => {
             setPetitions(petitions.map((p) => p.id === petition.id ? { data: doc.data(), id: doc.id } : p));
-        }).catch(err => console.log(err));
+        });
 
     //лайк петиции
     const handleLikeClick = (petition) => {

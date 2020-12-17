@@ -18,8 +18,6 @@ function Petition({onAddPetition}) {
     const [isLoaded, setIsLoaded] = useState(false)
     const [isPetitionPublished, setIsPetitionPublished] = useState(false)
     const [isPictureReady, setIsPictureReady] = useState(false)
-    
-    const [petition,setPetition] = useState({});
 
     function getPetitionTextData(petitionTextData) {
         setPoemText(petitionTextData.poemText)
