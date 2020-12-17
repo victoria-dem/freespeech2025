@@ -2,12 +2,13 @@ import React, {useState, useEffect, useContext} from 'react';
 import {storage} from "../../utils/firebase";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 
-function PetitionPicture() {
+function PetitionPicture({getPetitionPicData}) {
     const currentUser = useContext(CurrentUserContext);
     const [pictures, setPictures] = useState([])
     const [isPicturesReady, setIsPicturesReady] = useState(false)
     const [progressBar, setProgressBar] = useState(0)
     const [isPicUploaded, setIsPicUploaded] = useState(false)
+    const [url, setUrl] = useState('')
     const [picRef, setPicRef] = useState({
         picFullPath: '',
         picName: '',
@@ -36,7 +37,22 @@ function PetitionPicture() {
         }
     }, [isPicturesReady])
     
-    
+    // выгрузка картинки
+    useEffect(() => {
+        if (isPicUploaded) {
+            getPetitionPicData({picRef, isPicUploaded})
+            const storagePic = storage.ref(picRef.picFullPath || '1.jpeg');
+            storagePic
+                .getDownloadURL()
+                .then(function (url) {
+                    // console.log(url);
+                    setUrl(url)
+                })
+                .catch(function (error) {
+                    console.log("error encountered");
+                });
+        }
+    }, [isPicUploaded])
     
     function handleChoosePictures(e) {
         e.preventDefault();
@@ -45,30 +61,16 @@ function PetitionPicture() {
     }
     
     return (
-        <>
-            <div className="petition-form__user-picture">
-                <label>
-                    <input className="form__input" type="file" id="files" multiple
-                        onChange={handleChoosePictures} name="files[]"
-                           placeholder="Выберите картинку"
-                    />
-                    <p>Прогресс загрузки картинки: {progressBar}</p>
-                </label>
-            </div>
-            <div className="petition-form__default-pictures">
-                <img className="petition-form__default-picture" alt="#"/>
-                <img className="petition-form__default-picture" alt="#"/>
-                <img className="petition-form__default-picture" alt="#"/>
-            </div>
-            <button
-                type="submit"
-                className="form__submit-button"
-                // onClick={handleSubmitPetition}
-            >
-                Текст на кнопке
-                {/*{petitionBtnTitle}*/}
-            </button>
-        </>
+        <div className="petition-form__user-picture">
+            {url ? <img className="photo" src={url} alt={'картинка'}/> : null}
+            <label>
+                <input className="form__input" type="file" id="files" multiple
+                       onChange={handleChoosePictures} name="files[]"
+                       placeholder="Выберите картинку"
+                />
+                <p>Прогресс загрузки картинки: {progressBar}</p>
+            </label>
+        </div>
     )
 }
 

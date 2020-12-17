@@ -18,6 +18,8 @@
 .petition-form__text {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   border: 1px #324f10 solid;
 
 }
@@ -29,21 +31,25 @@
 }
 
 .petition-form__user-picture {
-  width: 200px;
-  height: 200px;
-  background-color: #9a9ad9;
+  margin: 20px;
+  width: 300px;
+  height: 300px;
+  background-color: #a2a2a5;
 }
+
 
 .petition-form__default-pictures {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 .petition-form__default-picture {
-  width: 50px;
-  height: 50px;
-  background-color: #bcbcc4;
+  margin: 10px;
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  object-fit: cover;
 }
 
 /*!!!!!!!!!!!!!!!!!!!!!!!!!*/
