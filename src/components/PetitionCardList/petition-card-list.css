@@ -1,9 +1,5 @@
 .petition-card-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 300px);
-  max-width: 1000px;
-  width: 100%;
+  width: 1000px;
+  height: 500px;
   margin: auto;
-  grid-gap: 20px;
-  justify-content: center;
 }

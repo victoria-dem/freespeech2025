@@ -1,16 +1,26 @@
 import PetitionCard from "../PetitionCard/PetitionCard";
 import { v4 as uuidv4 } from 'uuid';
+import Carousel from 'react-spring-3d-carousel';
+import {config} from 'react-spring';
+
 import './petition-card-list.css';
 
 const PetitionCardList = ({ petitions }) => {
   return (
-    <ul className="petition-card-list">
-      {petitions.map((petition) => {
-        return (
-          <PetitionCard key={uuidv4()} petition={petition} />
-        )
-      })}
-    </ul>
+    <div className="petition-card-list">
+      <Carousel slides={
+        petitions.map((petition) => {
+          return ({
+            key: uuidv4(),
+            content: <PetitionCard petition={petition} />
+          }
+          )
+        })
+      }
+      showNavigation={true}
+      animationConfig={config.slow}
+      />
+    </div>
   );
 }
 
