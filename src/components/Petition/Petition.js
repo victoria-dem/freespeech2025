@@ -59,16 +59,16 @@ function Petition({onAddPetition}) {
     useEffect(() => {
         // TODO: здесь надо добавить проверку, чтобы не делать запросы к базе с пустым url
         // TODO: но не делать запрос на проверку наличия url
-            const storagePic = storage.ref(pictureData.picFullPath);
-            storagePic
-                .getDownloadURL()
-                .then(function (url) {
-                    // console.log(url);
-                    setUrl(url)
-                })
-                .catch(function (error) {
-                    console.log("error encountered");
-                });
+        const storagePic = storage.ref(pictureData.picFullPath);
+        storagePic
+            .getDownloadURL()
+            .then(function (url) {
+                // console.log(url);
+                setUrl(url)
+            })
+            .catch(function (error) {
+                console.log("error encountered");
+            });
     }, [pictureData])
     
     function getSubmitPetitionEvent(isBtnClicked) {
@@ -110,7 +110,14 @@ function Petition({onAddPetition}) {
                     })
                     .catch(function (error) {
                         console.error("Error adding document: ", error);
-                    });
+                    }).finally((() => {
+                    // TODO: подумать правильно ли то, что этот находится в finally а не в then
+                    // TODO: резон для этого в том, что я хочу чтобы даже если ошибка возникла мы
+                    //  TODO:все равно проресетили все стейты и были готовы к приему новой петиции
+                    setTimeout(()=>{
+                        setIsPetitionPublished(true)
+                    }, 1000)
+                }))
             }, 1500)
         }
     }, [isPetitionSubmitted])
@@ -144,7 +151,6 @@ function Petition({onAddPetition}) {
                         isTextReadyToRender={isTextReadyToRender}
                     />
                 </div>
-            
             </div>
         </section>
     )
