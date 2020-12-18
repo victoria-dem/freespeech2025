@@ -17,7 +17,11 @@ function DefaultPicture({url, getDefaultPetitionPicData, isTextReadyToRender}){
 
     return(
         <>
-            <img className="petition-form__default-picture" src={isTextReadyToRender ? url : greyPic} alt={'картинка по умолчанию'} onClick={handleDefaultPictureClick}/>
+            <img
+                className="petition-form__default-picture"
+                src={isTextReadyToRender ? url : greyPic}
+                alt={'картинка по умолчанию'}
+                onClick={handleDefaultPictureClick}/>
         </>
     )
 }

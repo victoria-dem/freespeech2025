@@ -18,10 +18,11 @@ function Petition({onAddPetition}) {
     const [isLoaded, setIsLoaded] = useState(false)
     const [isPetitionPublished, setIsPetitionPublished] = useState(false)
     const [isPictureReady, setIsPictureReady] = useState(false)
-    const [resetTextInputs, setResetTextInputs] =useState(false)
+    const [resetTextInputs, setResetTextInputs] = useState(false)
     const [url, setUrl] = useState('')
+    const [isPublic, setIsPublic] = useState(false)
     
-    
+    console.log(isPublic)
     // console.log(isTextReadyToRender, isTextReadyToRender, isTextReadyToRender, url, pictureData)
     
     function handleDeletePicture() {
@@ -44,6 +45,7 @@ function Petition({onAddPetition}) {
     function getPetitionPicData({picRef, isPicUploaded}) {
         setPictureData(picRef)
         setIsPictureReady(isPicUploaded)
+        setIsPublic(false)
     }
     
     function getDefaultPetitionPicData(defaultPicName) {
@@ -54,6 +56,7 @@ function Petition({onAddPetition}) {
                 picBucket: "freespeech2025-46bc5.appspot.com"
             })
             setIsPictureReady(true)
+            setIsPublic(true)
         }
     }
     
@@ -89,7 +92,7 @@ function Petition({onAddPetition}) {
                 uid: currentUser.uid,
                 petition: poemText,
                 petitionTag: tagText,
-                isPublic: false,
+                isPublic: isPublic,
                 picFullPath: pictureData.picFullPath,
                 picName: pictureData.picName,
                 picBucket: pictureData.picBucket,
@@ -116,7 +119,7 @@ function Petition({onAddPetition}) {
                     // TODO: подумать правильно ли то, что этот находится в finally а не в then
                     // TODO: резон для этого в том, что я хочу чтобы даже если ошибка возникла мы
                     //  TODO:все равно проресетили все стейты и были готовы к приему новой петиции
-                    setTimeout(()=>{
+                    setTimeout(() => {
                         console.log('reset petition form')
                         setIsPetitionPublished(false)
                         setIsTextReadyToRender(false)
