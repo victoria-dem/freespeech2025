@@ -47,8 +47,9 @@ const Main = ({onUpdateUser, isLoggedIn, petitions, onLikeClick, onDislikeClick,
             <div className="future-page">
                 <Header handleAccountBtnClick={handleAccountBtnClick} buttonMsg={buttonMsg}/>
                 {/*TODO: перенести форму или петицию в эту точку*/}
-                <Petition onAddPetition={onAddPetition}/>
+
                 <PetitionCardList petitions={petitions} onLikeClick={onLikeClick} onDislikeClick={onDislikeClick} />
+                <Petition onAddPetition={onAddPetition}/>
                 <Auth onUpdateUser={onUpdateUser}
                       isLoggedIn={isLoggedIn}
                       isAccountPageOpen={isAccountPageOpen}
@@ -58,9 +59,9 @@ const Main = ({onUpdateUser, isLoggedIn, petitions, onLikeClick, onDislikeClick,
                 <Popup
                     // isOpen={isPopupOpen}
                     onClose={closePopup}
-                    onChange={onChange}
-                    onSignUp={onSignUp}
-                    onLogout={onLogout}
+                    // onChange={onChange}
+                    // onSignUp={onSignUp}
+                    // onLogout={onLogout}
                     isAccountPageOpen={isAccountPageOpen}
                 />
             </div>
