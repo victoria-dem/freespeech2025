@@ -18,9 +18,11 @@ function Petition({onAddPetition}) {
     const [isLoaded, setIsLoaded] = useState(false)
     const [isPetitionPublished, setIsPetitionPublished] = useState(false)
     const [isPictureReady, setIsPictureReady] = useState(false)
+    const [resetTextInputs, setResetTextInputs] = useState(false)
     const [url, setUrl] = useState('')
+    const [isPublic, setIsPublic] = useState(false)
     
-    
+    console.log(isPublic)
     // console.log(isTextReadyToRender, isTextReadyToRender, isTextReadyToRender, url, pictureData)
     
     function handleDeletePicture() {
@@ -43,6 +45,7 @@ function Petition({onAddPetition}) {
     function getPetitionPicData({picRef, isPicUploaded}) {
         setPictureData(picRef)
         setIsPictureReady(isPicUploaded)
+        setIsPublic(false)
     }
     
     function getDefaultPetitionPicData(defaultPicName) {
@@ -53,22 +56,23 @@ function Petition({onAddPetition}) {
                 picBucket: "freespeech2025-46bc5.appspot.com"
             })
             setIsPictureReady(true)
+            setIsPublic(true)
         }
     }
     
     useEffect(() => {
         // TODO: здесь надо добавить проверку, чтобы не делать запросы к базе с пустым url
         // TODO: но не делать запрос на проверку наличия url
-            const storagePic = storage.ref(pictureData.picFullPath);
-            storagePic
-                .getDownloadURL()
-                .then(function (url) {
-                    // console.log(url);
-                    setUrl(url)
-                })
-                .catch(function (error) {
-                    console.log("error encountered");
-                });
+        const storagePic = storage.ref(pictureData.picFullPath);
+        storagePic
+            .getDownloadURL()
+            .then(function (url) {
+                // console.log(url);
+                setUrl(url)
+            })
+            .catch(function (error) {
+                console.log("error encountered");
+            });
     }, [pictureData])
     
     function getSubmitPetitionEvent(isBtnClicked) {
@@ -88,7 +92,7 @@ function Petition({onAddPetition}) {
                 uid: currentUser.uid,
                 petition: poemText,
                 petitionTag: tagText,
-                isPublic: false,
+                isPublic: isPublic,
                 picFullPath: pictureData.picFullPath,
                 picName: pictureData.picName,
                 picBucket: pictureData.picBucket,
@@ -107,21 +111,39 @@ function Petition({onAddPetition}) {
                     }).then(function () {
                         // загрузка картинки (после того, как пользователь нажал на submit)
                         // pictureUpload()
+                        setIsPetitionPublished(true)
                     })
                     .catch(function (error) {
                         console.error("Error adding document: ", error);
-                    });
+                    }).finally((() => {
+                    // TODO: подумать правильно ли то, что этот находится в finally а не в then
+                    // TODO: резон для этого в том, что я хочу чтобы даже если ошибка возникла мы
+                    //  TODO:все равно проресетили все стейты и были готовы к приему новой петиции
+                    setTimeout(() => {
+                        console.log('reset petition form')
+                        setIsPetitionPublished(false)
+                        setIsTextReadyToRender(false)
+                        setIsPictureReady(false)
+                        setUrl('')
+                        setPoemText('')
+                        setTagText('')
+                        setResetTextInputs(!resetTextInputs)
+                        setIsPetitionSubmitted(false)
+                    }, 1000)
+                }))
             }, 1500)
         }
     }, [isPetitionSubmitted])
-    
     
     return (
         <section className="petition-form">
             <h1 className="petition-form__title">Создать инициативу</h1>
             <div className="petition-form__content">
                 <div className="petition-form__text">
-                    <PetitionForm getPetitionTextData={getPetitionTextData}/>
+                    <PetitionForm
+                        getPetitionTextData={getPetitionTextData}
+                        resetTextInputs={resetTextInputs}
+                    />
                     <PetitionPicture
                         getPetitionPicData={getPetitionPicData}
                         url={url}
@@ -144,7 +166,6 @@ function Petition({onAddPetition}) {
                         isTextReadyToRender={isTextReadyToRender}
                     />
                 </div>
-            
             </div>
         </section>
     )

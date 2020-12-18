@@ -23,15 +23,13 @@ const validators = {
     }
 }
 
-function PetitionForm({getPetitionTextData}) {
+function PetitionForm({getPetitionTextData, resetTextInputs}) {
     
     const [petitionValues, setPetitionValues] = React.useState({
         petitionTag: '',
         petition: '',
-        picFullPath: '',
-        picName: '',
-        picBucket: ''
     })
+    
     const [poemText, setPoemText] = React.useState('')
     const [isKeyPressed, setIsKeyPressed] = useState(false)
     const [isTagReady, setIsTagReady] = useState(false)
@@ -145,6 +143,20 @@ function PetitionForm({getPetitionTextData}) {
             }
     }, [isKeyPressed]);
     
+    useEffect(()=>{
+        // if (resetTextInputs) {
+        //     petitionValues.petitionTag=''
+        //     petitionValues.petition.value=''
+        
+        setPetitionValues({
+            petitionTag: '',
+            petition: '',
+        })
+
+        // }
+        
+    }, [resetTextInputs])
+    
     function handleFocus(e) {
         setIsKeyPressed(!isKeyPressed)
         setIsTagReady(false)
@@ -176,6 +188,7 @@ function PetitionForm({getPetitionTextData}) {
                             onChange={handleChange}
                             onFocus={handleFocus}
                             onBlur={handleOnBlur}
+                            value={petitionValues.petitionTag}
                         />
                         <span className="form__field">{errorMessage.errorMessageTag}</span>
                     </label>
@@ -190,6 +203,7 @@ function PetitionForm({getPetitionTextData}) {
                             maxLength="130"
                             required
                             onChange={handleChange}
+                            value={petitionValues.petition}
                         />
                         <span className="form__field">{errorMessage.errorMessageText}</span>
                     </label>

@@ -5,7 +5,7 @@ import cn from 'classnames';
 import fileUploadButton from '../../images/file-upload.png'
 import deleteButton from '../../images/delete-btn.png'
 
-function PetitionPicture({getPetitionPicData, url, handleDeletePicture}) {
+function PetitionPicture({getPetitionPicData, url, handleDeletePicture }) {
     const currentUser = useContext(CurrentUserContext);
     const [pictures, setPictures] = useState([])
     const [isPicturesReady, setIsPicturesReady] = useState(false)
@@ -50,7 +50,6 @@ function PetitionPicture({getPetitionPicData, url, handleDeletePicture}) {
     }, [isPicUploaded])
     
     function handleChoosePictures(e) {
-        console.log('ChoosePic')
         e.preventDefault();
         setPictures(e.target.files[0])
         setIsPicturesReady(true)

@@ -5,7 +5,7 @@ import getDefaultPictures from "../../utils/defaultPictures";
 import {v4 as uuidv4} from 'uuid';
 import DefaultPicture from "../DefaultPicture/DefaultPicture"
 
-function PetitionDefaultPicture({getDefaultPetitionPicData, isTextReadyToRender}) {
+function PetitionDefaultPicture({getDefaultPetitionPicData, isTextReadyToRender, handleIsPublicState}) {
     
     const [defaultPicUrls, setDefaultPicUrls] = useState([])
     const picDataSet = getDefaultPictures()
@@ -35,7 +35,9 @@ function PetitionDefaultPicture({getDefaultPetitionPicData, isTextReadyToRender}
         <div className="petition-form__default-pictures">
             {defaultPicUrls.map((url) => <DefaultPicture key={uuidv4()} url={url}
                                                          getDefaultPetitionPicData={getDefaultPetitionPicData}
-                                                         isTextReadyToRender={isTextReadyToRender}/>
+                                                         isTextReadyToRender={isTextReadyToRender}
+                                                         handleIsPublicState={handleIsPublicState}
+                />
                                                          )}
         </div>
     )
