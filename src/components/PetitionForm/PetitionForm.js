@@ -102,7 +102,6 @@ function PetitionForm({getPetitionTextData}) {
     }, [searchWord])
     
     const handleChange = e => {
-        console.log('handleChange', e.target.petitionTag)
         setIsKeyPressed(!isKeyPressed)
         const {name, value} = e.target;
         setPetitionValues(currentValue => {

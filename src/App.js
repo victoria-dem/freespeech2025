@@ -112,9 +112,7 @@ function App() {
         } else {
             console.log('please log in');
         }
-        
     }
-
 
     return (
         <CurrentUserContext.Provider value={currentUser}>
