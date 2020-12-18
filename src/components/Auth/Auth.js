@@ -9,14 +9,14 @@ function Auth({onUpdateUser, isLoggedIn, isAccountPageOpen, emailLinkStatus, onA
     const [isSignUpClicked, setIsSignUpClicked] = useState(false)
     const [isLogOutClicked, setIsLogOutClicked] = useState(false)
     const [values, setValues] = useState({email: ''})
-    
-    
+
+
     const actionCodeSettings = {
         url: window.location.href,
         handleCodeInApp: true
     };
-    
-    
+
+
     // определяем юзер на сайте или нет
     useEffect(() => {
         auth.onAuthStateChanged(function (user) {
@@ -27,7 +27,7 @@ function Auth({onUpdateUser, isLoggedIn, isAccountPageOpen, emailLinkStatus, onA
             }
         });
     }, [isLoggedIn])
-    
+
     // Confirm the link is a sign-in with email link.
     useEffect(() => {
         if (auth.isSignInWithEmailLink(window.location.href)) {
@@ -46,7 +46,7 @@ function Auth({onUpdateUser, isLoggedIn, isAccountPageOpen, emailLinkStatus, onA
             }
         }
     }, [])
-    
+
     useEffect(() => {
         if (isSignUpClicked) {
             auth.sendSignInLinkToEmail(values.email, actionCodeSettings)
@@ -61,7 +61,7 @@ function Auth({onUpdateUser, isLoggedIn, isAccountPageOpen, emailLinkStatus, onA
             setIsSignUpClicked(false)
         }
     }, [isSignUpClicked])
-    
+
     useEffect(() => {
         if (isLogOutClicked) {
             auth.signOut().then(function () {
@@ -73,31 +73,31 @@ function Auth({onUpdateUser, isLoggedIn, isAccountPageOpen, emailLinkStatus, onA
             setIsLogOutClicked(false)
         }
     }, [isLogOutClicked])
-    
+
     const handleChange = e => {
         const {name, value} = e.target;
         setValues({...values, [name]: value});
     }
-    
+
     function handleSignUp(e) {
         e.preventDefault();
         setIsSignUpClicked(true)
     }
-    
+
     function handleLogout(e) {
         e.preventDefault();
         setIsLogOutClicked(true)
     }
-    
+
     return (
         <>
-            {isAccountPageOpen &&
-            <SignUpForm
-                onChange={handleChange}
-                onSignUp={handleSignUp}
-                onLogout={handleLogout}
-                isAccountPageOpen={isAccountPageOpen}
-            />}
+            {/*{isAccountPageOpen &&*/}
+            {/*<SignUpForm*/}
+            {/*    onChange={handleChange}*/}
+            {/*    onSignUp={handleSignUp}*/}
+            {/*    onLogout={handleLogout}*/}
+            {/*    isAccountPageOpen={isAccountPageOpen}*/}
+            {/*/>}*/}
             {/* TODO: возможно,имеет смысл в этой форме тоже находить currentUser через контест и брать его ID */}
             <Petition onAddPetition={onAddPetition}/>
         </>

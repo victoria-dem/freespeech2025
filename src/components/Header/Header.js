@@ -2,11 +2,11 @@ import HeaderMenu from "../HeaderMenu/HeaderMenu";
 import "./header.css"
 
 
-function Header({onUpdateUser, isLoggedIn}) {
+function Header({handleAccountBtnClick, buttonMsg, isAccountPageOpen}) {
     return (
         <header className="header">
             <img src='#' alt="Free speech 2025" className="logo"/>
-            <HeaderMenu onUpdateUser={onUpdateUser} isLoggedIn={isLoggedIn}/>
+            <HeaderMenu handleAccountBtnClick={handleAccountBtnClick} buttonMsg={buttonMsg}/>
         </header>
     )
 }

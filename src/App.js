@@ -8,6 +8,7 @@ import { __RouterContext } from 'react-router';
 import { CurrentUserContext } from './contexts/CurrentUserContext';
 import { db, getPetitionsFromDb } from './utils/firebase';
 import { v4 as uuidv4 } from 'uuid';
+import Popup from "./components/Popup/Popup";
 
 // import manageJson from "./utils/manageJson"   /* util for loading json to firebase */
 // import manageJson from "./utils/loadAuthorData"   /* util for loading json to firebase */
@@ -87,7 +88,7 @@ function App() {
         } else {
             console.log('please log in');
         }
-        
+
     }
 
     //дислайк петиции
@@ -112,7 +113,7 @@ function App() {
         } else {
             console.log('please log in');
         }
-        
+
     }
 
 
