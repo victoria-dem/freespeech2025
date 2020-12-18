@@ -8,6 +8,11 @@ import './petition-card-list.css';
 const PetitionCardList = ({ petitions, onLikeClick, onDislikeClick }) => {
   return (
     <div className="petition-card-list">
+      <h2>Инициативы</h2>
+      <div className="petition-card-list__options">
+        <button className="petition-card-list__button">Актуальные</button>
+        <button className="petition-card-list__button">Мои инициативы</button>
+      </div>
       <Carousel slides={
         petitions.map((petition) => {
           return ({

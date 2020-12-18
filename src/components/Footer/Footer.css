@@ -1,0 +1,13 @@
+.footer {
+  display: flex;
+  flex-direction: row;
+  border-top: 1px solid grey;
+  min-height: 100px;
+  justify-content: end;
+  align-items: flex-end;
+}
+
+.footer__copyright {
+  text-align: left;
+  padding: 0 0 0 50px;
+}

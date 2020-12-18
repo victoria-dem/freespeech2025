@@ -1,6 +1,6 @@
 .petition-form {
   display: flex;
-  margin: 50px auto;
+  margin: 180px auto 60px;
   flex-direction: column;
   border: 1px solid blue;
 }
