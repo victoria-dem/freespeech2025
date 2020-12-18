@@ -5,6 +5,7 @@ import {useState, useContext, useEffect} from "react";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import PetitionCardList from '../PetitionCardList/PetitionCardList';
 import Petition from "../Petition/Petition";
+import Footer from '../Footer/Footer';
 
 const Main = ({onUpdateUser, isLoggedIn, petitions, onLikeClick, onDislikeClick, onAddPetition}) => {
     
@@ -47,9 +48,11 @@ const Main = ({onUpdateUser, isLoggedIn, petitions, onLikeClick, onDislikeClick,
                   emailLinkStatus={emailLinkStatus}
                   onAddPetition={onAddPetition}
             />
+            <PetitionCardList petitions={petitions} onLikeClick={onLikeClick} 
+                onDislikeClick={onDislikeClick} />
             {/*TODO: перенести форму или петицию в эту точку*/}
             <Petition onAddPetition={onAddPetition}/>
-            <PetitionCardList petitions={petitions} onLikeClick={onLikeClick} onDislikeClick={onDislikeClick} />
+            <Footer />
         </div>
     );
 }
