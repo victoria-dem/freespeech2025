@@ -36,6 +36,7 @@
   background-color: #a2a2a5;
   overflow: hidden;
   object-fit: cover;
+  position: relative;
 }
 
 
@@ -108,6 +109,15 @@
   border-radius: 2px;
 }
 
-.form__input_invisible {
-  display: none;
+/*.form__input_invisible {*/
+/*  display: none;*/
+/*}*/
+
+.petition-form__delete-btn {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top:0;
+  right:0;
+  z-index: 2;
 }

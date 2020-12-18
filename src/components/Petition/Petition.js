@@ -21,8 +21,18 @@ function Petition({onAddPetition}) {
     const [url, setUrl] = useState('')
     
     
+    // console.log(isTextReadyToRender, isTextReadyToRender, isTextReadyToRender, url, pictureData)
     
-    // console.log(isTextReadyToRender, isTextReadyToRender, isTextReadyToRender)
+    function handleDeletePicture() {
+        if (url) {
+            setUrl('')
+            setPictureData({})
+            setIsPictureReady(false)
+        }
+        // TODO: надо получить текущее имя файла и запустить удаление этого файла, если он не принадлежит к массиву заглушек
+        // TODO: затем внутри then очистить объект pictureData setPictureData({}) и убрать эту очистку из предыдущего if
+        
+    }
     
     function getPetitionTextData(petitionTextData) {
         setPoemText(petitionTextData.poemText)
@@ -47,16 +57,18 @@ function Petition({onAddPetition}) {
     }
     
     useEffect(() => {
-        const storagePic = storage.ref(pictureData.picFullPath);
-        storagePic
-            .getDownloadURL()
-            .then(function (url) {
-                // console.log(url);
-                setUrl(url)
-            })
-            .catch(function (error) {
-                console.log("error encountered");
-            });
+        // TODO: здесь надо добавить проверку, чтобы не делать запросы к базе с пустым url
+        // TODO: но не делать запрос на проверку наличия url
+            const storagePic = storage.ref(pictureData.picFullPath);
+            storagePic
+                .getDownloadURL()
+                .then(function (url) {
+                    // console.log(url);
+                    setUrl(url)
+                })
+                .catch(function (error) {
+                    console.log("error encountered");
+                });
     }, [pictureData])
     
     function getSubmitPetitionEvent(isBtnClicked) {
@@ -99,11 +111,9 @@ function Petition({onAddPetition}) {
                     .catch(function (error) {
                         console.error("Error adding document: ", error);
                     });
-                
             }, 1500)
         }
     }, [isPetitionSubmitted])
-    
     
     
     return (
@@ -112,8 +122,13 @@ function Petition({onAddPetition}) {
             <div className="petition-form__content">
                 <div className="petition-form__text">
                     <PetitionForm getPetitionTextData={getPetitionTextData}/>
-                    <PetitionPicture getPetitionPicData={getPetitionPicData} url={url}/>
-                    <PetitionDefaultPicture getDefaultPetitionPicData={getDefaultPetitionPicData} isTextReadyToRender={isTextReadyToRender}/>
+                    <PetitionPicture
+                        getPetitionPicData={getPetitionPicData}
+                        url={url}
+                        handleDeletePicture={handleDeletePicture}/>
+                    <PetitionDefaultPicture
+                        getDefaultPetitionPicData={getDefaultPetitionPicData}
+                        isTextReadyToRender={isTextReadyToRender}/>
                     <PetitionSubmitBtn
                         getSubmitPetitionEvent={getSubmitPetitionEvent}
                         isTextReadyToRender={isTextReadyToRender}
