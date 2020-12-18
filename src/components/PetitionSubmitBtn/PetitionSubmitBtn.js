@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './petition-submit-btn.css'
+import cn from 'classnames'
+import {act} from "@testing-library/react";
 
 function PetitionSubmitBtn(props) {
     
@@ -13,12 +15,12 @@ function PetitionSubmitBtn(props) {
     } =  props
     
     const [petitionBtnTitle, setPetitionBtnTitle] = useState('Мы что-то не учли')
+    const [isSubmitBtnAvailable, setIsSubmitBtnAvailable] = useState(false)
     
     function handleSubmitPetition(e) {
         e.preventDefault();
         getSubmitPetitionEvent(true)
     }
-    
     
     useEffect(() => {
         if (!isTextReadyToRender && !isLoaded) {
@@ -34,12 +36,21 @@ function PetitionSubmitBtn(props) {
         }
     }, [isPetitionSubmitted, isTextReadyToRender, isPictureReady, isLoaded, isPetitionPublished])
     
+    useEffect(()=>{
+        if (isTextReadyToRender && isPictureReady) {
+            setIsSubmitBtnAvailable(true)
+        }  else {
+            setIsSubmitBtnAvailable(false)
+            
+        }
+    },[isTextReadyToRender, isPictureReady])
     
     return (
         <button
             type="submit"
-            className="form__submit-button"
+            className={cn("form__submit-button", {"form__submit-button_disabled" : !isSubmitBtnAvailable} )}
             onClick={handleSubmitPetition}
+            disabled={!isSubmitBtnAvailable}
         >
             {petitionBtnTitle}
         </button>

@@ -5,7 +5,7 @@ import PetitionPicture from "../PetitionPicture/PetitionPicture"
 import PetitionTextPreview from "../PetitionTextPreview/PetitionTextPreview";
 import PetitionSubmitBtn from "../PetitionSubmitBtn/PetitionSubmitBtn";
 import PetitionDefaultPicture from "../PetitionDefaultPicture/PetitionDefaultPicture"
-import {db} from "../../utils/firebase";
+import {db, storage} from "../../utils/firebase";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 
 function Petition({onAddPetition}) {
@@ -18,7 +18,12 @@ function Petition({onAddPetition}) {
     const [isLoaded, setIsLoaded] = useState(false)
     const [isPetitionPublished, setIsPetitionPublished] = useState(false)
     const [isPictureReady, setIsPictureReady] = useState(false)
-
+    const [url, setUrl] = useState('')
+    
+    
+    
+    // console.log(isTextReadyToRender, isTextReadyToRender, isTextReadyToRender)
+    
     function getPetitionTextData(petitionTextData) {
         setPoemText(petitionTextData.poemText)
         setTagText(petitionTextData.tagText)
@@ -29,6 +34,30 @@ function Petition({onAddPetition}) {
         setPictureData(picRef)
         setIsPictureReady(isPicUploaded)
     }
+    
+    function getDefaultPetitionPicData(defaultPicName) {
+        if (defaultPicName) {
+            setPictureData({
+                picFullPath: defaultPicName,
+                picName: defaultPicName,
+                picBucket: "freespeech2025-46bc5.appspot.com"
+            })
+            setIsPictureReady(true)
+        }
+    }
+    
+    useEffect(() => {
+        const storagePic = storage.ref(pictureData.picFullPath);
+        storagePic
+            .getDownloadURL()
+            .then(function (url) {
+                // console.log(url);
+                setUrl(url)
+            })
+            .catch(function (error) {
+                console.log("error encountered");
+            });
+    }, [pictureData])
     
     function getSubmitPetitionEvent(isBtnClicked) {
         console.log('getSubmitPetitionEvent')
@@ -41,7 +70,6 @@ function Petition({onAddPetition}) {
             setIsLoaded(true)
             setIsPetitionPublished(false)
             const timestamp = Date.now().toString()
-            // setPetitionDate(timestamp)
             // TODO: обсудить использование ключа isPublic
             // TODO: setTimeout поставил специально, для отслеживания статуса загрузки
             const data = {
@@ -49,27 +77,15 @@ function Petition({onAddPetition}) {
                 petition: poemText,
                 petitionTag: tagText,
                 isPublic: false,
-                picFullPath: pictureData.picFullPath || '1.jpeg',
-                picName: pictureData.picName || '1.jpeg',
-                picBucket: pictureData.picBucket || 'freespeech2025-46bc5.appspot.com',
+                picFullPath: pictureData.picFullPath,
+                picName: pictureData.picName,
+                picBucket: pictureData.picBucket,
                 timestamp: timestamp,
                 likes: [],
                 disLikes: []
             }
             setTimeout(() => {
                 db.collection("petitions")
-                // .add({
-                //         uid: currentUser.uid,
-                //         petition: poemText,
-                //         petitionTag: tagText,
-                //         isPublic: false,
-                //         picFullPath: pictureData.picFullPath || '1.jpeg',
-                //         picName: pictureData.picName || '1.jpeg',
-                //         picBucket: pictureData.picBucket || 'freespeech2025-46bc5.appspot.com',
-                //         timestamp: timestamp,
-                //         likes: [],
-                //         disLikes: []
-                //     })
                     .add(data)
                     .then(function (docRef) {
                         console.log("Document written with ID: ", docRef.id);
@@ -88,15 +104,16 @@ function Petition({onAddPetition}) {
         }
     }, [isPetitionSubmitted])
     
+    
+    
     return (
         <section className="petition-form">
             <h1 className="petition-form__title">Создать инициативу</h1>
             <div className="petition-form__content">
                 <div className="petition-form__text">
                     <PetitionForm getPetitionTextData={getPetitionTextData}/>
-                    
-                    <PetitionPicture getPetitionPicData={getPetitionPicData}/>
-                    <PetitionDefaultPicture isTextReadyToRender={isTextReadyToRender}/>
+                    <PetitionPicture getPetitionPicData={getPetitionPicData} url={url}/>
+                    <PetitionDefaultPicture getDefaultPetitionPicData={getDefaultPetitionPicData} isTextReadyToRender={isTextReadyToRender}/>
                     <PetitionSubmitBtn
                         getSubmitPetitionEvent={getSubmitPetitionEvent}
                         isTextReadyToRender={isTextReadyToRender}
