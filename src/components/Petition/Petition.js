@@ -18,6 +18,7 @@ function Petition({onAddPetition}) {
     const [isLoaded, setIsLoaded] = useState(false)
     const [isPetitionPublished, setIsPetitionPublished] = useState(false)
     const [isPictureReady, setIsPictureReady] = useState(false)
+    const [resetTextInputs, setResetTextInputs] =useState(false)
     const [url, setUrl] = useState('')
     
     
@@ -107,6 +108,7 @@ function Petition({onAddPetition}) {
                     }).then(function () {
                         // загрузка картинки (после того, как пользователь нажал на submit)
                         // pictureUpload()
+                        setIsPetitionPublished(true)
                     })
                     .catch(function (error) {
                         console.error("Error adding document: ", error);
@@ -115,20 +117,30 @@ function Petition({onAddPetition}) {
                     // TODO: резон для этого в том, что я хочу чтобы даже если ошибка возникла мы
                     //  TODO:все равно проресетили все стейты и были готовы к приему новой петиции
                     setTimeout(()=>{
-                        setIsPetitionPublished(true)
+                        console.log('reset petition form')
+                        setIsPetitionPublished(false)
+                        setIsTextReadyToRender(false)
+                        setIsPictureReady(false)
+                        setUrl('')
+                        setPoemText('')
+                        setTagText('')
+                        setResetTextInputs(!resetTextInputs)
+                        setIsPetitionSubmitted(false)
                     }, 1000)
                 }))
             }, 1500)
         }
     }, [isPetitionSubmitted])
     
-    
     return (
         <section className="petition-form">
             <h1 className="petition-form__title">Создать инициативу</h1>
             <div className="petition-form__content">
                 <div className="petition-form__text">
-                    <PetitionForm getPetitionTextData={getPetitionTextData}/>
+                    <PetitionForm
+                        getPetitionTextData={getPetitionTextData}
+                        resetTextInputs={resetTextInputs}
+                    />
                     <PetitionPicture
                         getPetitionPicData={getPetitionPicData}
                         url={url}

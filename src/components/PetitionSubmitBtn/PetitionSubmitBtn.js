@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './petition-submit-btn.css'
 import cn from 'classnames'
-import {act} from "@testing-library/react";
+// import {act} from "@testing-library/react";
 
 function PetitionSubmitBtn(props) {
     
@@ -41,7 +41,6 @@ function PetitionSubmitBtn(props) {
             setIsSubmitBtnAvailable(true)
         }  else {
             setIsSubmitBtnAvailable(false)
-            
         }
     },[isTextReadyToRender, isPictureReady])
     
