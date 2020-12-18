@@ -5,6 +5,7 @@ import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import PetitionCardList from '../PetitionCardList/PetitionCardList';
 import Header from "../Header/Header";
 import Popup from "../Popup/Popup";
+import Petition from "../Petition/Petition";
 
 
 const Main = ({onUpdateUser, isLoggedIn, petitions, onLikeClick, onDislikeClick, onAddPetition}) => {
@@ -41,18 +42,19 @@ const Main = ({onUpdateUser, isLoggedIn, petitions, onLikeClick, onDislikeClick,
 
 
     return (
+
         <>
             <div className="future-page">
                 <Header handleAccountBtnClick={handleAccountBtnClick} buttonMsg={buttonMsg}/>
-                <PetitionCardList petitions={petitions} onLikeClick={onLikeClick} onDislikeClick={onDislikeClick}/>
+                {/*TODO: перенести форму или петицию в эту точку*/}
+                <Petition onAddPetition={onAddPetition}/>
+                <PetitionCardList petitions={petitions} onLikeClick={onLikeClick} onDislikeClick={onDislikeClick} />
                 <Auth onUpdateUser={onUpdateUser}
                       isLoggedIn={isLoggedIn}
                       isAccountPageOpen={isAccountPageOpen}
                       emailLinkStatus={emailLinkStatus}
                       onAddPetition={onAddPetition}
                 />
-                {/*TODO: перенести форму или петицию в эту точку*/}
-                {/*<PetitionCardList petitions={petitions} onLikeClick={onLikeClick} onDislikeClick={onDislikeClick}/>*/}
                 <Popup
                     // isOpen={isPopupOpen}
                     onClose={closePopup}

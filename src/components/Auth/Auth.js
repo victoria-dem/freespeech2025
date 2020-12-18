@@ -3,7 +3,7 @@ import './auth.css'
 import {auth} from '../../utils/firebase'
 import SignUpForm from '../SignUpForm/SignUpForm';
 import '../PetitionFormOld/petitionform.css'
-import Petition from "../Petition/Petition";
+// import Petition from "../Petition/Petition";
 
 function Auth({onUpdateUser, isLoggedIn, isAccountPageOpen, emailLinkStatus, onAddPetition}) {
     const [isSignUpClicked, setIsSignUpClicked] = useState(false)
@@ -99,7 +99,7 @@ function Auth({onUpdateUser, isLoggedIn, isAccountPageOpen, emailLinkStatus, onA
             {/*    isAccountPageOpen={isAccountPageOpen}*/}
             {/*/>}*/}
             {/* TODO: возможно,имеет смысл в этой форме тоже находить currentUser через контест и брать его ID */}
-            <Petition onAddPetition={onAddPetition}/>
+            {/*<Petition onAddPetition={onAddPetition}/>*/}
         </>
     )
 }
