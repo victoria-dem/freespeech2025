@@ -6,18 +6,18 @@ function HeaderMenu() {
         <>
             <nav>
                 <ul className="header__list">
+                    {/*<li className="header__list-item">*/}
+                    {/*    <a className="header__list-link" href="#"*/}
+                    {/*    >Статистика</a*/}
+                    {/*    >*/}
+                    {/*</li>*/}
                     <li className="header__list-item">
-                        <a className="header__list-link" href="#"
-                        >Статистика</a
-                        >
-                    </li>
-                    <li className="header__list-item">
-                        <a className="header__list-link" href="#"
+                        <a className="header__list-link" href="#petition-card-list"
                         >Инициативы</a
                         >
                     </li>
                     <li className="header__list-item">
-                        <a className="header__list-link" href="#" target="_blank" rel="noopener"
+                        <a className="header__list-link" href="#petition-form"
                         >Высказаться</a
                         >
                     </li>
