@@ -29,6 +29,19 @@
   text-align: left;
 }
 
+.petition-card__moderation {
+  grid-row: 1;
+  grid-column: 3;
+}
+
+.petition-card__moderation_in-progress {
+  color: red;
+}
+
+.petition-card__moderation_done {
+  color: green;
+}
+
 .petition-card__reaction {
   box-shadow: none;
   background: none;

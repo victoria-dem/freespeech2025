@@ -25,7 +25,7 @@ function Petition({onAddPetition}) {
     const [isPublic, setIsPublic] = useState(false)
     const [status, setStatus] = useState('Просто контролируем каждое ваше нажатие клавиш. Может ну его, связываться с нами ...')
     
-    console.log(status)
+    // console.log(status)
     
     // console.log(isTextReadyToRender, isTextReadyToRender, isTextReadyToRender, url, pictureData)
     

@@ -1,4 +1,4 @@
-.future-page {
+.main-page {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -7,7 +7,7 @@
   max-width: 1280px;
 }
 
-.future-page__header {
+/* .main-page__header {
   background-color: burlywood;
   min-height: 200px;
   display: flex;
@@ -19,7 +19,7 @@
   width: 100%;
 }
 
-.future-page__link {
+.main-page__link {
   color: white;
   text-decoration: none;
   margin: 0;
@@ -27,6 +27,6 @@
   transition: opacity .5s linear;
 }
 
-.future-page__link:hover {
+.main-page__link:hover {
   opacity: .7;
-}
+} */

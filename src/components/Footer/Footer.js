@@ -1,7 +1,7 @@
 import './Footer.css';
 
 const Footer = () => {
-  return(
+  return (
     <div className="footer">
       {/* актуальный год */}
       {/* <p className="footer__copyright">&copy; 
@@ -9,7 +9,7 @@ const Footer = () => {
         Free Speach
       </p> */}
       <p className="footer__copyright">&copy; <span id="year">2025 </span>Free Speech</p>
-        <p className="footer__copyright">Горячо одобрено Министерством Свободы от Свободы Слова</p>
+      <p className="footer__copyright">Горячо одобрено Министерством Свободы от Свободы Слова</p>
     </div>
   );
 }

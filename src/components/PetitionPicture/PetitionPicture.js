@@ -80,7 +80,7 @@ function PetitionPicture({getPetitionPicData, url, handleDeletePicture, isPetiti
         handleDeletePicture()
     }
     
-    console.log(progressBar, isPicturesReady, pictures, isPicUploaded)
+    // console.log(progressBar, isPicturesReady, pictures, isPicUploaded)
     
     return (
         <div className="petition-form__user-picture">
