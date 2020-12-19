@@ -8,7 +8,8 @@ import { __RouterContext } from 'react-router';
 import { CurrentUserContext } from './contexts/CurrentUserContext';
 import { db } from './utils/firebase';
 import { v4 as uuidv4 } from 'uuid';
-import { auth } from './utils/firebase'
+import { auth } from './utils/firebase';
+import Auth from './components/Auth/Auth';
 
 // import manageJson from "./utils/manageJson"   /* util for loading json to firebase */
 // import manageJson from "./utils/loadAuthorData"   /* util for loading json to firebase */
@@ -31,6 +32,7 @@ function App() {
     const [petitions, setPetitions] = useState([]);
     const [areMyPetitionsChosen, setAreMyPetitionsChosen] = useState(false);
     const [myPetitions, setMyPetitions] = useState([]);
+    const [hasCheckedLogin, setHasCheckedLogin] = useState(false);
 
     const { location } = useContext(__RouterContext);
     const transitions = useTransition(location, location => location.pathname, {
@@ -42,22 +44,58 @@ function App() {
     const handleUserUpdate = (user) => {
         setCurrentUser(user);
         user.uid ? setIsUserLoggedIn(true) : setIsUserLoggedIn(false);
+        console.log(isUserLoggedIn)
+    }
+
+    //определяем проверена ли авторизация на сайте
+    const handleCheckLogin = () => {
+        setHasCheckedLogin(true);
+    }
+
+    const setPetitionList = (petitionsToRender) => {
+        petitionsToRender.forEach(doc => {
+            setPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
+        })
     }
 
     //получить последние по дате публикации 6 петиций и добавить их в стейт petitions
     const setLatestPetitions = () => {
-        db.collection('petitions')
-            .where("isPublic", "==", true)
-            .orderBy("timestamp", "desc")
-            .limit(6)
-            .get()
-            .then(newPetitions => {
-                newPetitions.forEach(doc => {
-                    setPetitions(petitions => [...petitions,{ data: doc.data(), id: doc.id }]);
-                });
-
-            })
-            .catch(err => console.log(err));
+        //только после проверки на авторизацию
+        if (hasCheckedLogin) {
+            //если залогинен то отображаем и последние 6 петиций и последние 3 карточки пользователя
+            if (isUserLoggedIn) {
+                Promise.all([
+                    db.collection("petitions")
+                        .where("uid", "==", currentUser.uid)
+                        .orderBy("timestamp", "desc")
+                        .limit(3)
+                        .get(),
+                    db.collection('petitions')
+                        .where("isPublic", "==", true)
+                        .orderBy("timestamp", "desc")
+                        .limit(6)
+                        .get()])
+                    .then((values) => {
+                        const [curUserPetitions, latestPetitions] = values;
+                        if (isUserLoggedIn) {
+                            setPetitionList(curUserPetitions);
+                        }
+                        setPetitionList(latestPetitions);
+                    })
+                    .catch(err => console.log(err));
+            } else {
+                //если незалогинен, то отображаем только последние 6 петиций
+                db.collection('petitions')
+                    .where("isPublic", "==", true)
+                    .orderBy("timestamp", "desc")
+                    .limit(6)
+                    .get()
+                    .then(newPetitions => {
+                        setPetitions([]);
+                        setPetitionList(newPetitions);
+                    })
+            }
+        }
     }
 
     //получить петиции текущего юзера и добавить их в стейт myPetitions
@@ -68,20 +106,15 @@ function App() {
             .get()
             .then((myPetitions) => {
                 myPetitions.forEach(doc => {
-                    console.log('my petition', doc.data());
                     setMyPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
                 });
             })
             .catch((err) => console.log(err));
     }
-    useEffect(() => {
-        // console.log('user log in', isUserLoggedIn);
-    }, [isUserLoggedIn]);
-
 
     useEffect(() => {
         setLatestPetitions();
-    }, []);
+    }, [hasCheckedLogin, isUserLoggedIn]);
 
     //добавление новой петиции на страницу
     const handleAddPetition = (petition) => {
@@ -91,12 +124,12 @@ function App() {
     //добавление петиции после обновления инфо в ней (лайки)
     const updatePetitions = (petition) => db.collection("petitions")
         .doc(petition.id).onSnapshot((doc) => {
-            if(!areMyPetitionsChosen) {
+            if (!areMyPetitionsChosen) {
                 setPetitions(petitions.map((p) => p.id === petition.id ? { data: doc.data(), id: doc.id } : p));
             } else {
                 setMyPetitions(myPetitions.map((p) => p.id === petition.id ? { data: doc.data(), id: doc.id } : p));
             }
-            
+
         });
 
     //лайк петиции
@@ -166,6 +199,11 @@ function App() {
 
     return (
         <CurrentUserContext.Provider value={currentUser}>
+            <Auth
+                onUpdateUser={handleUserUpdate}
+                isLoggedIn={isUserLoggedIn}
+                onCheckLogin={handleCheckLogin}
+            />
             <div className="App">
                 {transitions.map(({ item, props, key }) => (
                     <animated.div key={key} style={props}>
@@ -179,7 +217,8 @@ function App() {
                                 <Main onUpdateUser={handleUserUpdate} isLoggedIn={isUserLoggedIn}
                                     petitions={areMyPetitionsChosen ? myPetitions : petitions}
                                     onLikeClick={handleLikeClick} onDislikeClick={handleDislikeClick} onAddPetition={handleAddPetition}
-                                    onMyPetitionsChoose={handleMyPetitionsChoose} onActualPetitionsChoose={handleActualPetitionsChoose} />
+                                    onMyPetitionsChoose={handleMyPetitionsChoose} onActualPetitionsChoose={handleActualPetitionsChoose} /> :
+
                             </Route>
                         </Switch>
                     </animated.div>
