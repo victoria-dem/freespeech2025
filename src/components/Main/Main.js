@@ -1,17 +1,17 @@
 import './main.css';
 import Auth from '../Auth/Auth';
-import {useState, useContext, useEffect} from "react";
-import {CurrentUserContext} from "../../contexts/CurrentUserContext";
+import { useState, useContext, useEffect } from "react";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import PetitionCardList from '../PetitionCardList/PetitionCardList';
 import Header from "../Header/Header";
 import Popup from "../Popup/Popup";
 import Petition from "../Petition/Petition";
-import {auth} from "../../utils/firebase";
+import { auth } from "../../utils/firebase";
 import Footer from '../Footer/Footer';
 
 
-const Main = ({onUpdateUser, isLoggedIn, petitions, onLikeClick, 
-    onDislikeClick, onAddPetition, onMyPetitionsChoose, onActualPetitionsChoose}) => {
+const Main = ({ onUpdateUser, isLoggedIn, petitions, onLikeClick,
+    onDislikeClick, onAddPetition, onMyPetitionsChoose, onActualPetitionsChoose }) => {
 
     const currentUser = useContext(CurrentUserContext);
     const [isAccountPageOpen, setIsAccountPageOpen] = useState(false)
@@ -19,9 +19,9 @@ const Main = ({onUpdateUser, isLoggedIn, petitions, onLikeClick,
     const [buttonMsg, setButtonMsg] = useState('Что-то мы не учли')
     const [isSignUpClicked, setIsSignUpClicked] = useState(false)
     const [isLogOutClicked, setIsLogOutClicked] = useState(false)
-    const [values, setValues] = useState({email: ''})
+    const [values, setValues] = useState({ email: '' })
 
-//  console.log(currentUser)
+    //  console.log(currentUser)
     useEffect(() => {
         if (isLinkSent && !currentUser.uid) {
             setIsAccountPageOpen(false)
@@ -74,13 +74,13 @@ const Main = ({onUpdateUser, isLoggedIn, petitions, onLikeClick,
         setIsLinkSent(props)
     }
 
-    function  closePopup () {
+    function closePopup() {
         setIsAccountPageOpen(!isAccountPageOpen)
     }
 
     const handleChange = e => {
-        const {name, value} = e.target;
-        setValues({...values, [name]: value});
+        const { name, value } = e.target;
+        setValues({ ...values, [name]: value });
     }
 
     function handleSignUp(e) {
@@ -97,13 +97,13 @@ const Main = ({onUpdateUser, isLoggedIn, petitions, onLikeClick,
     return (
         <>
             <div className="main-page">
-                <Header handleAccountBtnClick={handleAccountBtnClick} buttonMsg={buttonMsg}/>
-                <PetitionCardList petitions={petitions} onLikeClick={onLikeClick} onDislikeClick={onDislikeClick} 
+                <Header handleAccountBtnClick={handleAccountBtnClick} buttonMsg={buttonMsg} />
+                <PetitionCardList petitions={petitions} onLikeClick={onLikeClick} onDislikeClick={onDislikeClick}
                     onMyPetitionsChoose={onMyPetitionsChoose} onActualPetitionsChoose={onActualPetitionsChoose} />
-                <Petition onAddPetition={onAddPetition}/>
+                <Petition onAddPetition={onAddPetition} />
                 <Auth
-                      onUpdateUser={onUpdateUser}
-                      isLoggedIn={isLoggedIn}
+                    onUpdateUser={onUpdateUser}
+                    isLoggedIn={isLoggedIn}
                 />
                 <Popup
                     onClose={closePopup}

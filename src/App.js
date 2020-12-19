@@ -53,7 +53,7 @@ function App() {
             .get()
             .then(newPetitions => {
                 newPetitions.forEach(doc => {
-                    setPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
+                    setPetitions(petitions => [...petitions,{ data: doc.data(), id: doc.id }]);
                 });
 
             })
@@ -91,7 +91,12 @@ function App() {
     //добавление петиции после обновления инфо в ней (лайки)
     const updatePetitions = (petition) => db.collection("petitions")
         .doc(petition.id).onSnapshot((doc) => {
-            setPetitions(petitions.map((p) => p.id === petition.id ? { data: doc.data(), id: doc.id } : p));
+            if(!areMyPetitionsChosen) {
+                setPetitions(petitions.map((p) => p.id === petition.id ? { data: doc.data(), id: doc.id } : p));
+            } else {
+                setMyPetitions(myPetitions.map((p) => p.id === petition.id ? { data: doc.data(), id: doc.id } : p));
+            }
+            
         });
 
     //лайк петиции

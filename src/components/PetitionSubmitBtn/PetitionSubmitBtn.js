@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import './petition-submit-btn.css'
 import cn from 'classnames'
 // import {act} from "@testing-library/react";
 
 function PetitionSubmitBtn(props) {
-    
+
     const {
         getSubmitPetitionEvent,
         isTextReadyToRender,
@@ -12,16 +12,16 @@ function PetitionSubmitBtn(props) {
         isPictureReady,
         isPetitionPublished,
         isPetitionSubmitted
-    } =  props
-    
+    } = props
+
     const [petitionBtnTitle, setPetitionBtnTitle] = useState('Создай петицию')
     const [isSubmitBtnAvailable, setIsSubmitBtnAvailable] = useState(false)
-    
+
     function handleSubmitPetition(e) {
         e.preventDefault();
         getSubmitPetitionEvent(true)
     }
-    
+
     // TODO: временно закоментировано изменение текста на кнопке
     // useEffect(() => {
     //     if (!isTextReadyToRender && !isLoaded) {
@@ -36,24 +36,34 @@ function PetitionSubmitBtn(props) {
     //         setPetitionBtnTitle('Петиция загружена. Ждите ответа...')
     //     }
     // }, [isPetitionSubmitted, isTextReadyToRender, isPictureReady, isLoaded, isPetitionPublished])
-    
-    useEffect(()=>{
+
+    useEffect(() => {
         if (isTextReadyToRender && isPictureReady) {
             setIsSubmitBtnAvailable(true)
-        }  else {
+        } else {
             setIsSubmitBtnAvailable(false)
         }
-    },[isTextReadyToRender, isPictureReady])
-    
+    }, [isTextReadyToRender, isPictureReady])
+
     return (
-        <button
-            type="submit"
-            className={cn("petition-form__submit-btn", {"petition-form__submit-btn_disabled" : !isSubmitBtnAvailable} )}
-            onClick={handleSubmitPetition}
-            disabled={!isSubmitBtnAvailable}
-        >
-            {petitionBtnTitle}
-        </button>
+        // <button
+        //     type="submit"
+        //     className={cn("petition-form__submit-btn", {"petition-form__submit-btn_disabled" : !isSubmitBtnAvailable} )}
+        //     onClick={handleSubmitPetition}
+        //     disabled={!isSubmitBtnAvailable}
+        // >
+        //     {petitionBtnTitle}
+        // </button>
+        // <a href="#petitions">
+            <button
+                type="submit"
+                className={cn("petition-form__submit-btn", { "petition-form__submit-btn_disabled": !isSubmitBtnAvailable })}
+                onClick={handleSubmitPetition}
+                disabled={!isSubmitBtnAvailable}
+            >
+                {petitionBtnTitle}
+            </button>
+        // </a>
     )
 }
 

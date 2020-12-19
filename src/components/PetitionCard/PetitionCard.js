@@ -37,8 +37,10 @@ const PetitionCard = ({ petition, onLikeClick, onDislikeClick }) => {
 
   return (
     <div className="petition-card">
-      <div className="petition-card__image" style={{ background: `center/cover url(${url})`, 
-        borderRadius: "20px 0 0 20px"}}></div>
+      <div className="petition-card__image" style={{
+        background: `center/cover url(${url})`,
+        borderRadius: "20px 0 0 20px"
+      }}></div>
       <div className="petition-card__info">
         <p className="petition-card__timestamp">{`Time: ${petition.data.timestamp}`}</p>
         <p>{isOwn ? 'Моя петиция' : ''}</p>
@@ -59,9 +61,13 @@ const PetitionCard = ({ petition, onLikeClick, onDislikeClick }) => {
           }
         </ul>
         <button className="petition-card__reaction petition-card__reaction_type_like"
-          onClick={handleLikeClick}>{`Likes: ${petition.data.likes.length}`}</button>
+          onClick={handleLikeClick} disabled={!isOwn}>
+          {`Likes: ${petition.data.likes.length}`}
+        </button>
         <button className="petition-card__reaction petition-card__reaction_type_dislike"
-          onClick={handleDisLikeClick}>{`Dislikes: ${petition.data.disLikes.length}`}</button>
+          onClick={handleDisLikeClick} disabled={!isOwn}>
+          {`Dislikes: ${petition.data.disLikes.length}`}
+        </button>
       </div>
     </div>
   );
