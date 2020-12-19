@@ -172,12 +172,11 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
     
     return (
         <>
-            <form className="form form_petition" name="form-petition" noValidate>
-                <h2 className="form__heading">Ваш текст петиции</h2>
-                <fieldset className="form__fields">
-                    <label className="form__field-input">
+            <form className="petition-form__form" name="form-petition" noValidate>
+                <fieldset className="petition-form__form-fields">
+                    <label>
                         <input
-                            className="form__input form__input-first-field"
+                            className="petition-form__form-input"
                             type="text"
                             id="petition-tag"
                             placeholder="* Главное слово вашей инициативы"
@@ -190,11 +189,11 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
                             onBlur={handleOnBlur}
                             value={petitionValues.petitionTag}
                         />
-                        <span className="form__field">{errorMessage.errorMessageTag}</span>
+                        <span className="petition-form__form-error">{errorMessage.errorMessageTag}</span>
                     </label>
-                    <label className="form__field-input">
+                    <label>
                         <input
-                            className="form__input form__input-first-field"
+                            className="petition-form__form-input"
                             type="textarea"
                             id="petition"
                             placeholder="* Опишите подробно что вас волнует"
@@ -205,7 +204,7 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
                             onChange={handleChange}
                             value={petitionValues.petition}
                         />
-                        <span className="form__field">{errorMessage.errorMessageText}</span>
+                        <span className="petition-form__form-error">{errorMessage.errorMessageText}</span>
                     </label>
                 </fieldset>
             </form>

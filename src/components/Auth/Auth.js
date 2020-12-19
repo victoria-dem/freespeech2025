@@ -2,20 +2,16 @@ import React, {useEffect, useState} from 'react';
 import './auth.css'
 import {auth} from '../../utils/firebase'
 import SignUpForm from '../SignUpForm/SignUpForm';
-import '../PetitionFormOld/petitionform.css'
-// import Petition from "../Petition/Petition";
 
 function Auth({onUpdateUser, isLoggedIn, isAccountPageOpen, emailLinkStatus, onAddPetition}) {
     const [isSignUpClicked, setIsSignUpClicked] = useState(false)
     const [isLogOutClicked, setIsLogOutClicked] = useState(false)
     const [values, setValues] = useState({email: ''})
     
-    
     const actionCodeSettings = {
         url: window.location.href,
         handleCodeInApp: true
     };
-    
     
     // определяем юзер на сайте или нет
     useEffect(() => {

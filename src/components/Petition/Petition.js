@@ -7,6 +7,7 @@ import PetitionSubmitBtn from "../PetitionSubmitBtn/PetitionSubmitBtn";
 import PetitionDefaultPicture from "../PetitionDefaultPicture/PetitionDefaultPicture"
 import {db, storage} from "../../utils/firebase";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
+import PetitionSteps from "../PetitionSteps/PetitionSteps";
 
 function Petition({onAddPetition}) {
     const currentUser = useContext(CurrentUserContext);
@@ -22,7 +23,6 @@ function Petition({onAddPetition}) {
     const [url, setUrl] = useState('')
     const [isPublic, setIsPublic] = useState(false)
     
-    console.log(isPublic)
     // console.log(isTextReadyToRender, isTextReadyToRender, isTextReadyToRender, url, pictureData)
     
     function handleDeletePicture() {
@@ -61,18 +61,18 @@ function Petition({onAddPetition}) {
     }
     
     useEffect(() => {
-        // TODO: здесь надо добавить проверку, чтобы не делать запросы к базе с пустым url
-        // TODO: но не делать запрос на проверку наличия url
-        const storagePic = storage.ref(pictureData.picFullPath);
-        storagePic
-            .getDownloadURL()
-            .then(function (url) {
-                // console.log(url);
-                setUrl(url)
-            })
-            .catch(function (error) {
-                console.log("error encountered");
-            });
+        if (isPictureReady) {
+            const storagePic = storage.ref(pictureData.picFullPath);
+            storagePic
+                .getDownloadURL()
+                .then(function (url) {
+                    // console.log(url);
+                    setUrl(url)
+                })
+                .catch(function (error) {
+                    console.log("error encountered");
+                });
+        }
     }, [pictureData])
     
     function getSubmitPetitionEvent(isBtnClicked) {
@@ -139,7 +139,10 @@ function Petition({onAddPetition}) {
         <section className="petition-form">
             <h1 className="petition-form__title">Создать инициативу</h1>
             <div className="petition-form__content">
-                <div className="petition-form__text">
+                <div className="petition-form__steps">
+                    <PetitionSteps/>
+                </div>
+                <div className="petition-form__input">
                     <PetitionForm
                         getPetitionTextData={getPetitionTextData}
                         resetTextInputs={resetTextInputs}
@@ -160,7 +163,7 @@ function Petition({onAddPetition}) {
                         isPetitionSubmitted={isPetitionSubmitted}
                     />
                 </div>
-                <div className="petition-form__picture">
+                <div className="petition-form__output">
                     <PetitionTextPreview
                         poemText={poemText}
                         isTextReadyToRender={isTextReadyToRender}
