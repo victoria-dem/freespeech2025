@@ -14,7 +14,7 @@ function PetitionSubmitBtn(props) {
         isPetitionSubmitted
     } =  props
     
-    const [petitionBtnTitle, setPetitionBtnTitle] = useState('Мы что-то не учли')
+    const [petitionBtnTitle, setPetitionBtnTitle] = useState('Создай петицию')
     const [isSubmitBtnAvailable, setIsSubmitBtnAvailable] = useState(false)
     
     function handleSubmitPetition(e) {
@@ -22,19 +22,20 @@ function PetitionSubmitBtn(props) {
         getSubmitPetitionEvent(true)
     }
     
-    useEffect(() => {
-        if (!isTextReadyToRender && !isLoaded) {
-            setPetitionBtnTitle('Создай петицию')
-        } else if (isTextReadyToRender && !isLoaded && !isPictureReady && !isPetitionPublished) {
-            setPetitionBtnTitle('Петиция готова, но картинки нет -(')
-        } else if (isTextReadyToRender && !isLoaded && isPictureReady && !isPetitionPublished) {
-            setPetitionBtnTitle('Петиция готова, и картинка есть -)')
-        } else if (isLoaded) {
-            setPetitionBtnTitle('Загружаем петицию...')
-        } else if (isPetitionPublished) {
-            setPetitionBtnTitle('Петиция загружена. Ждите ответа...')
-        }
-    }, [isPetitionSubmitted, isTextReadyToRender, isPictureReady, isLoaded, isPetitionPublished])
+    // TODO: временно закоментировано изменение текста на кнопке
+    // useEffect(() => {
+    //     if (!isTextReadyToRender && !isLoaded) {
+    //         setPetitionBtnTitle('Создай петицию')
+    //     } else if (isTextReadyToRender && !isLoaded && !isPictureReady && !isPetitionPublished) {
+    //         setPetitionBtnTitle('Петиция готова, но картинки нет -(')
+    //     } else if (isTextReadyToRender && !isLoaded && isPictureReady && !isPetitionPublished) {
+    //         setPetitionBtnTitle('Петиция готова, и картинка есть -)')
+    //     } else if (isLoaded) {
+    //         setPetitionBtnTitle('Загружаем петицию...')
+    //     } else if (isPetitionPublished) {
+    //         setPetitionBtnTitle('Петиция загружена. Ждите ответа...')
+    //     }
+    // }, [isPetitionSubmitted, isTextReadyToRender, isPictureReady, isLoaded, isPetitionPublished])
     
     useEffect(()=>{
         if (isTextReadyToRender && isPictureReady) {

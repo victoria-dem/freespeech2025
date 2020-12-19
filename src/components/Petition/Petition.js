@@ -8,6 +8,7 @@ import PetitionDefaultPictures from "../PetitionDefaultPictures/PetitionDefaultP
 import {db, storage} from "../../utils/firebase";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import PetitionSteps from "../PetitionSteps/PetitionSteps";
+import PetitionStatus from "../PetitionStatus/PetitionStatus";
 
 function Petition({onAddPetition}) {
     const currentUser = useContext(CurrentUserContext);
@@ -22,6 +23,9 @@ function Petition({onAddPetition}) {
     const [resetTextInputs, setResetTextInputs] = useState(false)
     const [url, setUrl] = useState('')
     const [isPublic, setIsPublic] = useState(false)
+    const [status, setStatus] = useState('Просто контролируем каждое ваше нажатие клавиш. Может ну его, связываться с нами ...')
+    
+    console.log(status)
     
     // console.log(isTextReadyToRender, isTextReadyToRender, isTextReadyToRender, url, pictureData)
     
@@ -40,6 +44,7 @@ function Petition({onAddPetition}) {
         setPoemText(petitionTextData.poemText)
         setTagText(petitionTextData.tagText)
         setIsTextReadyToRender(petitionTextData.isPetitionReady)
+        
     }
     
     function getPetitionPicData({picRef, isPicUploaded}) {
@@ -50,6 +55,7 @@ function Petition({onAddPetition}) {
     
     function getDefaultPetitionPicData(defaultPicName) {
         if (defaultPicName) {
+            console.log('default')
             setPictureData({
                 picFullPath: defaultPicName,
                 picName: defaultPicName,
@@ -57,6 +63,7 @@ function Petition({onAddPetition}) {
             })
             setIsPictureReady(true)
             setIsPublic(true)
+            setStatus('Молодцы, что выбрали картинку одобренную Департаментом Визуальных Коммуникаций при Министерстве Свободы от Свободы Слова')
         }
     }
     
@@ -129,11 +136,17 @@ function Petition({onAddPetition}) {
                         setTagText('')
                         setResetTextInputs(!resetTextInputs)
                         setIsPetitionSubmitted(false)
+                        setStatus('Просто контролируем каждое ваше нажатие клавиш. Может ну его, связываться с нами ...')
                     }, 1000)
                 }))
             }, 1500)
         }
     }, [isPetitionSubmitted])
+    
+    
+    useEffect(()=>{
+        isTextReadyToRender && setStatus('Какое замечательное стихотворение мы для вас подыскали!!!')
+    }, [isTextReadyToRender])
     
     return (
         <section className="petition-form">
@@ -169,6 +182,10 @@ function Petition({onAddPetition}) {
                         poemText={poemText}
                         isTextReadyToRender={isTextReadyToRender}
                     />
+                    <PetitionStatus
+                        status={status}
+                    />
+                    
                 </div>
             </div>
         </section>

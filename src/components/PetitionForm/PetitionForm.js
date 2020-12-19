@@ -193,9 +193,8 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
                         <span className="petition-form__form-error">{errorMessage.errorMessageTag}</span>
                     </label>
                     <label className="petition-form__form-label">
-                        <input
+                        <textarea
                             className="petition-form__form-input petition-form__form-input_size"
-                            type="textarea"
                             id="petition"
                             placeholder="* Опишите подробно что вас волнует"
                             name="petition"
@@ -206,7 +205,9 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
                             value={petitionValues.petition}
                             autoComplete="off"
                         />
-                        <span className="petition-form__form-error petition-form__form-error_position">{errorMessage.errorMessageText}</span>
+                        <span className="petition-form__form-error petition-form__form-error_position">
+                            {errorMessage.errorMessageText}
+                        </span>
                     </label>
                 </fieldset>
             </form>

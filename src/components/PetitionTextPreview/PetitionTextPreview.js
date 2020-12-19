@@ -5,10 +5,12 @@ import {v4 as uuidv4} from 'uuid';
 
 function PetitionTextPreview({poemText, isTextReadyToRender}) {
     return (
-        <div className="card">
-            <p>Ваша инициатива в стихах</p>
-            <div>
-                {poemText && isTextReadyToRender && poemText.map((line) => <PoemLine key={uuidv4()} line={line}/>)}
+        <div className="petition-form__poem-preview">
+            <p className="petition-form__poem-preview-title">Ваша инициатива в стихах</p>
+            <div className="petition-form__poem-box">
+                <div>
+                    {poemText && isTextReadyToRender && poemText.map((line) => <PoemLine key={uuidv4()} line={line}/>)}
+                </div>
             </div>
         </div>
     )

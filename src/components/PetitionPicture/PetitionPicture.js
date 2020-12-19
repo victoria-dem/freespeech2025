@@ -86,7 +86,8 @@ function PetitionPicture({getPetitionPicData, url, handleDeletePicture, isPetiti
         <div className="petition-form__user-picture">
             {url ? <img className="petition-form__user-picture"
                         src={url} alt={'картинка'}/> : null}
-            <input className={cn("petition-form__picture", {"petition-form__picture_invisible": progressBar !== 0})}
+            {/*<input className={cn("petition-form__picture", {"petition-form__picture_invisible": progressBar !== 0})}*/}
+            <input className="petition-form__picture"
                    type="file"
                    id="files"
                    onChange={handleChoosePictures} name="files[]"
