@@ -43,5 +43,3 @@ function Auth({onUpdateUser, isLoggedIn}) {
 }
 
 export default Auth;
-
-

@@ -26,7 +26,6 @@ function Petition({onAddPetition}) {
     const [status, setStatus] = useState('Просто контролируем каждое ваше нажатие клавиш. Может ну его, связываться с нами ...')
 
     // console.log(status)
-
     // console.log(isTextReadyToRender, isTextReadyToRender, isTextReadyToRender, url, pictureData)
 
     function handleDeletePicture() {

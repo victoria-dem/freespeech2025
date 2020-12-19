@@ -11,6 +11,7 @@ function PetitionPicture({getPetitionPicData, url, handleDeletePicture, isPetiti
     const [isPicturesReady, setIsPicturesReady] = useState(false)
     const [progressBar, setProgressBar] = useState(0)
     const [isPicUploaded, setIsPicUploaded] = useState(false)
+    // const [picLabel, setPicLabel] = useState('')
     const [picRef, setPicRef] = useState({
         picFullPath: '',
         picName: '',
@@ -82,19 +83,23 @@ function PetitionPicture({getPetitionPicData, url, handleDeletePicture, isPetiti
     
     // console.log(progressBar, isPicturesReady, pictures, isPicUploaded)
     
+    useEffect(()=>{
+        // currentUser ? setPicLabel('Выберите картинку') : setPicLabel('Инициативу могут подавать только залогиненые пользователи ')
+    }, [currentUser])
+    console.log(currentUser.uid)
+    
     return (
         <div className="petition-form__user-picture">
-            {url ? <img className="petition-form__user-picture"
-                        src={url} alt={'картинка'}/> : null}
-            {/*<input className={cn("petition-form__picture", {"petition-form__picture_invisible": progressBar !== 0})}*/}
-            <input className="petition-form__picture"
+            {!currentUser.uid ? <div className="petition-form__anonymous-user-msg">Загружать свои картинки и подавать инициативу могут подавать только залогиненые пользователи</div> : null}
+            {url ? <img className="petition-form__user-picture" src={url} alt={'картинка'}/> : null}
+            {currentUser.uid ? <input className="petition-form__picture"
                    type="file"
                    id="files"
                    onChange={handleChoosePictures} name="files[]"
-                   placeholder="Выберите картинку"
+                   placeholder="placeholder text"
                    onClick={resetFileInput} //reset input
-            />
-            <label htmlFor="file" className="petition-form__picture-label">Выберите картинку</label>
+            /> : null}
+            <label htmlFor="file" className="petition-form__picture-label">{!currentUser ? "Label Text":null}</label>
             {/*TODO: статья о том как стилизовать input file button in react js*/}
             {/*TODO: https://masakudamatsu.medium.com/how-to-customize-the-file-upload-button-in-react-b3866a5973d8*/}
             {/*TODO: если успеем можем переделать как показано здесь если сочтем, что это хорошее решение https://www.youtube.com/watch?v=XlAs-Lid-TA*/}
@@ -110,3 +115,5 @@ export default PetitionPicture
 
 
 
+{/*<input className={cn("petition-form__picture", {"petition-form__picture_invisible": progressBar !== 0})}*/}
+{/*<input className={cn("petition-form__picture", {"petition-form__picture_invisible": !currentUser})}*/}
