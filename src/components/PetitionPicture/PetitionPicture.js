@@ -68,6 +68,7 @@ function PetitionPicture({getPetitionPicData, url, handleDeletePicture, isPetiti
     function resetFileInput(e) {
         console.log('resetFileInput')
         e.target.value = null;
+        // TODO: избыточный код
         setPictures([])
         setIsPicturesReady(false)
         setProgressBar(0)

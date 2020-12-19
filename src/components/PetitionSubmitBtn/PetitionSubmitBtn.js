@@ -24,7 +24,7 @@ function PetitionSubmitBtn(props) {
     
     useEffect(() => {
         if (!isTextReadyToRender && !isLoaded) {
-            setPetitionBtnTitle('Создайте петицию')
+            setPetitionBtnTitle('Создай петицию')
         } else if (isTextReadyToRender && !isLoaded && !isPictureReady && !isPetitionPublished) {
             setPetitionBtnTitle('Петиция готова, но картинки нет -(')
         } else if (isTextReadyToRender && !isLoaded && isPictureReady && !isPetitionPublished) {
@@ -47,7 +47,7 @@ function PetitionSubmitBtn(props) {
     return (
         <button
             type="submit"
-            className={cn("form__submit-button", {"form__submit-button_disabled" : !isSubmitBtnAvailable} )}
+            className={cn("petition-form__submit-btn", {"petition-form__submit-btn_disabled" : !isSubmitBtnAvailable} )}
             onClick={handleSubmitPetition}
             disabled={!isSubmitBtnAvailable}
         >

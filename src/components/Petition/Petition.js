@@ -4,7 +4,7 @@ import PetitionForm from "../PetitionForm/PetitionForm";
 import PetitionPicture from "../PetitionPicture/PetitionPicture"
 import PetitionTextPreview from "../PetitionTextPreview/PetitionTextPreview";
 import PetitionSubmitBtn from "../PetitionSubmitBtn/PetitionSubmitBtn";
-import PetitionDefaultPicture from "../PetitionDefaultPicture/PetitionDefaultPicture"
+import PetitionDefaultPictures from "../PetitionDefaultPictures/PetitionDefaultPictures"
 import {db, storage} from "../../utils/firebase";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import PetitionSteps from "../PetitionSteps/PetitionSteps";
@@ -152,7 +152,7 @@ function Petition({onAddPetition}) {
                         url={url}
                         handleDeletePicture={handleDeletePicture}
                         isPetitionPublished={isPetitionPublished}/>
-                    <PetitionDefaultPicture
+                    <PetitionDefaultPictures
                         getDefaultPetitionPicData={getDefaultPetitionPicData}
                         isTextReadyToRender={isTextReadyToRender}/>
                     <PetitionSubmitBtn

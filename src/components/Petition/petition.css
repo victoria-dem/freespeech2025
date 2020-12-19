@@ -50,6 +50,18 @@
   border-left: 1px solid black;
 }
 
+.petition-form__step-connector_position-second {
+  height: 232px;
+}
+
+.petition-form__step-connector_position-third {
+  height: 221px;
+}
+
+.petition-form__step-connector_position-forth {
+  height: 121px;
+}
+
 .petition-form__form {
   width: 344px;
   background-color: #fff;
@@ -95,6 +107,10 @@
   border: 1px solid #000000;
 }
 
+.petition-form__form-input_size {
+  height: 187px;
+}
+
 .petition-form__form-error {
   font-style: normal;
   font-weight: normal;
@@ -107,6 +123,9 @@
   left: 16px;
 }
 
+.petition-form__form-error_position {
+  top: 106px;
+}
 
 .petition-form__input {
   display: flex;
@@ -167,25 +186,70 @@
   display: none;
 }
 
-
-/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
-/*//////////*/
-
+.petition-form__default-picture-title {
+  margin: 32px 0 0 0;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 21px;
+}
 
 .petition-form__default-pictures {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  margin: 16px 0 0 0;
 }
 
 .petition-form__default-picture {
-  margin: 10px;
-  width: 100px;
-  height: 100px;
   overflow: hidden;
   object-fit: cover;
+  width: 104px;
+  height: 96px;
+  background: #C4C4C4;
+  border-radius: 16px;
 }
 
+.petition-form__default-picture:first-child{
+  margin-right: 16px;
+}
+
+.petition-form__default-picture:last-child{
+  margin-left: 16px;
+}
+
+.petition-form__submit-btn {
+  border: 0;
+  margin: 70px 0 0 0;
+  padding: 0;
+  text-align: center;
+  cursor: pointer;
+  width: 157px;
+  height: 47px;
+  background: rgba(196, 196, 196, 1);
+  border-radius: 16px;
+  align-self: flex-start;
+}
+
+.petition-form__submit-btn:hover{
+  opacity: 0.8;
+  transition: 2s ease;
+}
+
+.petition-form__submit-btn_disabled{
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.6;
+  color: #000;
+  background: #e5e5e5;
+  border: 1px solid #000;
+  box-sizing: border-box;
+  background: rgba(196, 196, 196, 0.2);
+  border-radius: 16px;
+}
+
+/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+/*//////////*/
 /*!!!!!!!!!!!!!!!!!!!!!!!!!*/
 
 
