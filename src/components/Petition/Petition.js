@@ -24,11 +24,11 @@ function Petition({onAddPetition}) {
     const [url, setUrl] = useState('')
     const [isPublic, setIsPublic] = useState(false)
     const [status, setStatus] = useState('Просто контролируем каждое ваше нажатие клавиш. Может ну его, связываться с нами ...')
-    
+
     // console.log(status)
-    
+
     // console.log(isTextReadyToRender, isTextReadyToRender, isTextReadyToRender, url, pictureData)
-    
+
     function handleDeletePicture() {
         if (url) {
             setUrl('')
@@ -37,22 +37,22 @@ function Petition({onAddPetition}) {
         }
         // TODO: надо получить текущее имя файла и запустить удаление этого файла, если он не принадлежит к массиву заглушек
         // TODO: затем внутри then очистить объект pictureData setPictureData({}) и убрать эту очистку из предыдущего if
-        
+
     }
-    
+
     function getPetitionTextData(petitionTextData) {
         setPoemText(petitionTextData.poemText)
         setTagText(petitionTextData.tagText)
         setIsTextReadyToRender(petitionTextData.isPetitionReady)
-        
+
     }
-    
+
     function getPetitionPicData({picRef, isPicUploaded}) {
         setPictureData(picRef)
         setIsPictureReady(isPicUploaded)
         setIsPublic(false)
     }
-    
+
     function getDefaultPetitionPicData(defaultPicName) {
         if (defaultPicName) {
             console.log('default')
@@ -66,7 +66,7 @@ function Petition({onAddPetition}) {
             setStatus('Молодцы, что выбрали картинку одобренную Департаментом Визуальных Коммуникаций при Министерстве Свободы от Свободы Слова')
         }
     }
-    
+
     useEffect(() => {
         if (isPictureReady) {
             const storagePic = storage.ref(pictureData.picFullPath);
@@ -81,12 +81,12 @@ function Petition({onAddPetition}) {
                 });
         }
     }, [pictureData])
-    
+
     function getSubmitPetitionEvent(isBtnClicked) {
         console.log('getSubmitPetitionEvent')
         setIsPetitionSubmitted(isBtnClicked)
     }
-    
+
     // создание записи в db
     useEffect(() => {
         if (isPetitionSubmitted && currentUser.uid) {
@@ -142,15 +142,15 @@ function Petition({onAddPetition}) {
             }, 1500)
         }
     }, [isPetitionSubmitted])
-    
-    
+
+
     useEffect(()=>{
         isTextReadyToRender && setStatus('Какое замечательное стихотворение мы для вас подыскали!!!')
     }, [isTextReadyToRender])
-    
+
     return (
         <section className="petition-form">
-            <h1 className="petition-form__title">Создать инициативу</h1>
+            <h1 id="petition-form" className="petition-form__title">Создать инициативу</h1>
             <div className="petition-form__content">
                 <div className="petition-form__steps">
                     <PetitionSteps/>
@@ -185,7 +185,7 @@ function Petition({onAddPetition}) {
                     <PetitionStatus
                         status={status}
                     />
-                    
+
                 </div>
             </div>
         </section>
