@@ -5,7 +5,7 @@ import cn from 'classnames';
 import fileUploadButton from '../../images/file-upload.png'
 import deleteButton from '../../images/delete-btn.png'
 
-function PetitionPicture({getPetitionPicData, url, handleDeletePicture }) {
+function PetitionPicture({getPetitionPicData, url, handleDeletePicture, isPetitionPublished }) {
     const currentUser = useContext(CurrentUserContext);
     const [pictures, setPictures] = useState([])
     const [isPicturesReady, setIsPicturesReady] = useState(false)
@@ -20,7 +20,6 @@ function PetitionPicture({getPetitionPicData, url, handleDeletePicture }) {
     // console.log(pictures, isPicturesReady, url)
     
     useEffect(() => {
-        console.log('start render new pic')
         // TODO: подумать надо ли нам сделать внутренний bucket для картинок
         if (isPicturesReady && currentUser.uid) {
             const storageRef = storage.ref();
@@ -49,6 +48,17 @@ function PetitionPicture({getPetitionPicData, url, handleDeletePicture }) {
         }
     }, [isPicUploaded])
     
+    useEffect(()=>{
+        if (isPetitionPublished){
+            setPictures([])
+            setIsPicturesReady(false)
+            setProgressBar(0)
+            setIsPicUploaded(false)
+        }
+       
+    }, [isPetitionPublished])
+    
+    
     function handleChoosePictures(e) {
         e.preventDefault();
         setPictures(e.target.files[0])
@@ -58,6 +68,7 @@ function PetitionPicture({getPetitionPicData, url, handleDeletePicture }) {
     function resetFileInput(e) {
         console.log('resetFileInput')
         e.target.value = null;
+        // TODO: избыточный код
         setPictures([])
         setIsPicturesReady(false)
         setProgressBar(0)
@@ -69,26 +80,28 @@ function PetitionPicture({getPetitionPicData, url, handleDeletePicture }) {
         handleDeletePicture()
     }
     
+    console.log(progressBar, isPicturesReady, pictures, isPicUploaded)
     
     return (
         <div className="petition-form__user-picture">
             {url ? <img className="petition-form__user-picture"
                         src={url} alt={'картинка'}/> : null}
-            <input className={cn("form__input", {"form__input_invisible": progressBar !== 0})}
+            {/*<input className={cn("petition-form__picture", {"petition-form__picture_invisible": progressBar !== 0})}*/}
+            <input className="petition-form__picture"
                    type="file"
                    id="files"
                    onChange={handleChoosePictures} name="files[]"
                    placeholder="Выберите картинку"
                    onClick={resetFileInput} //reset input
             />
-            <label htmlFor="file">Выберите картинку</label>
+            <label htmlFor="file" className="petition-form__picture-label">Выберите картинку</label>
             {/*TODO: статья о том как стилизовать input file button in react js*/}
             {/*TODO: https://masakudamatsu.medium.com/how-to-customize-the-file-upload-button-in-react-b3866a5973d8*/}
             {/*TODO: если успеем можем переделать как показано здесь если сочтем, что это хорошее решение https://www.youtube.com/watch?v=XlAs-Lid-TA*/}
-            <p className={cn("form__input-progress-bar", {"form__input_invisible": progressBar === 0})}>
+            <p className={cn("petition-form__progress-bar", {"petition-form__progress-bar_invisible": progressBar === 0})}>
                 Прогресс загрузки картинки: {progressBar}
             </p>
-            <img className="petition-form__delete-btn" src={deleteButton} alt="delete-btn" onClick={handleDeleteButtonClick}/>
+            <img className={cn("petition-form__delete-btn", {"petition-form__delete-btn_invisible": progressBar === 0})} src={deleteButton} alt="delete-btn" onClick={handleDeleteButtonClick}/>
         </div>
     )
 }
