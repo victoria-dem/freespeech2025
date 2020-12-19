@@ -5,12 +5,13 @@ import cn from 'classnames';
 import fileUploadButton from '../../images/file-upload.png'
 import deleteButton from '../../images/delete-btn.png'
 
-function PetitionPicture({getPetitionPicData, url, handleDeletePicture, isPetitionPublished }) {
+function PetitionPicture({getPetitionPicData, url, handleDeletePicture, isPetitionPublished, isPictureReady }) {
     const currentUser = useContext(CurrentUserContext);
     const [pictures, setPictures] = useState([])
     const [isPicturesReady, setIsPicturesReady] = useState(false)
     const [progressBar, setProgressBar] = useState(0)
     const [isPicUploaded, setIsPicUploaded] = useState(false)
+    const [isPicUploadedReady, setIsPicUploadedReady] = useState(false)
     // const [picLabel, setPicLabel] = useState('')
     const [picRef, setPicRef] = useState({
         picFullPath: '',
@@ -23,6 +24,9 @@ function PetitionPicture({getPetitionPicData, url, handleDeletePicture, isPetiti
     useEffect(() => {
         // TODO: подумать надо ли нам сделать внутренний bucket для картинок
         if (isPicturesReady && currentUser.uid) {
+            console.log('start pic upload -2')
+            
+            
             const storageRef = storage.ref();
             const thisRef = storageRef.child(pictures.name);
             setPicRef({
@@ -64,6 +68,8 @@ function PetitionPicture({getPetitionPicData, url, handleDeletePicture, isPetiti
         e.preventDefault();
         setPictures(e.target.files[0])
         setIsPicturesReady(true)
+        setProgressBar(0)
+        console.log('start pic upload - 1')
     }
     
     function resetFileInput(e) {
@@ -79,6 +85,7 @@ function PetitionPicture({getPetitionPicData, url, handleDeletePicture, isPetiti
     function handleDeleteButtonClick(e) {
         console.log('Delete')
         handleDeletePicture()
+        setIsPicturesReady(false)
     }
     
     // console.log(progressBar, isPicturesReady, pictures, isPicUploaded)
@@ -86,27 +93,24 @@ function PetitionPicture({getPetitionPicData, url, handleDeletePicture, isPetiti
     useEffect(()=>{
         // currentUser ? setPicLabel('Выберите картинку') : setPicLabel('Инициативу могут подавать только залогиненые пользователи ')
     }, [currentUser])
-    console.log(currentUser.uid)
+    console.log(isPictureReady, progressBar, (progressBar>0 && progressBar<100))
     
     return (
         <div className="petition-form__user-picture">
-            {!currentUser.uid ? <div className="petition-form__anonymous-user-msg">Загружать свои картинки и подавать инициативу могут подавать только залогиненые пользователи</div> : null}
+            {!currentUser.uid ? <div className="petition-form__anonymous-user-msg">Загружать свои картинки и подавать инициативу могут подавать только залогиненые пользователи. Линк на логин будет здесь... Пока идите наверх, пожалуйста.</div> : null}
             {url ? <img className="petition-form__user-picture" src={url} alt={'картинка'}/> : null}
-            {currentUser.uid ? <input className="petition-form__picture"
+            {currentUser.uid && (!isPicturesReady) ? <input className="petition-form__picture"
                    type="file"
                    id="files"
                    onChange={handleChoosePictures} name="files[]"
                    placeholder="placeholder text"
                    onClick={resetFileInput} //reset input
             /> : null}
-            <label htmlFor="file" className="petition-form__picture-label">{!currentUser ? "Label Text":null}</label>
-            {/*TODO: статья о том как стилизовать input file button in react js*/}
-            {/*TODO: https://masakudamatsu.medium.com/how-to-customize-the-file-upload-button-in-react-b3866a5973d8*/}
-            {/*TODO: если успеем можем переделать как показано здесь если сочтем, что это хорошее решение https://www.youtube.com/watch?v=XlAs-Lid-TA*/}
-            <p className={cn("petition-form__progress-bar", {"petition-form__progress-bar_invisible": progressBar === 0})}>
-                Прогресс загрузки картинки: {progressBar}
-            </p>
-            <img className={cn("petition-form__delete-btn", {"petition-form__delete-btn_invisible": progressBar === 0})} src={deleteButton} alt="delete-btn" onClick={handleDeleteButtonClick}/>
+            {currentUser.uid && (!isPicturesReady) ? <label htmlFor="file"
+                    className="petition-form__picture-label">{currentUser.uid ? "Label Text" : null}</label> :null}
+            {(isPicturesReady) ? <p className="petition-form__progress-bar">Прогресс загрузки картинки: {progressBar}</p> : null}
+            {isPictureReady ? <img className="petition-form__delete-btn" src={deleteButton} alt="delete-btn"
+                  onClick={handleDeleteButtonClick}/>:null}
         </div>
     )
 }

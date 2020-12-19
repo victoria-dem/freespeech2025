@@ -14,28 +14,37 @@ function PetitionSubmitBtn(props) {
         isPetitionSubmitted
     } = props
 
-    const [petitionBtnTitle, setPetitionBtnTitle] = useState('Создай петицию')
+    const [petitionBtnTitle, setPetitionBtnTitle] = useState('Прояви инициативу')
     const [isSubmitBtnAvailable, setIsSubmitBtnAvailable] = useState(false)
+    const [justPublished, setJustPublished] = useState(false)
 
     function handleSubmitPetition(e) {
         e.preventDefault();
         getSubmitPetitionEvent(true)
     }
-
-    // TODO: временно закоментировано изменение текста на кнопке
-    // useEffect(() => {
-    //     if (!isTextReadyToRender && !isLoaded) {
-    //         setPetitionBtnTitle('Создай петицию')
-    //     } else if (isTextReadyToRender && !isLoaded && !isPictureReady && !isPetitionPublished) {
-    //         setPetitionBtnTitle('Петиция готова, но картинки нет -(')
-    //     } else if (isTextReadyToRender && !isLoaded && isPictureReady && !isPetitionPublished) {
-    //         setPetitionBtnTitle('Петиция готова, и картинка есть -)')
-    //     } else if (isLoaded) {
-    //         setPetitionBtnTitle('Загружаем петицию...')
-    //     } else if (isPetitionPublished) {
-    //         setPetitionBtnTitle('Петиция загружена. Ждите ответа...')
-    //     }
-    // }, [isPetitionSubmitted, isTextReadyToRender, isPictureReady, isLoaded, isPetitionPublished])
+    
+    console.log(isPetitionPublished)
+    
+    useEffect(() => {
+        if (!isTextReadyToRender && !isLoaded) {
+            if (justPublished) {
+                setPetitionBtnTitle('Инициатива опубликована на сайте')
+                setTimeout(()=>{
+                    setJustPublished(false)
+                    setPetitionBtnTitle('Прояви инициативу')
+                }, 5000)
+            }
+            // setPetitionBtnTitle('Создай петицию')
+        } else if (isTextReadyToRender && !isLoaded && !isPictureReady && !isPetitionPublished) {
+            setPetitionBtnTitle('А картинка где?')
+        } else if (isTextReadyToRender && !isLoaded && isPictureReady && !isPetitionPublished) {
+            setPetitionBtnTitle('Инициатива готова к публикации')
+        } else if (isLoaded) {
+            setPetitionBtnTitle('Публикуем инициативу...')
+        } else if (isPetitionPublished) {
+            setJustPublished(true)
+        }
+    }, [isPetitionSubmitted, isTextReadyToRender, isPictureReady, isLoaded, isPetitionPublished])
 
     useEffect(() => {
         if (isTextReadyToRender && isPictureReady) {

@@ -1,5 +1,5 @@
 .popup {
-    /*display: flex;*/
+    display: flex;
     position: fixed;
     top: 0;
     bottom: 0;
@@ -28,7 +28,7 @@
     border-radius: 10px;
     padding: 0 36px 36px;
     width: 450px;
-    max-height: 600px;
+    max-height: 400px;
 }
 
 @media screen and (max-width: 540px) {

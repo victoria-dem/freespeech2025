@@ -24,10 +24,10 @@ function Petition({onAddPetition}) {
     const [url, setUrl] = useState('')
     const [isPublic, setIsPublic] = useState(false)
     const [status, setStatus] = useState('Просто контролируем каждое ваше нажатие клавиш. Может ну его, связываться с нами ...')
-
+    
     // console.log(status)
     // console.log(isTextReadyToRender, isTextReadyToRender, isTextReadyToRender, url, pictureData)
-
+    
     function handleDeletePicture() {
         if (url) {
             setUrl('')
@@ -36,25 +36,25 @@ function Petition({onAddPetition}) {
         }
         // TODO: надо получить текущее имя файла и запустить удаление этого файла, если он не принадлежит к массиву заглушек
         // TODO: затем внутри then очистить объект pictureData setPictureData({}) и убрать эту очистку из предыдущего if
-
+        
     }
-
+    
     function getPetitionTextData(petitionTextData) {
         setPoemText(petitionTextData.poemText)
         setTagText(petitionTextData.tagText)
         setIsTextReadyToRender(petitionTextData.isPetitionReady)
-
+        
     }
-
+    
     function getPetitionPicData({picRef, isPicUploaded}) {
         setPictureData(picRef)
         setIsPictureReady(isPicUploaded)
         setIsPublic(false)
     }
-
+    
     function getDefaultPetitionPicData(defaultPicName) {
         if (defaultPicName) {
-            console.log('default')
+            console.log('default picture chosen')
             setPictureData({
                 picFullPath: defaultPicName,
                 picName: defaultPicName,
@@ -65,7 +65,7 @@ function Petition({onAddPetition}) {
             setStatus('Молодцы, что выбрали картинку одобренную Департаментом Визуальных Коммуникаций при Министерстве Свободы от Свободы Слова')
         }
     }
-
+    
     useEffect(() => {
         if (isPictureReady) {
             const storagePic = storage.ref(pictureData.picFullPath);
@@ -80,12 +80,12 @@ function Petition({onAddPetition}) {
                 });
         }
     }, [pictureData])
-
+    
     function getSubmitPetitionEvent(isBtnClicked) {
         console.log('getSubmitPetitionEvent')
         setIsPetitionSubmitted(isBtnClicked)
     }
-
+    
     // создание записи в db
     useEffect(() => {
         if (isPetitionSubmitted && currentUser.uid) {
@@ -106,7 +106,7 @@ function Petition({onAddPetition}) {
                 likes: [],
                 disLikes: []
             }
-            setTimeout(() => {
+            // setTimeout(() => {
                 db.collection("petitions")
                     .add(data)
                     .then(function (docRef) {
@@ -125,7 +125,7 @@ function Petition({onAddPetition}) {
                     // TODO: подумать правильно ли то, что этот находится в finally а не в then
                     // TODO: резон для этого в том, что я хочу чтобы даже если ошибка возникла мы
                     //  TODO:все равно проресетили все стейты и были готовы к приему новой петиции
-                    setTimeout(() => {
+                    // setTimeout(() => {
                         console.log('reset petition form')
                         setIsPetitionPublished(false)
                         setIsTextReadyToRender(false)
@@ -136,17 +136,17 @@ function Petition({onAddPetition}) {
                         setResetTextInputs(!resetTextInputs)
                         setIsPetitionSubmitted(false)
                         setStatus('Просто контролируем каждое ваше нажатие клавиш. Может ну его, связываться с нами ...')
-                    }, 1000)
+                    // }, 1000)
                 }))
-            }, 1500)
+            // }, 1500)
         }
     }, [isPetitionSubmitted])
-
-
-    useEffect(()=>{
+    
+    
+    useEffect(() => {
         isTextReadyToRender && setStatus('Какое замечательное стихотворение мы для вас подыскали!!!')
     }, [isTextReadyToRender])
-
+    
     return (
         <section className="petition-form">
             <h1 id="petition-form" className="petition-form__title">Создать инициативу</h1>
@@ -163,7 +163,8 @@ function Petition({onAddPetition}) {
                         getPetitionPicData={getPetitionPicData}
                         url={url}
                         handleDeletePicture={handleDeletePicture}
-                        isPetitionPublished={isPetitionPublished}/>
+                        isPetitionPublished={isPetitionPublished}
+                        isPictureReady={isPictureReady}/>
                     <PetitionDefaultPictures
                         getDefaultPetitionPicData={getDefaultPetitionPicData}
                         isTextReadyToRender={isTextReadyToRender}/>
@@ -181,10 +182,10 @@ function Petition({onAddPetition}) {
                         poemText={poemText}
                         isTextReadyToRender={isTextReadyToRender}
                     />
-                    <PetitionStatus
-                        status={status}
-                    />
-
+                    {/*TODO: решаем надо нам это или нет*/}
+                    {/*<PetitionStatus*/}
+                    {/*    status={status}*/}
+                    {/*/>*/}
                 </div>
             </div>
         </section>
