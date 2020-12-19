@@ -150,7 +150,8 @@ function Petition({onAddPetition}) {
                     <PetitionPicture
                         getPetitionPicData={getPetitionPicData}
                         url={url}
-                        handleDeletePicture={handleDeletePicture}/>
+                        handleDeletePicture={handleDeletePicture}
+                        isPetitionPublished={isPetitionPublished}/>
                     <PetitionDefaultPicture
                         getDefaultPetitionPicData={getDefaultPetitionPicData}
                         isTextReadyToRender={isTextReadyToRender}/>

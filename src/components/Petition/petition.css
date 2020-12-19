@@ -68,14 +68,19 @@
   width: 100%;
 }
 
+.petition-form__form-label {
+  position: relative;
+}
+
+
 .petition-form__form-input {
-  background-color: transparent;
   margin: 0 0 86px 0;
   padding: 0 0 0 3px;
+  background-color: transparent;
   font-family: inherit;
   width: 100%;
   height: 48px;
-  border: 1px solid #000000;
+  border: 1px solid #bcbcc4;
   box-sizing: border-box;
   border-radius: 16px;
   font-size: 16px;
@@ -87,15 +92,19 @@
 
 .petition-form__form-input:focus {
   outline: none;
-  border: 1px solid #bcbcc4;
+  border: 1px solid #000000;
 }
 
 .petition-form__form-error {
-  color: red;
-  font-size: 12px;
   font-style: normal;
-  font-weight: 400;
-  line-height: 16px;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  color: #ff0000;
+  transition: opacity 0.3s;
+  position: absolute;
+  top: 40px;
+  left: 16px;
 }
 
 

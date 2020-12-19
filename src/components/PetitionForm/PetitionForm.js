@@ -174,7 +174,7 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
         <>
             <form className="petition-form__form" name="form-petition" noValidate>
                 <fieldset className="petition-form__form-fields">
-                    <label>
+                    <label className="petition-form__form-label">
                         <input
                             className="petition-form__form-input"
                             type="text"
@@ -188,10 +188,11 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
                             onFocus={handleFocus}
                             onBlur={handleOnBlur}
                             value={petitionValues.petitionTag}
+                            autoComplete="off"
                         />
                         <span className="petition-form__form-error">{errorMessage.errorMessageTag}</span>
                     </label>
-                    <label>
+                    <label className="petition-form__form-label">
                         <input
                             className="petition-form__form-input"
                             type="textarea"
@@ -203,6 +204,7 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
                             required
                             onChange={handleChange}
                             value={petitionValues.petition}
+                            autoComplete="off"
                         />
                         <span className="petition-form__form-error">{errorMessage.errorMessageText}</span>
                     </label>

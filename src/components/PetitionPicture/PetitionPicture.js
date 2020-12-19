@@ -5,7 +5,7 @@ import cn from 'classnames';
 import fileUploadButton from '../../images/file-upload.png'
 import deleteButton from '../../images/delete-btn.png'
 
-function PetitionPicture({getPetitionPicData, url, handleDeletePicture }) {
+function PetitionPicture({getPetitionPicData, url, handleDeletePicture, isPetitionPublished }) {
     const currentUser = useContext(CurrentUserContext);
     const [pictures, setPictures] = useState([])
     const [isPicturesReady, setIsPicturesReady] = useState(false)
@@ -48,6 +48,17 @@ function PetitionPicture({getPetitionPicData, url, handleDeletePicture }) {
         }
     }, [isPicUploaded])
     
+    useEffect(()=>{
+        if (isPetitionPublished){
+            setPictures([])
+            setIsPicturesReady(false)
+            setProgressBar(0)
+            setIsPicUploaded(false)
+        }
+       
+    }, [isPetitionPublished])
+    
+    
     function handleChoosePictures(e) {
         e.preventDefault();
         setPictures(e.target.files[0])
@@ -68,6 +79,7 @@ function PetitionPicture({getPetitionPicData, url, handleDeletePicture }) {
         handleDeletePicture()
     }
     
+    console.log(progressBar, isPicturesReady, pictures, isPicUploaded)
     
     return (
         <div className="petition-form__user-picture">
