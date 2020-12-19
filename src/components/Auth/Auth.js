@@ -1,9 +1,10 @@
 import React, {useEffect} from 'react';
 import './auth.css'
 import {auth} from '../../utils/firebase'
-import '../PetitionFormOld/petitionform.css'
+
 
 function Auth({onUpdateUser, isLoggedIn}) {
+
     // определяем юзер на сайте или нет
     useEffect(() => {
         auth.onAuthStateChanged(function (user) {

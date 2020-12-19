@@ -7,6 +7,7 @@ import Header from "../Header/Header";
 import Popup from "../Popup/Popup";
 import Petition from "../Petition/Petition";
 import {auth} from "../../utils/firebase";
+import Footer from '../Footer/Footer';
 
 
 const Main = ({onUpdateUser, isLoggedIn, petitions, onLikeClick, onDislikeClick, onAddPetition}) => {
@@ -96,8 +97,6 @@ const Main = ({onUpdateUser, isLoggedIn, petitions, onLikeClick, onDislikeClick,
         <>
             <div className="future-page">
                 <Header handleAccountBtnClick={handleAccountBtnClick} buttonMsg={buttonMsg}/>
-                {/*TODO: перенести форму или петицию в эту точку*/}
-
                 <PetitionCardList petitions={petitions} onLikeClick={onLikeClick} onDislikeClick={onDislikeClick} />
                 <Petition onAddPetition={onAddPetition}/>
                 <Auth
@@ -111,8 +110,8 @@ const Main = ({onUpdateUser, isLoggedIn, petitions, onLikeClick, onDislikeClick,
                     onLogout={handleLogout}
                     isAccountPageOpen={isAccountPageOpen}
                 />
+                <Footer />
             </div>
-
         </>
     );
 }

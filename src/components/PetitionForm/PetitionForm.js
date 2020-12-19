@@ -23,15 +23,13 @@ const validators = {
     }
 }
 
-function PetitionForm({getPetitionTextData}) {
+function PetitionForm({getPetitionTextData, resetTextInputs}) {
     
     const [petitionValues, setPetitionValues] = React.useState({
         petitionTag: '',
         petition: '',
-        picFullPath: '',
-        picName: '',
-        picBucket: ''
     })
+    
     const [poemText, setPoemText] = React.useState('')
     const [isKeyPressed, setIsKeyPressed] = useState(false)
     const [isTagReady, setIsTagReady] = useState(false)
@@ -145,6 +143,20 @@ function PetitionForm({getPetitionTextData}) {
             }
     }, [isKeyPressed]);
     
+    useEffect(()=>{
+        // if (resetTextInputs) {
+        //     petitionValues.petitionTag=''
+        //     petitionValues.petition.value=''
+        
+        setPetitionValues({
+            petitionTag: '',
+            petition: '',
+        })
+
+        // }
+        
+    }, [resetTextInputs])
+    
     function handleFocus(e) {
         setIsKeyPressed(!isKeyPressed)
         setIsTagReady(false)
@@ -160,12 +172,11 @@ function PetitionForm({getPetitionTextData}) {
     
     return (
         <>
-            <form className="form form_petition" name="form-petition" noValidate>
-                <h2 className="form__heading">Ваш текст петиции</h2>
-                <fieldset className="form__fields">
-                    <label className="form__field-input">
+            <form className="petition-form__form" name="form-petition" noValidate>
+                <fieldset className="petition-form__form-fields">
+                    <label className="petition-form__form-label">
                         <input
-                            className="form__input form__input-first-field"
+                            className="petition-form__form-input"
                             type="text"
                             id="petition-tag"
                             placeholder="* Главное слово вашей инициативы"
@@ -176,13 +187,14 @@ function PetitionForm({getPetitionTextData}) {
                             onChange={handleChange}
                             onFocus={handleFocus}
                             onBlur={handleOnBlur}
+                            value={petitionValues.petitionTag}
+                            autoComplete="off"
                         />
-                        <span className="form__field">{errorMessage.errorMessageTag}</span>
+                        <span className="petition-form__form-error">{errorMessage.errorMessageTag}</span>
                     </label>
-                    <label className="form__field-input">
-                        <input
-                            className="form__input form__input-first-field"
-                            type="textarea"
+                    <label className="petition-form__form-label">
+                        <textarea
+                            className="petition-form__form-input petition-form__form-input_size"
                             id="petition"
                             placeholder="* Опишите подробно что вас волнует"
                             name="petition"
@@ -190,8 +202,12 @@ function PetitionForm({getPetitionTextData}) {
                             maxLength="130"
                             required
                             onChange={handleChange}
+                            value={petitionValues.petition}
+                            autoComplete="off"
                         />
-                        <span className="form__field">{errorMessage.errorMessageText}</span>
+                        <span className="petition-form__form-error petition-form__form-error_position">
+                            {errorMessage.errorMessageText}
+                        </span>
                     </label>
                 </fieldset>
             </form>

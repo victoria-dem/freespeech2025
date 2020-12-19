@@ -4,9 +4,11 @@ import PetitionForm from "../PetitionForm/PetitionForm";
 import PetitionPicture from "../PetitionPicture/PetitionPicture"
 import PetitionTextPreview from "../PetitionTextPreview/PetitionTextPreview";
 import PetitionSubmitBtn from "../PetitionSubmitBtn/PetitionSubmitBtn";
-import PetitionDefaultPicture from "../PetitionDefaultPicture/PetitionDefaultPicture"
+import PetitionDefaultPictures from "../PetitionDefaultPictures/PetitionDefaultPictures"
 import {db, storage} from "../../utils/firebase";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
+import PetitionSteps from "../PetitionSteps/PetitionSteps";
+import PetitionStatus from "../PetitionStatus/PetitionStatus";
 
 function Petition({onAddPetition}) {
     const currentUser = useContext(CurrentUserContext);
@@ -18,8 +20,12 @@ function Petition({onAddPetition}) {
     const [isLoaded, setIsLoaded] = useState(false)
     const [isPetitionPublished, setIsPetitionPublished] = useState(false)
     const [isPictureReady, setIsPictureReady] = useState(false)
+    const [resetTextInputs, setResetTextInputs] = useState(false)
     const [url, setUrl] = useState('')
+    const [isPublic, setIsPublic] = useState(false)
+    const [status, setStatus] = useState('Просто контролируем каждое ваше нажатие клавиш. Может ну его, связываться с нами ...')
     
+    console.log(status)
     
     // console.log(isTextReadyToRender, isTextReadyToRender, isTextReadyToRender, url, pictureData)
     
@@ -38,27 +44,31 @@ function Petition({onAddPetition}) {
         setPoemText(petitionTextData.poemText)
         setTagText(petitionTextData.tagText)
         setIsTextReadyToRender(petitionTextData.isPetitionReady)
+        
     }
     
     function getPetitionPicData({picRef, isPicUploaded}) {
         setPictureData(picRef)
         setIsPictureReady(isPicUploaded)
+        setIsPublic(false)
     }
     
     function getDefaultPetitionPicData(defaultPicName) {
         if (defaultPicName) {
+            console.log('default')
             setPictureData({
                 picFullPath: defaultPicName,
                 picName: defaultPicName,
                 picBucket: "freespeech2025-46bc5.appspot.com"
             })
             setIsPictureReady(true)
+            setIsPublic(true)
+            setStatus('Молодцы, что выбрали картинку одобренную Департаментом Визуальных Коммуникаций при Министерстве Свободы от Свободы Слова')
         }
     }
     
     useEffect(() => {
-        // TODO: здесь надо добавить проверку, чтобы не делать запросы к базе с пустым url
-        // TODO: но не делать запрос на проверку наличия url
+        if (isPictureReady) {
             const storagePic = storage.ref(pictureData.picFullPath);
             storagePic
                 .getDownloadURL()
@@ -69,6 +79,7 @@ function Petition({onAddPetition}) {
                 .catch(function (error) {
                     console.log("error encountered");
                 });
+        }
     }, [pictureData])
     
     function getSubmitPetitionEvent(isBtnClicked) {
@@ -88,7 +99,7 @@ function Petition({onAddPetition}) {
                 uid: currentUser.uid,
                 petition: poemText,
                 petitionTag: tagText,
-                isPublic: false,
+                isPublic: isPublic,
                 picFullPath: pictureData.picFullPath,
                 picName: pictureData.picName,
                 picBucket: pictureData.picBucket,
@@ -107,26 +118,54 @@ function Petition({onAddPetition}) {
                     }).then(function () {
                         // загрузка картинки (после того, как пользователь нажал на submit)
                         // pictureUpload()
+                        setIsPetitionPublished(true)
                     })
                     .catch(function (error) {
                         console.error("Error adding document: ", error);
-                    });
+                    }).finally((() => {
+                    // TODO: подумать правильно ли то, что этот находится в finally а не в then
+                    // TODO: резон для этого в том, что я хочу чтобы даже если ошибка возникла мы
+                    //  TODO:все равно проресетили все стейты и были готовы к приему новой петиции
+                    setTimeout(() => {
+                        console.log('reset petition form')
+                        setIsPetitionPublished(false)
+                        setIsTextReadyToRender(false)
+                        setIsPictureReady(false)
+                        setUrl('')
+                        setPoemText('')
+                        setTagText('')
+                        setResetTextInputs(!resetTextInputs)
+                        setIsPetitionSubmitted(false)
+                        setStatus('Просто контролируем каждое ваше нажатие клавиш. Может ну его, связываться с нами ...')
+                    }, 1000)
+                }))
             }, 1500)
         }
     }, [isPetitionSubmitted])
     
     
+    useEffect(()=>{
+        isTextReadyToRender && setStatus('Какое замечательное стихотворение мы для вас подыскали!!!')
+    }, [isTextReadyToRender])
+    
     return (
         <section className="petition-form">
             <h1 className="petition-form__title">Создать инициативу</h1>
             <div className="petition-form__content">
-                <div className="petition-form__text">
-                    <PetitionForm getPetitionTextData={getPetitionTextData}/>
+                <div className="petition-form__steps">
+                    <PetitionSteps/>
+                </div>
+                <div className="petition-form__input">
+                    <PetitionForm
+                        getPetitionTextData={getPetitionTextData}
+                        resetTextInputs={resetTextInputs}
+                    />
                     <PetitionPicture
                         getPetitionPicData={getPetitionPicData}
                         url={url}
-                        handleDeletePicture={handleDeletePicture}/>
-                    <PetitionDefaultPicture
+                        handleDeletePicture={handleDeletePicture}
+                        isPetitionPublished={isPetitionPublished}/>
+                    <PetitionDefaultPictures
                         getDefaultPetitionPicData={getDefaultPetitionPicData}
                         isTextReadyToRender={isTextReadyToRender}/>
                     <PetitionSubmitBtn
@@ -138,13 +177,16 @@ function Petition({onAddPetition}) {
                         isPetitionSubmitted={isPetitionSubmitted}
                     />
                 </div>
-                <div className="petition-form__picture">
+                <div className="petition-form__output">
                     <PetitionTextPreview
                         poemText={poemText}
                         isTextReadyToRender={isTextReadyToRender}
                     />
+                    <PetitionStatus
+                        status={status}
+                    />
+                    
                 </div>
-            
             </div>
         </section>
     )
