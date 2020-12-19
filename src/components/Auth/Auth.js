@@ -1,18 +1,19 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import './auth.css'
-import {auth} from '../../utils/firebase'
+import { auth } from '../../utils/firebase'
 
 
-function Auth({onUpdateUser, isLoggedIn}) {
+function Auth({ onUpdateUser, isLoggedIn, onCheckLogin }) {
 
     // определяем юзер на сайте или нет
     useEffect(() => {
         auth.onAuthStateChanged(function (user) {
             if (user) {
-                onUpdateUser({email: user.email, uid: user.uid});
+                onUpdateUser({ email: user.email, uid: user.uid });
             } else {
                 onUpdateUser({});
             }
+            onCheckLogin();
         });
     }, [isLoggedIn])
 
@@ -26,7 +27,7 @@ function Auth({onUpdateUser, isLoggedIn}) {
             // The client SDK will parse the code from the link for you.
             if (email) {
                 auth.signInWithEmailLink(email, window.location.href).then(function (result) {
-                window.location.href = window.location.href.replace(/\?.*/, '')
+                    window.location.href = window.location.href.replace(/\?.*/, '')
                     window.localStorage.removeItem('emailForSignIn');
                 }).catch(function (error) {
                     console.log(error)
