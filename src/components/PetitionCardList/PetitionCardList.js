@@ -5,26 +5,40 @@ import { config } from 'react-spring';
 
 import './petition-card-list.css';
 
-const PetitionCardList = ({ petitions, onLikeClick, onDislikeClick }) => {
+const PetitionCardList = ({ petitions, onLikeClick, onDislikeClick, 
+    onMyPetitionsChoose, onActualPetitionsChoose }) => {
+  const handleMyPetitionsButtonClick = () => {
+    onMyPetitionsChoose();
+  }
+
+  const handleActualPetitionsButtonClick = () => {
+    onActualPetitionsChoose();
+  }
+
+  const isListEmpty = petitions.length === 0;
+
   return (
     <div className="petition-card-list">
       <h2>Инициативы</h2>
       <div className="petition-card-list__options">
-        <button className="petition-card-list__button">Актуальные</button>
-        <button className="petition-card-list__button">Мои инициативы</button>
+        <button type="button" className="petition-card-list__button"
+          onClick={handleActualPetitionsButtonClick} >Актуальные инициативы</button>
+        <button type="button" className="petition-card-list__button"
+          onClick={handleMyPetitionsButtonClick}>Мои инициативы</button>
       </div>
-      <Carousel slides={
-        petitions.map((petition) => {
-          return ({
-            key: uuidv4(),
-            content: <PetitionCard petition={petition} onLikeClick={onLikeClick} onDislikeClick={onDislikeClick} />
-          }
-          )
-        })
-      }
-        showNavigation={true}
-        animationConfig={config.slow}
-      />
+      {isListEmpty ? 'empty' :
+        <Carousel slides={
+          petitions.map((petition) => {
+            return ({
+              key: uuidv4(),
+              content: <PetitionCard petition={petition} onLikeClick={onLikeClick} onDislikeClick={onDislikeClick} />
+            }
+            )
+          })
+        }
+          showNavigation={true}
+          animationConfig={config.slow}
+        />}
     </div>
   );
 }

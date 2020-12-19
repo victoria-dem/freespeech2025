@@ -10,7 +10,8 @@ import {auth} from "../../utils/firebase";
 import Footer from '../Footer/Footer';
 
 
-const Main = ({onUpdateUser, isLoggedIn, petitions, onLikeClick, onDislikeClick, onAddPetition}) => {
+const Main = ({onUpdateUser, isLoggedIn, petitions, onLikeClick, 
+    onDislikeClick, onAddPetition, onMyPetitionsChoose, onActualPetitionsChoose}) => {
 
     const currentUser = useContext(CurrentUserContext);
     const [isAccountPageOpen, setIsAccountPageOpen] = useState(false)
@@ -20,7 +21,7 @@ const Main = ({onUpdateUser, isLoggedIn, petitions, onLikeClick, onDislikeClick,
     const [isLogOutClicked, setIsLogOutClicked] = useState(false)
     const [values, setValues] = useState({email: ''})
 
- console.log(currentUser)
+//  console.log(currentUser)
     useEffect(() => {
         if (isLinkSent && !currentUser.uid) {
             setIsAccountPageOpen(false)
@@ -95,9 +96,10 @@ const Main = ({onUpdateUser, isLoggedIn, petitions, onLikeClick, onDislikeClick,
 
     return (
         <>
-            <div className="future-page">
+            <div className="main-page">
                 <Header handleAccountBtnClick={handleAccountBtnClick} buttonMsg={buttonMsg}/>
-                <PetitionCardList petitions={petitions} onLikeClick={onLikeClick} onDislikeClick={onDislikeClick} />
+                <PetitionCardList petitions={petitions} onLikeClick={onLikeClick} onDislikeClick={onDislikeClick} 
+                    onMyPetitionsChoose={onMyPetitionsChoose} onActualPetitionsChoose={onActualPetitionsChoose} />
                 <Petition onAddPetition={onAddPetition}/>
                 <Auth
                       onUpdateUser={onUpdateUser}

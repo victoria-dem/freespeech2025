@@ -6,8 +6,9 @@ import { useTransition, animated } from 'react-spring';
 import { Switch, Route } from 'react-router-dom';
 import { __RouterContext } from 'react-router';
 import { CurrentUserContext } from './contexts/CurrentUserContext';
-import { db, getPetitionsFromDb } from './utils/firebase';
+import { db } from './utils/firebase';
 import { v4 as uuidv4 } from 'uuid';
+import { auth } from './utils/firebase'
 
 // import manageJson from "./utils/manageJson"   /* util for loading json to firebase */
 // import manageJson from "./utils/loadAuthorData"   /* util for loading json to firebase */
@@ -28,6 +29,8 @@ function App() {
     const [currentUser, setCurrentUser] = useState({}); // {email: ... , uid: ... }
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
     const [petitions, setPetitions] = useState([]);
+    const [areMyPetitionsChosen, setAreMyPetitionsChosen] = useState(false);
+    const [myPetitions, setMyPetitions] = useState([]);
 
     const { location } = useContext(__RouterContext);
     const transitions = useTransition(location, location => location.pathname, {
@@ -41,22 +44,48 @@ function App() {
         user.uid ? setIsUserLoggedIn(true) : setIsUserLoggedIn(false);
     }
 
+    //получить последние по дате публикации 6 петиций и добавить их в стейт petitions
+    const setLatestPetitions = () => {
+        db.collection('petitions')
+            .where("isPublic", "==", true)
+            .orderBy("timestamp", "desc")
+            .limit(6)
+            .get()
+            .then(newPetitions => {
+                newPetitions.forEach(doc => {
+                    setPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
+                });
+
+            })
+            .catch(err => console.log(err));
+    }
+
+    //получить петиции текущего юзера и добавить их в стейт myPetitions
+    const setUserPetitions = () => {
+        db.collection("petitions")
+            .where("uid", "==", currentUser.uid)
+            .orderBy("timestamp", "desc")
+            .get()
+            .then((myPetitions) => {
+                myPetitions.forEach(doc => {
+                    console.log('my petition', doc.data());
+                    setMyPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
+                });
+            })
+            .catch((err) => console.log(err));
+    }
     useEffect(() => {
         // console.log('user log in', isUserLoggedIn);
     }, [isUserLoggedIn]);
 
+
     useEffect(() => {
-        getPetitionsFromDb()
-            .then(newPetitions => {
-                newPetitions.forEach(doc => {
-                    setPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }])
-                });
-            })
-            .catch(err => console.log(err));
+        setLatestPetitions();
     }, []);
 
+    //добавление новой петиции на страницу
     const handleAddPetition = (petition) => {
-        setPetitions(petitions => [petition, ...petitions])
+        setPetitions([petition, ...petitions]);
     }
 
     //добавление петиции после обновления инфо в ней (лайки)
@@ -67,7 +96,7 @@ function App() {
 
     //лайк петиции
     const handleLikeClick = (petition) => {
-        if(currentUser.uid) {
+        if (currentUser.uid) {
             const isLiked = petition.data.likes.some(i => i.uid === currentUser.uid);
             db.collection("petitions")
                 .doc(petition.id)
@@ -92,7 +121,7 @@ function App() {
 
     //дислайк петиции
     const handleDislikeClick = (petition) => {
-        if(currentUser.uid) {
+        if (currentUser.uid) {
             const isDisliked = petition.data.disLikes.some(i => i.uid === currentUser.uid);
             db.collection("petitions")
                 .doc(petition.id)
@@ -114,6 +143,22 @@ function App() {
         }
     }
 
+    //обработчик выбора опции "Мои инициативы"
+    const handleMyPetitionsChoose = () => {
+        setAreMyPetitionsChosen(true);
+        if (currentUser.uid) {
+            setUserPetitions();
+        } else {
+            setMyPetitions([]);
+        }
+    }
+
+    //обработчик выбора опции "Актуальные инициативы"
+    const handleActualPetitionsChoose = () => {
+        setAreMyPetitionsChosen(false);
+        setLatestPetitions();
+    }
+
     return (
         <CurrentUserContext.Provider value={currentUser}>
             <div className="App">
@@ -126,8 +171,10 @@ function App() {
                             </Route>
                             {/* Страница 2025 года - пока там хедер и форма авторизации */}
                             <Route exact path="/main">
-                                <Main onUpdateUser={handleUserUpdate} isLoggedIn={isUserLoggedIn} petitions={petitions}
-                                      onLikeClick={handleLikeClick} onDislikeClick={handleDislikeClick} onAddPetition={handleAddPetition} />
+                                <Main onUpdateUser={handleUserUpdate} isLoggedIn={isUserLoggedIn}
+                                    petitions={areMyPetitionsChosen ? myPetitions : petitions}
+                                    onLikeClick={handleLikeClick} onDislikeClick={handleDislikeClick} onAddPetition={handleAddPetition}
+                                    onMyPetitionsChoose={handleMyPetitionsChoose} onActualPetitionsChoose={handleActualPetitionsChoose} />
                             </Route>
                         </Switch>
                     </animated.div>
