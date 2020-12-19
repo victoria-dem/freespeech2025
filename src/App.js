@@ -8,7 +8,6 @@ import { __RouterContext } from 'react-router';
 import { CurrentUserContext } from './contexts/CurrentUserContext';
 import { db, getPetitionsFromDb } from './utils/firebase';
 import { v4 as uuidv4 } from 'uuid';
-import Popup from "./components/Popup/Popup";
 
 // import manageJson from "./utils/manageJson"   /* util for loading json to firebase */
 // import manageJson from "./utils/loadAuthorData"   /* util for loading json to firebase */
@@ -70,21 +69,21 @@ function App() {
     const handleLikeClick = (petition) => {
         if(currentUser.uid) {
             const isLiked = petition.data.likes.some(i => i.uid === currentUser.uid);
-        db.collection("petitions")
-            .doc(petition.id)
-            .update({
-                likes: isLiked ?
-                    petition.data.likes.filter(i => i.uid !== currentUser.uid) :
-                    [...petition.data.likes, { uid: currentUser.uid }],
-                disLikes: !isLiked ? petition.data.disLikes.filter(i => i.uid !== currentUser.uid) :
-                    [...petition.data.disLikes]
-            })
-            .then(() => {
-                updatePetitions(petition);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+            db.collection("petitions")
+                .doc(petition.id)
+                .update({
+                    likes: isLiked ?
+                        petition.data.likes.filter(i => i.uid !== currentUser.uid) :
+                        [...petition.data.likes, { uid: currentUser.uid }],
+                    disLikes: !isLiked ? petition.data.disLikes.filter(i => i.uid !== currentUser.uid) :
+                        [...petition.data.disLikes]
+                })
+                .then(() => {
+                    updatePetitions(petition);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         } else {
             console.log('please log in');
         }
@@ -95,21 +94,21 @@ function App() {
     const handleDislikeClick = (petition) => {
         if(currentUser.uid) {
             const isDisliked = petition.data.disLikes.some(i => i.uid === currentUser.uid);
-        db.collection("petitions")
-            .doc(petition.id)
-            .update({
-                disLikes: isDisliked ?
-                    petition.data.disLikes.filter(i => i.uid !== currentUser.uid) :
-                    [...petition.data.disLikes, { uid: currentUser.uid }],
-                likes: !isDisliked ? petition.data.likes.filter(i => i.uid !== currentUser.uid) :
-                    [...petition.data.likes]
-            })
-            .then(() => {
-                updatePetitions(petition);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+            db.collection("petitions")
+                .doc(petition.id)
+                .update({
+                    disLikes: isDisliked ?
+                        petition.data.disLikes.filter(i => i.uid !== currentUser.uid) :
+                        [...petition.data.disLikes, { uid: currentUser.uid }],
+                    likes: !isDisliked ? petition.data.likes.filter(i => i.uid !== currentUser.uid) :
+                        [...petition.data.likes]
+                })
+                .then(() => {
+                    updatePetitions(petition);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         } else {
             console.log('please log in');
         }
@@ -128,7 +127,7 @@ function App() {
                             {/* Страница 2025 года - пока там хедер и форма авторизации */}
                             <Route exact path="/main">
                                 <Main onUpdateUser={handleUserUpdate} isLoggedIn={isUserLoggedIn} petitions={petitions}
-                                    onLikeClick={handleLikeClick} onDislikeClick={handleDislikeClick} onAddPetition={handleAddPetition} />
+                                      onLikeClick={handleLikeClick} onDislikeClick={handleDislikeClick} onAddPetition={handleAddPetition} />
                             </Route>
                         </Switch>
                     </animated.div>

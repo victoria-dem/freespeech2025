@@ -1,12 +1,13 @@
 import HeaderMenu from "../HeaderMenu/HeaderMenu";
-import "./header.css"
+import "./header.css";
 
 
-function Header({handleAccountBtnClick, buttonMsg, isAccountPageOpen}) {
+function Header({handleAccountBtnClick, buttonMsg}) {
     return (
         <header className="header">
-            <img src='#' alt="Free speech 2025" className="logo"/>
-            <HeaderMenu handleAccountBtnClick={handleAccountBtnClick} buttonMsg={buttonMsg}/>
+            <img src='#' alt="Logo" className="logo"/>
+            <HeaderMenu />
+            <button type='button' onClick={handleAccountBtnClick}>{buttonMsg ? buttonMsg : ''}</button>
         </header>
     )
 }
