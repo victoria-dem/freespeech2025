@@ -28,7 +28,7 @@
     border-radius: 10px;
     padding: 0 36px 36px;
     width: 450px;
-    /*max-height: 400px;*/
+    max-height: 600px;
 }
 
 @media screen and (max-width: 540px) {

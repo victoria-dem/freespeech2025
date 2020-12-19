@@ -44,7 +44,7 @@ function App() {
     const handleUserUpdate = (user) => {
         setCurrentUser(user);
         user.uid ? setIsUserLoggedIn(true) : setIsUserLoggedIn(false);
-        console.log(isUserLoggedIn)
+        // console.log(isUserLoggedIn)
     }
 
     //определяем проверена ли авторизация на сайте
