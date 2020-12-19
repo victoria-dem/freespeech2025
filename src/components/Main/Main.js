@@ -101,10 +101,10 @@ const Main = ({ onUpdateUser, isLoggedIn, petitions, onLikeClick,
                 <PetitionCardList petitions={petitions} onLikeClick={onLikeClick} onDislikeClick={onDislikeClick}
                     onMyPetitionsChoose={onMyPetitionsChoose} onActualPetitionsChoose={onActualPetitionsChoose} />
                 <Petition onAddPetition={onAddPetition} />
-                <Auth
+                {/* <Auth
                     onUpdateUser={onUpdateUser}
                     isLoggedIn={isLoggedIn}
-                />
+                /> */}
                 <Popup
                     onClose={closePopup}
                     onChange={handleChange}
