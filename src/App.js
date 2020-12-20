@@ -35,7 +35,7 @@ function App() {
     const [myPetitions, setMyPetitions] = useState([]);
     const [hasCheckedLogin, setHasCheckedLogin] = useState(false);
     const [nickname, setNickname] = useState('');
-    
+    const [isDisplayName, setIsDisplay] = useState(false)
     const {location} = useContext(__RouterContext);
     const transitions = useTransition(location, location => location.pathname, {
         from: {opacity: 0, transform: "translate(100%, 0)", display: "none"},
@@ -54,6 +54,7 @@ function App() {
                     displayName: getNicknames()
                 }).then(function () {
                     console.log('displayName is set')
+                    setIsDisplay(true)
                 }).catch(function (error) {
                     console.log(error)
                 });
@@ -67,6 +68,8 @@ function App() {
         }
     }, [currentUser])
 
+    console.log(nickname)
+    
     const handleUserUpdate = (user) => {
         setCurrentUser(user);
         user.uid ? setIsUserLoggedIn(true) : setIsUserLoggedIn(false);
@@ -254,6 +257,7 @@ function App() {
                                     onMyPetitionsChoose={handleMyPetitionsChoose}
                                     onActualPetitionsChoose={handleActualPetitionsChoose}
                                     nickname={nickname}
+                                    isDisplayName={isDisplayName}
                                 />
                             </Route>
                         </Switch>

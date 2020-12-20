@@ -12,7 +12,7 @@ import Footer from '../Footer/Footer';
 
 const Main = ({
                   onUpdateUser, isLoggedIn, petitions, onLikeClick,
-                  onDislikeClick, onAddPetition, onMyPetitionsChoose, onActualPetitionsChoose, nickname
+                  onDislikeClick, onAddPetition, onMyPetitionsChoose, onActualPetitionsChoose, nickname, isDisplayName
               }) => {
     
     const currentUser = useContext(CurrentUserContext);
@@ -34,7 +34,7 @@ const Main = ({
         } else {
             setButtonMsg(`Зайти на сайт`)
         }
-    }, [isLinkSent, currentUser, isLoggedIn,nickname])
+    }, [isLinkSent, currentUser, isLoggedIn, nickname, buttonMsg, isDisplayName])
     
     useEffect(() => {
         if (isSignUpClicked) {
