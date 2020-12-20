@@ -34,7 +34,7 @@ const Main = ({
         } else {
             setButtonMsg(`Зайти на сайт`)
         }
-    }, [isLinkSent, isLoggedIn])
+    }, [isLinkSent, currentUser, isLoggedIn,nickname])
     
     useEffect(() => {
         if (isSignUpClicked) {
