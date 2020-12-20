@@ -9,6 +9,7 @@ import { CurrentUserContext } from './contexts/CurrentUserContext';
 import { db } from './utils/firebase';
 import { v4 as uuidv4 } from 'uuid';
 import { auth } from './utils/firebase'
+import getNicknames from "./utils/getNicknames";
 
 // import manageJson from "./utils/manageJson"   /* util for loading json to firebase */
 // import manageJson from "./utils/loadAuthorData"   /* util for loading json to firebase */
@@ -26,11 +27,14 @@ function App() {
     // },[]);
 
 
+
+
     const [currentUser, setCurrentUser] = useState({}); // {email: ... , uid: ... }
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
     const [petitions, setPetitions] = useState([]);
     const [areMyPetitionsChosen, setAreMyPetitionsChosen] = useState(false);
     const [myPetitions, setMyPetitions] = useState([]);
+    const [nickname,setNickname] = useState('');
 
     const { location } = useContext(__RouterContext);
     const transitions = useTransition(location, location => location.pathname, {
@@ -39,9 +43,49 @@ function App() {
         leave: { opacity: 0, transform: "translate(-50%, 0)", display: "none" }
     });
 
+useEffect(()=>{
+    // присвоить юзеру никнейм
+    // let userProfile = auth.currentUser;
+    // if (user.uid) {
+    //     console.log(userProfile)
+    //     if (userProfile.displayName === null) {
+    //         // console.log('nicknameshouldready', nickname)
+    //         userProfile.updateProfile({
+    //             displayName: getNicknames(),
+    //         }).then(function () {
+    //             // Update successful.
+    //             console.log('users name is written', userProfile.displayName)
+    //             // setNickname(userProfile.displayName)
+    //         }).catch(function (error) {
+    //             // An error happened.
+    //             console.log(error)
+    //         });
+    //     }
+    // }
+    // if (currentUser.uid && !auth.currentUser.displayName) {
+    if (currentUser.uid && !auth.currentUser.displayName && nickname==='') {
+        console.log('установить дисплай нейм')
+        auth.currentUser.updateProfile({
+                        displayName: getNicknames(),
+                    }).then(function () {
+                        // Update successful.
+                        // console.log('users name is written', userProfile.displayName)
+                        setNickname(auth.currentUser.displayName)
+                    }).catch(function (error) {
+                        // An error happened.
+                        console.log(error)
+                    });
+    } else if (!currentUser.uid) {
+        setNickname('')
+    }
+},[currentUser])
+
+console.log('app',nickname)
+
     const handleUserUpdate = (user) => {
         setCurrentUser(user);
         user.uid ? setIsUserLoggedIn(true) : setIsUserLoggedIn(false);
+
     }
 
     //получить последние по дате публикации 6 петиций и добавить их в стейт petitions
@@ -75,7 +119,7 @@ function App() {
             .catch((err) => console.log(err));
     }
     useEffect(() => {
-        // console.log('user log in', isUserLoggedIn);
+        // setNickname(getNicknames())
     }, [isUserLoggedIn]);
 
 
@@ -96,7 +140,7 @@ function App() {
             } else {
                 setMyPetitions(myPetitions.map((p) => p.id === petition.id ? { data: doc.data(), id: doc.id } : p));
             }
-            
+
         });
 
     //лайк петиции
@@ -176,10 +220,17 @@ function App() {
                             </Route>
                             {/* Страница 2025 года - пока там хедер и форма авторизации */}
                             <Route exact path="/main">
-                                <Main onUpdateUser={handleUserUpdate} isLoggedIn={isUserLoggedIn}
+                                <Main
+                                    onUpdateUser={handleUserUpdate}
+                                    isLoggedIn={isUserLoggedIn}
                                     petitions={areMyPetitionsChosen ? myPetitions : petitions}
-                                    onLikeClick={handleLikeClick} onDislikeClick={handleDislikeClick} onAddPetition={handleAddPetition}
-                                    onMyPetitionsChoose={handleMyPetitionsChoose} onActualPetitionsChoose={handleActualPetitionsChoose} />
+                                    onLikeClick={handleLikeClick}
+                                    onDislikeClick={handleDislikeClick}
+                                    onAddPetition={handleAddPetition}
+                                    onMyPetitionsChoose={handleMyPetitionsChoose}
+                                    onActualPetitionsChoose={handleActualPetitionsChoose}
+                                    nickname={nickname}
+                                />
                             </Route>
                         </Switch>
                     </animated.div>

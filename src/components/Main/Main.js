@@ -11,7 +11,7 @@ import Footer from '../Footer/Footer';
 
 
 const Main = ({ onUpdateUser, isLoggedIn, petitions, onLikeClick,
-    onDislikeClick, onAddPetition, onMyPetitionsChoose, onActualPetitionsChoose }) => {
+    onDislikeClick, onAddPetition, onMyPetitionsChoose, onActualPetitionsChoose, nickname}) => {
 
     const currentUser = useContext(CurrentUserContext);
     const [isAccountPageOpen, setIsAccountPageOpen] = useState(false)
@@ -27,12 +27,13 @@ const Main = ({ onUpdateUser, isLoggedIn, petitions, onLikeClick,
             setIsAccountPageOpen(false)
             setButtonMsg('Проверьте, пожалуйста, почту и кликните на линк в письме')
         } else if (currentUser.uid) {
-            setButtonMsg(`Пользователь ${currentUser.email} на сайте`)
+            setButtonMsg(`Пользователь ${nickname} на сайте`)
             setIsLinkSent(false)
         } else {
             setButtonMsg(`Личный кабинет`)
         }
-    }, [isLinkSent, currentUser])
+    }, [isLinkSent, currentUser, isLoggedIn,nickname])
+
 
     useEffect(() => {
         if (isSignUpClicked) {
@@ -97,7 +98,7 @@ const Main = ({ onUpdateUser, isLoggedIn, petitions, onLikeClick,
     return (
         <>
             <div className="main-page">
-                <Header handleAccountBtnClick={handleAccountBtnClick} buttonMsg={buttonMsg} />
+                <Header handleAccountBtnClick={handleAccountBtnClick} buttonMsg={buttonMsg}  />
                 <PetitionCardList petitions={petitions} onLikeClick={onLikeClick} onDislikeClick={onDislikeClick}
                     onMyPetitionsChoose={onMyPetitionsChoose} onActualPetitionsChoose={onActualPetitionsChoose} />
                 <Petition onAddPetition={onAddPetition} />
