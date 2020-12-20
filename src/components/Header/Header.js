@@ -3,6 +3,7 @@ import "./header.css";
 
 
 function Header({handleAccountBtnClick, buttonMsg}) {
+    
     return (
         <header className="header">
             <img src='#' alt="Logo" className="logo"/>

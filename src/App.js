@@ -45,45 +45,43 @@ function App() {
         leave: { opacity: 0, transform: "translate(-50%, 0)", display: "none" }
     });
 
-useEffect(()=>{
-    // присвоить юзеру никнейм
-    // let userProfile = auth.currentUser;
-    // if (user.uid) {
-    //     console.log(userProfile)
-    //     if (userProfile.displayName === null) {
-    //         // console.log('nicknameshouldready', nickname)
-    //         userProfile.updateProfile({
-    //             displayName: getNicknames(),
-    //         }).then(function () {
-    //             // Update successful.
-    //             console.log('users name is written', userProfile.displayName)
-    //             // setNickname(userProfile.displayName)
-    //         }).catch(function (error) {
-    //             // An error happened.
-    //             console.log(error)
-    //         });
-    //     }
-    // }
-    // if (currentUser.uid && !auth.currentUser.displayName) {
-    if (currentUser.uid && !auth.currentUser.displayName && nickname==='') {
-        console.log('установить дисплай нейм')
-        auth.currentUser.updateProfile({
-                        displayName: getNicknames(),
-                    }).then(function () {
-                        // Update successful.
-                        // console.log('users name is written', userProfile.displayName)
-                        setNickname(auth.currentUser.displayName)
-                    }).catch(function (error) {
-                        // An error happened.
-                        console.log(error)
-                    });
-    } else if (!currentUser.uid) {
-        setNickname('')
-    }
+   
+    
+    
+    useEffect(()=>{
+        let user = auth.currentUser;
+        let name;
+        if (user != null) {
+            name = user.displayName;
+            if (name==null) {
+                user.updateProfile({
+                    displayName: getNicknames()
+                }).then(function() {
+                    console.log('displayName is set')
+                    // Update successful.
+                }).catch(function(error) {
+                    console.log(error)
+                    // An error happened.
+                });
+                setNickname(name)
+            }
+            if (nickname==='') {
+                setNickname(name)
+            }
+        }
+        
+        if (user===null) {
+            console.log('User set null')
+            setNickname('')
+        }
+        
+        
+        
+    
 },[currentUser])
 
-console.log('app',nickname)
-
+// console.log('app',nickname)
+    
     const handleUserUpdate = (user) => {
         setCurrentUser(user);
         user.uid ? setIsUserLoggedIn(true) : setIsUserLoggedIn(false);
@@ -253,10 +251,10 @@ console.log('app',nickname)
                 onCheckLogin={handleCheckLogin}
             />
             <div className="App">
-                {transitions.map(({ item, props, key }) => (
-                    <animated.div key={key} style={props}>
-                        <Switch location={item}>
-                            {/* Вступительная страница с кнопкой "Поехали" */}
+                {/*{transitions.map(({ item, props, key }) => (*/}
+                {/*    <animated.div key={key} style={props}>*/}
+                {/*        <Switch location={item}>*/}
+                {/*             Вступительная страница с кнопкой "Поехали"*/}
                             <Route exact path="/">
                                 <IntroPage />
                             </Route>
@@ -267,13 +265,13 @@ console.log('app',nickname)
                                     isLoggedIn={isUserLoggedIn}
                                     petitions={areMyPetitionsChosen ? myPetitions : petitions}
                                     onLikeClick={handleLikeClick} onDislikeClick={handleDislikeClick} onAddPetition={handleAddPetition}
-                                    onMyPetitionsChoose={handleMyPetitionsChoose} onActualPetitionsChoose={handleActualPetitionsChoose} /> :
+                                    onMyPetitionsChoose={handleMyPetitionsChoose} onActualPetitionsChoose={handleActualPetitionsChoose}
                                     nickname={nickname}
                                 />
                             </Route>
-                        </Switch>
-                    </animated.div>
-                ))}
+                    {/*    </Switch>*/}
+                    {/*</animated.div>*/}
+                {/*))}*/}
             </div>
         </CurrentUserContext.Provider>
     );

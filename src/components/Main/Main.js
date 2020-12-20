@@ -26,14 +26,21 @@ const Main = ({ onUpdateUser, isLoggedIn, petitions, onLikeClick,
         if (isLinkSent && !currentUser.uid) {
             setIsAccountPageOpen(false)
             setButtonMsg('Проверьте, пожалуйста, почту и кликните на линк в письме')
-        } else if (currentUser.uid) {
-            setButtonMsg(`Пользователь ${nickname} на сайте`)
+        } else if (currentUser.uid && nickname !== '') {
             setIsLinkSent(false)
+            setButtonMsg(`Пользователь ${nickname} на сайте`)
         } else {
             setButtonMsg(`Личный кабинет`)
         }
-    }, [isLinkSent, currentUser, isLoggedIn,nickname])
+    }, [isLinkSent, isLoggedIn])
 
+    useEffect(()=>{console.log('isLinkSent')},[isLinkSent])
+    useEffect(()=>{console.log('currentUser')},[currentUser])
+    useEffect(()=>{console.log('isLoggedIn')},[isLoggedIn])
+    
+    
+    
+    
 
     useEffect(() => {
         if (isSignUpClicked) {
@@ -98,7 +105,7 @@ const Main = ({ onUpdateUser, isLoggedIn, petitions, onLikeClick,
     return (
         <>
             <div className="main-page">
-                <Header handleAccountBtnClick={handleAccountBtnClick} buttonMsg={buttonMsg}  />
+                <Header handleAccountBtnClick={handleAccountBtnClick} buttonMsg={buttonMsg}/>
                 <PetitionCardList petitions={petitions} onLikeClick={onLikeClick} onDislikeClick={onDislikeClick}
                     onMyPetitionsChoose={onMyPetitionsChoose} onActualPetitionsChoose={onActualPetitionsChoose} />
                 <Petition onAddPetition={onAddPetition} />
