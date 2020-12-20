@@ -1,4 +1,6 @@
 # freespeech2025
+сайт доступен по адресу freespeech2025.com
+
 =======
 # Getting Started with Create React App
 
