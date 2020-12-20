@@ -92,6 +92,7 @@ function App() {
     const setLatestPetitions = () => {
         //только после проверки на авторизацию
         if (hasCheckedLogin) {
+            setPetitions([]);
             //если залогинен, то отображаем и последние 6 петиций и последние 3 карточки пользователя
             if (isUserLoggedIn) {
                 Promise.all([
@@ -110,14 +111,18 @@ function App() {
                         if (isUserLoggedIn) {
                             curUserPetitions.forEach(doc => {
                                 if(!doc.data().isPublic) {
-                                    setPetitions(petitions => [{ data: doc.data(), id: doc.id },...petitions]);
+                                    setPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
                                 }
                                 setMyPetitions(petitions=>[{data: doc.data(), id: doc.id},...petitions]);
                                 setMyPetitions(myPetitions.filter((p) => p.id !== doc.id));
                                 
                          })
                         }
-                        setPetitionList(latestPetitions);
+                        // setPetitionList(latestPetitions);
+                        latestPetitions.forEach(doc => {
+                            setPetitions(petitions => [ ...petitions, { data: doc.data(), id: doc.id }]);
+                        });
+                        
                         })
                     .catch(err => console.log(err));
             } else {
@@ -143,7 +148,7 @@ function App() {
             .get()
             .then((myPetitions) => {
                 myPetitions.forEach(doc => {
-                    setMyPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
+                    setMyPetitions(petitions => [...petitions,{ data: doc.data(), id: doc.id }]);
                 });
             })
             .catch((err) => console.log(err));
