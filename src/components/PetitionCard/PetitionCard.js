@@ -4,7 +4,7 @@ import {pictureUpload} from '../../utils/firebase';
 import {v4 as uuidv4} from 'uuid';
 import {CurrentUserContext} from '../../contexts/CurrentUserContext';
 
-const PetitionCard = ({petition, onLikeClick, onDislikeClick}) => {
+const PetitionCard = ({petition, onLikeClick, onDislikeClick, isLoggedIn}) => {
     const [url, setUrl] = useState('');
     const currentUser = useContext(CurrentUserContext);
     const [isOwn, setIsOwn] = useState(false);
@@ -61,11 +61,11 @@ const PetitionCard = ({petition, onLikeClick, onDislikeClick}) => {
                     }
                 </ul>
                 <button className="petition-card__reaction petition-card__reaction_type_like"
-                        onClick={handleLikeClick} disabled={!isOwn}>
+                        onClick={handleLikeClick} disabled={!isLoggedIn}>
                     {`Likes: ${petition.data.likes.length}`}
                 </button>
                 <button className="petition-card__reaction petition-card__reaction_type_dislike"
-                        onClick={handleDisLikeClick} disabled={!isOwn}>
+                        onClick={handleDisLikeClick} disabled={!isLoggedIn}>
                     {`Dislikes: ${petition.data.disLikes.length}`}
                 </button>
             </div>
