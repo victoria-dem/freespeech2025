@@ -8,6 +8,7 @@ import Popup from "../Popup/Popup";
 import Petition from "../Petition/Petition";
 import {auth} from "../../utils/firebase";
 import Footer from '../Footer/Footer';
+import Banner from "../Banner/Banner";
 
 
 const Main = ({
@@ -100,6 +101,7 @@ const Main = ({
         <>
             <div className="main-page">
                 <Header handleAccountBtnClick={handleAccountBtnClick} buttonMsg={buttonMsg}/>
+                <Banner/>
                 <PetitionCardList petitions={petitions} onLikeClick={onLikeClick} onDislikeClick={onDislikeClick}
                                   onMyPetitionsChoose={onMyPetitionsChoose}
                                 onActualPetitionsChoose={onActualPetitionsChoose} isLoggedIn={isLoggedIn}/>
