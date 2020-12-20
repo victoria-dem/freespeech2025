@@ -3,7 +3,6 @@ import {CurrentUserContext} from '../../contexts/CurrentUserContext';
 import './SignUpForm.css';
 import cn from 'classnames';
 
-
 const SignUpForm = ({onChange, onSignUp, onLogout, isAccountPageOpen}) => {
     const currentUser = useContext(CurrentUserContext);
     // TODO: validation and button disable
