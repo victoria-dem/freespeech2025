@@ -30,7 +30,7 @@ function Popup(props) {
     return (
         <div className={isAccountPageOpen ? `popup  popup_opened` : `popup`}>
             <div style={styleContainer} className="popup__container">
-                <button onClick={onClose} className="popup__button-close"></button>
+                <button onClick={onClose} className="popup__button-close"/>
                 <SignUpForm
                     onChange={onChange}
                     onSignUp={onSignUp}

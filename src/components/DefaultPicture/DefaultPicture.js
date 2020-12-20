@@ -4,6 +4,7 @@ import greyPic from '../../images/grey_default_pic.png'
 function DefaultPicture({url, getDefaultPetitionPicData, isTextReadyToRender}){
     
     const [defaultPicName, setDefaultPicName] = useState('')
+    
     function handleDefaultPictureClick(e) {
         if (isTextReadyToRender) {
             const filePath = e.target.src

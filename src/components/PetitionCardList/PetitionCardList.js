@@ -28,7 +28,7 @@ const PetitionCardList = ({ petitions, onLikeClick, onDislikeClick,
   return (
     <div className="petition-card-list">
       <h2>
-        <a  id="petition-card-list"  name="petitions"></a>
+        <a  id="petition-card-list"  name="petitions"/>
         Инициативы
       </h2>
       <div className="petition-card-list__options">

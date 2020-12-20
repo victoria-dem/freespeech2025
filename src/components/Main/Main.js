@@ -1,39 +1,41 @@
 import './main.css';
 import Auth from '../Auth/Auth';
-import { useState, useContext, useEffect } from "react";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import {useState, useContext, useEffect} from "react";
+import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import PetitionCardList from '../PetitionCardList/PetitionCardList';
 import Header from "../Header/Header";
 import Popup from "../Popup/Popup";
 import Petition from "../Petition/Petition";
-import { auth } from "../../utils/firebase";
+import {auth} from "../../utils/firebase";
 import Footer from '../Footer/Footer';
 
 
-const Main = ({ onUpdateUser, isLoggedIn, petitions, onLikeClick,
-    onDislikeClick, onAddPetition, onMyPetitionsChoose, onActualPetitionsChoose }) => {
-
+const Main = ({
+                  onUpdateUser, isLoggedIn, petitions, onLikeClick,
+                  onDislikeClick, onAddPetition, onMyPetitionsChoose, onActualPetitionsChoose, nickname, isDisplayName
+              }) => {
+    
     const currentUser = useContext(CurrentUserContext);
     const [isAccountPageOpen, setIsAccountPageOpen] = useState(false)
     const [isLinkSent, setIsLinkSent] = useState(false)
-    const [buttonMsg, setButtonMsg] = useState('Что-то мы не учли')
+    const [buttonMsg, setButtonMsg] = useState('Кнопка')
     const [isSignUpClicked, setIsSignUpClicked] = useState(false)
     const [isLogOutClicked, setIsLogOutClicked] = useState(false)
-    const [values, setValues] = useState({ email: '' })
-
+    const [values, setValues] = useState({email: ''})
+    
     //  console.log(currentUser)
     useEffect(() => {
         if (isLinkSent && !currentUser.uid) {
             setIsAccountPageOpen(false)
             setButtonMsg('Проверьте, пожалуйста, почту и кликните на линк в письме')
-        } else if (currentUser.uid) {
-            setButtonMsg(`Пользователь ${currentUser.email} на сайте`)
+        } else if (currentUser.uid && nickname !== '') {
             setIsLinkSent(false)
+            setButtonMsg(` Ваш псевдоним на сайте: ${nickname}`)
         } else {
-            setButtonMsg(`Личный кабинет`)
+            setButtonMsg(`Зайти на сайт`)
         }
-    }, [isLinkSent, currentUser])
-
+    }, [isLinkSent, currentUser, isLoggedIn, nickname, buttonMsg, isDisplayName])
+    
     useEffect(() => {
         if (isSignUpClicked) {
             auth.sendSignInLinkToEmail(values.email, actionCodeSettings)
@@ -48,7 +50,7 @@ const Main = ({ onUpdateUser, isLoggedIn, petitions, onLikeClick,
             setIsSignUpClicked(false)
         }
     }, [isSignUpClicked])
-
+    
     useEffect(() => {
         if (isLogOutClicked) {
             auth.signOut().then(function () {
@@ -60,47 +62,48 @@ const Main = ({ onUpdateUser, isLoggedIn, petitions, onLikeClick,
             setIsLogOutClicked(false)
         }
     }, [isLogOutClicked])
-
+    
     const actionCodeSettings = {
         url: window.location.href,
         handleCodeInApp: true
     };
-
-    function handleAccountBtnClick() {
+    
+    const handleAccountBtnClick = () => {
         setIsAccountPageOpen(!isAccountPageOpen)
     }
-
-    function emailLinkStatus(props) {
+    
+    const emailLinkStatus = (props) => {
         setIsLinkSent(props)
     }
-
-    function closePopup() {
+    
+    const closePopup = () => {
         setIsAccountPageOpen(!isAccountPageOpen)
     }
-
+    
     const handleChange = e => {
-        const { name, value } = e.target;
-        setValues({ ...values, [name]: value });
+        const {name, value} = e.target;
+        setValues({...values, [name]: value});
     }
-
-    function handleSignUp(e) {
+    
+    const handleSignUp = (e) => {
         e.preventDefault();
         setIsSignUpClicked(true)
     }
-
-    function handleLogout(e) {
+    
+    const handleLogout = (e) => {
         e.preventDefault();
         setIsLogOutClicked(true)
         setIsAccountPageOpen(!isAccountPageOpen)
     }
-
+    
     return (
         <>
             <div className="main-page">
-                <Header handleAccountBtnClick={handleAccountBtnClick} buttonMsg={buttonMsg} />
+                <Header handleAccountBtnClick={handleAccountBtnClick} buttonMsg={buttonMsg}/>
                 <PetitionCardList petitions={petitions} onLikeClick={onLikeClick} onDislikeClick={onDislikeClick}
-                    onMyPetitionsChoose={onMyPetitionsChoose} onActualPetitionsChoose={onActualPetitionsChoose} />
-                <Petition onAddPetition={onAddPetition} />
+                                  onMyPetitionsChoose={onMyPetitionsChoose}
+                                  onActualPetitionsChoose={onActualPetitionsChoose}/>
+                <Petition onAddPetition={onAddPetition}/>
                 {/* <Auth
                     onUpdateUser={onUpdateUser}
                     isLoggedIn={isLoggedIn}
@@ -112,7 +115,7 @@ const Main = ({ onUpdateUser, isLoggedIn, petitions, onLikeClick,
                     onLogout={handleLogout}
                     isAccountPageOpen={isAccountPageOpen}
                 />
-                <Footer />
+                <Footer/>
             </div>
         </>
     );
