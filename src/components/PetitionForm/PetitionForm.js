@@ -53,10 +53,6 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
         }
     })
     
-    // const isPetitionTagInvalid = Object.values(errors.petitionTag).some(Boolean);
-    // const isPetitionInvalid = Object.values(errors.petition).some(Boolean);
-    // const isSubmitDisabled = isPetitionTagInvalid || isPetitionInvalid;
-    
     useEffect(() => {
         if (isTagReady) {
             // TODO: trim space
@@ -144,17 +140,10 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
     }, [isKeyPressed]);
     
     useEffect(()=>{
-        // if (resetTextInputs) {
-        //     petitionValues.petitionTag=''
-        //     petitionValues.petition.value=''
-        
         setPetitionValues({
             petitionTag: '',
             petition: '',
         })
-
-        // }
-        
     }, [resetTextInputs])
     
     function handleFocus(e) {
@@ -211,7 +200,6 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
                     </label>
                 </fieldset>
             </form>
-        
         </>
     )
 }

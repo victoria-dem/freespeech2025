@@ -2,7 +2,6 @@
   display: flex;
   margin: 180px auto 60px;
   flex-direction: column;
-  /*border: 1px solid blue;*/
 }
 
 .petition-form__title {
@@ -23,7 +22,6 @@
 
 .petition-form__steps {
   width: 70px;
-  /*background-color: aquamarine;*/
 }
 
 .petition-form__step {
@@ -50,15 +48,15 @@
   border-left: 1px solid black;
 }
 
-.petition-form__step-connector_position-second {
+.petition-form__step-connector_position_second {
   height: 232px;
 }
 
-.petition-form__step-connector_position-third {
+.petition-form__step-connector_position_third {
   height: 221px;
 }
 
-.petition-form__step-connector_position-forth {
+.petition-form__step-connector_position_forth {
   height: 124px;
 }
 
@@ -141,7 +139,6 @@
 .petition-form__output {
   display: flex;
   flex-direction: column;
-  /*border: 1px red solid;*/
 }
 
 .petition-form__user-picture {
@@ -269,7 +266,6 @@
   width: 344px;
   margin: 67px 0 26px 156px;
 }
-
 
 .petition-form__poem-box {
   padding: 15px;

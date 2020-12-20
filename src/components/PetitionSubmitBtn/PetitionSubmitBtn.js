@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './petition-submit-btn.css'
 import cn from 'classnames'
-// import {act} from "@testing-library/react";
 
 function PetitionSubmitBtn(props) {
 
@@ -23,8 +22,6 @@ function PetitionSubmitBtn(props) {
         getSubmitPetitionEvent(true)
     }
     
-    console.log(isPetitionPublished)
-    
     useEffect(() => {
         if (!isTextReadyToRender && !isLoaded) {
             if (justPublished) {
@@ -32,9 +29,8 @@ function PetitionSubmitBtn(props) {
                 setTimeout(()=>{
                     setJustPublished(false)
                     setPetitionBtnTitle('Прояви инициативу')
-                }, 5000)
+                }, 3000)
             }
-            // setPetitionBtnTitle('Создай петицию')
         } else if (isTextReadyToRender && !isLoaded && !isPictureReady && !isPetitionPublished) {
             setPetitionBtnTitle('А картинка где?')
         } else if (isTextReadyToRender && !isLoaded && isPictureReady && !isPetitionPublished) {
@@ -55,15 +51,6 @@ function PetitionSubmitBtn(props) {
     }, [isTextReadyToRender, isPictureReady])
 
     return (
-        // <button
-        //     type="submit"
-        //     className={cn("petition-form__submit-btn", {"petition-form__submit-btn_disabled" : !isSubmitBtnAvailable} )}
-        //     onClick={handleSubmitPetition}
-        //     disabled={!isSubmitBtnAvailable}
-        // >
-        //     {petitionBtnTitle}
-        // </button>
-        // <a href="#petitions">
             <button
                 type="submit"
                 className={cn("petition-form__submit-btn", { "petition-form__submit-btn_disabled": !isSubmitBtnAvailable })}
@@ -72,7 +59,6 @@ function PetitionSubmitBtn(props) {
             >
                 {petitionBtnTitle}
             </button>
-        // </a>
     )
 }
 
