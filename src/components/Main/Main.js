@@ -30,10 +30,9 @@ const Main = ({
             setButtonMsg('Проверьте, пожалуйста, почту и кликните на линк в письме')
         } else if (currentUser.uid && nickname !== '') {
             setIsLinkSent(false)
-            setButtonMsg(`Пользователь ${nickname} на сайте`)
+            setButtonMsg(` Ваш псевдоним на сайте: ${nickname}`)
         } else {
-            console.log('что то не учли')
-            setButtonMsg(`Личный кабинет`)
+            setButtonMsg(`Зайти на сайт`)
         }
     }, [isLinkSent, isLoggedIn])
     
