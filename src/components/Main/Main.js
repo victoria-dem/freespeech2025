@@ -102,7 +102,7 @@ const Main = ({
                 <Header handleAccountBtnClick={handleAccountBtnClick} buttonMsg={buttonMsg}/>
                 <PetitionCardList petitions={petitions} onLikeClick={onLikeClick} onDislikeClick={onDislikeClick}
                                   onMyPetitionsChoose={onMyPetitionsChoose}
-                                  onActualPetitionsChoose={onActualPetitionsChoose}/>
+                                onActualPetitionsChoose={onActualPetitionsChoose} isLoggedIn={isLoggedIn}/>
                 <Petition onAddPetition={onAddPetition}/>
                 {/* <Auth
                     onUpdateUser={onUpdateUser}

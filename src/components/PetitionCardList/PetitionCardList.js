@@ -8,7 +8,7 @@ import './petition-card-list.css';
 import { useContext } from "react";
 
 const PetitionCardList = ({ petitions, onLikeClick, onDislikeClick,
-  onMyPetitionsChoose, onActualPetitionsChoose }) => {
+  onMyPetitionsChoose, onActualPetitionsChoose, isLoggedIn}) => {
     const [isActButtonClicked, setIsActButtonClicked] = useState(false);
     const [isMyButtonClicked, setIsMyButtonClicked] = useState(false);
   const handleMyPetitionsButtonClick = () => {
@@ -42,7 +42,7 @@ const PetitionCardList = ({ petitions, onLikeClick, onDislikeClick,
           petitions.map((petition) => {
             return ({
               key: uuidv4(),
-              content: <PetitionCard petition={petition} onLikeClick={onLikeClick} onDislikeClick={onDislikeClick} />
+              content: <PetitionCard petition={petition} onLikeClick={onLikeClick} onDislikeClick={onDislikeClick} isLoggedIn={isLoggedIn}/>
             }
             )
           })
