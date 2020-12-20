@@ -8,7 +8,8 @@ import PetitionDefaultPictures from "../PetitionDefaultPictures/PetitionDefaultP
 import {db, storage} from "../../utils/firebase";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import PetitionSteps from "../PetitionSteps/PetitionSteps";
-import PetitionStatus from "../PetitionStatus/PetitionStatus";
+
+// import PetitionStatus from "../PetitionStatus/PetitionStatus";
 
 function Petition({onAddPetition}) {
     const currentUser = useContext(CurrentUserContext);
@@ -23,12 +24,9 @@ function Petition({onAddPetition}) {
     const [resetTextInputs, setResetTextInputs] = useState(false)
     const [url, setUrl] = useState('')
     const [isPublic, setIsPublic] = useState(false)
-    const [status, setStatus] = useState('Просто контролируем каждое ваше нажатие клавиш. Может ну его, связываться с нами ...')
+    // const [status, setStatus] = useState('Просто контролируем каждое ваше нажатие клавиш. Может ну его, связываться с нами ...')
     
-    // console.log(status)
-    // console.log(isTextReadyToRender, isTextReadyToRender, isTextReadyToRender, url, pictureData)
-    
-    function handleDeletePicture() {
+    const handleDeletePicture = () => {
         if (url) {
             setUrl('')
             setPictureData({})
@@ -39,20 +37,20 @@ function Petition({onAddPetition}) {
         
     }
     
-    function getPetitionTextData(petitionTextData) {
+    const getPetitionTextData = (petitionTextData) => {
         setPoemText(petitionTextData.poemText)
         setTagText(petitionTextData.tagText)
         setIsTextReadyToRender(petitionTextData.isPetitionReady)
         
     }
     
-    function getPetitionPicData({picRef, isPicUploaded}) {
+    const getPetitionPicData = ({picRef, isPicUploaded}) => {
         setPictureData(picRef)
         setIsPictureReady(isPicUploaded)
         setIsPublic(false)
     }
     
-    function getDefaultPetitionPicData(defaultPicName) {
+    const getDefaultPetitionPicData = (defaultPicName) => {
         if (defaultPicName) {
             console.log('default picture chosen')
             setPictureData({
@@ -62,8 +60,12 @@ function Petition({onAddPetition}) {
             })
             setIsPictureReady(true)
             setIsPublic(true)
-            setStatus('Молодцы, что выбрали картинку одобренную Департаментом Визуальных Коммуникаций при Министерстве Свободы от Свободы Слова')
+            // setStatus('Молодцы, что выбрали картинку одобренную Департаментом Визуальных Коммуникаций при Министерстве Свободы от Свободы Слова')
         }
+    }
+    
+    const getSubmitPetitionEvent = (isBtnClicked) => {
+        setIsPetitionSubmitted(isBtnClicked)
     }
     
     useEffect(() => {
@@ -81,10 +83,6 @@ function Petition({onAddPetition}) {
         }
     }, [pictureData])
     
-    function getSubmitPetitionEvent(isBtnClicked) {
-        console.log('getSubmitPetitionEvent')
-        setIsPetitionSubmitted(isBtnClicked)
-    }
     
     // создание записи в db
     useEffect(() => {
@@ -92,8 +90,6 @@ function Petition({onAddPetition}) {
             setIsLoaded(true)
             setIsPetitionPublished(false)
             const timestamp = Date.now().toString()
-            // TODO: обсудить использование ключа isPublic
-            // TODO: setTimeout поставил специально, для отслеживания статуса загрузки
             const data = {
                 uid: currentUser.uid,
                 petition: poemText,
@@ -106,39 +102,35 @@ function Petition({onAddPetition}) {
                 likes: [],
                 disLikes: []
             }
-            // setTimeout(() => {
-                db.collection("petitions")
-                    .add(data)
-                    .then(function (docRef) {
-                        console.log("Document written with ID: ", docRef.id);
-                        setIsLoaded(false)
-                        setIsPetitionPublished(true)
-                        onAddPetition({data: data, id: docRef.id});
-                    }).then(function () {
-                        // загрузка картинки (после того, как пользователь нажал на submit)
-                        // pictureUpload()
-                        setIsPetitionPublished(true)
-                    })
-                    .catch(function (error) {
-                        console.error("Error adding document: ", error);
-                    }).finally((() => {
-                    // TODO: подумать правильно ли то, что этот находится в finally а не в then
-                    // TODO: резон для этого в том, что я хочу чтобы даже если ошибка возникла мы
-                    //  TODO:все равно проресетили все стейты и были готовы к приему новой петиции
-                    // setTimeout(() => {
-                        console.log('reset petition form')
-                        setIsPetitionPublished(false)
-                        setIsTextReadyToRender(false)
-                        setIsPictureReady(false)
-                        setUrl('')
-                        setPoemText('')
-                        setTagText('')
-                        setResetTextInputs(!resetTextInputs)
-                        setIsPetitionSubmitted(false)
-                        setStatus('Просто контролируем каждое ваше нажатие клавиш. Может ну его, связываться с нами ...')
-                    // }, 1000)
-                }))
-            // }, 1500)
+            db.collection("petitions")
+                .add(data)
+                .then(function (docRef) {
+                    console.log("Document written with ID: ", docRef.id);
+                    setIsLoaded(false)
+                    setIsPetitionPublished(true)
+                    onAddPetition({data: data, id: docRef.id});
+                }).then(function () {
+                    // загрузка картинки (после того, как пользователь нажал на submit)
+                    // pictureUpload()
+                    setIsPetitionPublished(true)
+                })
+                .catch(function (error) {
+                    console.error("Error adding document: ", error);
+                }).finally((() => {
+                // TODO: подумать правильно ли то, что этот находится в finally а не в then
+                // TODO: резон для этого в том, что я хочу чтобы даже если ошибка возникла мы
+                //  TODO:все равно проресетили все стейты и были готовы к приему новой петиции
+                console.log('reset petition form')
+                setIsPetitionPublished(false)
+                setIsTextReadyToRender(false)
+                setIsPictureReady(false)
+                setUrl('')
+                setPoemText('')
+                setTagText('')
+                setResetTextInputs(!resetTextInputs)
+                setIsPetitionSubmitted(false)
+                setStatus('Просто контролируем каждое ваше нажатие клавиш. Может ну его, связываться с нами ...')
+            }))
         }
     }, [isPetitionSubmitted])
     

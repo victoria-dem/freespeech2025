@@ -14,7 +14,24 @@ function PetitionPicture({getPetitionPicData, url, handleDeletePicture, isPetiti
         picBucket: ''
     })
     
-    // console.log(pictures, isPicturesReady, url)
+    const handleChoosePictures = e => {
+        e.preventDefault();
+        setPictures(e.target.files[0])
+        setIsPicturesReady(true)
+    }
+    
+    const resetFileInput = e => {
+        e.target.value = null;
+        // TODO: избыточный код
+        setPictures([])
+        setIsPicturesReady(false)
+        setIsPicUploaded(false)
+    }
+    
+    const handleDeleteButtonClick = e => {
+        handleDeletePicture()
+        setIsPicturesReady(false)
+    }
     
     useEffect(() => {
         // TODO: подумать надо ли нам сделать внутренний bucket для картинок
@@ -50,27 +67,6 @@ function PetitionPicture({getPetitionPicData, url, handleDeletePicture, isPetiti
         }
         
     }, [isPetitionPublished])
-    
-    function handleChoosePictures(e) {
-        e.preventDefault();
-        setPictures(e.target.files[0])
-        setIsPicturesReady(true)
-    }
-    
-    function resetFileInput(e) {
-        e.target.value = null;
-        // TODO: избыточный код
-        setPictures([])
-        setIsPicturesReady(false)
-        setIsPicUploaded(false)
-    }
-    
-    function handleDeleteButtonClick(e) {
-        handleDeletePicture()
-        setIsPicturesReady(false)
-    }
-    
-    // console.log(progressBar, isPicturesReady, pictures, isPicUploaded)
     
     return (
         <div className="petition-form__user-picture">

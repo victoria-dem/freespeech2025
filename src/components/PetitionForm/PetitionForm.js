@@ -53,6 +53,35 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
         }
     })
     
+    const handleChange = e => {
+        setIsKeyPressed(!isKeyPressed)
+        const {name, value} = e.target;
+        setPetitionValues(currentValue => {
+            return {
+                ...currentValue,
+                [name]: value
+            }
+        });
+        if ((e.target.name === 'petition') && e.target.value.length > 10) {
+            setIsPetitionReady(true)
+        } else {
+            setIsPetitionReady(false)
+        }
+    }
+    
+    const handleFocus= e => {
+        setIsKeyPressed(!isKeyPressed)
+        setIsTagReady(false)
+        setIsPoemReady(false)
+    }
+    
+    const handleOnBlur= e => {
+        setIsKeyPressed(!isKeyPressed)
+        if (petitionValues.petitionTag) {
+            setIsTagReady(true)
+        }
+    }
+    
     useEffect(() => {
         if (isTagReady) {
             // TODO: trim space
@@ -95,22 +124,6 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
         }
     }, [searchWord])
     
-    const handleChange = e => {
-        setIsKeyPressed(!isKeyPressed)
-        const {name, value} = e.target;
-        setPetitionValues(currentValue => {
-            return {
-                ...currentValue,
-                [name]: value
-            }
-        });
-        if ((e.target.name === 'petition') && e.target.value.length > 10) {
-            setIsPetitionReady(true)
-        } else {
-            setIsPetitionReady(false)
-        }
-    }
-    
     useEffect(function validateInputs() {
         const petitionTagValidationResult = Object.keys(validators.petitionTag).map(errorKey => {
                 const errorResult = validators.petitionTag[errorKey](petitionValues.petitionTag);
@@ -145,19 +158,6 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
             petition: '',
         })
     }, [resetTextInputs])
-    
-    function handleFocus(e) {
-        setIsKeyPressed(!isKeyPressed)
-        setIsTagReady(false)
-        setIsPoemReady(false)
-    }
-    
-    function handleOnBlur(e) {
-        setIsKeyPressed(!isKeyPressed)
-        if (petitionValues.petitionTag) {
-            setIsTagReady(true)
-        }
-    }
     
     return (
         <>

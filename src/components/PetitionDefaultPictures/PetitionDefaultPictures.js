@@ -11,7 +11,7 @@ function PetitionDefaultPictures({getDefaultPetitionPicData, isTextReadyToRender
     const picDataSet = getDefaultPictures()
     
     useEffect(() => {
-        function getUrl(picReef) {
+        const getUrl = (picReef) => {
             return storage.ref(picReef)
                 .getDownloadURL().then(function (url) {
                     return url
@@ -21,7 +21,7 @@ function PetitionDefaultPictures({getDefaultPetitionPicData, isTextReadyToRender
                 });
         }
         
-        function getUrls() {
+        const getUrls = () => {
             return Promise.all([getUrl(picDataSet[0]), getUrl(picDataSet[1]), getUrl(picDataSet[2])])
         }
         

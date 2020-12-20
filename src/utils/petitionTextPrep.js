@@ -11,6 +11,8 @@ function petitionTextPrep(docIds, setPoemText, tagText) {
     let lastLine = 0
     let string = ''
     // TODO: надо протестировать на стихах разной длины и там, где нужное слово находиться вначале и в конце
+    // TODO: точно есть ошибка на стихах, где ключевое слово встречается в последней строке
+    
     randomPoem.forEach((line, i, arr) => {
         string = line.toLowerCase()
         if ((string.indexOf(tagText) !== -1) && (baseString === -1)) {

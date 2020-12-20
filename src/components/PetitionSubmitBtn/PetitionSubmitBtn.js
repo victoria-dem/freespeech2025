@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import './petition-submit-btn.css'
 import cn from 'classnames'
 
 function PetitionSubmitBtn(props) {
-
+    
     const {
         getSubmitPetitionEvent,
         isTextReadyToRender,
@@ -12,12 +12,12 @@ function PetitionSubmitBtn(props) {
         isPetitionPublished,
         isPetitionSubmitted
     } = props
-
+    
     const [petitionBtnTitle, setPetitionBtnTitle] = useState('Прояви инициативу')
     const [isSubmitBtnAvailable, setIsSubmitBtnAvailable] = useState(false)
     const [justPublished, setJustPublished] = useState(false)
-
-    function handleSubmitPetition(e) {
+    
+    const handleSubmitPetition = e => {
         e.preventDefault();
         getSubmitPetitionEvent(true)
     }
@@ -26,7 +26,7 @@ function PetitionSubmitBtn(props) {
         if (!isTextReadyToRender && !isLoaded) {
             if (justPublished) {
                 setPetitionBtnTitle('Инициатива опубликована на сайте')
-                setTimeout(()=>{
+                setTimeout(() => {
                     setJustPublished(false)
                     setPetitionBtnTitle('Прояви инициативу')
                 }, 3000)
@@ -41,7 +41,7 @@ function PetitionSubmitBtn(props) {
             setJustPublished(true)
         }
     }, [isPetitionSubmitted, isTextReadyToRender, isPictureReady, isLoaded, isPetitionPublished])
-
+    
     useEffect(() => {
         if (isTextReadyToRender && isPictureReady) {
             setIsSubmitBtnAvailable(true)
@@ -49,16 +49,16 @@ function PetitionSubmitBtn(props) {
             setIsSubmitBtnAvailable(false)
         }
     }, [isTextReadyToRender, isPictureReady])
-
+    
     return (
-            <button
-                type="submit"
-                className={cn("petition-form__submit-btn", { "petition-form__submit-btn_disabled": !isSubmitBtnAvailable })}
-                onClick={handleSubmitPetition}
-                disabled={!isSubmitBtnAvailable}
-            >
-                {petitionBtnTitle}
-            </button>
+        <button
+            type="submit"
+            className={cn("petition-form__submit-btn", {"petition-form__submit-btn_disabled": !isSubmitBtnAvailable})}
+            onClick={handleSubmitPetition}
+            disabled={!isSubmitBtnAvailable}
+        >
+            {petitionBtnTitle}
+        </button>
     )
 }
 
