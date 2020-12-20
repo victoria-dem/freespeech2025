@@ -10,26 +10,27 @@ function Popup(props) {
         onLogout,
         isAccountPageOpen,
     } = props
-    const [scrollPosition, setScrollPosition] = useState(0);
-    const handleScroll = () => {
-        const position = window.pageYOffset;
-        setScrollPosition(position);
-    };
+    // const [scrollPosition, setScrollPosition] = useState(0);
+    // const handleScroll = () => {
+    //     const position = window.pageYOffset;
+    //     setScrollPosition(position);
+    // };
 
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll, {passive: true});
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
+    // useEffect(() => {
+    //     window.addEventListener('scroll', handleScroll, {passive: true});
+    //     return () => {
+    //         window.removeEventListener('scroll', handleScroll);
+    //     };
+    // }, []);
 
-    const styleContainer = {
-        marginTop: scrollPosition + (window.innerHeight / 100) * 20 + 'px'
-    }
+    // const styleContainer = {
+    //     marginTop: scrollPosition + (window.innerHeight / 100) * 20 + 'px'
+    // }
 
     return (
         <div className={isAccountPageOpen ? `popup  popup_opened` : `popup`}>
-            <div style={styleContainer} className="popup__container">
+            {/*<div style={styleContainer} className="popup__container">*/}
+            <div className="popup__container">
                 <button onClick={onClose} className="popup__button-close"/>
                 <SignUpForm
                     onChange={onChange}

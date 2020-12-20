@@ -1,12 +1,6 @@
-.authForm {
-  margin: 20px auto;
-}
-
 .form {
-  width: 430px;
+  /*width: 430px;*/
   background: #fff;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
-  border-radius: 10px;
   font-family: 'Inter', sans-serif;
   display: flex;
   flex-direction: column;
@@ -21,6 +15,9 @@
     width: 240px;
   }
 }
+
+
+
 
 .form__text-email {
   display: inline-block
@@ -57,13 +54,13 @@
   }
 }
 
-.form__submit-button_position_top {
-  margin: 20px 0 0 0;
-}
+/*.form__submit-button_position_top {*/
+/*  margin: 20px 0 0 0;*/
+/*}*/
 
-.form__submit-button_position_bottom {
-  margin: 35px 0 37px 0;
-}
+/*.form__submit-button_position_bottom {*/
+/*  margin: 35px 0 37px 0;*/
+/*}*/
 
 .form__submit-button_disabled {
   pointer-events: none;
@@ -90,12 +87,11 @@
   font-weight: normal;
   line-height: 17px;
   font-family: inherit;
+  /*display: block;*/
 }
 
 .form__input:focus {
   outline: none;
-  border: 1px solid #bcbcc4;
-  border-radius: 2px;
 }
 
 
@@ -114,9 +110,8 @@
 .form__heading {
   width: 358px;
   height: 23px;
-  color: #6a6a6a;
-  margin: 34px 0 0 0;
-  padding: 0;
+  color: #000;
+  margin: 90px 0 0 0;
 }
 
 @media screen and (max-width: 580px) {
@@ -153,6 +148,7 @@
   padding: 0;
   width: 358px;
   z-index: 5;
+  text-align: left;
 }
 
 @media screen and (max-width: 580px) {
@@ -180,9 +176,20 @@
 }
 .form__checkbox-label{
   margin-bottom: 20px;
+  display: inline-block;
 }
 .form__checkbox{
   margin-bottom: 20px;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.form__checkbox:checked + .form__pseudo-item {
+  background-image: url("../../images/form_rectangle_black.svg");
+  background-repeat: no-repeat;
 }
 
 .form__checkbox-label_hide {
@@ -192,3 +199,24 @@
 .form__checkbox_hide {
   display: none;
 }
+
+.form__pseudo-item {
+  display: inline-block;
+  vertical-align: middle;
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
+  background-image: url("../../images/form_grey_rect.svg");
+  background-repeat: no-repeat;
+}
+
+/*.form__pseudo-item_type_radio {*/
+/*  border-radius: 50%;*/
+/*}*/
+
+/*.form__item_el_number-of-columns:checked + .form__pseudo-item_type_radio{*/
+/*  background-image: url("https://code.s3.yandex.net/web-code/plane.svg");*/
+/*}*/
+/*.form__item_el_extra-options:checked + .form__pseudo-item_type_checkbox{*/
+/*  background-image: url("https://code.s3.yandex.net/web-code/tick.svg");*/
+/*}*/

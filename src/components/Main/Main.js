@@ -15,7 +15,7 @@ const Main = ({
                   onUpdateUser, isLoggedIn, petitions, onLikeClick,
                   onDislikeClick, onAddPetition, onMyPetitionsChoose, onActualPetitionsChoose, nickname, isDisplayName
               }) => {
-    
+
     const currentUser = useContext(CurrentUserContext);
     const [isAccountPageOpen, setIsAccountPageOpen] = useState(false)
     const [isLinkSent, setIsLinkSent] = useState(false)
@@ -23,7 +23,7 @@ const Main = ({
     const [isSignUpClicked, setIsSignUpClicked] = useState(false)
     const [isLogOutClicked, setIsLogOutClicked] = useState(false)
     const [values, setValues] = useState({email: ''})
-    
+
     //  console.log(currentUser)
     useEffect(() => {
         if (isLinkSent && !currentUser.uid) {
@@ -36,7 +36,7 @@ const Main = ({
             setButtonMsg(`Зайти на сайт`)
         }
     }, [isLinkSent, currentUser, isLoggedIn, nickname, buttonMsg, isDisplayName])
-    
+
     useEffect(() => {
         if (isSignUpClicked) {
             auth.sendSignInLinkToEmail(values.email, actionCodeSettings)
@@ -51,7 +51,7 @@ const Main = ({
             setIsSignUpClicked(false)
         }
     }, [isSignUpClicked])
-    
+
     useEffect(() => {
         if (isLogOutClicked) {
             auth.signOut().then(function () {
@@ -63,40 +63,41 @@ const Main = ({
             setIsLogOutClicked(false)
         }
     }, [isLogOutClicked])
-    
+
     const actionCodeSettings = {
         url: window.location.href,
         handleCodeInApp: true
     };
-    
+
     const handleAccountBtnClick = () => {
         setIsAccountPageOpen(!isAccountPageOpen)
+
     }
-    
+
     const emailLinkStatus = (props) => {
         setIsLinkSent(props)
     }
-    
+
     const closePopup = () => {
         setIsAccountPageOpen(!isAccountPageOpen)
     }
-    
+
     const handleChange = e => {
         const {name, value} = e.target;
         setValues({...values, [name]: value});
     }
-    
+
     const handleSignUp = (e) => {
         e.preventDefault();
         setIsSignUpClicked(true)
     }
-    
+
     const handleLogout = (e) => {
         e.preventDefault();
         setIsLogOutClicked(true)
         setIsAccountPageOpen(!isAccountPageOpen)
     }
-    
+
     return (
         <>
             <div className="main-page">
