@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import './petition-submit-btn.css'
+import cn from 'classnames'
 
 function PetitionSubmitBtn(props) {
     
@@ -10,36 +11,51 @@ function PetitionSubmitBtn(props) {
         isPictureReady,
         isPetitionPublished,
         isPetitionSubmitted
-    } =  props
+    } = props
     
-    const [petitionBtnTitle, setPetitionBtnTitle] = useState('Мы что-то не учли')
+    const [petitionBtnTitle, setPetitionBtnTitle] = useState('Прояви инициативу')
+    const [isSubmitBtnAvailable, setIsSubmitBtnAvailable] = useState(false)
+    const [justPublished, setJustPublished] = useState(false)
     
-    function handleSubmitPetition(e) {
+    const handleSubmitPetition = e => {
         e.preventDefault();
         getSubmitPetitionEvent(true)
     }
     
-    
     useEffect(() => {
         if (!isTextReadyToRender && !isLoaded) {
-            setPetitionBtnTitle('Создайте петицию')
+            if (justPublished) {
+                setPetitionBtnTitle('Инициатива опубликована на сайте')
+                setTimeout(() => {
+                    setJustPublished(false)
+                    setPetitionBtnTitle('Прояви инициативу')
+                }, 3000)
+            }
         } else if (isTextReadyToRender && !isLoaded && !isPictureReady && !isPetitionPublished) {
-            setPetitionBtnTitle('Петиция готова, но картинки нет -(')
+            setPetitionBtnTitle('А картинка где?')
         } else if (isTextReadyToRender && !isLoaded && isPictureReady && !isPetitionPublished) {
-            setPetitionBtnTitle('Петиция готова, и картинка есть -)')
+            setPetitionBtnTitle('Инициатива готова к публикации')
         } else if (isLoaded) {
-            setPetitionBtnTitle('Загружаем петицию...')
+            setPetitionBtnTitle('Публикуем инициативу...')
         } else if (isPetitionPublished) {
-            setPetitionBtnTitle('Петиция загружена. Ждите ответа...')
+            setJustPublished(true)
         }
     }, [isPetitionSubmitted, isTextReadyToRender, isPictureReady, isLoaded, isPetitionPublished])
     
+    useEffect(() => {
+        if (isTextReadyToRender && isPictureReady) {
+            setIsSubmitBtnAvailable(true)
+        } else {
+            setIsSubmitBtnAvailable(false)
+        }
+    }, [isTextReadyToRender, isPictureReady])
     
     return (
         <button
             type="submit"
-            className="form__submit-button"
+            className={cn("petition-form__submit-btn", {"petition-form__submit-btn_disabled": !isSubmitBtnAvailable})}
             onClick={handleSubmitPetition}
+            disabled={!isSubmitBtnAvailable}
         >
             {petitionBtnTitle}
         </button>

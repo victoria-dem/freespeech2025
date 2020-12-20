@@ -178,3 +178,17 @@
 .form__field_hide {
   display:none;
 }
+.form__checkbox-label{
+  margin-bottom: 20px;
+}
+.form__checkbox{
+  margin-bottom: 20px;
+}
+
+.form__checkbox-label_hide {
+  display:none;
+}
+
+.form__checkbox_hide {
+  display: none;
+}

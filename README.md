@@ -1,3 +1,7 @@
+# freespeech2025
+сайт доступен по адресу freespeech2025.com
+
+=======
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

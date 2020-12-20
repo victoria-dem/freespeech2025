@@ -1,12 +1,20 @@
+import React, {useState} from 'react';
 import HeaderMenu from "../HeaderMenu/HeaderMenu";
-import "./header.css"
+import "./header.css";
 
 
-function Header({onUpdateUser, isLoggedIn}) {
+function Header({handleAccountBtnClick, buttonMsg}) {
+    
+    const [buttonVisibility, setButtonVisibility] = useState("header__account")
+    setTimeout(() => {
+        setButtonVisibility("header__account_visibility")
+    }, 1000)
+    
     return (
         <header className="header">
-            <img src='#' alt="Free speech 2025" className="logo"/>
-            <HeaderMenu onUpdateUser={onUpdateUser} isLoggedIn={isLoggedIn}/>
+            <img src='#' alt="Logo" className="logo"/>
+            <HeaderMenu />
+            <button type='button'  className={buttonVisibility} onClick={handleAccountBtnClick}>{buttonMsg ? buttonMsg : ''}</button>
         </header>
     )
 }

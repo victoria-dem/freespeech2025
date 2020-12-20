@@ -1,19 +1,37 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {storage} from "../../utils/firebase";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
+import deleteButton from '../../images/delete-btn.png'
 
-function PetitionPicture({getPetitionPicData}) {
+function PetitionPicture({getPetitionPicData, url, handleDeletePicture, isPetitionPublished, isPictureReady}) {
     const currentUser = useContext(CurrentUserContext);
     const [pictures, setPictures] = useState([])
     const [isPicturesReady, setIsPicturesReady] = useState(false)
-    const [progressBar, setProgressBar] = useState(0)
     const [isPicUploaded, setIsPicUploaded] = useState(false)
-    const [url, setUrl] = useState('')
     const [picRef, setPicRef] = useState({
         picFullPath: '',
         picName: '',
         picBucket: ''
     })
+    
+    const handleChoosePictures = e => {
+        e.preventDefault();
+        setPictures(e.target.files[0])
+        setIsPicturesReady(true)
+    }
+    
+    const resetFileInput = e => {
+        e.target.value = null;
+        // TODO: избыточный код
+        setPictures([])
+        setIsPicturesReady(false)
+        setIsPicUploaded(false)
+    }
+    
+    const handleDeleteButtonClick = e => {
+        handleDeletePicture()
+        setIsPicturesReady(false)
+    }
     
     useEffect(() => {
         // TODO: подумать надо ли нам сделать внутренний bucket для картинок
@@ -29,47 +47,46 @@ function PetitionPicture({getPetitionPicData}) {
             //  надо попробовать загружать ее под именем timestamp+имя
             thisRef.put(pictures).then(function (snapshot) {
                 setIsPicUploaded(true)
-                const percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                setProgressBar(percentage)
-                // TODO: надо будет попробовать обработать визуализацию загрузки картинки при помощи snapshot.
-                //  В файле test.html есть пример как получить данные для отображения загрузки.
+                // const percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
             }).catch((err) => console.log(err));
         }
-    }, [isPicturesReady])
+    }, [isPicturesReady, pictures])
     
-    // выгрузка картинки
+    // передаем наверх данные для отображения картинки
     useEffect(() => {
         if (isPicUploaded) {
             getPetitionPicData({picRef, isPicUploaded})
-            const storagePic = storage.ref(picRef.picFullPath || '1.jpeg');
-            storagePic
-                .getDownloadURL()
-                .then(function (url) {
-                    // console.log(url);
-                    setUrl(url)
-                })
-                .catch(function (error) {
-                    console.log("error encountered");
-                });
         }
     }, [isPicUploaded])
     
-    function handleChoosePictures(e) {
-        e.preventDefault();
-        setPictures(e.target.files[0])
-        setIsPicturesReady(!isPicturesReady)
-    }
+    useEffect(() => {
+        if (isPetitionPublished) {
+            setPictures([])
+            setIsPicturesReady(false)
+            setIsPicUploaded(false)
+        }
+        
+    }, [isPetitionPublished])
     
     return (
         <div className="petition-form__user-picture">
-            {url ? <img className="photo" src={url} alt={'картинка'}/> : null}
-            <label>
-                <input className="form__input" type="file" id="files" multiple
-                       onChange={handleChoosePictures} name="files[]"
-                       placeholder="Выберите картинку"
-                />
-                <p>Прогресс загрузки картинки: {progressBar}</p>
-            </label>
+            {!currentUser.uid ?
+                <div className="petition-form__anonymous-user-msg">Загружать свои картинки и подавать инициативу могут
+                    подавать только залогиненые пользователи. Линк на логин будет здесь... Пока идите наверх,
+                    пожалуйста.</div> : null}
+            {url ? <img className="petition-form__user-picture" src={url} alt={'картинка'}/> : null}
+            {currentUser.uid && (!isPicturesReady) ? <input className="petition-form__picture"
+                                                            type="file"
+                                                            id="files"
+                                                            onChange={handleChoosePictures} name="files[]"
+                                                            placeholder="placeholder text"
+                                                            onClick={resetFileInput} //reset input
+            /> : null}
+            {currentUser.uid && (!isPicturesReady) ? <label htmlFor="file"
+                                                            className="petition-form__picture-label">{currentUser.uid ? "Загрузите свою картинку" : null}</label> : null}
+            {(isPicturesReady) ? <p className="petition-form__progress-bar">Загружаем картинку....</p> : null}
+            {isPictureReady ? <img className="petition-form__delete-btn" src={deleteButton} alt="delete-btn"
+                                   onClick={handleDeleteButtonClick}/> : null}
         </div>
     )
 }
