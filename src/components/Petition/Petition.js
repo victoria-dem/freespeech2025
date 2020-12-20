@@ -129,15 +129,15 @@ function Petition({onAddPetition}) {
                 setTagText('')
                 setResetTextInputs(!resetTextInputs)
                 setIsPetitionSubmitted(false)
-                setStatus('Просто контролируем каждое ваше нажатие клавиш. Может ну его, связываться с нами ...')
+                // setStatus('Просто контролируем каждое ваше нажатие клавиш. Может ну его, связываться с нами ...')
             }))
         }
     }, [isPetitionSubmitted])
     
     
-    useEffect(() => {
-        isTextReadyToRender && setStatus('Какое замечательное стихотворение мы для вас подыскали!!!')
-    }, [isTextReadyToRender])
+    // useEffect(() => {
+    //     isTextReadyToRender && setStatus('Какое замечательное стихотворение мы для вас подыскали!!!')
+    // }, [isTextReadyToRender])
     
     return (
         <section className="petition-form">
