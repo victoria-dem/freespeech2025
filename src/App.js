@@ -46,7 +46,7 @@ function App() {
     // генерация псевдонима для сайта
     useEffect(() => {
         let user = auth.currentUser;
-        console.log(currentUser);
+        // console.log(currentUser);
         let name;
         if (user != null) {
             name = user.displayName;
@@ -252,9 +252,9 @@ function App() {
                 onCheckLogin={handleCheckLogin}
             />
             <div className="App">
-                {transitions.map(({ item, props, key }) => (
-                    <animated.div key={key} style={props}>
-                        <Switch location={item}>
+                {/*{transitions.map(({ item, props, key }) => (*/}
+                {/*    <animated.div key={key} style={props}>*/}
+                {/*        <Switch location={item}>*/}
                             {/*             Вступительная страница с кнопкой "Поехали"*/}
                             <Route exact path="/">
                                 <IntroPage />
@@ -273,9 +273,9 @@ function App() {
                                     isDisplayName={isDisplayName}
                                 />
                             </Route>
-                        </Switch>
-                    </animated.div>
-                ))}
+                        {/*</Switch>*/}
+                    {/*</animated.div>*/}
+                {/*))}*/}
             </div>
         </CurrentUserContext.Provider>
     );

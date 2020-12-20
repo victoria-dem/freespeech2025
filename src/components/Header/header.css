@@ -6,3 +6,13 @@
     border-bottom: #000 1px solid;
     margin-bottom: 50px;
 }
+
+.header__account{
+  opacity: 0;
+
+}
+
+.header__account_visibility {
+  opacity: 1;
+  transition: opacity 1s linear;
+}

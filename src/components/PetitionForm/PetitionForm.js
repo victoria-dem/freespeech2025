@@ -10,7 +10,7 @@ const validators = {
             return value === ''
         },
         minLength: (value) => {
-            return value.length < 4
+            return value.length < 3
         },
         oneWord: (value) => {
             return !/(^[а-яА-ЯёЁ]+$)|(^\s+)([а-яА-ЯёЁ]+$)|(^\s+)([а-яА-ЯёЁ]+)(\s+$)|(^[а-яА-ЯёЁ]+)(\s+$)/.test(value)
@@ -142,7 +142,7 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
             
         })
             if (errors.petitionTag.minLength && petitionValues.petitionTag) {
-                setErrorMessage({...errorMessage, errorMessageTag: 'Минимальная длина 4 символа'});
+                setErrorMessage({...errorMessage, errorMessageTag: 'Минимальная длина 4 символа. Только русские буквы'});
             } else if (!errors.petitionTag.minLength && errors.petitionTag.oneWord && petitionValues.petitionTag) {
                 setErrorMessage({...errorMessage, errorMessageTag: 'Одно слово русскими буквами'});
             } else if (errors.petition.minLength && petitionValues.petition) {

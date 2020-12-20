@@ -26,10 +26,8 @@ function Auth({ onUpdateUser, isLoggedIn, onCheckLogin }) {
             }
             if (email) {
                 auth.signInWithEmailLink(email, window.location.href).then(function (result) {
-                    // TODO: из-за этой строчки возникает второй рендер
-                    // window.location.href = window.location.href.replace(/\?.*/, '')
-                    // TODO:  эту строчку надо будет восстановить, когда разберемся со вторым рендером
-                    // window.localStorage.removeItem('emailForSignIn');
+                    window.location.href = window.location.href.replace(/\?.*/, '')
+                    window.localStorage.removeItem('emailForSignIn');
                 }).catch(function (error) {
                     console.log(error)
                 });

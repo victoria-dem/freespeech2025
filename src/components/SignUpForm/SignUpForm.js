@@ -6,7 +6,7 @@ import cn from 'classnames';
 
 const SignUpForm = ({onChange, onSignUp, onLogout, isAccountPageOpen}) => {
     const currentUser = useContext(CurrentUserContext);
-
+    // TODO: validation and button disable
     return (
         <div className="authForm">
             <form className="form form-sign-up" name="form-signup" noValidate>
