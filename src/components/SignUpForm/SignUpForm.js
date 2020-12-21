@@ -1,53 +1,86 @@
+import React, {useEffect} from 'react';
 import './sign-up-form.css';
 import signInBtn from '../../images/signInBtn.svg'
+import signInBtnDis from '../../images/signInBtnDis.svg'
 
+const SignUpForm = ({
+                        onChange,
+                        onSignUp,
+                        isAccountPageOpen,
+                        formValidity,
+                        emailErrorText,
+                        setFormValues,
+                        setEmailErrorText,
+                        formValues
+                    }) => {
 
-const SignUpForm = ({onChange, onSignUp}) => {
-    // TODO: validation and button disable
+    useEffect(function clearForm() {
+        setFormValues({
+            email: '',
+            checkBoxOne: false,
+            checkBoxTwo: false,
+            checkBoxThree: false
+        });
+        setEmailErrorText('');
+
+    }, [isAccountPageOpen]);
+
+    const {email, checkBoxOne, checkBoxTwo, checkBoxThree} = formValues;
+    console.log(formValidity)
+    const isSubmitDisabled = !Object.values(formValidity).every(Boolean);
+
     return (
         <form className="form" name="form-signup" noValidate>
             <h2 className="form__heading">Добро пожаловать!</h2>
             <fieldset className="form__fields">
                 <label className="form__field-input">
                     <input
+                        onChange={onChange}
                         className="form__input form__input-first-field"
                         type="email"
-                        id="first-field-place"
+                        id="email"
                         placeholder="E-mail"
                         name="email"
                         minLength="5"
                         maxLength="130"
                         required
                         autoComplete="username"
-                        onChange={onChange}
+                        value={email}
                     />
-                    <span className="form__field"/>
+                    <span className="form__error-text">{emailErrorText}</span>
                 </label>
                 <label>
-                    <input required className="form__checkbox" type="checkbox" id="checkbox-first" name="agree1"
-                           value="checkbox-first"/>
+                    <input onChange={onChange} required className="form__checkbox" type="checkbox" id="checkBoxOne"
+                           name="checkBoxOne"
+                           checked={checkBoxOne}
+                           value="checkBoxOne"/>
                     <span className="form__pseudo-item"></span>
                     <span className="form__checkbox-label">Да, я нахожусь в здравом уме</span><br/>
                 </label>
                 <label>
-                    <input required
+                    <input onChange={onChange} required
                            className="form__checkbox"
-                           type="checkbox" id="checkbox-second" name="agree2" value="checkbox-second"/>
+                           checked={checkBoxTwo}
+                           type="checkbox" id="checkBoxTwo" name="checkBoxTwo" value="checkBoxTwo"/>
                     <span className="form__pseudo-item"></span>
                     <span className="form__checkbox-label">Да, я пытался решить проблему сам</span><br/>
                 </label>
                 <label>
-                    <input required
+                    <input onChange={onChange} required
                            className="form__checkbox"
-                           type="checkbox" id="checkbox-third" name="agree3" value="checkbox-third"/>
+                           checked={checkBoxThree}
+                           type="checkbox" id="checkBoxThree" name="checkBoxThree" value="checkBoxThree"/>
                     <span className="form__pseudo-item"></span>
                     <span className="form__checkbox-label">Нет, я никому больше не расскажу</span><br/>
                 </label>
-                <button type="submit"
-                        className="form__submit-button"
-                        onClick={onSignUp}>
-                    <span className="form__submit-text">Войти</span>
-                    <img src={signInBtn} alt='Button Sign-in'></img>
+                <button
+                    disabled={isSubmitDisabled}
+                    type="submit"
+                    className="form__submit-button"
+                    onClick={onSignUp}>
+                    <span
+                        className={isSubmitDisabled ? "form__submit-text form__submit-text_disabled" : "form__submit-text"}>Войти</span>
+                    <img src={isSubmitDisabled ? signInBtnDis : signInBtn} alt='Button Sign-in'></img>
                 </button>
             </fieldset>
         </form>

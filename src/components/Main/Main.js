@@ -1,5 +1,4 @@
 import './main.css';
-import Auth from '../Auth/Auth';
 import {useState, useContext, useEffect} from "react";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import PetitionCardList from '../PetitionCardList/PetitionCardList';
@@ -22,13 +21,22 @@ const Main = ({
     const [buttonMsg, setButtonMsg] = useState('Кнопка')
     const [isSignUpClicked, setIsSignUpClicked] = useState(false)
     const [isLogOutClicked, setIsLogOutClicked] = useState(false)
-    const [values, setValues] = useState({email: ''})
+    const [values, setValues] = useState({
+        email: '',
+        checkBoxOne: false,
+        checkBoxTwo: false,
+        checkBoxThree: false})
+    const [formValidity, setFormValidity] = useState({
+        emailValid: false,
+        checkBoxOneValid: false,
+        checkBoxTwoValid: false,
+        checkBoxThreeValid: false
+    })
+    const [emailErrorText, setEmailErrorText] = useState('')
     const [popupContain, setPopupContain] = useState('')
 
-    //  console.log(currentUser)
     useEffect(() => {
         if (isLinkSent && !currentUser.uid) {
-            // setIsAccountPageOpen(false)
             setButtonMsg('Проверьте, пожалуйста, почту и кликните на линк в письме')
         } else if (currentUser.uid && nickname !== '') {
             setIsLinkSent(false)
@@ -81,16 +89,35 @@ const Main = ({
 
     const closePopup = () => {
         setIsAccountPageOpen(!isAccountPageOpen)
+        setFormValidity({
+            emailValid: false,
+            checkBoxOneValid: false,
+            checkBoxTwoValid: false,
+            checkBoxThreeValid: false
+        })
     }
 
-    const handleChange = e => {
+    const handleSignUpChange = e => {
         const {name, value} = e.target;
+        console.log(e.target)
         setValues({...values, [name]: value});
+        validation(e);
+    }
+
+    function validation(e) {
+        const validatedFieldName = [e.target.name]+'Valid'
+        setFormValidity (prevData => ({ ...prevData, [validatedFieldName]: e.target.validity.valid}))
+        if (e.target.name === 'email' && !e.target.validity.valid) {
+            setEmailErrorText( "Введите правильный почтовый адрес")
+        } else if(e.target.name === 'email' && e.target.validity.valid){
+            setEmailErrorText( "")
+        }
     }
 
     const handleSignUp = (e) => {
         e.preventDefault();
         setIsSignUpClicked(true)
+
         setPopupContain("sign-in-success")
     }
 
@@ -109,17 +136,18 @@ const Main = ({
                                   onMyPetitionsChoose={onMyPetitionsChoose}
                                 onActualPetitionsChoose={onActualPetitionsChoose} isLoggedIn={isLoggedIn}/>
                 <Petition onAddPetition={onAddPetition}/>
-                {/* <Auth
-                    onUpdateUser={onUpdateUser}
-                    isLoggedIn={isLoggedIn}
-                /> */}
                 <Popup
                     onClose={closePopup}
-                    onChange={handleChange}
+                    onChange={handleSignUpChange}
                     onSignUp={handleSignUp}
                     onLogout={handleLogout}
                     isAccountPageOpen={isAccountPageOpen}
                     popupContain={popupContain}
+                    formValidity={formValidity}
+                    emailErrorText={emailErrorText}
+                    setFormValues={setValues}
+                    setEmailErrorText={setEmailErrorText}
+                    formValues={values}
                 />
                 <Footer/>
             </div>

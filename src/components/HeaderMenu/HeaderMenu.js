@@ -5,11 +5,6 @@ function HeaderMenu() {
         <>
             <nav>
                 <ul className="header__list">
-                    {/*<li className="header__list-item">*/}
-                    {/*    <a className="header__list-link" href="#"*/}
-                    {/*    >Статистика</a*/}
-                    {/*    >*/}
-                    {/*</li>*/}
                     <li className="header__list-item">
                         <a className="header__list-link" href="#petition-card-list"
                         >Инициативы</a
@@ -17,7 +12,7 @@ function HeaderMenu() {
                     </li>
                     <li className="header__list-item">
                         <a className="header__list-link" href="#petition-form"
-                        >Высказаться</a
+                        >Создать инициативу</a
                         >
                     </li>
                     {/*<li className="header__list-item">*/}
