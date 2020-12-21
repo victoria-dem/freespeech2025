@@ -23,11 +23,12 @@ const Main = ({
     const [isSignUpClicked, setIsSignUpClicked] = useState(false)
     const [isLogOutClicked, setIsLogOutClicked] = useState(false)
     const [values, setValues] = useState({email: ''})
+    const [popupContain, setPopupContain] = useState('')
 
     //  console.log(currentUser)
     useEffect(() => {
         if (isLinkSent && !currentUser.uid) {
-            setIsAccountPageOpen(false)
+            // setIsAccountPageOpen(false)
             setButtonMsg('Проверьте, пожалуйста, почту и кликните на линк в письме')
         } else if (currentUser.uid && nickname !== '') {
             setIsLinkSent(false)
@@ -70,8 +71,8 @@ const Main = ({
     };
 
     const handleAccountBtnClick = () => {
-        setIsAccountPageOpen(!isAccountPageOpen)
-
+        setIsAccountPageOpen(!isAccountPageOpen);
+        currentUser.uid ?  setPopupContain("sign-out") : setPopupContain("sign-in");
     }
 
     const emailLinkStatus = (props) => {
@@ -90,6 +91,7 @@ const Main = ({
     const handleSignUp = (e) => {
         e.preventDefault();
         setIsSignUpClicked(true)
+        setPopupContain("sign-in-success")
     }
 
     const handleLogout = (e) => {
@@ -117,6 +119,7 @@ const Main = ({
                     onSignUp={handleSignUp}
                     onLogout={handleLogout}
                     isAccountPageOpen={isAccountPageOpen}
+                    popupContain={popupContain}
                 />
                 <Footer/>
             </div>

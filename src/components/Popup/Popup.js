@@ -1,6 +1,7 @@
 import './popup.css'
-import React, {useState, useEffect} from 'react';
 import SignUpForm from "../SignUpForm/SignUpForm";
+import SignOutForm from "../SignOutForm/SignOutForm";
+import SignInSuccessForm from "../SignInSuccessForm/SignInSuccessForm";
 
 function Popup(props) {
     const {
@@ -9,6 +10,7 @@ function Popup(props) {
         onSignUp,
         onLogout,
         isAccountPageOpen,
+        popupContain
     } = props
     // const [scrollPosition, setScrollPosition] = useState(0);
     // const handleScroll = () => {
@@ -27,17 +29,28 @@ function Popup(props) {
     //     marginTop: scrollPosition + (window.innerHeight / 100) * 20 + 'px'
     // }
 
+   function renderInsightPopup(popupContain) {
+        switch (popupContain) {
+            case 'sign-in':
+                return <SignUpForm
+                    onChange={onChange}
+                    onSignUp={onSignUp}
+                />;
+            case 'sign-out':
+                return <SignOutForm onLogout={onLogout}/>;
+            case 'sign-in-success':
+                return <SignInSuccessForm onLogout={onLogout}/>;
+            default:
+               return <></>;
+        }
+    }
+
     return (
         <div className={isAccountPageOpen ? `popup  popup_opened` : `popup`}>
             {/*<div style={styleContainer} className="popup__container">*/}
             <div className="popup__container">
                 <button onClick={onClose} className="popup__button-close"/>
-                <SignUpForm
-                    onChange={onChange}
-                    onSignUp={onSignUp}
-                    onLogout={onLogout}
-                    isAccountPageOpen={isAccountPageOpen}
-                />
+                {renderInsightPopup(popupContain)}
             </div>
         </div>
     )

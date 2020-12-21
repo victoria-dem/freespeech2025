@@ -16,9 +16,6 @@
   }
 }
 
-
-
-
 .form__text-email {
   display: inline-block
 }
@@ -31,46 +28,36 @@
 .form__submit-button {
   border: 0;
   width: 358px;
-  height: 50.15px;
-  background: #6a6a6a;
-  color: #fff;
-  border-radius: 2px;
+  height: 50px;
+  background: transparent;
   margin: 20px 0 37px 0;
   padding: 0;
-  text-align: center;
   cursor: pointer;
   z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .form__submit-button:hover {
   opacity: 0.8;
-  transition: 2s ease;
+  transition: opacity 0.4s ease-out;
 }
 
-@media screen and (max-width: 580px) {
-  .form__submit-button {
-    width: 200px;
-    height: 40px;
-  }
+.form__submit-text {
+  margin-right: 10px;
+  font-weight: bold;
 }
-
-/*.form__submit-button_position_top {*/
-/*  margin: 20px 0 0 0;*/
-/*}*/
-
-/*.form__submit-button_position_bottom {*/
-/*  margin: 35px 0 37px 0;*/
-/*}*/
 
 .form__submit-button_disabled {
-  pointer-events: none;
-  user-select: none;
-  opacity: 0.2;
-  color: #000;
-  background: #e5e5e5;
-  border: 1px solid #000;
-  box-sizing: border-box;
-  border-radius: 2px;
+  /*pointer-events: none;*/
+  /*user-select: none;*/
+  /*opacity: 0.2;*/
+  /*color: #000;*/
+  /*background: #e5e5e5;*/
+  /*border: 1px solid #000;*/
+  /*box-sizing: border-box;*/
+  /*border-radius: 2px;*/
 }
 
 .form__input {
@@ -179,7 +166,6 @@
   display: inline-block;
 }
 .form__checkbox{
-  margin-bottom: 20px;
   position: absolute;
   width: 1px;
   height: 1px;
@@ -187,18 +173,17 @@
   clip: rect(0 0 0 0);
 }
 
+.form__checkbox:hover {
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.4s ease-out;
+}
+
 .form__checkbox:checked + .form__pseudo-item {
   background-image: url("../../images/form_rectangle_black.svg");
   background-repeat: no-repeat;
 }
 
-.form__checkbox-label_hide {
-  display:none;
-}
-
-.form__checkbox_hide {
-  display: none;
-}
 
 .form__pseudo-item {
   display: inline-block;
@@ -210,13 +195,4 @@
   background-repeat: no-repeat;
 }
 
-/*.form__pseudo-item_type_radio {*/
-/*  border-radius: 50%;*/
-/*}*/
 
-/*.form__item_el_number-of-columns:checked + .form__pseudo-item_type_radio{*/
-/*  background-image: url("https://code.s3.yandex.net/web-code/plane.svg");*/
-/*}*/
-/*.form__item_el_extra-options:checked + .form__pseudo-item_type_checkbox{*/
-/*  background-image: url("https://code.s3.yandex.net/web-code/tick.svg");*/
-/*}*/
