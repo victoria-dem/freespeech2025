@@ -1,11 +1,11 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect, useContext, useRef} from 'react';
 import {storage} from "../../utils/firebase";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import deleteButton from '../../images/delete-btn.png'
 
 function PetitionPicture({getPetitionPicData, url, handleDeletePicture, isPetitionPublished, isPictureReady}) {
     const currentUser = useContext(CurrentUserContext);
-    const [pictures, setPictures] = useState([])
+    const [pictures, setPictures] = useState({})
     const [isPicturesReady, setIsPicturesReady] = useState(false)
     const [isPicUploaded, setIsPicUploaded] = useState(false)
     const [picRef, setPicRef] = useState({
@@ -13,12 +13,20 @@ function PetitionPicture({getPetitionPicData, url, handleDeletePicture, isPetiti
         picName: '',
         picBucket: ''
     })
-    
+    const hiddenFileInput = useRef(null);
+    console.log(pictures===true, pictures.length, pictures, Array.isArray(pictures))
     const handleChoosePictures = e => {
         e.preventDefault();
+    
+        // const fileUploaded = e.target.files[0]
+        
         setPictures(e.target.files[0])
         setIsPicturesReady(true)
     }
+    
+    // useEffect(()=>{
+    //     if
+    // }, [pictures])
     
     const resetFileInput = e => {
         e.target.value = null;
@@ -68,6 +76,13 @@ function PetitionPicture({getPetitionPicData, url, handleDeletePicture, isPetiti
         
     }, [isPetitionPublished])
     
+    const handlePictureUpload =(e) => {
+        console.log('handlePictureUpload')
+        hiddenFileInput.current.click();
+        
+    }
+    
+    
     return (
         <div className="petition-form__user-picture">
             {!currentUser.uid ?
@@ -75,7 +90,10 @@ function PetitionPicture({getPetitionPicData, url, handleDeletePicture, isPetiti
                     подавать только залогиненые пользователи. Линк на логин будет здесь... Пока идите наверх,
                     пожалуйста.</div> : null}
             {url ? <img className="petition-form__user-picture" src={url} alt={'картинка'}/> : null}
+            {currentUser.uid && (!isPicturesReady) ? <button className="petition-form__button"  onClick={handlePictureUpload}>Загрузите картинку</button>
+             : null}
             {currentUser.uid && (!isPicturesReady) ? <input className="petition-form__picture"
+                                                            ref={hiddenFileInput}
                                                             type="file"
                                                             id="files"
                                                             onChange={handleChoosePictures} name="files[]"
