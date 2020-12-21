@@ -15,7 +15,7 @@ const Main = ({
                   onUpdateUser, isLoggedIn, petitions, onLikeClick,
                   onDislikeClick, onAddPetition, onMyPetitionsChoose, onActualPetitionsChoose, nickname, isDisplayName
               }) => {
-    
+
     const currentUser = useContext(CurrentUserContext);
     const [isAccountPageOpen, setIsAccountPageOpen] = useState(false)
     const [isLinkSent, setIsLinkSent] = useState(false)
@@ -23,11 +23,12 @@ const Main = ({
     const [isSignUpClicked, setIsSignUpClicked] = useState(false)
     const [isLogOutClicked, setIsLogOutClicked] = useState(false)
     const [values, setValues] = useState({email: ''})
-    
+    const [popupContain, setPopupContain] = useState('')
+
     //  console.log(currentUser)
     useEffect(() => {
         if (isLinkSent && !currentUser.uid) {
-            setIsAccountPageOpen(false)
+            // setIsAccountPageOpen(false)
             setButtonMsg('Проверьте, пожалуйста, почту и кликните на линк в письме')
         } else if (currentUser.uid && nickname !== '') {
             setIsLinkSent(false)
@@ -36,7 +37,7 @@ const Main = ({
             setButtonMsg(`Зайти на сайт`)
         }
     }, [isLinkSent, currentUser, isLoggedIn, nickname, buttonMsg, isDisplayName])
-    
+
     useEffect(() => {
         if (isSignUpClicked) {
             auth.sendSignInLinkToEmail(values.email, actionCodeSettings)
@@ -51,7 +52,7 @@ const Main = ({
             setIsSignUpClicked(false)
         }
     }, [isSignUpClicked])
-    
+
     useEffect(() => {
         if (isLogOutClicked) {
             auth.signOut().then(function () {
@@ -63,40 +64,42 @@ const Main = ({
             setIsLogOutClicked(false)
         }
     }, [isLogOutClicked])
-    
+
     const actionCodeSettings = {
         url: window.location.href,
         handleCodeInApp: true
     };
-    
+
     const handleAccountBtnClick = () => {
-        setIsAccountPageOpen(!isAccountPageOpen)
+        setIsAccountPageOpen(!isAccountPageOpen);
+        currentUser.uid ?  setPopupContain("sign-out") : setPopupContain("sign-in");
     }
-    
+
     const emailLinkStatus = (props) => {
         setIsLinkSent(props)
     }
-    
+
     const closePopup = () => {
         setIsAccountPageOpen(!isAccountPageOpen)
     }
-    
+
     const handleChange = e => {
         const {name, value} = e.target;
         setValues({...values, [name]: value});
     }
-    
+
     const handleSignUp = (e) => {
         e.preventDefault();
         setIsSignUpClicked(true)
+        setPopupContain("sign-in-success")
     }
-    
+
     const handleLogout = (e) => {
         e.preventDefault();
         setIsLogOutClicked(true)
         setIsAccountPageOpen(!isAccountPageOpen)
     }
-    
+
     return (
         <>
             <div className="main-page">
@@ -116,6 +119,7 @@ const Main = ({
                     onSignUp={handleSignUp}
                     onLogout={handleLogout}
                     isAccountPageOpen={isAccountPageOpen}
+                    popupContain={popupContain}
                 />
                 <Footer/>
             </div>

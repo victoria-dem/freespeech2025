@@ -142,44 +142,36 @@ function Petition({onAddPetition}) {
     return (
         <section className="petition-form">
             <h1 id="petition-form" className="petition-form__title">Создать инициативу</h1>
-            <div className="petition-form__content">
-                <div className="petition-form__steps">
-                    <PetitionSteps/>
-                </div>
-                <div className="petition-form__input">
-                    <PetitionForm
-                        getPetitionTextData={getPetitionTextData}
-                        resetTextInputs={resetTextInputs}
-                    />
-                    <PetitionPicture
-                        getPetitionPicData={getPetitionPicData}
-                        url={url}
-                        handleDeletePicture={handleDeletePicture}
-                        isPetitionPublished={isPetitionPublished}
-                        isPictureReady={isPictureReady}/>
-                    <PetitionDefaultPictures
-                        getDefaultPetitionPicData={getDefaultPetitionPicData}
-                        isTextReadyToRender={isTextReadyToRender}/>
-                    <PetitionSubmitBtn
-                        getSubmitPetitionEvent={getSubmitPetitionEvent}
-                        isTextReadyToRender={isTextReadyToRender}
-                        isLoaded={isLoaded}
-                        isPictureReady={isPictureReady}
-                        isPetitionPublished={isPetitionPublished}
-                        isPetitionSubmitted={isPetitionSubmitted}
-                    />
-                </div>
-                <div className="petition-form__output">
-                    <PetitionTextPreview
-                        poemText={poemText}
-                        isTextReadyToRender={isTextReadyToRender}
-                    />
-                    {/*TODO: решаем надо нам это или нет*/}
-                    {/*<PetitionStatus*/}
-                    {/*    status={status}*/}
-                    {/*/>*/}
-                </div>
+            <div className="petition-form__steps">
+                <PetitionSteps/>
             </div>
+            <div className="petition-form__input">
+                <PetitionForm
+                    getPetitionTextData={getPetitionTextData}
+                    resetTextInputs={resetTextInputs}
+                />
+                <PetitionPicture
+                    getPetitionPicData={getPetitionPicData}
+                    url={url}
+                    handleDeletePicture={handleDeletePicture}
+                    isPetitionPublished={isPetitionPublished}
+                    isPictureReady={isPictureReady}/>
+                <PetitionDefaultPictures
+                    getDefaultPetitionPicData={getDefaultPetitionPicData}
+                    isTextReadyToRender={isTextReadyToRender}/>
+            </div>
+            <PetitionSubmitBtn
+                getSubmitPetitionEvent={getSubmitPetitionEvent}
+                isTextReadyToRender={isTextReadyToRender}
+                isLoaded={isLoaded}
+                isPictureReady={isPictureReady}
+                isPetitionPublished={isPetitionPublished}
+                isPetitionSubmitted={isPetitionSubmitted}
+            />
+            <PetitionTextPreview
+                poemText={poemText}
+                isTextReadyToRender={isTextReadyToRender}
+            />
         </section>
     )
 }
