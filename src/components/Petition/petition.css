@@ -149,6 +149,8 @@
 
 .petition-form__form-input_size {
   height: 187px;
+  resize: none;
+
 }
 
 .petition-form__form-error {
