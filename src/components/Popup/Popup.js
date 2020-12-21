@@ -10,7 +10,12 @@ function Popup(props) {
         onSignUp,
         onLogout,
         isAccountPageOpen,
-        popupContain
+        popupContain,
+        formValidity,
+        emailErrorText,
+        setFormValues,
+        setEmailErrorText,
+        formValues
     } = props
     // const [scrollPosition, setScrollPosition] = useState(0);
     // const handleScroll = () => {
@@ -35,6 +40,12 @@ function Popup(props) {
                 return <SignUpForm
                     onChange={onChange}
                     onSignUp={onSignUp}
+                    isAccountPageOpen={isAccountPageOpen}
+                    formValidity={formValidity}
+                    emailErrorText={emailErrorText}
+                    setFormValues={setFormValues}
+                    setEmailErrorText={setEmailErrorText}
+                    formValues={formValues}
                 />;
             case 'sign-out':
                 return <SignOutForm onLogout={onLogout}/>;
