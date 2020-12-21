@@ -1,18 +1,48 @@
 .header {
-    display: flex;
+    display: grid;
     width: 100%;
     justify-content: space-between;
     align-items: center;
     border-bottom: #000 1px solid;
     margin-bottom: 50px;
+    grid-template-columns: 76px 3fr 1fr 40px;
 }
 
 .header__account{
   opacity: 0;
-
 }
 
 .header__account_visibility {
   opacity: 1;
   transition: opacity 1s linear;
+}
+
+.header__button {
+    outline: none;
+    background-color: #fff;
+    border: none;
+}
+
+.header__button:hover {
+    opacity: 0.8;
+    transition: opacity 0.4s ease-out;
+    cursor: pointer;
+}
+.header__button:focus {
+    outline: none;
+}
+
+.header__nickname-title {
+    font-size: smaller;
+    margin: 0;
+    padding: 10px 5px 0 5px;
+    text-align: right;
+}
+.header__nickname {
+    margin: 0;
+    padding: 5px 5px 5px 5px;
+    text-align: right;
+}
+.header__nickname-content {
+    justify-self: end;
 }

@@ -18,7 +18,7 @@ const Main = ({
     const currentUser = useContext(CurrentUserContext);
     const [isAccountPageOpen, setIsAccountPageOpen] = useState(false)
     const [isLinkSent, setIsLinkSent] = useState(false)
-    const [buttonMsg, setButtonMsg] = useState('Кнопка')
+    // const [buttonMsg, setButtonMsg] = useState('Кнопка')
     const [isSignUpClicked, setIsSignUpClicked] = useState(false)
     const [isLogOutClicked, setIsLogOutClicked] = useState(false)
     const [values, setValues] = useState({
@@ -35,16 +35,16 @@ const Main = ({
     const [emailErrorText, setEmailErrorText] = useState('')
     const [popupContain, setPopupContain] = useState('')
 
-    useEffect(() => {
-        if (isLinkSent && !currentUser.uid) {
-            setButtonMsg('Проверьте, пожалуйста, почту и кликните на линк в письме')
-        } else if (currentUser.uid && nickname !== '') {
-            setIsLinkSent(false)
-            setButtonMsg(` Ваш псевдоним на сайте: ${nickname}`)
-        } else {
-            setButtonMsg(`Зайти на сайт`)
-        }
-    }, [isLinkSent, currentUser, isLoggedIn, nickname, buttonMsg, isDisplayName])
+    // useEffect(() => {
+    //     if (isLinkSent && !currentUser.uid) {
+    //         setButtonMsg('Проверьте, пожалуйста, почту и кликните на линк в письме')
+    //     } else if (currentUser.uid && nickname !== '') {
+    //         setIsLinkSent(false)
+    //         setButtonMsg(` Ваш псевдоним на сайте: ${nickname}`)
+    //     } else {
+    //         setButtonMsg(`Зайти на сайт`)
+    //     }
+    // }, [isLinkSent, currentUser, isLoggedIn, nickname, buttonMsg, isDisplayName])
 
     useEffect(() => {
         if (isSignUpClicked) {
@@ -99,7 +99,6 @@ const Main = ({
 
     const handleSignUpChange = e => {
         const {name, value} = e.target;
-        console.log(e.target)
         setValues({...values, [name]: value});
         validation(e);
     }
@@ -117,7 +116,6 @@ const Main = ({
     const handleSignUp = (e) => {
         e.preventDefault();
         setIsSignUpClicked(true)
-
         setPopupContain("sign-in-success")
     }
 
@@ -130,7 +128,7 @@ const Main = ({
     return (
         <>
             <div className="main-page">
-                <Header handleAccountBtnClick={handleAccountBtnClick} buttonMsg={buttonMsg}/>
+                <Header handleAccountBtnClick={handleAccountBtnClick} nickname={nickname}/>
                 <Banner/>
                 <PetitionCardList petitions={petitions} onLikeClick={onLikeClick} onDislikeClick={onDislikeClick}
                                   onMyPetitionsChoose={onMyPetitionsChoose}

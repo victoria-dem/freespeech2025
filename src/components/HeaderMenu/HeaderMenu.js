@@ -2,7 +2,6 @@ import './header-menu.css';
 
 function HeaderMenu() {
     return (
-        <>
             <nav>
                 <ul className="header__list">
                     <li className="header__list-item">
@@ -20,7 +19,6 @@ function HeaderMenu() {
                     {/*</li>*/}
                 </ul>
             </nav>
-        </>
     )
 }
 
