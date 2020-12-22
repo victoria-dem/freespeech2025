@@ -198,7 +198,7 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
                             className="petition-form__form-input"
                             type="text"
                             id="petition-tag"
-                            placeholder="* Главное слово вашей инициативы"
+                            placeholder="* Ключевое слово"
                             name="petitionTag"
                             minLength="4"
                             maxLength="20"
@@ -215,10 +215,10 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
                         <textarea
                             className="petition-form__form-input petition-form__form-input_size"
                             id="petition"
-                            placeholder="* Опишите подробно что вас волнует"
+                            placeholder="* Текст инициативы ..."
                             name="petition"
                             minLength="10"
-                            maxLength="130"
+                            maxLength="140"
                             required
                             onChange={handleChange}
                             value={petitionValues.petition}
