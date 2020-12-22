@@ -44,7 +44,7 @@ function App() {
         leave: {opacity: 0, transform: "translate(-50%, 0)", display: "none"}
     });
     
-    console.log(tempNickname, nickname)
+    // console.log(tempNickname, nickname)
     
     // генерация псевдонима на всякий случай
     useEffect(()=>(
