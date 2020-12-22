@@ -11,6 +11,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { auth } from './utils/firebase';
 import Auth from './components/Auth/Auth';
 import getNicknames from "./utils/getNicknames";
+import PetitionsPage from './components/PetitionsPage/PetitionsPage';
 
 // import manageJson from "./utils/manageJson"   /* util for loading json to firebase */
 // import manageJson from "./utils/loadAuthorData"   /* util for loading json to firebase */
@@ -33,6 +34,8 @@ function App() {
     const [petitions, setPetitions] = useState([]);
     const [areMyPetitionsChosen, setAreMyPetitionsChosen] = useState(false);
     const [myPetitions, setMyPetitions] = useState([]);
+    const [allPetitions, setAllPetitions] = useState([]);
+    const [allPetitionsChosen, setAllPetitionsChosen] = useState(false);
     const [hasCheckedLogin, setHasCheckedLogin] = useState(false);
     const [nickname, setNickname] = useState('');
     const [tempNickname, setTempNickname] = useState('');
@@ -93,46 +96,29 @@ function App() {
         setHasCheckedLogin(true);
     }
 
-    const setPetitionList = (petitionsToRender) => {
-        petitionsToRender.forEach(doc => {
-            setPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
-        })
-    }
+    // const setPetitionList = (petitionsToRender) => {
+    //     petitionsToRender.forEach(doc => {
+    //         setPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
+    //     })
+    // }
 
     //получить последние по дате публикации 6 петиций и добавить их в стейт petitions
     const setLatestPetitions = () => {
         //только после проверки на авторизацию
         if (hasCheckedLogin) {
+            setPetitions([]);
             //если залогинен, то отображаем и последние 6 петиций и последние 3 карточки пользователя
             if (isUserLoggedIn) {
-                Promise.all([
-                    db.collection("petitions")
-                        .where("uid", "==", currentUser.uid)
-                        .orderBy("timestamp", "desc")
-                        .limit(3)
-                        .get(),
-                    db.collection('petitions')
-                        .where("isPublic", "==", true)
-                        .orderBy("timestamp", "desc")
-                        .limit(6)
-                        .get()])
-                    .then((values) => {
-                        const [curUserPetitions, latestPetitions] = values;
-                        // if (isUserLoggedIn) {
-                        setPetitions([]);
-                        curUserPetitions.forEach(doc => {
-                            if (!doc.data().isPublic) {
+                db.collection("petitions")
+                    .orderBy("timestamp", "desc")
+                    .limit(10)
+                    .get()
+                    .then((petitions) => {
+                        petitions.forEach((doc) => {
+                            if (doc.data().isPublic || (currentUser.uid && doc.data().uid === currentUser.uid)) {
                                 setPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
                             }
-                            setMyPetitions(petitions => [{ data: doc.data(), id: doc.id }, ...petitions]);
-                            setMyPetitions(myPetitions.filter((p) => p.id !== doc.id));
-
                         })
-                        // }
-                        // setPetitionList(latestPetitions);
-                        latestPetitions.forEach(doc => {
-                            setPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
-                        });
                     })
                     .catch(err => console.log(err));
             } else {
@@ -143,8 +129,10 @@ function App() {
                     .limit(6)
                     .get()
                     .then(newPetitions => {
-                        setPetitions([]);
-                        setPetitionList(newPetitions);
+                        
+                        newPetitions.forEach((doc) => {
+                            setPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
+                        })
                     })
             }
         }
@@ -152,14 +140,16 @@ function App() {
 
     //получить петиции текущего юзера и добавить их в стейт myPetitions
     const setUserPetitions = () => {
+        setMyPetitions([]);
         db.collection("petitions")
             .where("uid", "==", currentUser.uid)
             .orderBy("timestamp", "desc")
             .get()
-            .then((myPetitions) => {
-                myPetitions.forEach(doc => {
+            .then((petitions) => {
+                petitions.forEach(doc => {
                     setMyPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
-                });
+                    //setMyPetitions([{ data: doc.data(), id: doc.id },...myPetitions]);
+                })
             })
             .catch((err) => console.log(err));
     }
@@ -173,9 +163,28 @@ function App() {
         setLatestPetitions();
     }, [hasCheckedLogin, isUserLoggedIn]);
 
+    //получить все петиции из базы данных для страницы PetitionsPage
+    useEffect(() => {
+        if (hasCheckedLogin) {
+            setAllPetitions([]);
+            db.collection("petitions")
+                .orderBy("timestamp", "desc")
+                .get()
+                .then((petitions) => {
+                    petitions.forEach(doc => {
+                        if (doc.data().isPublic || (currentUser.uid && doc.data().uid === currentUser.uid)) {
+                            setAllPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
+                        }
+                    });
+                    console.log(petitions.length)
+                })
+        }
+    }, [hasCheckedLogin, isUserLoggedIn]);
+
     //добавление новой петиции на страницу
     const handleAddPetition = (petition) => {
         setPetitions([petition, ...petitions]);
+        //setAllPetitions([petition, ...allPetitions]);
     }
 
     //добавление петиции после обновления инфо в ней (лайки)
@@ -187,6 +196,7 @@ function App() {
                 setMyPetitions(myPetitions.map((p) => p.id === petition.id ? { data: doc.data(), id: doc.id } : p));
             }
 
+            setAllPetitions(allPetitions.map((p) => p.id === petition.id ? { data: doc.data(), id: doc.id } : p));
         });
 
     //лайк петиции
@@ -254,6 +264,15 @@ function App() {
         setLatestPetitions();
     }
 
+    const handleAllPetitionsChoose = () => {
+        setAllPetitionsChosen(true);
+    }
+
+    const handleReturn = () => {
+        setAllPetitionsChosen(false);
+        setAreMyPetitionsChosen(false);
+    }
+
     return (
         <CurrentUserContext.Provider value={currentUser}>
             <Auth
@@ -279,8 +298,13 @@ function App() {
                         onAddPetition={handleAddPetition}
                         onMyPetitionsChoose={handleMyPetitionsChoose}
                         onActualPetitionsChoose={handleActualPetitionsChoose}
-                        nickname={nickname}
+                        nickname={nickname} onAllPetitionsChoose={handleAllPetitionsChoose}
                     />
+                </Route>
+                <Route exact path="/petitions">
+                    <PetitionsPage petitions={allPetitions} onLikeClick={handleLikeClick}
+                        onDislikeClick={handleDislikeClick} isLoggedIn={isUserLoggedIn} nickname={nickname}
+                        onReturn={handleReturn} />
                 </Route>
                 {/*</Switch>*/}
                 {/*</animated.div>*/}

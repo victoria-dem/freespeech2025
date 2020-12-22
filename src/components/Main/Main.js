@@ -1,19 +1,20 @@
 import './main.css';
-import {useState, useContext, useEffect} from "react";
-import {CurrentUserContext} from "../../contexts/CurrentUserContext";
+import { useState, useContext, useEffect } from "react";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import PetitionCardList from '../PetitionCardList/PetitionCardList';
 import Header from "../Header/Header";
 import Popup from "../Popup/Popup";
 import Petition from "../Petition/Petition";
-import {auth} from "../../utils/firebase";
+import { auth } from "../../utils/firebase";
 import Footer from '../Footer/Footer';
 import Banner from "../Banner/Banner";
 
 
 const Main = ({
-                  onUpdateUser, isLoggedIn, petitions, onLikeClick,
-                  onDislikeClick, onAddPetition, onMyPetitionsChoose, onActualPetitionsChoose, nickname
-              }) => {
+    onUpdateUser, isLoggedIn, petitions, onLikeClick,
+    onDislikeClick, onAddPetition, onMyPetitionsChoose, onActualPetitionsChoose,
+    nickname, onAllPetitionsChoose
+}) => {
 
     const currentUser = useContext(CurrentUserContext);
     const [isAccountPageOpen, setIsAccountPageOpen] = useState(false)
@@ -25,7 +26,8 @@ const Main = ({
         email: '',
         checkBoxOne: false,
         checkBoxTwo: false,
-        checkBoxThree: false})
+        checkBoxThree: false
+    })
     const [formValidity, setFormValidity] = useState({
         emailValid: false,
         checkBoxOneValid: false,
@@ -69,7 +71,7 @@ const Main = ({
 
     const handleAccountBtnClick = () => {
         setIsAccountPageOpen(!isAccountPageOpen);
-        currentUser.uid ?  setPopupContain("sign-out") : setPopupContain("sign-in");
+        currentUser.uid ? setPopupContain("sign-out") : setPopupContain("sign-in");
     }
 
     const emailLinkStatus = (props) => {
@@ -87,18 +89,18 @@ const Main = ({
     }
 
     const handleSignUpChange = e => {
-        const {name, value} = e.target;
-        setValues({...values, [name]: value});
+        const { name, value } = e.target;
+        setValues({ ...values, [name]: value });
         validation(e);
     }
 
     function validation(e) {
-        const validatedFieldName = [e.target.name]+'Valid'
-        setFormValidity (prevData => ({ ...prevData, [validatedFieldName]: e.target.validity.valid}))
+        const validatedFieldName = [e.target.name] + 'Valid'
+        setFormValidity(prevData => ({ ...prevData, [validatedFieldName]: e.target.validity.valid }))
         if (e.target.name === 'email' && !e.target.validity.valid) {
-            setEmailErrorText( "Введите правильный почтовый адрес")
-        } else if(e.target.name === 'email' && e.target.validity.valid){
-            setEmailErrorText( "")
+            setEmailErrorText("Введите правильный почтовый адрес")
+        } else if (e.target.name === 'email' && e.target.validity.valid) {
+            setEmailErrorText("")
         }
     }
 
@@ -117,12 +119,13 @@ const Main = ({
     return (
         <>
             <div className="main-page">
-                <Header handleAccountBtnClick={handleAccountBtnClick} nickname={nickname}/>
-                <Banner/>
+                <Header handleAccountBtnClick={handleAccountBtnClick} nickname={nickname} />
+                <Banner />
                 <PetitionCardList petitions={petitions} onLikeClick={onLikeClick} onDislikeClick={onDislikeClick}
-                                  onMyPetitionsChoose={onMyPetitionsChoose}
-                                onActualPetitionsChoose={onActualPetitionsChoose} isLoggedIn={isLoggedIn}/>
-                <Petition onAddPetition={onAddPetition}/>
+                    onMyPetitionsChoose={onMyPetitionsChoose} nickname={nickname}
+                    onActualPetitionsChoose={onActualPetitionsChoose} isLoggedIn={isLoggedIn}
+                    onAllPetitionsChoose={onAllPetitionsChoose} />
+                <Petition onAddPetition={onAddPetition} />
                 <Popup
                     onClose={closePopup}
                     onChange={handleSignUpChange}
@@ -136,7 +139,7 @@ const Main = ({
                     setEmailErrorText={setEmailErrorText}
                     formValues={values}
                 />
-                <Footer/>
+                <Footer />
             </div>
         </>
     );

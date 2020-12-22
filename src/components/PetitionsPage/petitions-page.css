@@ -1,0 +1,33 @@
+.petitions-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.petitions-page__petitions {
+  display: grid;
+  grid-gap: 40px;
+
+}
+
+.petitions-page__title {
+  font-weight: 500;
+  font-style: normal;
+  font-size: 40px;
+  line-height: 47px;
+  color: black;
+  padding: 60px 0 60px;
+  margin: 0;
+}
+
+.petitions-page__return-link {
+  text-align: left;
+  text-decoration: none;
+  color: black;
+  font-size: 24px;
+  line-height: 1.2;
+  margin: 0;
+  position: fixed;
+  top:40px;
+  left: 40px;
+}

@@ -8,7 +8,7 @@ import './petition-card-list.css';
 import { NavLink } from 'react-router-dom';
 
 const PetitionCardList = ({ petitions, onLikeClick, onDislikeClick,
-  onMyPetitionsChoose, onActualPetitionsChoose, isLoggedIn }) => {
+  onMyPetitionsChoose, nickname, onActualPetitionsChoose, isLoggedIn, onAllPetitionsChoose }) => {
   const carousel = useRef();
   const [isActButtonClicked, setIsActButtonClicked] = useState(true);
   const [isMyButtonClicked, setIsMyButtonClicked] = useState(false);
@@ -28,7 +28,7 @@ const PetitionCardList = ({ petitions, onLikeClick, onDislikeClick,
   
   return (
     <div className="petition-card-list">
-      <h2>
+      <h2 className="petion-card-list__title">
         <a id="petition-card-list" name="petitions" />
         Инициативы
       </h2>
@@ -44,7 +44,7 @@ const PetitionCardList = ({ petitions, onLikeClick, onDislikeClick,
             petitions.map((petition) => {
               return (
                 <PetitionCard key={uuidv4()} petition={petition} onLikeClick={onLikeClick}
-                  onDislikeClick={onDislikeClick} isLoggedIn={isLoggedIn} />
+                  onDislikeClick={onDislikeClick} isLoggedIn={isLoggedIn} nickname={nickname}/>
               )
             })
           }
@@ -64,7 +64,9 @@ const PetitionCardList = ({ petitions, onLikeClick, onDislikeClick,
           showNavigation={true}
           animationConfig={config.slow}
         />} */}
-        <NavLink to="/petitions" ></NavLink>
+        <NavLink to="/petitions" className="petition-card-list__all-link" onClick={onAllPetitionsChoose}>
+          Все петиции &rarr;
+        </NavLink>
     </div>
   );
 }
