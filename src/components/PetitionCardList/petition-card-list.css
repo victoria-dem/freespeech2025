@@ -1,7 +1,10 @@
 .petition-card-list {
-  width: 1000px;
-  height: 500px;
+  max-width: 1000px;
+  min-height: 500px;
+  width: 100%;
   margin: auto;
+  display: flex;
+  flex-direction: column;
   /* position: relative; */
 }
 
@@ -10,7 +13,7 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-end;
-  margin: 0 0 0 100px;
+  margin: 0 0 15px 100px;
   min-height: 50px;
 }
 
@@ -28,4 +31,63 @@
 
 .petition-card-list__button:hover {
   border-bottom: 1px solid grey;
+}
+
+/* стили карусели */
+/* .rec-arrow-left  */
+/* button.lgksPe {
+  background-color: white;
+}
+
+button.lgksPe:focus:enabled{
+  background-color: white;
+  color: black;
+}
+
+button.lgksPe:hover:enabled {
+  background-color: white;
+}
+
+button.rec-dot{
+  background-color: rgb(231, 227, 224);
+  box-shadow: 0 0 1px 3px rgba(233, 125, 24, 0.5);
+}
+
+button.rec-dot:hover, button.rec-dot:active:enabled, button.rec-dot:focus:enabled  {
+  box-shadow: 0 0 1px 3px rgba(241, 118, 3, 0.774);
+} */
+
+@media screen and (max-width: 1000px) {
+  .rec-carousel-wrapper {
+    width: 80%;
+  }
+
+  .petition-card-list {
+    max-width: 900px;
+    min-height: 400px;
+  }
+
+  .rec-arrow-right .rec-arrow-left {
+    width: 40px;
+    height: 40px;
+  }
+} 
+
+@media screen and (max-width: 768px) {
+  .petition-card-list {
+    max-width: 700px;
+    
+  }
+
+  .petition-card-list__button {
+    margin: 0;
+    padding: 10px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .petition-card-list__options {
+    margin-left: 0;
+    justify-content: space-between;
+  }
 }
