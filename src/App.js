@@ -51,6 +51,8 @@ function App() {
         setTempNickname(getNicknames())
     ), [])
     
+    // если юзер изменился и нинайм есть то есть надо убить никнейм
+    
     // проверяю есть ли у меня юзер и если есть, то есть ли у него displayName?
     useEffect(() => {
         if (currentUser.uid) {
