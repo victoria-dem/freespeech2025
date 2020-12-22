@@ -16,7 +16,7 @@ function PetitionPicture({getPetitionPicData, url, handleDeletePicture, isPetiti
     })
     const hiddenFileInput = useRef(null);
     
-    console.log(isPictureChosen, isPicUploaded)
+    // console.log(isPictureChosen, isPicUploaded)
     
     const handleChoosePicture = e => {
         setPicture(e.target.files[0])

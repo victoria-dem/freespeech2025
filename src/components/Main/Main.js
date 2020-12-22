@@ -12,7 +12,7 @@ import Banner from "../Banner/Banner";
 
 const Main = ({
                   onUpdateUser, isLoggedIn, petitions, onLikeClick,
-                  onDislikeClick, onAddPetition, onMyPetitionsChoose, onActualPetitionsChoose, nickname, isDisplayName
+                  onDislikeClick, onAddPetition, onMyPetitionsChoose, onActualPetitionsChoose, nickname
               }) => {
 
     const currentUser = useContext(CurrentUserContext);
@@ -34,18 +34,7 @@ const Main = ({
     })
     const [emailErrorText, setEmailErrorText] = useState('')
     const [popupContain, setPopupContain] = useState('')
-
-    // useEffect(() => {
-    //     if (isLinkSent && !currentUser.uid) {
-    //         setButtonMsg('Проверьте, пожалуйста, почту и кликните на линк в письме')
-    //     } else if (currentUser.uid && nickname !== '') {
-    //         setIsLinkSent(false)
-    //         setButtonMsg(` Ваш псевдоним на сайте: ${nickname}`)
-    //     } else {
-    //         setButtonMsg(`Зайти на сайт`)
-    //     }
-    // }, [isLinkSent, currentUser, isLoggedIn, nickname, buttonMsg, isDisplayName])
-
+    
     useEffect(() => {
         if (isSignUpClicked) {
             auth.sendSignInLinkToEmail(values.email, actionCodeSettings)
