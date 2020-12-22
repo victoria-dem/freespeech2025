@@ -59,7 +59,7 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
     // console.log('isTagReady', 'isPoemReady', 'isPetitionReady','poemText')
     // console.log(isTagReady, isPoemReady, isPetitionReady, poemText)
     
-    console.log(!errorMessage.errorMessageTag, !errorMessage.errorMessageText)
+    // console.log(!errorMessage.errorMessageTag, !errorMessage.errorMessageText)
     
     const handleChange = e => {
         setIsKeyPressed(!isKeyPressed)
@@ -70,11 +70,11 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
                 [name]: value
             }
         });
-        if ((e.target.name === 'petition') && e.target.value.length > 10) {
-            setIsPetitionReady(true)
-        } else {
-            setIsPetitionReady(false)
-        }
+        // if ((e.target.name === 'petition') && e.target.value.length > 10) {
+        //     setIsPetitionReady(true)
+        // } else {
+        //     setIsPetitionReady(false)
+        // }
     }
     
     const handleFocus = e => {
@@ -151,6 +151,7 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
     }, [searchWord])
     
     useEffect(function validateInputs() {
+        // console.log('validating')
         const petitionTagValidationResult = Object.keys(validators.petitionTag).map(errorKey => {
                 const errorResult = validators.petitionTag[errorKey](petitionValues.petitionTag);
                 return {[errorKey]: errorResult};
