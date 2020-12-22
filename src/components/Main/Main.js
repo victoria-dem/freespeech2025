@@ -34,7 +34,7 @@ const Main = ({
     })
     const [emailErrorText, setEmailErrorText] = useState('')
     const [popupContain, setPopupContain] = useState('')
-    
+
     useEffect(() => {
         if (isSignUpClicked) {
             auth.sendSignInLinkToEmail(values.email, actionCodeSettings)
