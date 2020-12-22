@@ -4,10 +4,6 @@ import {db} from '../../utils/firebase'
 import petitionTextPrep from "../../utils/petitionTextPrep";
 import petitionDefaultTextPrep from "../../utils/petitionDefaultTextPrep";
 
-
-// const isForbiddenWord = /^(хуй)|^(оху)|^(пизд)|^(еб)|^(хер)|^(охре)|^(поеб)|^(уеб)|^(похуй)|^(похуи)|^(бляд)|^(побляд)/.test(petitionValues.petitionTag)
-// const isForbiddenRegex = /^(хуй)|^(оху)|^(пизд)|^(еб)|^(хер)|^(охре)|^(поеб)|^(уеб)|^(похуй)|^(похуи)|^(бляд)|^(побляд)/
-
 const validators = {
     petitionTag: {
         required: (value) => {
@@ -31,12 +27,12 @@ const validators = {
 }
 
 function PetitionForm({getPetitionTextData, resetTextInputs}) {
-
+    
     const [petitionValues, setPetitionValues] = React.useState({
         petitionTag: '',
         petition: '',
     })
-
+    
     const [poemText, setPoemText] = React.useState('')
     const [isKeyPressed, setIsKeyPressed] = useState(false)
     const [isTagReady, setIsTagReady] = useState(false)
@@ -47,7 +43,7 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
         errorMessageTag: '',
         errorMessageText: ''
     })
-
+    
     const [errors, setErrors] = useState({
         petitionTag: {
             required: true,
@@ -60,9 +56,11 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
             minLength: true,
         }
     })
-
-    // const isForbiddenWord = /^(хуй)|^(оху)|^(пизд)|^(еб)|^(хер)|^(охре)|^(поеб)|^(уеб)|^(похуй)|^(похуи)|^(бля)|^(проеб)/.test(petitionValues.petitionTag)
-
+    // console.log('isTagReady', 'isPoemReady', 'isPetitionReady','poemText')
+    // console.log(isTagReady, isPoemReady, isPetitionReady, poemText)
+    
+    console.log(!errorMessage.errorMessageTag, !errorMessage.errorMessageText)
+    
     const handleChange = e => {
         setIsKeyPressed(!isKeyPressed)
         const {name, value} = e.target;
@@ -78,35 +76,52 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
             setIsPetitionReady(false)
         }
     }
-
-    const handleFocus= e => {
+    
+    const handleFocus = e => {
         setIsKeyPressed(!isKeyPressed)
         setIsTagReady(false)
         setIsPoemReady(false)
     }
-
-    const handleOnBlur= e => {
+    
+    const handleOnBlur = e => {
         setIsKeyPressed(!isKeyPressed)
         if (petitionValues.petitionTag) {
             setIsTagReady(true)
         }
     }
-
-
+    
+    
+    // здесь надо добавить валидность двух полей
+    useEffect(()=>{
+        if (isPoemReady &&
+            petitionValues.petition.length>10 &&
+            petitionValues.petitionTag.length>4 &&
+            isTagReady &&
+            !errorMessage.errorMessageTag &&
+            !errorMessage.errorMessageText
+        ) { setIsPetitionReady(true)
+        } else {
+            setIsPetitionReady(false)
+        }
+    }, [isPoemReady, petitionValues, isTagReady])
+    
+    
     useEffect(() => {
         if (isTagReady) {
             // TODO: trim space
             setSearchWord(petitionValues.petitionTag.toLowerCase())
-            setIsTagReady(false)
+            // setIsTagReady(false)
+        } else {
+            setPoemText('')
         }
     }, [isTagReady])
-
+    
     useEffect(() => {
         if (isPoemReady) {
             getPetitionTextData({poemText: poemText, tagText: searchWord, isPetitionReady: isPetitionReady})
         }
     }, [isPetitionReady, poemText])
-
+    
     useEffect(() => {
         if (searchWord) {
             const poemsRef = db.collection("poems");
@@ -134,7 +149,7 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
             );
         }
     }, [searchWord])
-
+    
     useEffect(function validateInputs() {
         const petitionTagValidationResult = Object.keys(validators.petitionTag).map(errorKey => {
                 const errorResult = validators.petitionTag[errorKey](petitionValues.petitionTag);
@@ -146,33 +161,32 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
                 return {[errorKey]: errorResult};
             }
         ).reduce((acc, el) => ({...acc, ...el}), {})
-
+        
         setErrors({
             petitionTag: petitionTagValidationResult,
             petition: petitionValidationResult
-
+            
         })
-            if (errors.petitionTag.minLength && petitionValues.petitionTag) {
-                setErrorMessage({...errorMessage, errorMessageTag: 'Минимальная длина 4 символа. Только русские буквы'});
-            } else if (!errors.petitionTag.minLength && errors.petitionTag.oneWord && petitionValues.petitionTag) {
-                setErrorMessage({...errorMessage, errorMessageTag: 'Одно слово русскими буквами'});
-            }  else if (errors.petitionTag.forbidden && petitionValues.petitionTag)  {
-                setErrorMessage({...errorMessage, errorMessageTag: 'Нельзя писать нецензурные слова'});
-            }
-            else if (errors.petition.minLength && petitionValues.petition) {
-                setErrorMessage({...errorMessage, errorMessageText: 'Минимальная длина 10 символов'})
-            } else {
-                setErrorMessage({errorMessageText: '', errorMessageTag: ''})
-            }
+        if (errors.petitionTag.minLength && petitionValues.petitionTag) {
+            setErrorMessage({...errorMessage, errorMessageTag: 'Минимальная длина 4 символа. Только русские буквы'});
+        } else if (!errors.petitionTag.minLength && errors.petitionTag.oneWord && petitionValues.petitionTag) {
+            setErrorMessage({...errorMessage, errorMessageTag: 'Одно слово русскими буквами'});
+        } else if (errors.petitionTag.forbidden && petitionValues.petitionTag) {
+            setErrorMessage({...errorMessage, errorMessageTag: 'Нельзя писать нецензурные слова'});
+        } else if (errors.petition.minLength && petitionValues.petition) {
+            setErrorMessage({...errorMessage, errorMessageText: 'Минимальная длина 10 символов'})
+        } else {
+            setErrorMessage({errorMessageText: '', errorMessageTag: ''})
+        }
     }, [isKeyPressed]);
-
-    useEffect(()=>{
+    
+    useEffect(() => {
         setPetitionValues({
             petitionTag: '',
             petition: '',
         })
     }, [resetTextInputs])
-
+    
     return (
         <>
             <form className="petition-form__form" name="form-petition" noValidate>
