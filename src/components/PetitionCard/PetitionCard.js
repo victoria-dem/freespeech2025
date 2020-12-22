@@ -38,12 +38,11 @@ const PetitionCard = ({petition, onLikeClick, onDislikeClick, isLoggedIn}) => {
     return (
         <div className="petition-card">
             <div className="petition-card__image" style={{
-                background: `center/cover url(${url})`,
-                borderRadius: "20px 0 0 20px"
+                background: `center/cover url(${url})`
             }}/>
             <div className="petition-card__info">
                 <p className="petition-card__timestamp">{`Time: ${petition.data.timestamp}`}</p>
-                <p>{isOwn ? 'Моя петиция' : ''}</p>
+                <p className='petition-card_is-own'>{isOwn ? 'Моя петиция' : ''}</p>
                 {isOnModeration ?
                     <p className="petition-card__moderation petition-card__moderation_in-progress">
                         На модерации</p> :
