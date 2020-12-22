@@ -4,7 +4,7 @@ import {pictureUpload} from '../../utils/firebase';
 import {v4 as uuidv4} from 'uuid';
 import {CurrentUserContext} from '../../contexts/CurrentUserContext';
 
-const PetitionCard = ({petition, onLikeClick, onDislikeClick, isLoggedIn}) => {
+const PetitionCard = ({petition, onLikeClick, onDislikeClick, isLoggedIn, nickname}) => {
     const [url, setUrl] = useState('');
     const currentUser = useContext(CurrentUserContext);
     const [isOwn, setIsOwn] = useState(false);
@@ -34,15 +34,16 @@ const PetitionCard = ({petition, onLikeClick, onDislikeClick, isLoggedIn}) => {
     const handleDisLikeClick = () => {
         onDislikeClick(petition);
     }
-    
+  
     return (
         <div className="petition-card">
             <div className="petition-card__image" style={{
                 background: `center/cover url(${url})`
             }}/>
             <div className="petition-card__info">
+                <p className="petition-card__name">{nickname}</p>
                 <p className="petition-card__timestamp">{`Time: ${petition.data.timestamp}`}</p>
-                <p className='petition-card_is-own'>{isOwn ? 'Моя петиция' : ''}</p>
+                {/* <p className='petition-card_is-own'>{isOwn ? 'Моя петиция' : ''}</p> */}
                 {isOnModeration ?
                     <p className="petition-card__moderation petition-card__moderation_in-progress">
                         На модерации</p> :
@@ -63,10 +64,10 @@ const PetitionCard = ({petition, onLikeClick, onDislikeClick, isLoggedIn}) => {
                         onClick={handleLikeClick} disabled={!isLoggedIn}>
                     {`Likes: ${petition.data.likes.length}`}
                 </button>
-                <button className="petition-card__reaction petition-card__reaction_type_dislike"
+                {/* <button className="petition-card__reaction petition-card__reaction_type_dislike"
                         onClick={handleDisLikeClick} disabled={!isLoggedIn}>
                     {`Dislikes: ${petition.data.disLikes.length}`}
-                </button>
+                </button> */}
             </div>
         </div>
     );

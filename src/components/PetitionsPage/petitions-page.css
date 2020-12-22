@@ -1,0 +1,11 @@
+.petitions-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.petitions-page__petitions {
+  display: grid;
+  margin: auto;
+  grid-gap: 40px
+}

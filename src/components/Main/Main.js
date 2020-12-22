@@ -120,7 +120,7 @@ const Main = ({
                 <Header handleAccountBtnClick={handleAccountBtnClick} nickname={nickname}/>
                 <Banner/>
                 <PetitionCardList petitions={petitions} onLikeClick={onLikeClick} onDislikeClick={onDislikeClick}
-                                  onMyPetitionsChoose={onMyPetitionsChoose}
+                                  onMyPetitionsChoose={onMyPetitionsChoose} nickname={nickname}
                                 onActualPetitionsChoose={onActualPetitionsChoose} isLoggedIn={isLoggedIn}/>
                 <Petition onAddPetition={onAddPetition}/>
                 <Popup

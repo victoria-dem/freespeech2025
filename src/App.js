@@ -11,6 +11,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { auth } from './utils/firebase';
 import Auth from './components/Auth/Auth';
 import getNicknames from "./utils/getNicknames";
+import PetitionsPage from './components/PetitionsPage/PetitionsPage';
 
 // import manageJson from "./utils/manageJson"   /* util for loading json to firebase */
 // import manageJson from "./utils/loadAuthorData"   /* util for loading json to firebase */
@@ -33,6 +34,7 @@ function App() {
     const [petitions, setPetitions] = useState([]);
     const [areMyPetitionsChosen, setAreMyPetitionsChosen] = useState(false);
     const [myPetitions, setMyPetitions] = useState([]);
+    const [allPetitions, setAllPetitions] = useState([]);
     const [hasCheckedLogin, setHasCheckedLogin] = useState(false);
     const [nickname, setNickname] = useState('');
     const [tempNickname, setTempNickname] = useState('');
@@ -173,6 +175,21 @@ function App() {
         setLatestPetitions();
     }, [hasCheckedLogin, isUserLoggedIn]);
 
+    //получить все петиции из базы данных для страницы PetitionsPage
+    useEffect(() => {
+        if (hasCheckedLogin) {
+            db.collection("petitions")
+            .orderBy("timestamp", "desc")
+            .get()
+            .then((petitions) => {
+                petitions.forEach(doc => {
+                    setAllPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
+                });
+                console.log(petitions.length)
+            })
+        }
+    }, [hasCheckedLogin]);
+
     //добавление новой петиции на страницу
     const handleAddPetition = (petition) => {
         setPetitions([petition, ...petitions]);
@@ -281,6 +298,10 @@ function App() {
                         onActualPetitionsChoose={handleActualPetitionsChoose}
                         nickname={nickname}
                     />
+                </Route>
+                <Route exact path="/petitions">
+                    <PetitionsPage petitions={allPetitions} onLikeClick={handleLikeClick} 
+                        onDislikeClick={handleDislikeClick} isLoggedIn={isUserLoggedIn} nickname={nickname}/>
                 </Route>
                 {/*</Switch>*/}
                 {/*</animated.div>*/}
