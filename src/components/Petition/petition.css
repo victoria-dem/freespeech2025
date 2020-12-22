@@ -90,7 +90,7 @@
 .petition-form__step-connector {
   height: 92px;
   margin-left: 20px;
-  border-left: 1px solid black;
+  border-left: 1px solid #6A5F5F;
 }
 
 .petition-form__step-connector_position_second {
@@ -128,14 +128,10 @@
   position: relative;
 }
 
-.petition-form__form-input::placeholder {
-  margin: 12px 0 0 16px;
-}
-
 
 .petition-form__form-input {
   margin: 0 0 86px 0;
-  padding: 0 0 0 3px;
+  padding: 12px 12px 12px 16px;
   background-color: transparent;
   border: 1px solid #E7E7E9;
   box-sizing: border-box;
@@ -152,6 +148,17 @@
   color: #575D68;
 }
 
+
+
+.petition-form__form-input::placeholder {
+
+}
+
+.petition-form__form-input:focus::placeholder {
+  opacity: 0; transition: opacity 0.3s ease;
+}
+
+
 .petition-form__form-input:focus {
   outline: none;
   border: 1px solid #000000;
@@ -161,6 +168,8 @@
   height: 187px;
   resize: none;
   width: 344px;
+  /*padding: ;*/
+
 }
 
 .petition-form__form-error {
@@ -171,12 +180,12 @@
   color: #ff0000;
   transition: opacity 0.3s;
   position: absolute;
-  top: 40px;
+  top: 46px;
   left: 16px;
 }
 
 .petition-form__form-error_position {
-  top: -65px;
+  top: 187px;
 }
 
 .petition-form__input {
@@ -255,10 +264,14 @@
   position: absolute;
   top: 39px;
   left: 102px;
-  font-size: 15px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
   font-style: normal;
   font-weight: 500;
-  line-height: 18px;
+  line-height: 20px;
+  letter-spacing: 0;
+  text-align: center;
+  color: rgba(106,95,95,0.8);
 }
 
 .petition-form__progress-bar {
@@ -287,11 +300,13 @@
 
 .petition-form__default-picture-title {
   margin: 32px 0 0 0;
-  font-size: 18px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
   font-style: normal;
-  font-weight: 400;
-  line-height: 21px;
-
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0;
+  text-align: left;
 }
 
 .petition-form__default-pictures {
@@ -331,13 +346,21 @@
   grid-area: button;
   border: 0;
   margin: 70px 0 0 0;
-  padding: 0;
   text-align: center;
   cursor: pointer;
+  padding: 12px 28px;
   width: 157px;
   height: 47px;
-  background: rgba(196, 196, 196, 1);
+  background: rgba(196, 196, 196, 0.2);
   border-radius: 16px;
+
+/*Прояви инициативу*/
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+  color: rgba(0, 0, 0, 0.4);
 }
 
 .petition-form__submit-btn:hover {
