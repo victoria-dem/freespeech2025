@@ -3,13 +3,21 @@ import './petition-card.css';
 import {pictureUpload} from '../../utils/firebase';
 import {v4 as uuidv4} from 'uuid';
 import {CurrentUserContext} from '../../contexts/CurrentUserContext';
+import SimpleDateTime  from 'react-simple-timestamp-to-date';
 
 const PetitionCard = ({petition, onLikeClick, onDislikeClick, isLoggedIn, nickname}) => {
     const [url, setUrl] = useState('');
     const currentUser = useContext(CurrentUserContext);
     const [isOwn, setIsOwn] = useState(false);
     const [isOnModeration, setIsOnModeration] = useState(false);
-    
+    const isLiked = petition.data.likes.some((i) => i.uid === currentUser.uid);
+    const petitionLikeButtonClassName = (
+        `petition-card__like ${isLiked ?
+            'petition-card__like_active' :
+            'petition-card__like_inactive'}`
+    );
+    const likeChallenge = 20;
+
     //получение ссылки на картинку
     useEffect(() => {
         let cleanUp = false;
@@ -34,7 +42,11 @@ const PetitionCard = ({petition, onLikeClick, onDislikeClick, isLoggedIn, nickna
     const handleDisLikeClick = () => {
         onDislikeClick(petition);
     }
-  
+
+    let time = Number(petition.data.timestamp);
+    let futureTime = petition.data.futureTime;
+    if(futureTime) {console.log('sec',futureTime.seconds);}
+
     return (
         <div className="petition-card">
             <div className="petition-card__image" style={{
@@ -42,8 +54,11 @@ const PetitionCard = ({petition, onLikeClick, onDislikeClick, isLoggedIn, nickna
             }}/>
             <div className="petition-card__info">
                 <p className="petition-card__name">{nickname}</p>
-                <p className="petition-card__timestamp">{`Time: ${petition.data.timestamp}`}</p>
-                {/* <p className='petition-card_is-own'>{isOwn ? 'Моя петиция' : ''}</p> */}
+                <SimpleDateTime className="petition-card__timestamp" format="DMY"
+                    dateSeparator="-" format="MYD" timeSeparator=":" meridians="1">
+                        {/* {futureTime ? Number(futureTime.seconds): (time/1000)} */}
+                        {Number(time/1000)}
+                </SimpleDateTime>
                 {isOnModeration ?
                     <p className="petition-card__moderation petition-card__moderation_in-progress">
                         На модерации</p> :
@@ -60,7 +75,8 @@ const PetitionCard = ({petition, onLikeClick, onDislikeClick, isLoggedIn, nickna
                             'Вы не ввели жалобу'
                     }
                 </ul>
-                <button className="petition-card__reaction petition-card__reaction_type_like"
+                <p className="petition-card__challenge">До продвижения осталось: {likeChallenge - petition.data.likes.length}</p>
+                <button className={petitionLikeButtonClassName}
                         onClick={handleLikeClick} disabled={!isLoggedIn}>
                     {`Likes: ${petition.data.likes.length}`}
                 </button>

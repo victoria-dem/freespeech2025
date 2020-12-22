@@ -8,7 +8,7 @@ import './petition-card-list.css';
 import { NavLink } from 'react-router-dom';
 
 const PetitionCardList = ({ petitions, onLikeClick, onDislikeClick,
-  onMyPetitionsChoose, nickname, onActualPetitionsChoose, isLoggedIn }) => {
+  onMyPetitionsChoose, nickname, onActualPetitionsChoose, isLoggedIn, onAllPetitionsChoose }) => {
   const carousel = useRef();
   const [isActButtonClicked, setIsActButtonClicked] = useState(true);
   const [isMyButtonClicked, setIsMyButtonClicked] = useState(false);
@@ -64,7 +64,9 @@ const PetitionCardList = ({ petitions, onLikeClick, onDislikeClick,
           showNavigation={true}
           animationConfig={config.slow}
         />} */}
-        <NavLink to="/petitions" className="petition-card-list__all-link">Все петиции &rarr;</NavLink>
+        <NavLink to="/petitions" className="petition-card-list__all-link" onClick={onAllPetitionsChoose}>
+          Все петиции &rarr;
+        </NavLink>
     </div>
   );
 }

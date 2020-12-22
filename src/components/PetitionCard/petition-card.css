@@ -7,8 +7,7 @@
   border: 1px solid grey;
   background-color: white;
   border-radius: 20px;
-  /* margin: auto; */
-  margin: 0;
+  margin: auto;
 }
 
 .petition-card__image {
@@ -22,7 +21,7 @@
   display: grid;
   width: 400px;
   align-items: flex-start;
-  /* grid-template-rows: 80px 80px 1fr 80px; */
+  justify-items: baseline;
   padding: 30px;
 }
 
@@ -50,18 +49,36 @@
   color: green;
 }
 
-.petition-card__reaction {
+.petition-card__challenge {
+  grid-row: 5;
+  grid-column: 1/3;
+  padding: 0;
+  margin: 0;
+  justify-self: end;
+}
+
+.petition-card__like {
   box-shadow: none;
   background: none;
   border: 1px solid grey;
   max-width: 80px;
   margin: 0;
   padding: 0;
+  grid-row: 6;
+  grid-column: 2;
+  transition: opacity background-color 0.8s linear;
 }
 
-.petition-card__reaction_type_like {
-  grid-row: 5;
-  grid-column: 2;
+.petition-card__like_active {
+  background-color: rgb(243, 225, 191);
+}
+
+.petition-card__like_inactive {
+  background-color: white;
+}
+
+.petition-card__like:hover{
+  opacity: 0.8;
 }
 
 /* .petition-card__reaction_type_dislike {
@@ -104,20 +121,23 @@
   align-self: end;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
   .petition-card {
     flex-direction: column;
+    width: 90vw;
   }
 
   .rec-arrow {
     display: none;
   }
+
   .petition-card__image {
     width: 100%;
     border-radius: 20px 20px 0 0;
   }
   .petition-card__info {
-   width: 100%;
+   min-height: 400px;
+   width: 70vw;
   }
 }
 
@@ -125,25 +145,21 @@
   .petition-card__image {
     height: 300px;
   }
+  .petition-card__info {
+    min-height: 300px;
+   }
 
-  .petition-card__moderation {
-    grid-row: 2;
-    grid-column: 1/3;
-  }
-  .petition-card__tag {
-    grid-row: 3;
-  }
-  .petition-card__poem {
-    grid-row: 4;
-    padding: 5px;
-  }
+   .petition-card__poem {
+     font-size: 12px;
+   }
 
-  .petition-card__reaction_type_like {
+   .petition-card__like {
+     grid-row: 7;
+     grid-column: 1;
+   }
+
+   .petition-card__challenge {
     grid-row: 6;
     grid-column: 1;
-  }
-  .petition-card__reaction_type_dislike {
-    grid-row: 6;
-    grid-column: 2;
-  }
+   }
 }

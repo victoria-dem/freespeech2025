@@ -5,11 +5,14 @@ import { v4 as uuidv4 } from 'uuid';
 import { useContext } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-const PetitionsPage = ({petitions, onLikeClick, onDislikeClick, isLoggedIn, nickname}) => {
+const PetitionsPage = ({petitions, onLikeClick, onDislikeClick, isLoggedIn, nickname, onReturn}) => {
   // const currentUser = useContext(CurrentUserContext);
   return (
     <div className="petitions-page">
-      <h1>Все петиции</h1>
+       <NavLink to="/main" className="petitions-page__return-link" onClick={onReturn}>
+        Назад &larr;
+      </NavLink>
+      <h1 className="petitions-page__title">Все петиции</h1>
       <div className="petitions-page__petitions">
         {
           petitions.map((petition) => {
@@ -20,7 +23,6 @@ const PetitionsPage = ({petitions, onLikeClick, onDislikeClick, isLoggedIn, nick
           })
         }
       </div>
-      <NavLink to="/main" className="petitions-page__return-link">Назад &larr;</NavLink>
     </div>
   );
 }
