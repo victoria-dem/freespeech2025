@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Carousel from 'react-elastic-carousel';
 import { config } from 'react-spring';
 import './petition-card-list.css';
+import { NavLink } from 'react-router-dom';
 
 const PetitionCardList = ({ petitions, onLikeClick, onDislikeClick,
   onMyPetitionsChoose, onActualPetitionsChoose, isLoggedIn }) => {
@@ -63,7 +64,7 @@ const PetitionCardList = ({ petitions, onLikeClick, onDislikeClick,
           showNavigation={true}
           animationConfig={config.slow}
         />} */}
-
+        <NavLink to="/petitions" ></NavLink>
     </div>
   );
 }
