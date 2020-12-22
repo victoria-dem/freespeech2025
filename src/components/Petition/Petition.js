@@ -74,7 +74,6 @@ function Petition({onAddPetition}) {
             storagePic
                 .getDownloadURL()
                 .then(function (url) {
-                    // console.log(url);
                     setUrl(url)
                 })
                 .catch(function (error) {
@@ -110,8 +109,6 @@ function Petition({onAddPetition}) {
                     setIsPetitionPublished(true)
                     onAddPetition({data: data, id: docRef.id});
                 }).then(function () {
-                    // загрузка картинки (после того, как пользователь нажал на submit)
-                    // pictureUpload()
                     setIsPetitionPublished(true)
                 })
                 .catch(function (error) {

@@ -16,7 +16,7 @@ function PetitionPicture({getPetitionPicData, url, handleDeletePicture, isPetiti
     })
     const hiddenFileInput = useRef(null);
     
-    console.log(isPictureChosen, isPicUploaded)
+    // console.log(isPictureChosen, isPicUploaded)
     
     const handleChoosePicture = e => {
         setPicture(e.target.files[0])
@@ -91,7 +91,7 @@ function PetitionPicture({getPetitionPicData, url, handleDeletePicture, isPetiti
                  src={url} alt={'картинка'}
             />}
             
-            {currentUser.uid && !isPictureChosen &&
+            {currentUser.uid && !isPictureChosen && !isPictureReady &&
             <>
                 <button type="button"
                         className="petition-form__button"
@@ -102,7 +102,7 @@ function PetitionPicture({getPetitionPicData, url, handleDeletePicture, isPetiti
                 </span>
             </>}
             
-            {currentUser.uid && !isPictureChosen &&
+            {currentUser.uid && !isPictureChosen && !isPictureReady &&
             <input className="petition-form__picture"
                    ref={hiddenFileInput}
                    type="file"
