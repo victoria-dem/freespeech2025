@@ -8,30 +8,28 @@ import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 
 
 function Header({handleAccountBtnClick, nickname}) {
-    
+
     const currentUser = useContext(CurrentUserContext);
-    
-    // const [buttonVisibility, setButtonVisibility] = useState("header__account")
-    // setTimeout(() => {
-    //     setButtonVisibility("header__account_visibility")
-    // }, 1000)
-    
-    
+
+    const [buttonVisibility, setButtonVisibility] = useState(false)
+    setTimeout(() => {
+        setButtonVisibility(true)
+    }, 1000)
+
+
     return (
         <header className="header">
-            <img src={logo2} alt="Logo" className="logo"/>
+            <img  src={logo2} alt="Logo" className="logo"/>
             <HeaderMenu/>
-            {/*<div className={buttonVisibility}>*/}
-                <div className="header__nickname-content">
+                <div   className={buttonVisibility ? "header__nickname-content header__nickname-content_visibility" : "header__nickname-content"}>
                     {nickname ?
                         <> <p className="header__nickname-title">Ваш псевдоним на сайте:</p>
                             <p className="header__nickname">{nickname}</p>
-                        </> : ''}
+                        </> : null }
                 </div>
                 <button type='button' className="header__button" onClick={handleAccountBtnClick}>
                     {(currentUser.uid === null) ? <img src={login} alt='Login'/> :
                         <img src={logout} alt='Login'/>}</button>
-            {/*</div>*/}
         </header>
     )
 }
