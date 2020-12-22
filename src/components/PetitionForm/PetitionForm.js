@@ -99,11 +99,12 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
             isTagReady &&
             !errorMessage.errorMessageTag &&
             !errorMessage.errorMessageText
-        ) { setIsPetitionReady(true)
+        ) {
+            setIsPetitionReady(true)
         } else {
             setIsPetitionReady(false)
         }
-    }, [isPoemReady, petitionValues, isTagReady])
+    }, [isPoemReady, petitionValues, isTagReady, errorMessage])
     
     
     useEffect(() => {
