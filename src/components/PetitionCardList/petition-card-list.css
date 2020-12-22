@@ -8,6 +8,14 @@
   /* position: relative; */
 }
 
+.petion-card-list__title {
+  font-weight: 500;
+  font-style: normal;
+  font-size: 40px;
+  line-height: 47px;
+  color: black;
+}
+
 .petition-card-list__options {
   display: flex;
   flex-direction: row;
@@ -33,6 +41,14 @@
   border-bottom: 1px solid grey;
 }
 
+.petition-card-list__all-link {
+  text-decoration: none;
+  color: black;
+  text-align: right;
+  padding: 0;
+  margin: 30px 0 0 0;
+  font-size: 24px;
+}
 /* стили карусели */
 /* .rec-arrow-left  */
 /* button.lgksPe {
