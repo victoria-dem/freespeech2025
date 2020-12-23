@@ -1,16 +1,20 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useContext } from 'react';
 import './petition-card.css';
-import {pictureUpload} from '../../utils/firebase';
-import {v4 as uuidv4} from 'uuid';
-import {CurrentUserContext} from '../../contexts/CurrentUserContext';
-import SimpleDateTime  from 'react-simple-timestamp-to-date';
 import pic from '../../images/backgroundIntro.jpg';
-import isClose from "../../images/icClose.svg";
 import PetitionCardInfo from '../PetitionCardInfo/PetitionCardInfo';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 const PetitionCard = ({petition, onLikeClick, isLoggedIn, nickname, onDeletePetition}) => {
+    const currentUser = useContext(CurrentUserContext);
+    const isOwn = petition.data.uid === currentUser.uid;
+    const petitionDeleteButtonClassName = (
+        `petition-card__delete-button ${isOwn ?
+          'petition-card__delete-button_active' :
+          'petition-card__delete-button_inactive'}`
+      );
+
     const handleDeletePetition = () => {
-        // onDeletePetition(petition);
+        onDeletePetition(petition);
     }
     return (
         <div className="petition-card">
@@ -19,8 +23,8 @@ const PetitionCard = ({petition, onLikeClick, isLoggedIn, nickname, onDeletePeti
             }}/>
            <PetitionCardInfo petition={petition} onLikeClick={onLikeClick} isLoggedIn={isLoggedIn}
                 nickname={nickname} />
-            <button className="petition-card__delete-button" 
-            // onClick={handleDeletePetition}
+            <button className={petitionDeleteButtonClassName}
+                onClick={handleDeletePetition}
             >&#128465;</button>
         </div>
     );

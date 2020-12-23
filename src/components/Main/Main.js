@@ -10,11 +10,9 @@ import Footer from '../Footer/Footer';
 import Banner from "../Banner/Banner";
 
 
-const Main = ({
-    onUpdateUser, isLoggedIn, petitions, onLikeClick,
-    onDislikeClick, onAddPetition, onMyPetitionsChoose, onActualPetitionsChoose,
-    nickname, onAllPetitionsChoose
-}) => {
+const Main = ({ onUpdateUser, isLoggedIn, petitions, onLikeClick,
+    onAddPetition, onMyPetitionsChoose, onActualPetitionsChoose,
+    nickname, onAllPetitionsChoose, onDeletePetition }) => {
 
     const currentUser = useContext(CurrentUserContext);
     const [isAccountPageOpen, setIsAccountPageOpen] = useState(false)
@@ -121,10 +119,10 @@ const Main = ({
             <div className="main-page">
                 <Header handleAccountBtnClick={handleAccountBtnClick} nickname={nickname} />
                 <Banner />
-                <PetitionCardList petitions={petitions} onLikeClick={onLikeClick} onDislikeClick={onDislikeClick}
+                <PetitionCardList petitions={petitions} onLikeClick={onLikeClick}
                     onMyPetitionsChoose={onMyPetitionsChoose} nickname={nickname}
                     onActualPetitionsChoose={onActualPetitionsChoose} isLoggedIn={isLoggedIn}
-                    onAllPetitionsChoose={onAllPetitionsChoose} />
+                    onAllPetitionsChoose={onAllPetitionsChoose} onDeletePetition={onDeletePetition}/>
                 <Petition onAddPetition={onAddPetition} nickname={nickname}/>
                 <Popup
                     onClose={closePopup}

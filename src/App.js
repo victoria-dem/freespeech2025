@@ -204,6 +204,27 @@ function App() {
         setAllPetitions([petition, ...allPetitions]);
     }
 
+    const filterPetitions = (petitions, petition, setPetitions) => {
+        const newPetitions = petitions.filter((p) => p.id !== petition.id);
+        setPetitions(newPetitions);
+    }
+
+    //удаление своей петиции
+    const handleDeletePetition = (petition) => {
+        db.collection("petitions")
+            .doc(petition.id)
+            .delete()
+            .then(() => {
+                if (!areMyPetitionsChosen) {
+                    filterPetitions(petitions, petition, setPetitions);
+                } else {
+                    filterPetitions(myPetitions, petition, setMyPetitions);
+                }
+                filterPetitions(allPetitions,petition,setAllPetitions);
+            })
+            .catch(err => console.log(err));
+    }
+
     //добавление петиции после обновления инфо в ней (лайки)
     const updatePetitions = (petition) => db.collection("petitions")
         .doc(petition.id).onSnapshot((doc) => {
@@ -317,12 +338,13 @@ function App() {
                         onActualPetitionsChoose={handleActualPetitionsChoose}
                         nickname={nickname}
                         onAllPetitionsChoose={handleAllPetitionsChoose}
+                        onDeletePetition={handleDeletePetition}
                     />
                 </Route>
                 <Route exact path="/petitions">
                     <PetitionsPage petitions={allPetitions} onLikeClick={handleLikeClick}
                         onDislikeClick={handleDislikeClick} isLoggedIn={isUserLoggedIn} nickname={nickname}
-                        onReturn={handleReturn} />
+                        onReturn={handleReturn} onDeletePetition={handleDeletePetition} />
                 </Route>
                 {/*</Switch>*/}
                 {/*</animated.div>*/}
@@ -333,3 +355,4 @@ function App() {
 }
 
 export default App;
+

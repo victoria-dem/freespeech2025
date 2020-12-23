@@ -5,7 +5,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { useContext } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-const PetitionsPage = ({petitions, onLikeClick, onDislikeClick, isLoggedIn, nickname, onReturn}) => {
+const PetitionsPage = ({petitions, onLikeClick, onDislikeClick, isLoggedIn, nickname, onReturn,
+  onDeletePetition}) => {
   // const currentUser = useContext(CurrentUserContext);
   return (
     <div className="petitions-page">
@@ -18,7 +19,8 @@ const PetitionsPage = ({petitions, onLikeClick, onDislikeClick, isLoggedIn, nick
           petitions.map((petition) => {
             return (
               <PetitionCard key={uuidv4()} petition={petition} onLikeClick={onLikeClick}
-                onDislikeClick={onDislikeClick} isLoggedIn={isLoggedIn} nickname={nickname}/>
+                onDislikeClick={onDislikeClick} isLoggedIn={isLoggedIn} nickname={nickname} 
+                onDeletePetition={onDeletePetition}/>
             )
           })
         }
