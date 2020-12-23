@@ -147,6 +147,14 @@
   font-size: 24px;
 }
 
+.petition-card__delete-button_inactive {
+  display: none;
+}
+
+.petition-card__delete-button_active {
+  display: block;
+}
+
 @media screen and (max-width: 900px) {
   .petition-card {
     flex-direction: column;
