@@ -45,7 +45,7 @@ const PetitionCard = ({petition, onLikeClick, onDislikeClick, isLoggedIn, nickna
 
     let time = Number(petition.data.timestamp);
     let futureTime = petition.data.futureTime;
-    if(futureTime) {console.log('sec',futureTime.seconds);}
+    // if(futureTime) {console.log('sec',futureTime.seconds);}
 
     return (
         <div className="petition-card">

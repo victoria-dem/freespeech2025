@@ -60,12 +60,6 @@ function App() {
         }, 5000)
     }, [])
     
-    useEffect(()=>{
-        setTimeout(() =>{
-          console.log('tempNicknametempNicknametempNicknametempNicknametempNicknametempNickname', tempNickname, tempNickname==='')
-        }, 5000)
-    }, [tempNickname])
-    
     // если юзер изменился и нинайм есть то есть надо убить никней
     // проверяю есть ли у меня юзер и если есть, то есть ли у него displayName?
     useEffect(() => {
@@ -189,7 +183,7 @@ function App() {
                             setAllPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
                         }
                     });
-                    console.log(petitions.length)
+                    // console.log(petitions.length)
                 })
         }
     }, [hasCheckedLogin, isUserLoggedIn]);

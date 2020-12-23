@@ -4,6 +4,7 @@ import PoemLine from "../PoemLine/PoemLine";
 import {v4 as uuidv4} from 'uuid';
 
 function PetitionTextPreview({poemText, isTextReadyToRender}) {
+    
     return (
         <div className="petition-form__poem-preview">
             <p className="petition-form__poem-preview-title">Ваша инициатива в стихах</p>

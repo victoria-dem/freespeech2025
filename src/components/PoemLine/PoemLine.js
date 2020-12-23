@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
-function PoemLine(props) {
-    return <p className="petition-form__poem-line">{props.line}</p>
+function PoemLine({line}) {
+    
+    return <p className="petition-form__poem-line">{line}</p>
 }
 
 export default PoemLine;
