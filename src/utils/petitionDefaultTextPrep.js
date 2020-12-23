@@ -6,7 +6,7 @@ function petitionDefaultTextPrep(setIsPoemReady, setPoemText) {
         'Только в уборную — и сразу же возвращайся.']]
     
     const defaultPoemNun=Math.floor(Math.random()*defaultPoems.length)
-    
+    console.log(defaultPoemNun);
     
     setPoemText(defaultPoems[defaultPoemNun])
     setIsPoemReady(true)

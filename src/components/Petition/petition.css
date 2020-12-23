@@ -185,7 +185,7 @@
 }
 
 .petition-form__form-error_position {
-  top: 187px;
+  top: 107px;
 }
 
 .petition-form__input {
@@ -350,7 +350,7 @@
   text-align: center;
   cursor: pointer;
   padding: 12px 28px;
-  width: 157px;
+  width: 257px;
   height: 47px;
   background: rgba(196, 196, 196, 0.2);
   border-radius: 16px;
@@ -359,8 +359,8 @@
   font-family: 'Montserrat', sans-serif;
   font-style: normal;
   font-weight: 500;
-  font-size: 20px;
-  line-height: 23px;
+  font-size: 16px;
+  line-height: 20px;
   color: rgba(0, 0, 0, 0.4);
 }
 
@@ -437,12 +437,44 @@
   width: 344px;
   box-sizing: border-box;
   border-radius: 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 18px;
+  color: #000;
 }
 
 .petition-form__poem-line {
-  font-style: normal;
-  font-weight: normal;
-  font-size: 12px;
-  line-height: 15px;
+  animation: poem-animation 5s linear both;
 }
+
+@keyframes poem-animation {
+  0% {
+    opacity: 0.9;
+    color: blue;
+    font-size: 6px;
+  }
+  30% {
+    opacity: .4;
+    color:grey;
+    font-size: 14px;
+  }
+  40% {
+    opacity: .2;
+    color:forestgreen;
+    font-size: 18px;
+  }
+  60% {
+    opacity: .6;
+    color: orange;
+    font-size: 16px;
+  }
+  100% {
+    opacity: 1;
+    color:black;
+    font-size: 13px;
+  }
+}
+
 

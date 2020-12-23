@@ -24,6 +24,7 @@ function Petition({ onAddPetition }) {
     const [resetTextInputs, setResetTextInputs] = useState(false)
     const [url, setUrl] = useState('')
     const [isPublic, setIsPublic] = useState(false)
+    const [poemId, setPoemId] = useState(0)
     // const [status, setStatus] = useState('Просто контролируем каждое ваше нажатие клавиш. Может ну его, связываться с нами ...')
 
     const handleDeletePicture = () => {
@@ -34,7 +35,6 @@ function Petition({ onAddPetition }) {
         }
         // TODO: надо получить текущее имя файла и запустить удаление этого файла, если он не принадлежит к массиву заглушек
         // TODO: затем внутри then очистить объект pictureData setPictureData({}) и убрать эту очистку из предыдущего if
-
     }
 
     const getPetitionTextData = (petitionTextData) => {
@@ -149,6 +149,7 @@ function Petition({ onAddPetition }) {
                 <PetitionForm
                     getPetitionTextData={getPetitionTextData}
                     resetTextInputs={resetTextInputs}
+                    setPoemId={setPoemId}
                 />
                 <PetitionPicture
                     getPetitionPicData={getPetitionPicData}
@@ -171,6 +172,7 @@ function Petition({ onAddPetition }) {
             <PetitionTextPreview
                 poemText={poemText}
                 isTextReadyToRender={isTextReadyToRender}
+                poemId={poemId}
             />
         </section>
     )

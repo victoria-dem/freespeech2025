@@ -27,7 +27,7 @@ function PetitionSubmitBtn(props) {
     useEffect(() => {
         if (!isTextReadyToRender && !isLoaded) {
             if (justPublished) {
-                setPetitionBtnTitle('Инициатива опубликована на сайте')
+                setPetitionBtnTitle('Инициатива на сайте')
                 setTimeout(() => {
                     setJustPublished(false)
                     setPetitionBtnTitle('Прояви инициативу')
@@ -36,9 +36,9 @@ function PetitionSubmitBtn(props) {
         } else if (isTextReadyToRender && !isLoaded && !isPictureReady && !isPetitionPublished) {
             setPetitionBtnTitle('А картинка где?')
         } else if (isTextReadyToRender && !isLoaded && isPictureReady && !isPetitionPublished && currentUser.uid) {
-            setPetitionBtnTitle('Инициатива готова к публикации')
+            setPetitionBtnTitle('Готова к публикации')
         } else if (isLoaded) {
-            setPetitionBtnTitle('Публикуем инициативу...')
+            setPetitionBtnTitle('Публикуем ...')
         } else if (isPetitionPublished) {
             setJustPublished(true)
         }
