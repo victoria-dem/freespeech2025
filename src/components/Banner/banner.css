@@ -1,6 +1,64 @@
-.banner{
-  width: 348px;
-  height: 153px;
-  margin: 0 auto;
-  padding: 0;
+.banner__image{
+  width: 100%;
+
+}
+.banner__title {
+  position: absolute;
+  top: 0;
+  left: 32%;
+  bottom: 0;
+  padding-top: 100px;
+  max-width: 550px;
+  font-size: 32px;
+}
+.banner {
+  position: relative;
+
+}
+
+@media screen and (max-width: 1350px) {
+  .banner__title {
+    font-size: 27px;
+    max-width: 430px;
+  }
+}
+
+@media screen and (max-width: 1130px) {
+  .banner__title {
+    font-size: 24px;
+    max-width: 380px;
+  }
+}
+
+@media screen and (max-width: 1118px) {
+  .banner__title {
+    font-size: 22px;
+    max-width: 340px;
+    padding-top: 60px;
+  }
+}
+
+@media screen and (max-width: 865px) {
+  .banner__title {
+    font-size: 18px;
+    max-width: 300px;
+    padding-top: 50px;
+  }
+}
+@media screen and (max-width: 720px) {
+  .banner__title {
+    font-size: 17px;
+    max-width: 300px;
+    padding-top: 20px;
+    left: 27%;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  .banner__title {
+    position: initial;
+    font-size: 17px;
+    max-width: 500px;
+    padding: 0 40px;
+  }
 }

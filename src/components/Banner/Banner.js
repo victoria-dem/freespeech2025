@@ -1,10 +1,13 @@
 import React from 'react'
-import banner from '../../images/main_banner.png'
+import banner from '../../images/banner.png'
 import './banner.css'
 
 function Banner() {
-    return(
-        <img className="banner" src={banner} alt="banner"/>
+    return (
+        <div className="banner">
+            <img className="banner__image" src={banner} alt="banner"/>
+            <h1 className="banner__title">Цензура больше не проблема, обубликуем петицию цитатой поэта-классика</h1>
+        </div>
     )
 }
 

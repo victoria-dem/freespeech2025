@@ -12,6 +12,9 @@ function HeaderMenu() {
     const handleHamburgerCloseClick = () => {
         setIsHamburgerOpenClicked(!isHamburgerOpenClicked)
     }
+    const handleHamburgerLinkClick = () => {
+        setIsHamburgerOpenClicked(!isHamburgerOpenClicked)
+    }
 
     return (
         <>
@@ -42,12 +45,12 @@ function HeaderMenu() {
                 <nav>
                     <ul className="header__list-hamburger">
                         <li className="header__list-item-hamburger">
-                            <a className="header__list-link-hamburger" href="#petition-card-list"
+                            <a onClick={handleHamburgerLinkClick} className="header__list-link-hamburger" href="#petition-card-list"
                             >Инициативы</a
                             >
                         </li>
                         <li className="header__list-item-hamburger">
-                            <a className="header__list-link-hamburger" href="#petition-form"
+                            <a onClick={handleHamburgerLinkClick} className="header__list-link-hamburger" href="#petition-form"
                             >Создать инициативу</a
                             >
                         </li>
