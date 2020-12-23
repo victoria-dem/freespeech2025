@@ -53,17 +53,17 @@ function App() {
     useEffect(() => (
         setTempNickname(getNicknames())
     ), [])
-    
-    useEffect(()=>{
-        setTimeout(() =>{
+
+    useEffect(() => {
+        setTimeout(() => {
             setTempNickname('')
         }, 5000)
     }, [])
-    
+
     // если юзер изменился и нинайм есть то есть надо убить никней
     // проверяю есть ли у меня юзер и если есть, то есть ли у него displayName?
     useEffect(() => {
-        if (currentUser.uid && tempNickname!=='') {
+        if (currentUser.uid && tempNickname !== '') {
             const user = auth.currentUser
             if (user.displayName === null) {
                 user.updateProfile({
@@ -86,7 +86,7 @@ function App() {
         const user = auth.currentUser
         if (user !== null) {
             if (user.displayName !== null) {
-                setNickname(user.displayName)
+                setNickname(user.displayName);
             }
         } else {
             setNickname('')
@@ -103,45 +103,55 @@ function App() {
         setHasCheckedLogin(true);
     }
 
-    // const setPetitionList = (petitionsToRender) => {
-    //     petitionsToRender.forEach(doc => {
-    //         setPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
-    //     })
-    // }
-
     //получить последние по дате публикации 6 петиций и добавить их в стейт petitions
     const setLatestPetitions = () => {
+        let cleanUp = false;
         //только после проверки на авторизацию
         if (hasCheckedLogin) {
-            setPetitions([]);
-            //если залогинен, то отображаем и последние 6 петиций и последние 3 карточки пользователя
-            if (isUserLoggedIn) {
+            Promise.all([
                 db.collection("petitions")
                     .orderBy("timestamp", "desc")
-                    .limit(10)
-                    .get()
-                    .then((petitions) => {
-                        petitions.forEach((doc) => {
-                            if (doc.data().isPublic || (currentUser.uid && doc.data().uid === currentUser.uid)) {
-                                setPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
-                            }
-                        })
-                    })
-                    .catch(err => console.log(err));
-            } else {
-                //если незалогинен, то отображаем только последние 6 петиций
+                    .limit(8)
+                    .get(),
                 db.collection('petitions')
                     .where("isPublic", "==", true)
                     .orderBy("timestamp", "desc")
-                    .limit(6)
+                    .limit(8)
                     .get()
-                    .then(newPetitions => {
-                        
-                        newPetitions.forEach((doc) => {
+            ]).then(values => {
+                if (!cleanUp) {
+                    setPetitions([]);
+                    const [allLatestPetitions, onlyPublicPetitions] = values;
+                    const ids = [];
+                    if (isUserLoggedIn) {
+                        allLatestPetitions.forEach((doc) => {
+                            if (doc.data().isPublic || (currentUser.uid && doc.data().uid === currentUser.uid)) {
+                                setPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
+                                ids.push(doc.id);
+                            }
+                        });
+
+                        //если среди последних петиций не хватает публичных или созданных пользователем
+                        //добавляем последние публичные
+                        if (ids.length < 8) {
+                            onlyPublicPetitions.forEach((doc) => {
+                                if (!ids.includes(doc.id) && ids.length < 8) {
+                                    setPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
+                                    ids.push(doc.id);
+                                }
+                            });
+                            ids.length = 0;
+                        }
+                    } else {
+                        setPetitions([]);
+                        onlyPublicPetitions.forEach((doc) => {
                             setPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
-                        })
-                    })
-            }
+                        });
+                    }
+                }
+            })
+                .catch(err => console.log(err));
+            return () => cleanUp = true;
         }
     }
 
@@ -168,30 +178,30 @@ function App() {
 
     useEffect(() => {
         setLatestPetitions();
-    }, [hasCheckedLogin, isUserLoggedIn, currentUser]);
+    }, [hasCheckedLogin, isUserLoggedIn]);
 
     //получить все петиции из базы данных для страницы PetitionsPage
     useEffect(() => {
-        if (hasCheckedLogin) {
-            setAllPetitions([]);
-            db.collection("petitions")
-                .orderBy("timestamp", "desc")
-                .get()
-                .then((petitions) => {
-                    petitions.forEach(doc => {
-                        if (doc.data().isPublic || (currentUser.uid && doc.data().uid === currentUser.uid)) {
-                            setAllPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
-                        }
-                    });
-                    // console.log(petitions.length)
-                })
-        }
-    }, [hasCheckedLogin, isUserLoggedIn]);
+        // if (hasCheckedLogin) {
+        setAllPetitions([]);
+        db.collection("petitions")
+            .orderBy("timestamp", "desc")
+            .get()
+            .then((petitions) => {
+                petitions.forEach(doc => {
+                    if (doc.data().isPublic || (currentUser.uid && doc.data().uid === currentUser.uid)) {
+                        setAllPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
+                    }
+                });
+            })
+        // }
+        // }, [ hasCheckedLogin, isUserLoggedIn]);
+    }, [allPetitionsChosen]);
 
     //добавление новой петиции на страницу
     const handleAddPetition = (petition) => {
         setPetitions([petition, ...petitions]);
-        //setAllPetitions([petition, ...allPetitions]);
+        setAllPetitions([petition, ...allPetitions]);
     }
 
     //добавление петиции после обновления инфо в ней (лайки)

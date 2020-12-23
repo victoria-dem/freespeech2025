@@ -34,6 +34,7 @@ function Auth({ onUpdateUser, isLoggedIn, onCheckLogin }) {
             }
         }
     }, [])
+    
 
     return (
         <>

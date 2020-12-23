@@ -65,7 +65,7 @@ const PetitionCardList = ({ petitions, onLikeClick, onDislikeClick,
           animationConfig={config.slow}
         />} */}
         <NavLink to="/petitions" className="petition-card-list__all-link" onClick={onAllPetitionsChoose}>
-          Все петиции &rarr;
+          Все инициативы &rarr;
         </NavLink>
     </div>
   );
