@@ -4,6 +4,7 @@ import {pictureUpload} from '../../utils/firebase';
 import {v4 as uuidv4} from 'uuid';
 import {CurrentUserContext} from '../../contexts/CurrentUserContext';
 import SimpleDateTime  from 'react-simple-timestamp-to-date';
+import pic from '../../images/backgroundIntro.jpg';
 
 const PetitionCard = ({petition, onLikeClick, onDislikeClick, isLoggedIn, nickname}) => {
     const [url, setUrl] = useState('');
@@ -17,23 +18,6 @@ const PetitionCard = ({petition, onLikeClick, onDislikeClick, isLoggedIn, nickna
             'petition-card__like_inactive'}`
     );
     const likeChallenge = 20;
-
-    //получение ссылки на картинку
-    useEffect(() => {
-        let cleanUp = false;
-        pictureUpload(petition.data.picFullPath)
-            .then((url) => {
-                if (!cleanUp) {
-                    setUrl(url);
-                    setIsOwn(petition.data.uid === currentUser.uid);
-                    setIsOnModeration(!petition.data.isPublic);
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-        return () => cleanUp = true;
-    }, []);
     
     const handleLikeClick = () => {
         onLikeClick(petition);
@@ -50,7 +34,7 @@ const PetitionCard = ({petition, onLikeClick, onDislikeClick, isLoggedIn, nickna
     return (
         <div className="petition-card">
             <div className="petition-card__image" style={{
-                background: `center/cover url(${url})`
+                background: `center/cover url(${petition.data.url? petition.data.url : pic})`
             }}/>
             <div className="petition-card__info">
                 <p className="petition-card__name">{nickname}</p>

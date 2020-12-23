@@ -102,7 +102,8 @@ function Petition({ onAddPetition }) {
                 timestamp: timestamp,
                 futureTime: time,
                 likes: [],
-                disLikes: []
+                disLikes: [],
+                url: url
             }
             db.collection("petitions")
                 .add(data)

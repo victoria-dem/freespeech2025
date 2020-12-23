@@ -120,36 +120,36 @@ function App() {
                     .limit(8)
                     .get()
             ]).then(values => {
-                    setPetitions([]);
-                    const [allLatestPetitions, onlyPublicPetitions] = values;
-                    const ids = [];
-                    if (isUserLoggedIn) {
-                        allLatestPetitions.forEach((doc) => {
-                            if (doc.data().isPublic || (currentUser.uid && doc.data().uid === currentUser.uid)) {
+                setPetitions([]);
+                const [allLatestPetitions, onlyPublicPetitions] = values;
+                const ids = [];
+                if (isUserLoggedIn) {
+                    allLatestPetitions.forEach((doc) => {
+                        if (doc.data().isPublic || (currentUser.uid && doc.data().uid === currentUser.uid)) {
+                            setPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
+                            ids.push(doc.id);
+                        }
+                    });
+
+                    //если среди последних петиций не хватает публичных или созданных пользователем
+                    //добавляем последние публичные
+                    if (ids.length < 8) {
+                        onlyPublicPetitions.forEach((doc) => {
+                            if (!ids.includes(doc.id) && ids.length < 8) {
                                 setPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
                                 ids.push(doc.id);
                             }
                         });
-
-                        //если среди последних петиций не хватает публичных или созданных пользователем
-                        //добавляем последние публичные
-                        if (ids.length < 8) {
-                            onlyPublicPetitions.forEach((doc) => {
-                                if(!ids.includes(doc.id) && ids.length < 8) {
-                                    setPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
-                                    ids.push(doc.id);
-                                }
-                            });
-                            ids.length=0;
-                        }
-                    } else {
-                        setPetitions([]);
-                        onlyPublicPetitions.forEach((doc) => {
-                            setPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
-                        });
+                        ids.length = 0;
                     }
+                } else {
+                    setPetitions([]);
+                    onlyPublicPetitions.forEach((doc) => {
+                        setPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
+                    });
+                }
             })
-            .catch(err => console.log(err));       
+                .catch(err => console.log(err));
         }
     }
 
@@ -180,21 +180,22 @@ function App() {
 
     //получить все петиции из базы данных для страницы PetitionsPage
     useEffect(() => {
-        if (hasCheckedLogin) {
-            setAllPetitions([]);
-            db.collection("petitions")
-                .orderBy("timestamp", "desc")
-                .get()
-                .then((petitions) => {
-                    petitions.forEach(doc => {
-                        if (doc.data().isPublic || (currentUser.uid && doc.data().uid === currentUser.uid)) {
-                            setAllPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
-                        }
-                    });
-                    // console.log(petitions.length)
-                })
-        }
-    }, [hasCheckedLogin, isUserLoggedIn]);
+        // if (hasCheckedLogin) {
+        setAllPetitions([]);
+        db.collection("petitions")
+            .orderBy("timestamp", "desc")
+            .get()
+            .then((petitions) => {
+                petitions.forEach(doc => {
+                    if (doc.data().isPublic || (currentUser.uid && doc.data().uid === currentUser.uid)) {
+                        setAllPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
+                    }
+                });
+                // console.log(petitions.length)
+            })
+        // }
+        // }, [ hasCheckedLogin, isUserLoggedIn]);
+    }, [allPetitionsChosen]);
 
     //добавление новой петиции на страницу
     const handleAddPetition = (petition) => {
