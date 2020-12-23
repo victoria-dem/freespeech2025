@@ -8,6 +8,7 @@ function PetitionTextPreview({poemText, isTextReadyToRender}) {
         <div className="petition-form__poem-preview">
             <p className="petition-form__poem-preview-title">Ваша инициатива в стихах</p>
             <div className="petition-form__poem-box">
+                {!isTextReadyToRender ? <p className="petition-form__poem-box-default">появится здесь</p>: null}
                 <div>
                     {poemText && isTextReadyToRender && poemText.map((line) => <PoemLine key={uuidv4()} line={line}/>)}
                 </div>

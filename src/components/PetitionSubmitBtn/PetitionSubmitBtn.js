@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import './petition-submit-btn.css'
 import cn from 'classnames'
+import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 
 function PetitionSubmitBtn(props) {
     
@@ -13,6 +14,7 @@ function PetitionSubmitBtn(props) {
         isPetitionSubmitted
     } = props
     
+    const currentUser = useContext(CurrentUserContext);
     const [petitionBtnTitle, setPetitionBtnTitle] = useState('Прояви инициативу')
     const [isSubmitBtnAvailable, setIsSubmitBtnAvailable] = useState(false)
     const [justPublished, setJustPublished] = useState(false)
@@ -33,7 +35,7 @@ function PetitionSubmitBtn(props) {
             }
         } else if (isTextReadyToRender && !isLoaded && !isPictureReady && !isPetitionPublished) {
             setPetitionBtnTitle('А картинка где?')
-        } else if (isTextReadyToRender && !isLoaded && isPictureReady && !isPetitionPublished) {
+        } else if (isTextReadyToRender && !isLoaded && isPictureReady && !isPetitionPublished && currentUser.uid) {
             setPetitionBtnTitle('Инициатива готова к публикации')
         } else if (isLoaded) {
             setPetitionBtnTitle('Публикуем инициативу...')
