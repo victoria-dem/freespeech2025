@@ -4,7 +4,7 @@ import ('./sign-in-success-form.css')
 
 function SignInSuccessForm () {
     return (
-        <div>
+        <div className='popup__success'>
         <img src={letter}></img>
             <p>Подтвердите адрес электронной почты</p>
             <p>Добро пожаловать в Центр общественных инициатив</p>
