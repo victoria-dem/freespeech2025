@@ -174,7 +174,7 @@ function App() {
 
     useEffect(() => {
         setLatestPetitions();
-    }, [hasCheckedLogin, isUserLoggedIn]);
+    }, [hasCheckedLogin, isUserLoggedIn, currentUser]);
 
     //получить все петиции из базы данных для страницы PetitionsPage
     useEffect(() => {
