@@ -1,10 +1,18 @@
 import React, {useState, useEffect, useContext, useRef} from 'react';
 import {storage} from "../../utils/firebase";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
-import deleteButton from '../../images/delete-btn.png'
+import deleteButton from '../../images/delete-btn.svg'
 import Loader from 'react-loader-spinner'
 
-function PetitionPicture({getPetitionPicData, url, handleDeletePicture, isPetitionPublished, isPictureReady}) {
+function PetitionPicture({
+                             getPetitionPicData,
+                             url,
+                             handleDeletePicture,
+                             isPetitionPublished,
+                             isPictureReady,
+                             isDefaultPictureChosen,
+                             handleAccountBtnClick
+                         }) {
     const currentUser = useContext(CurrentUserContext);
     const [picture, setPicture] = useState({})
     const [isPictureChosen, setIsPictureChosen] = useState(false)
@@ -74,16 +82,19 @@ function PetitionPicture({getPetitionPicData, url, handleDeletePicture, isPetiti
         }
     }, [isPetitionPublished])
     
-    
     return (
         <div className="petition-form__user-picture-element"
-        style={{border: (isPicUploaded && isPictureChosen) ? 'none' :'1px dashed #C4C4C4'}}>
+             style={{border: (isPicUploaded && isPictureChosen) || (isDefaultPictureChosen && isPictureReady) ? 'none' : '1px dashed #C4C4C4'}}>
             {!currentUser.uid &&
             <div className="petition-form__anonymous-user-msg">
-                Загружать свои картинки и подавать инициативу могут
-                подавать только залогиненые пользователи.
-                Линк на логин будет здесь... Пока идите наверх,
-                пожалуйста.
+                <p className="petition-form__anonymous-user-msg-text">
+                    Для того чтобы создать инициативу,
+                </p>
+                <p className="petition-form__anonymous-user-msg-text">
+                    <a className="petition-form__anonymous-user-msg-link" onClick={handleAccountBtnClick}>
+                        залогиньтесь
+                    </a> пожалуйста.
+                </p>
             </div>}
             
             {url &&
@@ -98,7 +109,7 @@ function PetitionPicture({getPetitionPicData, url, handleDeletePicture, isPetiti
                         onClick={handlePictureUpload}>
                 </button>
                 <span className="petition-form__button-text">
-                Загрузите картинку
+                    <a className="petition-form__pic-upload-link" onClick={handlePictureUpload}>Загрузите картинку</a>
                 </span>
             </>}
             
@@ -111,7 +122,7 @@ function PetitionPicture({getPetitionPicData, url, handleDeletePicture, isPetiti
                    placeholder="placeholder text"
                    onClick={resetFileInput} //reset input
             />}
-    
+            
             {isPictureChosen && !isPicUploaded &&
             <div className="petition-form__progress-bar">
                 <Loader

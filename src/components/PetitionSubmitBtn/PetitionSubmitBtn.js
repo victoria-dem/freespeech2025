@@ -52,14 +52,20 @@ function PetitionSubmitBtn(props) {
         }
     }, [isTextReadyToRender, isPictureReady])
     
+    console.log('isSubmitBtnAvailable=', isSubmitBtnAvailable)
+    
+    
     return (
         <button
             type="submit"
-            className={cn("petition-form__submit-btn", {"petition-form__submit-btn_disabled": !isSubmitBtnAvailable})}
+            className={cn("petition-form__submit-btn",
+                {"petition-form__submit-btn_disabled": !isSubmitBtnAvailable},
+                {"petition-form__submit-btn_active" : isSubmitBtnAvailable})}
             onClick={handleSubmitPetition}
             disabled={!isSubmitBtnAvailable}
         >
-            {petitionBtnTitle}
+            Отправить
+            {/*{petitionBtnTitle}*/}
         </button>
     )
 }

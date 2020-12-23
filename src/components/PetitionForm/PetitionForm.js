@@ -3,6 +3,7 @@ import './petition-form.css'
 import {db} from '../../utils/firebase'
 import petitionTextPrep from "../../utils/petitionTextPrep";
 import petitionDefaultTextPrep from "../../utils/petitionDefaultTextPrep";
+import cn from 'classnames';
 
 const validators = {
     petitionTag: {
@@ -26,7 +27,7 @@ const validators = {
     }
 }
 
-function PetitionForm({getPetitionTextData, resetTextInputs, setPoemId}) {
+function PetitionForm({getPetitionTextData, resetTextInputs}) {
     
     const [petitionValues, setPetitionValues] = React.useState({
         petitionTag: '',
@@ -94,10 +95,10 @@ function PetitionForm({getPetitionTextData, resetTextInputs, setPoemId}) {
     
     
     // здесь надо добавить валидность двух полей
-    useEffect(()=>{
+    useEffect(() => {
         if (isPoemReady &&
-            petitionValues.petition.length>10 &&
-            petitionValues.petitionTag.length>4 &&
+            petitionValues.petition.length > 10 &&
+            petitionValues.petitionTag.length > 4 &&
             isTagReady &&
             !errorMessage.errorMessageTag &&
             !errorMessage.errorMessageText
@@ -141,10 +142,8 @@ function PetitionForm({getPetitionTextData, resetTextInputs, setPoemId}) {
                         });
                         if (docIds.length !== 0) {
                             petitionTextPrep(docIds, setPoemText, searchWord)
-                            setPoemId(Date.now())
                         } else {
                             petitionDefaultTextPrep(setIsPoemReady, setPoemText)
-                            setPoemId(Date.now())
                         }
                     }
                 )
@@ -193,13 +192,16 @@ function PetitionForm({getPetitionTextData, resetTextInputs, setPoemId}) {
         })
     }, [resetTextInputs])
     
+    console.log(errorMessage.errorMessageTag)
+    
     return (
         <>
             <form className="petition-form__form" name="form-petition" noValidate>
                 <fieldset className="petition-form__form-fields">
                     <label className="petition-form__form-label">
                         <input
-                            className="petition-form__form-input"
+                            className={cn("petition-form__form-input",
+                                {"petition-form__form-input_error": errorMessage.errorMessageTag})}
                             type="text"
                             id="petition-tag"
                             placeholder="Ключевое слово"
@@ -217,7 +219,8 @@ function PetitionForm({getPetitionTextData, resetTextInputs, setPoemId}) {
                     </label>
                     <label className="petition-form__form-label">
                         <textarea
-                            className="petition-form__form-input petition-form__form-input_size"
+                            className={cn("petition-form__form-input petition-form__form-input_size",
+                                {"petition-form__form-input_error": errorMessage.errorMessageText})}
                             id="petition"
                             placeholder="Текст инициативы ..."
                             name="petition"

@@ -1,15 +1,12 @@
 import React from 'react';
+import cn from 'classnames';
 
-const PoemLine = ({line, poemId}) => {
-    
-    const [prevPoemId, setPrevPoemId] = React.useState(0)
-    
-    
-    React.useEffect(()=>{
-        setPrevPoemId(poemId)
-    }, [])
-    
-    console.log('renderagain', poemId, prevPoemId)
-    return <p className="petition-form__poem-line">{line}</p>
+const PoemLine = ({line, isAnimationIn, isAnimationOut}) => {
+    return <p className={cn("petition-form__poem-line",
+        {"petition-form__poem-line_animation": isAnimationIn},
+        {"petition-form__poem-line_animation-out": isAnimationOut}
+        )}>
+        {line}
+    </p>
 }
-export default React.memo(PoemLine)
+export default PoemLine

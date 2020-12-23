@@ -10,6 +10,7 @@ function DefaultPicture({url, getDefaultPetitionPicData, isTextReadyToRender}){
     const [isReadyToClick, setIsReadyToClick] = useState(false)
     
     function handleDefaultPictureClick(e) {
+        e.preventDefault();
         if (isTextReadyToRender && currentUser.uid) {
             const filePath = e.target.src
             setDefaultPicName([...filePath.matchAll(/o\/(.*)\?/g)][0][1])
