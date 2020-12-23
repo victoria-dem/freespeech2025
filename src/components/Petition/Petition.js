@@ -11,7 +11,7 @@ import PetitionSteps from "../PetitionSteps/PetitionSteps";
 
 // import PetitionStatus from "../PetitionStatus/PetitionStatus";
 
-function Petition({ onAddPetition }) {
+function Petition({ onAddPetition, nickname }) {
     const currentUser = useContext(CurrentUserContext);
     const [poemText, setPoemText] = useState('')
     const [tagText, setTagText] = useState('')
@@ -104,7 +104,7 @@ function Petition({ onAddPetition }) {
                 likes: [],
                 disLikes: [],
                 url: url,
-                nick: currentUser.nick
+                nick: nickname
             }
             db.collection("petitions")
                 .add(data)

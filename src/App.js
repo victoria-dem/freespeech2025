@@ -315,7 +315,8 @@ function App() {
                         onAddPetition={handleAddPetition}
                         onMyPetitionsChoose={handleMyPetitionsChoose}
                         onActualPetitionsChoose={handleActualPetitionsChoose}
-                        nickname={nickname} onAllPetitionsChoose={handleAllPetitionsChoose}
+                        nickname={nickname}
+                        onAllPetitionsChoose={handleAllPetitionsChoose}
                     />
                 </Route>
                 <Route exact path="/petitions">
