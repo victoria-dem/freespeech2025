@@ -103,8 +103,7 @@ function Petition({ onAddPetition }) {
                 futureTime: time,
                 likes: [],
                 disLikes: [],
-                url: url,
-                nick: currentUser.nick
+                url: url
             }
             db.collection("petitions")
                 .add(data)

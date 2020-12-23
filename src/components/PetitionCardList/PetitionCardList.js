@@ -7,8 +7,8 @@ import { config } from 'react-spring';
 import './petition-card-list.css';
 import { NavLink } from 'react-router-dom';
 
-const PetitionCardList = ({ petitions, onLikeClick, onDislikeClick,
-  onMyPetitionsChoose, nickname, onActualPetitionsChoose, isLoggedIn, onAllPetitionsChoose }) => {
+const PetitionCardList = ({ petitions, onLikeClick, onMyPetitionsChoose, nickname, 
+  onActualPetitionsChoose, isLoggedIn, onAllPetitionsChoose, onDeletePetition }) => {
   const carousel = useRef();
   const [isActButtonClicked, setIsActButtonClicked] = useState(true);
   const [isMyButtonClicked, setIsMyButtonClicked] = useState(false);
@@ -44,7 +44,7 @@ const PetitionCardList = ({ petitions, onLikeClick, onDislikeClick,
             petitions.map((petition) => {
               return (
                 <PetitionCard key={uuidv4()} petition={petition} onLikeClick={onLikeClick}
-                  onDislikeClick={onDislikeClick} isLoggedIn={isLoggedIn} nickname={nickname}/>
+                isLoggedIn={isLoggedIn} nickname={nickname} onDeletePetition={onDeletePetition}/>
               )
             })
           }
