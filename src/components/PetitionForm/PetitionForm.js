@@ -202,7 +202,7 @@ function PetitionForm({getPetitionTextData, resetTextInputs, setPoemId}) {
                             className="petition-form__form-input"
                             type="text"
                             id="petition-tag"
-                            placeholder="* Ключевое слово"
+                            placeholder="Ключевое слово"
                             name="petitionTag"
                             minLength="4"
                             maxLength="20"
@@ -219,7 +219,7 @@ function PetitionForm({getPetitionTextData, resetTextInputs, setPoemId}) {
                         <textarea
                             className="petition-form__form-input petition-form__form-input_size"
                             id="petition"
-                            placeholder="* Текст инициативы ..."
+                            placeholder="Текст инициативы ..."
                             name="petition"
                             minLength="10"
                             maxLength="140"
