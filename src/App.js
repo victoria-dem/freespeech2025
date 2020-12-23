@@ -86,7 +86,7 @@ function App() {
         const user = auth.currentUser
         if (user !== null) {
             if (user.displayName !== null) {
-                setNickname(user.displayName)
+                setNickname(user.displayName);
             }
         } else {
             setNickname('')
@@ -108,7 +108,6 @@ function App() {
         let cleanUp = false;
         //только после проверки на авторизацию
         if (hasCheckedLogin) {
-
             Promise.all([
                 db.collection("petitions")
                     .orderBy("timestamp", "desc")
@@ -120,36 +119,39 @@ function App() {
                     .limit(8)
                     .get()
             ]).then(values => {
-                setPetitions([]);
-                const [allLatestPetitions, onlyPublicPetitions] = values;
-                const ids = [];
-                if (isUserLoggedIn) {
-                    allLatestPetitions.forEach((doc) => {
-                        if (doc.data().isPublic || (currentUser.uid && doc.data().uid === currentUser.uid)) {
-                            setPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
-                            ids.push(doc.id);
-                        }
-                    });
-
-                    //если среди последних петиций не хватает публичных или созданных пользователем
-                    //добавляем последние публичные
-                    if (ids.length < 8) {
-                        onlyPublicPetitions.forEach((doc) => {
-                            if (!ids.includes(doc.id) && ids.length < 8) {
+                if (!cleanUp) {
+                    setPetitions([]);
+                    const [allLatestPetitions, onlyPublicPetitions] = values;
+                    const ids = [];
+                    if (isUserLoggedIn) {
+                        allLatestPetitions.forEach((doc) => {
+                            if (doc.data().isPublic || (currentUser.uid && doc.data().uid === currentUser.uid)) {
                                 setPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
                                 ids.push(doc.id);
                             }
                         });
-                        ids.length = 0;
+
+                        //если среди последних петиций не хватает публичных или созданных пользователем
+                        //добавляем последние публичные
+                        if (ids.length < 8) {
+                            onlyPublicPetitions.forEach((doc) => {
+                                if (!ids.includes(doc.id) && ids.length < 8) {
+                                    setPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
+                                    ids.push(doc.id);
+                                }
+                            });
+                            ids.length = 0;
+                        }
+                    } else {
+                        setPetitions([]);
+                        onlyPublicPetitions.forEach((doc) => {
+                            setPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
+                        });
                     }
-                } else {
-                    setPetitions([]);
-                    onlyPublicPetitions.forEach((doc) => {
-                        setPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
-                    });
                 }
             })
                 .catch(err => console.log(err));
+            return () => cleanUp = true;
         }
     }
 
@@ -176,7 +178,7 @@ function App() {
 
     useEffect(() => {
         setLatestPetitions();
-    }, [hasCheckedLogin, isUserLoggedIn, currentUser]);
+    }, [hasCheckedLogin, isUserLoggedIn]);
 
     //получить все петиции из базы данных для страницы PetitionsPage
     useEffect(() => {
@@ -191,7 +193,6 @@ function App() {
                         setAllPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
                     }
                 });
-                // console.log(petitions.length)
             })
         // }
         // }, [ hasCheckedLogin, isUserLoggedIn]);
