@@ -123,7 +123,7 @@ const Main = ({ onUpdateUser, isLoggedIn, petitions, onLikeClick,
                     onMyPetitionsChoose={onMyPetitionsChoose} nickname={nickname}
                     onActualPetitionsChoose={onActualPetitionsChoose} isLoggedIn={isLoggedIn}
                     onAllPetitionsChoose={onAllPetitionsChoose} onDeletePetition={onDeletePetition}/>
-                <Petition onAddPetition={onAddPetition} nickname={nickname}/>
+                <Petition onAddPetition={onAddPetition} nickname={nickname} handleAccountBtnClick={handleAccountBtnClick}/>
                 <Popup
                     onClose={closePopup}
                     onChange={handleSignUpChange}

@@ -11,7 +11,7 @@ import PetitionSteps from "../PetitionSteps/PetitionSteps";
 
 // import PetitionStatus from "../PetitionStatus/PetitionStatus";
 
-function Petition({ onAddPetition, nickname }) {
+function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
     const currentUser = useContext(CurrentUserContext);
     const [poemText, setPoemText] = useState('')
     const [tagText, setTagText] = useState('')
@@ -26,11 +26,9 @@ function Petition({ onAddPetition, nickname }) {
     const [isPublic, setIsPublic] = useState(false)
     const [isAnimationIn, setIsAnimationIn] = React.useState(false)
     const [isAnimationOut, setIsAnimationOut] =useState(false)
+    const [isDefaultPictureChosen, setIsDefaultPictureChosen] =useState(false)
     // const [status, setStatus] = useState('Просто контролируем каждое ваше нажатие клавиш. Может ну его, связываться с нами ...')
 
-    console.log(isAnimationOut)
-    
-    
     const handleDeletePicture = () => {
         if (url) {
             setUrl('')
@@ -64,6 +62,7 @@ function Petition({ onAddPetition, nickname }) {
     const getDefaultPetitionPicData = (defaultPicName) => {
         if (defaultPicName) {
             console.log('default picture chosen')
+            setIsDefaultPictureChosen(true)
             setPictureData({
                 picFullPath: defaultPicName,
                 picName: defaultPicName,
@@ -173,7 +172,10 @@ function Petition({ onAddPetition, nickname }) {
                     url={url}
                     handleDeletePicture={handleDeletePicture}
                     isPetitionPublished={isPetitionPublished}
-                    isPictureReady={isPictureReady} />
+                    isPictureReady={isPictureReady}
+                    isDefaultPictureChosen={isDefaultPictureChosen}
+                    handleAccountBtnClick={handleAccountBtnClick}
+                />
                 <PetitionDefaultPictures
                     getDefaultPetitionPicData={getDefaultPetitionPicData}
                     isTextReadyToRender={isTextReadyToRender} />

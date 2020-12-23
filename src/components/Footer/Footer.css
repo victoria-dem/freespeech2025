@@ -1,13 +1,20 @@
 .footer {
+  margin: 0 auto;
   display: flex;
   flex-direction: row;
   border-top: 1px solid grey;
-  min-height: 100px;
+  width: 100%;
+  /*max-width: 1400px;*/
+  min-height: 82px;
   justify-content: space-between;
   align-items: flex-end;
 }
 
 .footer__copyright {
-  text-align: left;
-  padding: 0 50px 0 50px;
+  /*text-align: left;*/
+  margin: 0 0 32px 37px;
+}
+
+.footer__text{
+  margin: 0 37px 32px 0;
 }
