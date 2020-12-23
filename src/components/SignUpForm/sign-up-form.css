@@ -77,12 +77,6 @@
 
 
 
-@media screen and (max-width: 580px) {
-  .form__input {
-    font-size: 12px;
-    line-height: 15px;
-  }
-}
 
 .form__input_position {
   margin-top: 5px;
@@ -92,15 +86,9 @@
   color: #000;
   text-align: center;
   align-self: center;
+  white-space: normal;
 }
 
-@media screen and (max-width: 580px) {
-  .form__heading {
-    width: 200px;
-    font-size: 18px;
-    line-height: 22px;
-  }
-}
 
 .form__handler {
   border: 0;
@@ -110,11 +98,6 @@
   width: 330px;
 }
 
-@media screen and (max-width: 580px) {
-  .form__handler {
-    width: 200px;
-  }
-}
 
 .form__fields {
   border: 0;
@@ -125,11 +108,6 @@
   text-align: left;
 }
 
-@media screen and (max-width: 580px) {
-  .form__fields {
-    width: 200px;
-  }
-}
 
 .form__field {
   display: block;
@@ -194,4 +172,27 @@
   max-width: 300px;
 }
 
+
+@media screen and (max-width: 580px) {
+  .form__input {
+    font-size: 12px;
+    line-height: 15px;
+    width: 220px;
+  }
+  .form__heading {
+    width: 200px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .form__handler {
+    width: 260px;
+  }
+  .form__fields {
+    width: 220px;
+  }
+  .form__checkbox-label {
+    padding-left: 3px;
+  }
+
+}
 

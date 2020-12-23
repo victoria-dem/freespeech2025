@@ -31,10 +31,10 @@
 
 }
 
-@media screen and (max-width: 540px) {
+@media screen and (max-width: 440px) {
     .popup__container {
 
-        width: calc(100vw - 140px);
+        width: calc(100vw - 40px);
         min-width: auto;
     }
 }
@@ -42,7 +42,7 @@
 
 .popup__button-close {
     position: absolute;
-    right: calc(100vw - 800px);
+    /*right: calc(100vw - 800px);*/
     top: 10px;
     right: 10px;
     padding: 0;
@@ -50,7 +50,6 @@
     border-width: 0;
     width: 20px;
     height: 20px;
-    /*background-image: url(../../images/icClose.svg);*/
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
