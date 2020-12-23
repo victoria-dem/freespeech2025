@@ -5,7 +5,7 @@ function PoemLine({line, poemId}) {
     const [isAnimated, setIsAnimated] = useState('false')
     const [prevPoemId, setPrevPoemId] = useState(0)
     
-    console.log(isAnimated, prevPoemId, poemId, poemId===prevPoemId)
+    // console.log(isAnimated, prevPoemId, poemId, poemId===prevPoemId)
     
     useEffect(() => {
         
