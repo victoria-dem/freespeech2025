@@ -26,7 +26,7 @@ const validators = {
     }
 }
 
-function PetitionForm({getPetitionTextData, resetTextInputs}) {
+function PetitionForm({getPetitionTextData, resetTextInputs, setPoemId}) {
     
     const [petitionValues, setPetitionValues] = React.useState({
         petitionTag: '',
@@ -39,6 +39,7 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
     const [searchWord, setSearchWord] = useState('')
     const [isPoemReady, setIsPoemReady] = useState(false)
     const [isPetitionReady, setIsPetitionReady] = useState(false)
+    
     const [errorMessage, setErrorMessage] = useState({
         errorMessageTag: '',
         errorMessageText: ''
@@ -60,6 +61,7 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
     // console.log(isTagReady, isPoemReady, isPetitionReady, poemText)
     
     // console.log(!errorMessage.errorMessageTag, !errorMessage.errorMessageText)
+    
     
     const handleChange = e => {
         setIsKeyPressed(!isKeyPressed)
@@ -139,8 +141,10 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
                         });
                         if (docIds.length !== 0) {
                             petitionTextPrep(docIds, setPoemText, searchWord)
+                            setPoemId(Date.now())
                         } else {
                             petitionDefaultTextPrep(setIsPoemReady, setPoemText)
+                            setPoemId(Date.now())
                         }
                     }
                 )
