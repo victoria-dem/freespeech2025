@@ -2,6 +2,7 @@ import './popup.css'
 import SignUpForm from "../SignUpForm/SignUpForm";
 import SignOutForm from "../SignOutForm/SignOutForm";
 import SignInSuccessForm from "../SignInSuccessForm/SignInSuccessForm";
+import loginFormHeader from "../../images/loginFormHeader.png"
 
 function Popup(props) {
     const {
@@ -60,6 +61,8 @@ function Popup(props) {
         <div className={isAccountPageOpen ? `popup  popup_opened` : `popup`}>
             {/*<div style={styleContainer} className="popup__container">*/}
             <div className="popup__container">
+                {/*<div></div>*/}
+                <img src={loginFormHeader} alt='login form' className='popup__image'/>
                 <button onClick={onClose} className="popup__button-close"/>
                 {renderInsightPopup(popupContain)}
             </div>

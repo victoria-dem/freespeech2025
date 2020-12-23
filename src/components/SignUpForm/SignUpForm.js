@@ -32,8 +32,8 @@ const SignUpForm = ({
     return (
         <form className="form" name="form-signup" noValidate>
             <h2 className="form__heading">Добро пожаловать!</h2>
-            <fieldset className="form__fields">
-                <label className="form__field-input">
+            {/*<fieldset className="form__fields">*/}
+            {/*    <label className="form__field-input">*/}
                     <input
                         onChange={onChange}
                         className="form__input form__input-first-field"
@@ -48,8 +48,9 @@ const SignUpForm = ({
                         value={email}
                     />
                     <span className="form__error-text">{emailErrorText}</span>
-                </label>
-                <label>
+                {/*</label>*/}
+                {/*<label className='form__label'>*/}
+            <label htmlFor="checkBoxOne" className="form__label form__label_direction_right">
                     <input onChange={onChange} required className="form__checkbox" type="checkbox" id="checkBoxOne"
                            name="checkBoxOne"
                            checked={checkBoxOne}
@@ -57,7 +58,7 @@ const SignUpForm = ({
                     <span className="form__pseudo-item"></span>
                     <span className="form__checkbox-label">Да, я нахожусь в здравом уме</span><br/>
                 </label>
-                <label>
+                <label htmlFor="checkBoxTwo" className='form__label'>
                     <input onChange={onChange} required
                            className="form__checkbox"
                            checked={checkBoxTwo}
@@ -65,7 +66,7 @@ const SignUpForm = ({
                     <span className="form__pseudo-item"></span>
                     <span className="form__checkbox-label">Да, я пытался решить проблему сам</span><br/>
                 </label>
-                <label>
+                <label htmlFor="checkBoxThree" className='form__label'>
                     <input onChange={onChange} required
                            className="form__checkbox"
                            checked={checkBoxThree}
@@ -82,7 +83,7 @@ const SignUpForm = ({
                         className={isSubmitDisabled ? "form__submit-text form__submit-text_disabled" : "form__submit-text"}>Войти</span>
                     <img src={isSubmitDisabled ? signInBtnDis : signInBtn} alt='Button Sign-in'></img>
                 </button>
-            </fieldset>
+            {/*</fieldset>*/}
         </form>
     );
 }
