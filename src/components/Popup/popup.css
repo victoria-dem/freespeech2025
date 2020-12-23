@@ -41,23 +41,20 @@
 
 
 .popup__button-close {
-    position: relative;
-    /*margin: 17px 10px 0 8px;*/
+    position: absolute;
     right: calc(100vw - 800px);
-    /*width: calc(100vw - 140px);*/
-    top: -100px;
-    /*right: auto;*/
-    /*top: auto;*/
+    top: 10px;
+    right: 10px;
     padding: 0;
     background-color: transparent;
     border-width: 0;
     width: 20px;
     height: 20px;
-    background-image: url(../../images/ic_close.svg);
+    /*background-image: url(../../images/icClose.svg);*/
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    z-index: 6;
+    z-index: 10;
 }
 
 @media screen and (max-width: 600px) {

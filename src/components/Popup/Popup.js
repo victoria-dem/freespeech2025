@@ -3,6 +3,7 @@ import SignUpForm from "../SignUpForm/SignUpForm";
 import SignOutForm from "../SignOutForm/SignOutForm";
 import SignInSuccessForm from "../SignInSuccessForm/SignInSuccessForm";
 import loginFormHeader from "../../images/loginFormHeader.png"
+import icClose from "../../images/icClose.svg"
 
 function Popup(props) {
     const {
@@ -63,7 +64,7 @@ function Popup(props) {
             <div className="popup__container">
                 {/*<div></div>*/}
                 <img src={loginFormHeader} alt='login form' className='popup__image'/>
-                <button onClick={onClose} className="popup__button-close"/>
+                <button onClick={onClose} className="popup__button-close"><img src={icClose} alt='close popup'/></button>
                 {renderInsightPopup(popupContain)}
             </div>
         </div>

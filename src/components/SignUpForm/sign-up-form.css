@@ -1,13 +1,10 @@
 .form {
-  /*background: #fff;*/
   font-family: 'Inter', sans-serif;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
   padding:0 28px 40px 28px;
-  /*position: relative;*/
-  /*z-index: 5;*/
 }
 
 .form__text-email {
@@ -105,8 +102,6 @@
   }
 }
 
-
-
 .form__handler {
   border: 0;
   outline: none;
@@ -126,7 +121,6 @@
   outline: none;
   margin: 0;
   padding: 0;
-  /*width: 358px;*/
   z-index: 5;
   text-align: left;
 }
@@ -179,7 +173,6 @@
   background-repeat: no-repeat;
 }
 
-
 .form__pseudo-item {
   display: inline-block;
   vertical-align: middle;
@@ -196,6 +189,7 @@
   height: 40px;
   display: inherit;
 }
+
 .form__field-input {
   max-width: 300px;
 }
