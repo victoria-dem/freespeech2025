@@ -24,9 +24,13 @@ function Petition({ onAddPetition, nickname }) {
     const [resetTextInputs, setResetTextInputs] = useState(false)
     const [url, setUrl] = useState('')
     const [isPublic, setIsPublic] = useState(false)
-    const [poemId, setPoemId] = useState(0)
+    const [isAnimationIn, setIsAnimationIn] = React.useState(false)
+    const [isAnimationOut, setIsAnimationOut] =useState(false)
     // const [status, setStatus] = useState('Просто контролируем каждое ваше нажатие клавиш. Может ну его, связываться с нами ...')
 
+    console.log(isAnimationOut)
+    
+    
     const handleDeletePicture = () => {
         if (url) {
             setUrl('')
@@ -40,8 +44,15 @@ function Petition({ onAddPetition, nickname }) {
     const getPetitionTextData = (petitionTextData) => {
         setPoemText(petitionTextData.poemText)
         setTagText(petitionTextData.tagText)
-        setIsTextReadyToRender(petitionTextData.isPetitionReady)
-
+        if (petitionTextData.isPetitionReady) {
+            setIsTextReadyToRender(petitionTextData.isPetitionReady)
+        } else {
+            setIsAnimationOut(true)
+            setTimeout(() =>{
+                setIsAnimationOut(false)
+                setIsTextReadyToRender(petitionTextData.isPetitionReady)
+            }, 3000)
+        }
     }
 
     const getPetitionPicData = ({ picRef, isPicUploaded }) => {
@@ -137,9 +148,14 @@ function Petition({ onAddPetition, nickname }) {
     }, [isPetitionSubmitted])
 
 
-    // useEffect(() => {
-    //     isTextReadyToRender && setStatus('Какое замечательное стихотворение мы для вас подыскали!!!')
-    // }, [isTextReadyToRender])
+    useEffect(() => {
+        if (isTextReadyToRender && poemText) {
+            setIsAnimationIn(true)
+            setTimeout(()=>{
+                setIsAnimationIn(false)
+            }, 3000)
+        }
+    }, [isTextReadyToRender, poemText])
 
     return (
         <section className="petition-form">
@@ -151,7 +167,6 @@ function Petition({ onAddPetition, nickname }) {
                 <PetitionForm
                     getPetitionTextData={getPetitionTextData}
                     resetTextInputs={resetTextInputs}
-                    setPoemId={setPoemId}
                 />
                 <PetitionPicture
                     getPetitionPicData={getPetitionPicData}
@@ -174,7 +189,8 @@ function Petition({ onAddPetition, nickname }) {
             <PetitionTextPreview
                 poemText={poemText}
                 isTextReadyToRender={isTextReadyToRender}
-                poemId={poemId}
+                isAnimationIn={isAnimationIn}
+                isAnimationOut={isAnimationOut}
             />
         </section>
     )

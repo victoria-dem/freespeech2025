@@ -59,7 +59,8 @@ function PetitionSubmitBtn(props) {
             onClick={handleSubmitPetition}
             disabled={!isSubmitBtnAvailable}
         >
-            {petitionBtnTitle}
+            Отправить
+            {/*{petitionBtnTitle}*/}
         </button>
     )
 }

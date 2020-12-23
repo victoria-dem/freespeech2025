@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext, useRef} from 'react';
 import {storage} from "../../utils/firebase";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
-import deleteButton from '../../images/delete-btn.png'
+import deleteButton from '../../images/delete-btn.svg'
 import Loader from 'react-loader-spinner'
 
 function PetitionPicture({getPetitionPicData, url, handleDeletePicture, isPetitionPublished, isPictureReady}) {
@@ -74,7 +74,7 @@ function PetitionPicture({getPetitionPicData, url, handleDeletePicture, isPetiti
         }
     }, [isPetitionPublished])
     
-    
+    console.log(isPictureChosen, isPicUploaded)
     return (
         <div className="petition-form__user-picture-element"
         style={{border: (isPicUploaded && isPictureChosen) ? 'none' :'1px dashed #C4C4C4'}}>

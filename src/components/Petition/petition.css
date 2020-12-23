@@ -201,7 +201,6 @@
   position: relative;
   width: 344px;
   height: 190px;
-
   border-radius: 16px;
   box-sizing: border-box;
 }
@@ -286,11 +285,11 @@
 }
 
 .petition-form__delete-btn {
-  width: 50px;
-  height: 50px;
+  width: 16px;
+  height: 17px;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 16px;
+  right: 16px;
   z-index: 2;
   cursor: pointer;
 }
@@ -350,7 +349,7 @@
   text-align: center;
   cursor: pointer;
   padding: 12px 28px;
-  width: 257px;
+  width: 157px;
   height: 47px;
   background: rgba(196, 196, 196, 0.2);
   border-radius: 16px;
@@ -446,29 +445,39 @@
 }
 
 .petition-form__poem-line {
-  animation: poem-animation 5s linear both;
 }
 
-@keyframes poem-animation {
+
+
+.petition-form__poem-line_animation-out {
+  animation: poem-animation-out 2s linear both;
+}
+
+
+@keyframes poem-animation-out {
   0% {
-    opacity: 0.9;
-    color: blue;
+    opacity: 1;
+    color:black;
+    font-size: 13px;
+  }
+  100% {
+    opacity: 0;
+    color: orange;
     font-size: 6px;
   }
-  30% {
-    opacity: .4;
-    color:grey;
-    font-size: 14px;
-  }
-  40% {
-    opacity: .2;
-    color:forestgreen;
-    font-size: 18px;
-  }
-  60% {
-    opacity: .6;
+}
+
+
+.petition-form__poem-line_animation {
+  animation: poem-animation-in 2s linear both;
+}
+
+
+@keyframes poem-animation-in {
+  0% {
+    opacity: 0.1;
     color: orange;
-    font-size: 16px;
+    font-size: 6px;
   }
   100% {
     opacity: 1;
@@ -476,5 +485,3 @@
     font-size: 13px;
   }
 }
-
-
