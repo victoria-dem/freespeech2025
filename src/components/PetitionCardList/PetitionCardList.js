@@ -10,7 +10,7 @@ import EmptyPetition from '../EmptyPetition/EmptyPetition';
 
 const PetitionCardList = ({ petitions, onLikeClick, onMyPetitionsChoose, nickname, 
   onActualPetitionsChoose, isLoggedIn, onAllPetitionsChoose, onDeletePetition }) => {
-  const carousel = useRef();
+  
   const [isActButtonClicked, setIsActButtonClicked] = useState(true);
   const [isMyButtonClicked, setIsMyButtonClicked] = useState(false);
   const handleMyPetitionsButtonClick = () => {
@@ -40,7 +40,7 @@ const PetitionCardList = ({ petitions, onLikeClick, onMyPetitionsChoose, nicknam
           onClick={handleMyPetitionsButtonClick}>Мои инициативы</button>
       </div>
       {isListEmpty ? <EmptyPetition/> :
-        <Carousel itemPosition='center' enableSwipe={true} ref={carousel}>
+        <Carousel itemPosition='center' enableSwipe={true}>
           {
             petitions.map((petition) => {
               return (
@@ -51,20 +51,6 @@ const PetitionCardList = ({ petitions, onLikeClick, onMyPetitionsChoose, nicknam
           }
         </Carousel>
       }
-      {/* {isListEmpty ? 'empty' :
-        <Carousel slides={
-          petitions.map((petition) => {
-            return ({
-              key: uuidv4(),
-              content: <PetitionCard petition={petition} onLikeClick={onLikeClick} 
-                onDislikeClick={onDislikeClick} isLoggedIn={isLoggedIn}/>
-            }
-            )
-          })
-        }
-          showNavigation={true}
-          animationConfig={config.slow}
-        />} */}
         <NavLink to="/petitions" className="petition-card-list__all-link" onClick={onAllPetitionsChoose}>
           Все инициативы &rarr;
         </NavLink>
