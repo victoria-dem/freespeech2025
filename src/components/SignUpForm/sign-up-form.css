@@ -159,6 +159,18 @@
 /*  background-repeat: no-repeat;*/
 /*}*/
 
+.form__checkbox:hover + .form__pseudo-item {
+  background-image: url("../../images/form-hover.svg");
+  background-repeat: no-repeat;
+}
+
+.form__checkbox:active + .form__pseudo-item {
+  background-image: url("../../images/form-click.svg");
+  background-repeat: no-repeat;
+}
+
+
+
 .form__pseudo-item {
   display: inline-block;
   vertical-align: middle;
