@@ -146,6 +146,11 @@
   background: center/contain url('../../images/likeClick.svg') no-repeat white;
 }
 
+.petition-card__like:disabled {
+  background: center/contain url('../../images/like.svg') no-repeat white;
+  opacity: 0.2;
+}
+
 .petition-card__tag {
   grid-row: 3;
   grid-column: 1/3;
