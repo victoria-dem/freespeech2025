@@ -1,0 +1,54 @@
+.empty-petition {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 860px;
+  height: 450px;
+  border: 1px solid #000;
+  margin: 39px auto 0;
+  padding: 33px 21px;
+  border-radius: 16px;
+  backdrop-filter: blur(20px);
+  box-sizing: border-box;
+  /* background-color: rgba(255,255,255,0.1); */
+  background: center/395px 197px url('../../images/myPetitionPic.svg') no-repeat rgba(255,255,255,0.1);
+}
+
+.empty-petition__text {
+  max-width: 819px;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 1.22;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+.empty-petition__link {
+  width: 275.44px;
+  height: 48px;
+  border: none;
+  border-radius: 16px;
+  background-color: black;
+  color: #fff;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 1.22;
+  text-decoration: none;
+  margin: 0;
+  padding: 12px 0;
+  box-sizing: border-box;
+  transition: background-color 0.8s linear;
+}
+
+.empty-petition__link:hover {
+  background-color: #EE6A4D;
+}
+
+.empty-petition__link:active {
+  background-color: #D84444;
+}
+
