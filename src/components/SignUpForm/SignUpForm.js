@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import './sign-up-form.css';
 import signInBtn from '../../images/signInBtn.svg'
 import signInBtnDis from '../../images/signInBtnDis.svg'
+import loginHover from '../../images/loginHover.svg'
 
 
 const SignUpForm = ({
@@ -91,7 +92,7 @@ const SignUpForm = ({
                     onClick={onSignUp}>
                     <span
                         className={isSubmitDisabled ? "form__submit-text form__submit-text_disabled" : "form__submit-text"}>Войти</span>
-                    <img src={isSubmitDisabled ? signInBtnDis : signInBtn} alt='Button Sign-in'/>
+                    <img  src={isSubmitDisabled ? signInBtnDis : signInBtn} alt='Button Sign-in'/>
                 </button>
             </form>
             <p className="form__disclaimer">Входя на сайт вы заранее соглашаетесь с любыми последствиями своих действий</p>
