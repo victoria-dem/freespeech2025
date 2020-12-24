@@ -6,6 +6,7 @@ import Carousel from 'react-elastic-carousel';
 import { config } from 'react-spring';
 import './petition-card-list.css';
 import { NavLink } from 'react-router-dom';
+import EmptyPetition from '../EmptyPetition/EmptyPetition';
 
 const PetitionCardList = ({ petitions, onLikeClick, onMyPetitionsChoose, nickname, 
   onActualPetitionsChoose, isLoggedIn, onAllPetitionsChoose, onDeletePetition }) => {
@@ -34,11 +35,11 @@ const PetitionCardList = ({ petitions, onLikeClick, onMyPetitionsChoose, nicknam
       </h2>
       <div className="petition-card-list__options">
         <button type="button" className={`petition-card-list__button ${isActButtonClicked && 'petition-card-list__button_active'}`}
-          onClick={handleActualPetitionsButtonClick} >Актуальные инициативы</button>
+          onClick={handleActualPetitionsButtonClick} >Актуальные</button>
         <button type="button" className={`petition-card-list__button ${isMyButtonClicked && 'petition-card-list__button_active'}`}
           onClick={handleMyPetitionsButtonClick}>Мои инициативы</button>
       </div>
-      {isListEmpty ? 'empty' :
+      {isListEmpty ? <EmptyPetition/> :
         <Carousel itemPosition='center' enableSwipe={true} ref={carousel}>
           {
             petitions.map((petition) => {

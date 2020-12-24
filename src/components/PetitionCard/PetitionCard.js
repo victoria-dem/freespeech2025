@@ -24,8 +24,7 @@ const PetitionCard = ({petition, onLikeClick, isLoggedIn, nickname, onDeletePeti
            <PetitionCardInfo petition={petition} onLikeClick={onLikeClick} isLoggedIn={isLoggedIn}
                 nickname={nickname} />
             <button className={petitionDeleteButtonClassName}
-                onClick={handleDeletePetition}
-            >&#128465;</button>
+                onClick={handleDeletePetition}></button>
         </div>
     );
 }

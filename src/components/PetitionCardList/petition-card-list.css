@@ -1,19 +1,22 @@
 .petition-card-list {
-  max-width: 1000px;
-  min-height: 500px;
+  max-width: 1440px;
+  min-height: 1041px;
   width: 100%;
   margin: auto;
   display: flex;
   flex-direction: column;
-  /* position: relative; */
+  background: center/cover url('../../images/petitionBackground.svg') no-repeat;
+  align-items: center;
 }
 
 .petion-card-list__title {
-  font-weight: 500;
+  font-weight: 600;
   font-style: normal;
-  font-size: 40px;
-  line-height: 47px;
+  font-size: 45px;
+  line-height: 1.22;
   color: black;
+  padding: 0;
+  margin: 150px 0 39px 0;
 }
 
 .petition-card-list__options {
@@ -21,24 +24,42 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-end;
-  margin: 0 0 15px 100px;
+  margin: 0 0 39px 0;
   min-height: 50px;
+  width: 860px;
+  border-bottom: 1px solid #000;
 }
 
 .petition-card-list__button {
   border: none;
   box-shadow: none;
   background: none;
-  margin-left: 30px;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 25px;
+  line-height: 1.22;
+  color: #000;
+  /* max-width: 419px; */
+  margin: 0;
+  padding: 0 0 16px 0;
+  width: 50%;
+  outline: none;
+  transition: color 0.8s linear;
 }
 
 .petition-card-list__button_active {
-  outline: none;
-  border-bottom: 1px solid grey;
+  border-bottom: 2px solid #EE6A4D;;
+  color: #EE6A4D;
 }
 
 .petition-card-list__button:hover {
-  border-bottom: 1px solid grey;
+  border-bottom: 2px solid #759196;
+  color: #759196;
+}
+
+.petition-card-list__button:active {
+  border-bottom: 2px solid #767596;
+  color: #767596;
 }
 
 .petition-card-list__all-link {
@@ -46,32 +67,92 @@
   color: black;
   text-align: right;
   padding: 0;
-  margin: 30px 0 0 0;
-  font-size: 24px;
+  margin: 50px 0 0 0;
+  max-width: 860px;
+  width: 100%;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 25px;
+  line-height: 1.22;
+  transition: color 0.8s linear;
 }
+
+.petition-card-list__all-link:hover {
+  color: #EE6A4D;
+}
+
+.petition-card-list__all-link:active {
+  color: #D84444;
+}
+
 /* стили карусели */
-/* .rec-arrow-left  */
-/* button.lgksPe {
-  background-color: white;
+.galrjd {
+  justify-content: center;
 }
 
-button.lgksPe:focus:enabled{
-  background-color: white;
-  color: black;
+.rec-slider-container {
+  max-width: 900px;
+  min-height: 500px;
 }
 
-button.lgksPe:hover:enabled {
-  background-color: white;
+button.lgksPe,button.lgksPe:focus:enabled,button.lgksPe:hover:enabled {
+  background-color: rgba(255,255,255,0.1);
+  font-size: 0;
+  box-shadow: none;
+  min-width: 22.92px;
+  width: 22.92px;
+  height: 36.67px;
+}
+
+.iLquPE:disabled {
+  background-color: rgba(255,255,255,0.1);
+  font-size: 0;
+  box-shadow: none;
+  opacity: 0.2;
+  min-width: 22.92px;
+  width: 22.92px;
+  height: 36.67px;
+}
+
+.rec-arrow-right{
+  background: center/contain url('../../images/rightArrow.svg') no-repeat white;
+}
+
+.rec-arrow-right:hover:enabled{
+  background: center/contain url('../../images/rightArrowHover.svg') no-repeat;
+}
+
+.rec-arrow-right:focus:enabled{
+  background: center/contain url('../../images/rightArrowClick.svg') no-repeat;
+}
+
+.rec-arrow-left{
+  background: center/contain url('../../images/leftArrow.svg') no-repeat;
+}
+
+.rec-arrow-left:hover:enabled {
+  background: center/contain url('../../images/leftArrowHover.svg') no-repeat;
+}
+
+.rec-arrow-left:focus:enabled {
+  background: center/contain url('../../images/leftArrowClick.svg') no-repeat;
 }
 
 button.rec-dot{
-  background-color: rgb(231, 227, 224);
-  box-shadow: 0 0 1px 3px rgba(233, 125, 24, 0.5);
+  width: 16px;
+  height: 16px;
+  background-color: #C4C4C4;
+  /* box-shadow: 0 0 1px 3px rgba(233, 125, 24, 0.5); */
+}
+
+button.cJeRRR {
+  box-shadow: 0 0 1px 3px #EE6A4D;
+  background-color: #EE6A4D;
 }
 
 button.rec-dot:hover, button.rec-dot:active:enabled, button.rec-dot:focus:enabled  {
   box-shadow: 0 0 1px 3px rgba(241, 118, 3, 0.774);
-} */
+}
 
 @media screen and (max-width: 1000px) {
   .rec-carousel-wrapper {
