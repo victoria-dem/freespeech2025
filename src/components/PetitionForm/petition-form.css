@@ -18,6 +18,20 @@
   /*width: 100%;*/
 }
 
+
+@media screen and (max-width: 950px) {
+  .petition-form__form-fields {
+    margin: 0 0 0 0;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .petition-form__form-fields {
+    margin: 0 0 0 0;
+  }
+}
+
+
 .petition-form__form-label {
   position: relative;
 }

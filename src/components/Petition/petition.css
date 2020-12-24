@@ -9,6 +9,7 @@
 
 @media screen and (max-width: 950px) {
   .petition-form {
+    /*border: 1px solid red;*/
     display: grid;
     margin: 180px auto 60px;
     grid-template-areas:
@@ -36,7 +37,7 @@
   padding: 0;
   color: black;
   grid-area: title;
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 48px;
   font-style: normal;
   font-weight: 500;
@@ -48,8 +49,24 @@
 
 @media screen and (max-width: 950px) {
   .petition-form__title {
-    margin: 20px 10px 52px 0;
-    padding: 0;
+    margin: 0 0 62px 38px;
+    padding: 0 0 0 0;
+    /*letter-spacing: 0.01em;*/
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 39px;
+    /*text-align: center;*/
+  }
+}
+
+
+
+@media screen and (max-width: 500px) {
+  .petition-form__title {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
     /*letter-spacing: 0.01em;*/
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
@@ -59,7 +76,6 @@
     text-align: center;
   }
 }
-
 
 .petition-form__content {
   display: flex;
