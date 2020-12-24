@@ -191,15 +191,19 @@
 }
 
 .petition-form__form-error {
+  padding: 0;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 500;
   font-size: 12px;
-  line-height: 15px;
+  line-height: 14px;
   color: #ff0000;
   transition: opacity 0.3s;
   position: absolute;
+  text-align: left;
   top: 46px;
-  left: 16px;
+  left: 0;
 }
 
 .petition-form__form-error_position {
@@ -404,7 +408,7 @@
   cursor: pointer;
   padding: 12px 28px;
   width: 157px;
-  height: 47px;
+  height: 48px;
   background: rgba(196, 196, 196, 0.2);
   border-radius: 16px;
   /*Прояви инициативу*/
@@ -417,13 +421,15 @@
 }
 
 .petition-form__submit-btn_active {
-  background: rgba(216,68,68,1)
-
+  background: rgba(216, 68, 68, 1);
+  color: #ffffff
 }
 
 
 .petition-form__submit-btn_active:hover {
-  background: rgba(238,106,77,1)
+  background: rgba(238, 106, 77, 1);
+  color: #ffffff
+
   /*opacity: 0.8;*/
   /*transition: 2s ease;*/
 }
@@ -470,7 +476,6 @@
 }
 
 .petition-form__poem-box-default {
-  /*border: 1px solid red;*/
   margin: 2px 0 0 9px;
   padding: 0 0 0 0;
   font-family: 'Montserrat', sans-serif;

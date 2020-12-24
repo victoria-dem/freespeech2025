@@ -38,8 +38,15 @@ function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
         // TODO: надо получить текущее имя файла и запустить удаление этого файла, если он не принадлежит к массиву заглушек
         // TODO: затем внутри then очистить объект pictureData setPictureData({}) и убрать эту очистку из предыдущего if
     }
-
+    
+    console.log(poemText, isTextReadyToRender)
+    
+    
+    
     const getPetitionTextData = (petitionTextData) => {
+    
+        console.log(petitionTextData);
+    
         setPoemText(petitionTextData.poemText)
         setTagText(petitionTextData.tagText)
         if (petitionTextData.isPetitionReady) {
@@ -52,7 +59,17 @@ function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
             }, 3000)
         }
     }
-
+    
+    useEffect(() => {
+        if (isTextReadyToRender && poemText) {
+            setIsAnimationIn(true)
+            setTimeout(()=>{
+                setIsAnimationIn(false)
+            }, 3000)
+        }
+    }, [isTextReadyToRender, poemText])
+    
+    
     const getPetitionPicData = ({ picRef, isPicUploaded }) => {
         setPictureData(picRef)
         setIsPictureReady(isPicUploaded)
@@ -73,7 +90,9 @@ function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
             // setStatus('Молодцы, что выбрали картинку одобренную Департаментом Визуальных Коммуникаций при Министерстве Свободы от Свободы Слова')
         }
     }
-
+    
+   
+    
     const getSubmitPetitionEvent = (isBtnClicked) => {
         setIsPetitionSubmitted(isBtnClicked)
     }
@@ -147,14 +166,7 @@ function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
     }, [isPetitionSubmitted])
 
 
-    useEffect(() => {
-        if (isTextReadyToRender && poemText) {
-            setIsAnimationIn(true)
-            setTimeout(()=>{
-                setIsAnimationIn(false)
-            }, 3000)
-        }
-    }, [isTextReadyToRender, poemText])
+    
 
     return (
         <section className="petition-form">

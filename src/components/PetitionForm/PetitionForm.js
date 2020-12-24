@@ -39,7 +39,7 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
     const [isTagReady, setIsTagReady] = useState(false)
     const [searchWord, setSearchWord] = useState('')
     const [isPoemReady, setIsPoemReady] = useState(false)
-    const [isPetitionReady, setIsPetitionReady] = useState(false)
+    const [isPetitionReady, setIsPetitionReady] = useState(true)
     
     const [errorMessage, setErrorMessage] = useState({
         errorMessageTag: '',
@@ -191,8 +191,6 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
             petition: '',
         })
     }, [resetTextInputs])
-    
-    console.log(errorMessage.errorMessageTag)
     
     return (
         <>

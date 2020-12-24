@@ -52,9 +52,6 @@ function PetitionSubmitBtn(props) {
         }
     }, [isTextReadyToRender, isPictureReady])
     
-    console.log('isSubmitBtnAvailable=', isSubmitBtnAvailable)
-    
-    
     return (
         <button
             type="submit"
