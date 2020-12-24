@@ -17,7 +17,8 @@ function Popup(props) {
         emailErrorText,
         setFormValues,
         setEmailErrorText,
-        formValues
+        formValues,
+        setIsAccountPageOpen
     } = props
     // const [scrollPosition, setScrollPosition] = useState(0);
     // const handleScroll = () => {
@@ -50,7 +51,7 @@ function Popup(props) {
                     formValues={formValues}
                 />;
             case 'sign-out':
-                return <SignOutForm onLogout={onLogout}/>;
+                return <SignOutForm onLogout={onLogout} setIsAccountPageOpen={setIsAccountPageOpen}  isAccountPageOpen={isAccountPageOpen}/>;
             case 'sign-in-success':
                 return <SignInSuccessForm onLogout={onLogout}/>;
             default:
@@ -60,9 +61,7 @@ function Popup(props) {
 
     return (
         <div className={isAccountPageOpen ? `popup  popup_opened` : `popup`}>
-            {/*<div style={styleContainer} className="popup__container">*/}
             <div className="popup__container">
-                {/*<div></div>*/}
                 <img src={loginFormHeader} alt='login form' className='popup__image'/>
                 <button onClick={onClose} className="popup__button-close"><img src={icClose} alt='close popup'/></button>
                 {renderInsightPopup(popupContain)}

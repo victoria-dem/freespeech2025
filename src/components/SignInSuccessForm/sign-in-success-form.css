@@ -1,4 +1,29 @@
 .popup__success {
-    padding: 60px 0 0 0;
+    padding: 0 0 200px 0;
     max-width: 360px;
+    position: relative;
+}
+
+.popup__success-header {
+    font-family: Montserrat;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 26.22px;
+}
+
+.popup__success-text {
+    font-family: Montserrat;
+    padding: 0 10px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 14.8px;
+}
+
+.popup__success-text_narrow {
+    padding: 0 50px;
+}
+
+.popup__success-image {
+    position: relative;
+    top: -30px;
 }
