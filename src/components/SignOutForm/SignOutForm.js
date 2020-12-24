@@ -1,11 +1,23 @@
 import './sign-out-form.css';
+import signInBtn from '../../images/signInBtn.svg'
 
 
-const SignOutForm = ({onLogout}) => {
+const SignOutForm = ({onLogout, setIsAccountPageOpen,  isAccountPageOpen}) => {
+
+    function onEscLogout() {
+        setIsAccountPageOpen(!isAccountPageOpen);
+    }
+
     return (
         <>
-            <h2 className="form__heading">Уже уходите?</h2>
-                <button type="submit" className="form__submit-button" onClick={onLogout}>Log Out</button>
+            <h2 className="sign-out__heading">Уже уходите?</h2>
+                <button type="button"  className="sign-out__submit-button" onClick={onLogout}>
+                    <span
+                        className="sign-out__message">Выйти</span>
+                    <img src={signInBtn} alt='Log out'/>
+                </button>
+            <button type="button"  className="sign-out__escape-button" onClick={onEscLogout}>
+                <p className="sign-out__escape-button-text">Пожалуй, останусь</p></button>
         </>
     );
 }

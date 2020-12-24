@@ -1,0 +1,8 @@
+.statistic {
+    background-image: url("../../images/statistic.svg");
+    height: 385px;
+    background-repeat: no-repeat;
+    margin: 0 auto 0;
+    min-width: 1250px;
+
+}
