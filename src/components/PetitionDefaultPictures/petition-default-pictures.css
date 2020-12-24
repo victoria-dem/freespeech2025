@@ -1,0 +1,17 @@
+.petition-form__default-picture-title {
+  margin: 30px 0 0 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0;
+  text-align: left;
+}
+
+.petition-form__default-pictures {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 16px 0 0 0;
+}

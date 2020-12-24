@@ -2,6 +2,7 @@ import React, {useState, useEffect, useContext} from 'react';
 import greyPic from '../../images/grey_default_pic.png'
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import cn from 'classnames';
+import './default-picture.css'
 
 function DefaultPicture({url, getDefaultPetitionPicData, isTextReadyToRender}){
     

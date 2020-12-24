@@ -2,6 +2,7 @@ import React from 'react';
 import './petition-text-preview.css'
 import PoemLine from "../PoemLine/PoemLine";
 import {v4 as uuidv4} from 'uuid';
+import './petition-text-preview.css'
 
 function PetitionTextPreview({poemText, isTextReadyToRender, isAnimationIn, isAnimationOut}) {
     

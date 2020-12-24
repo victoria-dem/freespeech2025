@@ -1,4 +1,5 @@
 import React from 'react';
+import './petition-steps.css'
 
 function PetitionSteps() {
     return (
