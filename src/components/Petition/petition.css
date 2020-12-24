@@ -403,7 +403,7 @@
   text-align: center;
   cursor: pointer;
   padding: 12px 28px;
-  width: 170px;
+  width: 157px;
   height: 47px;
   background: rgba(196, 196, 196, 0.2);
   border-radius: 16px;
@@ -411,8 +411,8 @@
   font-family: 'Montserrat', sans-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 20px;
-  line-height: 23px;
+  font-size: 16px;
+  line-height: 20px;
   color: rgba(0, 0, 0, 0.4);
 }
 
