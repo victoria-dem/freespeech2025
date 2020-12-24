@@ -7,7 +7,7 @@ import logout from "../../images/logout.svg"
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 
 
-function Header({handleAccountBtnClick, nickname}) {
+function Header({handleAccountBtnClick, nickname, showMenu}) {
 
     const currentUser = useContext(CurrentUserContext);
 
@@ -16,11 +16,18 @@ function Header({handleAccountBtnClick, nickname}) {
         setButtonVisibility(true)
     }, 1000)
 
+    const headerClassName = (
+        `header ${showMenu ?
+          'header_menu-visible' :
+          'header_menu-hidden'}`
+      ); 
+
 
     return (
-        <header className="header">
+        // <header className="header">
+        <header className={headerClassName}>
             <img  src={logo2} alt="Logo" className="logo"/>
-            <HeaderMenu/>
+            <HeaderMenu showMenu={showMenu}/>
                 <div   className={buttonVisibility ? "header__nickname-content header__nickname-content_visibility" : "header__nickname-content"}>
                     {nickname ?
                         <> <p className="header__nickname-title">Ваш псевдоним на сайте:</p>
