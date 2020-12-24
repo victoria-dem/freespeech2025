@@ -1,21 +1,30 @@
 import "./statistic.css"
 
-function Statistic () {
+function Statistic() {
     return (
-        <div className="statistic">
-                <div className="statistic__card">
-                    <span className="statistic__card-digits">2453</span>
-                    <span className="statistic__card-text">петиций опубликовано</span>
+        <section className="statistic">
+            <div className="statistic__list">
+                <div className="statistic__card statistic__card_place_one">
+                    <div className="statistic__text-content">
+                        <p className="statistic__card-digits">25</p>
+                        <p className="statistic__card-text">петиций опубликовано</p>
+                    </div>
                 </div>
-                <div className="statistic__card">
-                    <span className="statistic__card-digits">16 182</span>
-                    <span className="statistic__card-text">уникальных стихов в архиве</span>
+                <div className="statistic__card statistic__card_place_two">
+                    <div className="statistic__text-content">
+                        <p className="statistic__card-digits">16 693</p>
+                        <p className="statistic__card-text">уникальных стихов в архиве</p>
+                    </div>
                 </div>
-                <div className="statistic__card">
-                <span className="statistic__card-digits">98%</span>
-                <span className="statistic__card-text">точность передачи смысла</span>
+                <div className="statistic__card statistic__card_place_three">
+                    <div className="statistic__text-content">
+                        <p className="statistic__card-digits">98%</p>
+                        <p className="statistic__card-text">точность передачи смысла</p>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
     )
 }
+
 export default Statistic;

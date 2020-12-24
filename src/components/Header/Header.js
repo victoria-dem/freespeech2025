@@ -2,8 +2,6 @@ import React, {useContext, useState} from 'react';
 import HeaderMenu from "../HeaderMenu/HeaderMenu";
 import "./header.css";
 import logo from "../../images/logo.svg"
-import login from "../../images/login.svg"
-import logout from "../../images/logout.svg"
 import userIcon from "../../images/userIcon.svg"
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 
@@ -16,7 +14,8 @@ function Header({handleAccountBtnClick, nickname}) {
     setTimeout(() => {
         setButtonVisibility(true)
     }, 1000)
-const userNickname = nickname.split(' ');
+    const userNickname = nickname.split(' ');
+
 
     return (
         <header className="header">
@@ -35,8 +34,9 @@ const userNickname = nickname.split(' ');
                     </> : null}
             </div>
             <button type='button' className="header__button" onClick={handleAccountBtnClick}>
-                {(currentUser.uid === null) ? <img src={login} alt='Login'/> :
-                    <img src={logout} alt='Login'/>}</button>
+                <div className={!currentUser.uid ? "header__button-image header__button-image_login"
+                    : "header__button-image header__button-image_logout"}/>
+            </button>
         </header>
     )
 }

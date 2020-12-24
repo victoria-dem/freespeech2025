@@ -1,20 +1,81 @@
-.banner__image{
+.banner__image {
   width: 100%;
+ }
 
-}
 .banner__title {
   position: absolute;
-  top: 0;
-  left: 32%;
-  bottom: 0;
-  padding-top: 100px;
-  max-width: 550px;
-  font-size: 32px;
+  margin: auto;
+  top: 180px;
+  left: 33%;
+  /*padding-top: 150px;*/
+  max-width: 625px;
+  font-family: 'Rubik', sans-serif;
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 47px;
 }
-.banner {
-  position: relative;
 
+
+.banner__link {
+  padding: 10px 20px;
+  position: relative;
+  text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+  margin: auto;
+  color:#fff;
+  background-color: #000;
+  text-align: center;
+  display: inline-block;
+  align-self: center;
+  justify-self: center;
 }
+
+.banner__link:hover {
+  background-color: #ee6a4d;
+  transition: color, 0.2s ease-out;
+}
+
+.banner__link:active {
+  background-color: #d84444;
+  font-size: 21px;
+  line-height: 26px;
+  padding: 5px 14px;
+  transition: color,font-size,font-weight 0.2s ease-out;
+}
+
+.banner__link-button {
+  background-color: #000;
+  width: 178px;
+  height: 53px;
+  border-radius: 16px;
+  display: flex;
+  position: absolute;
+  top: 370px;
+  left: 44%;
+}
+
+.banner__link-button:hover {
+  background-color: #ee6a4d;
+  transition: color, 0.2s ease-out;
+}
+
+.banner__link-button:active {
+  background-color: #d84444;
+  width: 163px;
+  height: 50px;
+  transition: color, width, height 0.2s ease-out;
+}
+
+
+@media screen and (max-width: 1440px) {
+  .banner__title {
+    left: 28%;
+  }
+}
+
 
 @media screen and (max-width: 1350px) {
   .banner__title {

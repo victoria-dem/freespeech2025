@@ -1,8 +1,70 @@
 .statistic {
-    background-image: url("../../images/statistic.svg");
+margin: 60px auto 0;
+}
+
+.statistic__card {
     height: 385px;
     background-repeat: no-repeat;
-    margin: 0 auto 0;
-    min-width: 1250px;
+    background-size: contain;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.statistic__card_place_one {
+    background-image: url("../../images/statistic-1.svg");
 
 }
+
+.statistic__card_place_two {
+    background-image: url("../../images/statistic-2.svg");
+}
+
+.statistic__card_place_three {
+    background-image: url("../../images/statistic-3.svg");
+}
+
+.statistic__list {
+    background-repeat: no-repeat;
+    margin: 0 auto 0;
+    background-size: contain;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(100px,385px));
+}
+.statistic__text-content {
+    max-height: 200px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.statistic__card-text {
+    padding: 0;
+    margin: auto;
+    font-family: 'Montserrat',  sans-serif;
+    font-size: 24px;
+    line-height: 29px;
+    font-weight: 400;
+    max-width: 146px;
+
+}
+
+.statistic__card-digits {
+    padding: 0;
+    margin: auto;
+    font-family: 'Montserrat',  sans-serif;
+    font-size: 45px;
+    line-height: 55px;
+    font-weight: 400;
+    max-width: 146px;
+}
+
+
+@media screen and (max-width: 1300px) {
+    .statistic__list {
+        width: calc(100vw - 40px)
+    }
+}
+
+
