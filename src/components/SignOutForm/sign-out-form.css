@@ -1,0 +1,67 @@
+.sign-out__heading {
+    padding: 0;
+    margin: 0;
+    top:-12px;
+    position: relative;
+}
+.sign-out__message {
+    padding: 0;
+    margin: 0 5px 0 0;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 20.72px;
+}
+
+
+.sign-out__submit-button {
+    border: 0;
+    height: 50px;
+    background: transparent;
+    margin: 0 0 30px 0;
+    padding: 0;
+    cursor: pointer;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+
+}
+.sign-out__escape-button-text {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17.07px;
+    text-decoration-line: underline;
+    color: #759196;
+}
+
+.sign-out__submit-button:hover {
+    opacity: 0.8;
+    transition: opacity 0.4s ease-out;
+}
+
+.sign-out__submit-button:focus {
+    outline: none;
+}
+
+.sign-out__escape-button {
+    border: 0;
+    background: transparent;
+    margin: 0 0 33px 0;
+    padding: 0;
+    cursor: pointer;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+}
+
+.sign-out__escape-button:hover {
+    opacity: 0.8;
+    transition: opacity 0.4s ease-out;
+}
+
+.sign-out__escape-button:focus {
+    outline: none;
+}

@@ -8,6 +8,7 @@ import Petition from "../Petition/Petition";
 import { auth } from "../../utils/firebase";
 import Footer from '../Footer/Footer';
 import Banner from "../Banner/Banner";
+import Statistic from "../Statistic/Statistic";
 
 
 const Main = ({ onUpdateUser, isLoggedIn, petitions, onLikeClick,
@@ -17,7 +18,6 @@ const Main = ({ onUpdateUser, isLoggedIn, petitions, onLikeClick,
     const currentUser = useContext(CurrentUserContext);
     const [isAccountPageOpen, setIsAccountPageOpen] = useState(false)
     const [isLinkSent, setIsLinkSent] = useState(false)
-    // const [buttonMsg, setButtonMsg] = useState('Кнопка')
     const [isSignUpClicked, setIsSignUpClicked] = useState(false)
     const [isLogOutClicked, setIsLogOutClicked] = useState(false)
     const [values, setValues] = useState({
@@ -85,16 +85,20 @@ const Main = ({ onUpdateUser, isLoggedIn, petitions, onLikeClick,
             checkBoxThreeValid: false
         })
     }
-
+    console.log({values})
     const handleSignUpChange = e => {
         const { name, value } = e.target;
         setValues({ ...values, [name]: value });
         validation(e);
+
     }
+
 
     function validation(e) {
         const validatedFieldName = [e.target.name] + 'Valid'
-        setFormValidity(prevData => ({ ...prevData, [validatedFieldName]: e.target.validity.valid }))
+        // setFormValidity(prevData => ({ ...prevData, [validatedFieldName]: e.target.validity.valid }))
+        setFormValidity({ ...formValidity, [validatedFieldName]: e.target.validity.valid })
+        console.log( e.target.validity.valid)
         if (e.target.name === 'email' && !e.target.validity.valid) {
             setEmailErrorText("Введите правильный почтовый адрес")
         } else if (e.target.name === 'email' && e.target.validity.valid) {
@@ -119,6 +123,7 @@ const Main = ({ onUpdateUser, isLoggedIn, petitions, onLikeClick,
             <div className="main-page">
                 <Header handleAccountBtnClick={handleAccountBtnClick} nickname={nickname} />
                 <Banner />
+                {/*<Statistic />*/}
                 <PetitionCardList petitions={petitions} onLikeClick={onLikeClick}
                     onMyPetitionsChoose={onMyPetitionsChoose} nickname={nickname}
                     onActualPetitionsChoose={onActualPetitionsChoose} isLoggedIn={isLoggedIn}
@@ -136,6 +141,7 @@ const Main = ({ onUpdateUser, isLoggedIn, petitions, onLikeClick,
                     setFormValues={setValues}
                     setEmailErrorText={setEmailErrorText}
                     formValues={values}
+                    setIsAccountPageOpen={setIsAccountPageOpen}
                 />
                 <Footer />
             </div>

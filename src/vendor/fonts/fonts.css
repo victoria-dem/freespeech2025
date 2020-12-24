@@ -1,0 +1,35 @@
+@font-face {
+    src: url('./Montserrat-Regular.ttf');
+    font-family: 'Montserrat';
+    font-weight: 400;
+}
+
+@font-face {
+    src: url('./Montserrat-Medium.ttf');
+    font-family: 'Montserrat';
+    font-weight: 500;
+}
+
+@font-face {
+    src: url('./Montserrat-Bold.ttf');
+    font-family: 'Montserrat';
+    font-weight: 700;
+}
+
+@font-face {
+    src: url('./Rubik-Regular.ttf');
+    font-family: 'Rubik';
+    font-weight: 400;
+}
+
+@font-face {
+    src: url('./Rubik-Medium.ttf');
+    font-family: 'Rubik';
+    font-weight: 500;
+}
+
+@font-face {
+    src: url('./Rubik-Bold.ttf');
+    font-family: 'Rubik';
+    font-weight: 700;
+}
