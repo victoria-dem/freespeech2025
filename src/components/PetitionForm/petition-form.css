@@ -39,8 +39,22 @@
   line-height: 20px;
   letter-spacing: 0;
   text-align: left;
-  color: #000000;
+  color: #575D68;
 }
+
+
+@media screen and (max-width: 500px) {
+  .petition-form__form-input {
+    width: 192px;
+    height: 32px;
+    border-radius: 12px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
+
+
+
 
 .petition-form__form-input::placeholder {
 
@@ -65,6 +79,15 @@
   height: 104px;
   resize: none;
   width: 344px;
+}
+
+
+@media screen and (max-width: 500px) {
+  .petition-form__form-input_size {
+    width: 253px;
+    height: 76px;
+    resize: none;
+  }
 }
 
 .petition-form__form-error {

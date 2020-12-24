@@ -8,6 +8,15 @@
 }
 
 
+
+@media screen and (max-width: 500px) {
+  .petition-form__user-picture-element {
+    width: 253px;
+    height: 140px;
+  }
+}
+
+
 .petition-form__anonymous-user-msg {
   margin: 20px 0 0 0;
   padding: 0 0 0 0;
@@ -63,6 +72,16 @@
   cursor: pointer;
 }
 
+
+@media screen and (max-width: 500px) {
+  .petition-form__button {
+    width: 47px;
+    height: 47px;
+  }
+}
+
+
+
 .petition-form__button:focus {
   border: none;
   outline: none;
@@ -96,8 +115,20 @@
   line-height: 20px;
   letter-spacing: 0;
   text-align: center;
-  color: rgba(106, 95, 95, 0.8);
+  color: #759196;
 }
+
+
+@media screen and (max-width: 500px) {
+  .petition-form__button-text {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
+
+
+
+
 
 .petition-form__pic-upload-link {
   margin: 0;

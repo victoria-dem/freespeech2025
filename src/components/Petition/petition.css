@@ -7,7 +7,7 @@
       "steps button button";
 }
 
-@media screen and (max-width: 834px) {
+@media screen and (max-width: 950px) {
   .petition-form {
     display: grid;
     margin: 180px auto 60px;

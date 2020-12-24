@@ -9,6 +9,17 @@
   text-align: left;
 }
 
+
+@media screen and (max-width: 500px) {
+  .petition-form__default-picture-title {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
+
+
+
 .petition-form__default-pictures {
   display: flex;
   flex-direction: row;
