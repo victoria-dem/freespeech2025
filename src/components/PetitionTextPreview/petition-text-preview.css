@@ -19,6 +19,18 @@
   }
 }
 
+
+@media screen and (max-width: 500px) {
+  .petition-form__poem-preview {
+    background: unset;
+    /*background: url("../../images/blots_petition_tablet.svg") no-repeat center;*/
+    padding: 0 0 0 0;
+    width: 253px;
+    /*position: relative;*/
+    /*margin-left: -50px;*/
+  }
+}
+
 .petition-form__poem-preview-title {
   margin: 66px 0 0 14px;
   padding: 0 0 0 0;
@@ -103,12 +115,14 @@
 }
 
 
+
 @media screen and (max-width: 500px) {
   .petition-form__poem-box {
     width: 253px;
     height: 106px;
     font-size: 12px;
     line-height: 18px;
+    background: unset;
   }
 }
 
