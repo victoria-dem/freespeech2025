@@ -45,19 +45,17 @@ function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
     
     const getPetitionTextData = (petitionTextData) => {
     
-        console.log(petitionTextData);
-    
+        console.log('petitionTextData==', petitionTextData);
+        setIsAnimationOut(true)
+        setTimeout(() =>{
+            setIsAnimationOut(false)
+            setIsTextReadyToRender(petitionTextData.isPetitionReady)
+        }, 3000)
         setPoemText(petitionTextData.poemText)
         setTagText(petitionTextData.tagText)
-        if (petitionTextData.isPetitionReady) {
-            setIsTextReadyToRender(petitionTextData.isPetitionReady)
-        } else {
-            setIsAnimationOut(true)
-            setTimeout(() =>{
-                setIsAnimationOut(false)
-                setIsTextReadyToRender(petitionTextData.isPetitionReady)
-            }, 3000)
-        }
+        
+        setIsTextReadyToRender(petitionTextData.isPetitionReady)
+        // }
     }
     
     useEffect(() => {
