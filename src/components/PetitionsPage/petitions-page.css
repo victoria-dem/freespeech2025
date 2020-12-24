@@ -4,6 +4,7 @@
   justify-content: center;
   align-items: center;
   max-width: 1440px;
+  margin: auto;
 }
 
 .petitions-page__petitions {
@@ -56,4 +57,53 @@
 
 .petitions-page__return-link:active {
   background: center/contain url('../../images/backClick.svg') no-repeat;
+}
+
+@media screen and (min-width:768px) and (max-width: 1024px) {
+  .petitions-page__title {
+    font-size: 38px;
+    padding: 32px 0 24px;
+  }
+
+  .petitions-page__petitions {
+    grid-gap: 72px;
+    margin-bottom: 72px;
+  }
+
+  .petitions-page__count {
+    max-width: 644px;
+    font-size: 20px;
+    padding: 0 0 16px 0;
+  }
+
+  .petitions-page__return-link {
+    top: 121px;
+    left: 37px;
+  }
+}
+
+@media screen and (min-width:320px) and (max-width: 767px) {
+  .petitions-page__title {
+    font-size: 20px;
+    padding: 22px 0 32px;
+  }
+
+  .petitions-page__petitions {
+    grid-gap: 64px;
+    margin-bottom: 64px;
+  }
+
+  .petitions-page__count {
+    max-width: 216px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 0 0 16px 0;
+  }
+
+  .petitions-page__return-link {
+    width: 23px;
+    height: 17.83px;
+    top: 89.91px;
+    left: 16px;
+  }
 }

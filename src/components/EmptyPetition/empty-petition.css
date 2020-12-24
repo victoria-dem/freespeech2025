@@ -52,3 +52,36 @@
   background-color: #D84444;
 }
 
+@media screen and (min-width:768px) and (max-width:1024px) {
+  .empty-petition {
+    width: 644px;
+    background: center/240px 120px url('../../images/myPetitionPic.svg') no-repeat rgba(255,255,255,0.1);
+  }
+
+  .empty-petition__link {
+
+  }
+
+  .empty-petition__text {
+    
+  }
+}
+
+@media screen and (min-width:320px) and (max-width:767px) {
+  .empty-petition {
+    width: 216px;
+    background: center/160px 80px url('../../images/myPetitionPic.svg') no-repeat rgba(255,255,255,0.1);
+  }
+
+  .empty-petition__link {
+    font-size: 12px;
+    width: 120px;
+    height: 30px;
+    padding: 0;
+  }
+
+  .empty-petition__text {
+    font-size: 12px;
+  }
+}
+

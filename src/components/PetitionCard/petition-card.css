@@ -5,6 +5,8 @@
   height: 450px;
   border-radius: 16px;
   /* filter: drop-shadow(0px 4px 10px rgba(0,0,0,0.25)); */
+  box-shadow: 3px 3px 3px 2px rgba(0,0,0,0.15);
+  box-sizing: border-box;
   background-color: white;
   margin: 0;
   position: relative;
@@ -99,11 +101,10 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   grid-row: 5;
   grid-column: 1/3;
   max-height: 25px;
-  margin-bottom: 9px;
 }
 
 .petition-card__like-text {
@@ -177,7 +178,11 @@
   max-width: 343px;
   align-self: start;
   max-height: 192px;
-  overflow: scroll;
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 .petition-card__poem-line {
@@ -219,10 +224,11 @@
   background: center/contain url('../../images/deleteClick.svg') no-repeat;
 }
 
-@media screen and (min-width:835px) and (max-width: 1024px) {
+@media screen and (min-width:768px) and (max-width: 1024px) {
   .petition-card {
     width: 644px;
     height: 328px;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.15);
   }
 
   .petition-card__image {
@@ -254,6 +260,7 @@
   .petition-card__poem {
     padding: 8px 0 31px;
     max-height: 104px;
+    max-width: 250px;
   }
 
   .petition-card__poem-line {
@@ -279,23 +286,90 @@
     margin-left: 8px;
   }
   
+  .petition-card__like-text_count {
+    font-size: 16px;
+  }
 }
 
-@media screen and (min-width: 481px) and (max-width: 834px) {
-.rec-arrow {
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  button.rec-arrow {
     display: none;
   }
 
+  .petition-card {
+    flex-direction: column;
+    width: 214px;
+    min-height: 457px;
+    box-shadow: 1px 0.1px 0 0.5px rgba(0,0,0,0.15);
+  }
+
   .petition-card__image {
-    border-radius: 20px 20px 0 0;
+    border-radius: 16px 16px 0 0;
+    width: 214px;
+    height: 173px;
   }
   .petition-card__info {
-   min-height: 400px;
+   max-width: 214px;
+   max-height: 284px;
+   padding: 16px 22px 24px 26px;
+  }
+
+  .petition-card__name {
+    font-size: 8px;
+    margin-bottom: 4px;
+    max-width: 120px;
+  }
+
+  .petition-card__timestamp {
+    font-size: 8px;
+  }
+
+  .petition-card__tag {
+    font-size: 16px;
+    padding-top: 16px;
+  }
+
+  .petition-card__poem {
+    margin: 8px 0 21px 0;
+    height: 120px;
+    max-width: 166px;
+  }
+
+  .petition-card__poem-line {
+    font-size: 10px;
+    line-height: 1.2;
+  }
+
+  .petition-card__moderation {
+    font-size: 8px;
+  }
+
+  .petition-card__like-text {
+    font-size: 8px;
+  }
+
+  .petition-card__like {
+    width: 11.98px;
+    height: 12.17px;
+    margin: 0 2.61px 0 5.15px;
+  }
+
+  .petition-card__challenge-container {
+    margin-top: 4.68px;
+  }
+
+  .petition-card__challenge {
+    font-size: 8px;
+    margin-left: 8px;
+  }
+  
+  .petition-card__like-text_count {
+    font-size: 10px;
   }
 }
 
 
-@media screen and (max-width: 480px) {
+/* @media screen and (max-width: 480px) {
   .petition-card__image {
     height: 300px;
   }
@@ -315,5 +389,5 @@
    .petition-card__challenge {
     grid-row: 6;
     grid-column: 1;
-   }
-}
+   } */
+/* } */
