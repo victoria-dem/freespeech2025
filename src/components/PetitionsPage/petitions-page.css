@@ -2,22 +2,37 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  max-width: 1440px;
 }
 
 .petitions-page__petitions {
   display: grid;
   grid-gap: 40px;
-
+  justify-content: center;
+  margin-bottom: 180px;
 }
 
 .petitions-page__title {
-  font-weight: 500;
+  font-weight: 600;
   font-style: normal;
-  font-size: 40px;
-  line-height: 47px;
+  font-size: 45px;
+  line-height: 1.22;
   color: black;
-  padding: 60px 0 60px;
+  padding: 35px 0 39px;
   margin: 0;
+}
+
+.petitions-page__count {
+  font-weight: 600;
+  font-style: normal;
+  font-size: 25px;
+  line-height: 1.22;
+  margin: 0;
+  padding: 0 0 31px 0;
+  width: 100%;
+  max-width: 860px;
+  text-align: left;
 }
 
 .petitions-page__return-link {
@@ -28,6 +43,17 @@
   line-height: 1.2;
   margin: 0;
   position: fixed;
-  top:40px;
-  left: 40px;
+  top: 156.41px;
+  left: 67px;
+  width: 36px;
+  height: 30px;
+  background: center/contain url('../../images/back.svg') no-repeat;
+}
+
+.petitions-page__return-link:hover {
+  background: center/contain url('../../images/backHover.svg') no-repeat;
+}
+
+.petitions-page__return-link:active {
+  background: center/contain url('../../images/backClick.svg') no-repeat;
 }

@@ -8,6 +8,14 @@
     padding: 0;
 }
 
+.header__list_visible {
+    display: flex;
+}
+
+.header__list_hidden {
+    display: none;
+}
+
 .header__list-item {
     display: flex;
     justify-content: center;

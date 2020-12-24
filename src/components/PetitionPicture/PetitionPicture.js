@@ -3,6 +3,7 @@ import {storage} from "../../utils/firebase";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import deleteButton from '../../images/delete-btn.svg'
 import Loader from 'react-loader-spinner'
+import './petition-picture.css'
 
 function PetitionPicture({
                              getPetitionPicData,

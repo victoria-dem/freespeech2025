@@ -3,7 +3,7 @@ import './header-menu.css';
 import hamburger from '../../images/hamburger.svg'
 
 
-function HeaderMenu() {
+function HeaderMenu({showMenu}) {
     const [isHamburgerOpenClicked, setIsHamburgerOpenClicked] = useState(false)
 
     const handleHamburgerOpenClick = () => {
@@ -16,10 +16,17 @@ function HeaderMenu() {
         setIsHamburgerOpenClicked(!isHamburgerOpenClicked)
     }
 
+    const headerListClassName = (
+        `header__list ${showMenu ?
+          'header__list_visible' :
+          'header__list_hidden'}`
+      ); 
+
     return (
         <>
             <nav>
-                <ul className="header__list">
+                {/* <ul className="header__list"> */}
+                <ul className={headerListClassName}>
                     <li className="header__list-item">
                         <a className="header__list-link" href="#petition-card-list"
                         >Инициативы</a

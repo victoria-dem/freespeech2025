@@ -8,20 +8,28 @@ import userIcon from "../../images/userIcon.svg"
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 
 
-function Header({handleAccountBtnClick, nickname}) {
-
+function Header({handleAccountBtnClick, nickname, showMenu}) {
+    
     const currentUser = useContext(CurrentUserContext);
-
+    
     const [buttonVisibility, setButtonVisibility] = useState(false)
     setTimeout(() => {
         setButtonVisibility(true)
     }, 1000)
-const userNickname = nickname.split(' ');
-
+    
+    
+    const userNickname = nickname.split(' ');
+    
+    const headerClassName = (
+        `header ${showMenu ?
+            'header_menu-visible' :
+            'header_menu-hidden'}`
+    );
+    
     return (
-        <header className="header">
+        <header className={headerClassName}>
             <img src={logo} alt="Logo" className="logo"/>
-            <HeaderMenu/>
+            <HeaderMenu showMenu={showMenu}/>
             <div
                 className={buttonVisibility ? "header__nickname-content header__nickname-content_visibility" : "header__nickname-content"}>
                 {nickname ?

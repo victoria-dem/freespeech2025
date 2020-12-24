@@ -1,14 +1,101 @@
-/*.photo {*/
-/*  margin: 20px auto;*/
-/*  padding: 0;*/
-/*  width: 200px;*/
-/*  height: 300px;*/
-/*  object-fit: cover;*/
-/*}*/
 
-/*.card {*/
-/*  display: flex;*/
-/*  flex-direction: column;*/
-/*  margin: 0;*/
-/*  padding: 0;*/
-/*}*/
+.petition-form__poem-preview {
+  grid-area: output;
+  width: 411px;
+  margin: 0 0 26px 0;
+  padding: 34px 0 0 49px;
+  background: url("../../images/poem_background.svg") no-repeat center;
+  border-image-outset: 30px;
+}
+
+.petition-form__poem-preview-title {
+  margin: 66px 0 0 14px;
+  padding: 0 0 0 0;
+  width: 344px;
+  justify-self: center;
+  /*border: 1px solid red;*/
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0;
+  text-align: left;
+
+
+}
+
+.petition-form__poem-box-default {
+  margin: 2px 0 0 9px;
+  padding: 0 0 0 0;
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: rgba(106, 95, 95, 1);
+  text-align: left;
+
+}
+
+@media screen and (max-width: 834px) {
+  .petition-form__poem-preview {
+
+    width: 344px;
+    margin: 67px 0;
+  }
+}
+
+.petition-form__poem-box {
+  padding: 5px 5px 5px 5px;
+  width: 344px;
+  box-sizing: border-box;
+  border-radius: 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 18px;
+  color: #000;
+}
+
+.petition-form__poem-line {
+}
+
+
+.petition-form__poem-line_animation-out {
+  animation: poem-animation-out 2s linear both;
+}
+
+
+@keyframes poem-animation-out {
+  0% {
+    opacity: 1;
+    color: black;
+    font-size: 13px;
+  }
+  100% {
+    opacity: 0;
+    color: orange;
+    font-size: 6px;
+  }
+}
+
+
+.petition-form__poem-line_animation {
+  animation: poem-animation-in 2s linear both;
+}
+
+
+@keyframes poem-animation-in {
+  0% {
+    opacity: 0.1;
+    color: orange;
+    font-size: 6px;
+  }
+  100% {
+    opacity: 1;
+    color: black;
+    font-size: 13px;
+  }
+}
