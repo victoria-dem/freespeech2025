@@ -8,6 +8,17 @@
   border-radius: 16px;
 }
 
+
+
+@media screen and (max-width: 500px) {
+  .petition-form__default-picture {
+    width: 76px;
+    height: 70px;
+  }
+}
+
+
+
 .petition-form__default-picture_cursor {
   cursor: pointer;
 }

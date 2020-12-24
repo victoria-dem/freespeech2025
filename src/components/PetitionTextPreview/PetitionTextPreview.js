@@ -11,7 +11,7 @@ function PetitionTextPreview({poemText, isTextReadyToRender, isAnimationIn, isAn
             <p className="petition-form__poem-preview-title">Ваша инициатива в стихах</p>
             <div className="petition-form__poem-box">
                 {!isTextReadyToRender ? <p className="petition-form__poem-box-default">появится здесь</p> : null}
-                <div>
+                <div className="petition-form__poem-all-lines">
                     {((poemText && isTextReadyToRender) || isAnimationOut) && poemText.map((line) => <PoemLine
                         key={uuidv4()}
                         line={line}
@@ -20,6 +20,7 @@ function PetitionTextPreview({poemText, isTextReadyToRender, isAnimationIn, isAn
                     />)}
                 </div>
             </div>
+            
         </div>
     )
 }

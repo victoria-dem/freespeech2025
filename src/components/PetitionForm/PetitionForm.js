@@ -98,7 +98,7 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
     useEffect(() => {
         if (isPoemReady &&
             petitionValues.petition.length > 10 &&
-            petitionValues.petitionTag.length > 4 &&
+            petitionValues.petitionTag.length > 3 &&
             isTagReady &&
             !errorMessage.errorMessageTag &&
             !errorMessage.errorMessageText

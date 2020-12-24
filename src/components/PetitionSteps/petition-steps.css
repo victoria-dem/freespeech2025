@@ -4,7 +4,15 @@
   margin: 5px 0 0 0;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 950px) {
+  .petition-form__steps {
+    margin: 0 0 0 0;
+  }
+}
+
+
+
+@media screen and (max-width: 500px) {
   .petition-form__steps {
     display: none;
   }
@@ -41,6 +49,15 @@
 .petition-form__step-connector_position_third {
   height: 377px;
 }
+
+
+@media screen and (max-width: 950px) {
+  .petition-form__step-connector_position_third {
+    height: 703px;
+  }
+}
+
+
 
 .petition-form__step-connector_position_forth {
   height: 124px;

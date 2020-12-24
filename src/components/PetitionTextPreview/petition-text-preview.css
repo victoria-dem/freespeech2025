@@ -1,4 +1,3 @@
-
 .petition-form__poem-preview {
   grid-area: output;
   width: 411px;
@@ -6,6 +5,18 @@
   padding: 34px 0 0 49px;
   background: url("../../images/poem_background.svg") no-repeat center;
   border-image-outset: 30px;
+}
+
+
+@media screen and (max-width: 950px) {
+  .petition-form__poem-preview {
+    background: unset;
+    /*background: url("../../images/blots_petition_tablet.svg") no-repeat center;*/
+    padding: 0 0 0 0;
+    width: 344px;
+    /*position: relative;*/
+    /*margin-left: -50px;*/
+  }
 }
 
 .petition-form__poem-preview-title {
@@ -21,9 +32,25 @@
   line-height: 24px;
   letter-spacing: 0;
   text-align: left;
-
-
+  color: #000000
 }
+
+@media screen and (max-width: 950px) {
+  .petition-form__poem-preview-title {
+    margin: 63px 0 0 0;
+  }
+}
+
+
+@media screen and (max-width: 500px) {
+  .petition-form__poem-preview-title {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 18px;
+  }
+}
+
 
 .petition-form__poem-box-default {
   margin: 2px 0 0 9px;
@@ -38,28 +65,88 @@
 
 }
 
-@media screen and (max-width: 834px) {
-  .petition-form__poem-preview {
 
-    width: 344px;
-    margin: 67px 0;
+@media screen and (max-width: 950px) {
+  .petition-form__poem-box-default {
+    margin: -16px 0 0 43px;
   }
 }
+
 
 .petition-form__poem-box {
   padding: 5px 5px 5px 5px;
   width: 344px;
   box-sizing: border-box;
-  border-radius: 16px;
   font-family: 'Montserrat', sans-serif;
+  color: #000;
+  font-size: 16px;
   font-style: normal;
   font-weight: 500;
-  font-size: 13px;
-  line-height: 18px;
-  color: #000;
+  line-height: 24px;
+  text-align: left;
+  overflow: hidden;
+
+
 }
 
+
+@media screen and (max-width: 950px) {
+  .petition-form__poem-box {
+    /*border: 1px solid red;*/
+    padding: 16px 0 0 0;
+    margin: 16px 0 0 -47px;
+    width: 390px;
+    height: 255px;
+    position: relative;
+    background: url("../../images/blots_petition_tablet.svg") no-repeat center;
+  }
+}
+
+
+@media screen and (max-width: 500px) {
+  .petition-form__poem-box {
+    width: 253px;
+    height: 106px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+.petition-form__poem-all-lines {
+
+}
+
+@media screen and (max-width: 950px) {
+  .petition-form__poem-all-lines {
+    margin: 0 0 0 43px;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+}
+
+
+/*.petition-form__poem-box-blots {*/
+/*  display: none;*/
+/*}*/
+
+/*@media screen and (max-width: 950px) {*/
+/*  .petition-form__poem-box-blots {*/
+/*    !*position: absolute;*!*/
+/*    !*top: 0;*!*/
+/*    !*left: 0;*!*/
+/*    border: 10px solid red;*/
+/*    width: 340px;*/
+/*    height: 200px;*/
+/*    z-index: 100;*/
+/*  }*/
+/*}*/
+
+
+
 .petition-form__poem-line {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
 }
 
 
@@ -96,6 +183,6 @@
   100% {
     opacity: 1;
     color: black;
-    font-size: 13px;
+    font-size: 16px;
   }
 }
