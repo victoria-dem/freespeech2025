@@ -39,13 +39,13 @@ function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
         // TODO: затем внутри then очистить объект pictureData setPictureData({}) и убрать эту очистку из предыдущего if
     }
     
-    console.log(poemText, isTextReadyToRender)
+    // console.log(poemText, isTextReadyToRender)
     
     
     
     const getPetitionTextData = (petitionTextData) => {
     
-        console.log('petitionTextData==', petitionTextData);
+        // console.log('petitionTextData==', petitionTextData);
         setIsAnimationOut(true)
         setTimeout(() =>{
             setIsAnimationOut(false)
@@ -53,7 +53,6 @@ function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
         }, 3000)
         setPoemText(petitionTextData.poemText)
         setTagText(petitionTextData.tagText)
-        
         setIsTextReadyToRender(petitionTextData.isPetitionReady)
         // }
     }
