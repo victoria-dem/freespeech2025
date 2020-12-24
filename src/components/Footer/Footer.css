@@ -2,19 +2,20 @@
   margin: 0 auto;
   display: flex;
   flex-direction: row;
-  border-top: 1px solid grey;
+  border-top: 1px solid #BEBEBE;
   width: 100%;
   /* max-width: 1440px; */
-  min-height: 82px;
+  box-sizing: border-box;
+  padding: 0 40px;
+  min-height: 84px;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
 }
 
 .footer__copyright {
-  /*text-align: left;*/
-  margin: 0 0 32px 37px;
-}
-
-.footer__text{
-  margin: 0 37px 32px 0;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 1.22;
+  color: #759196;
 }

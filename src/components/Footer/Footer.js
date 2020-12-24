@@ -9,7 +9,7 @@ const Footer = () => {
         Free Speach
       </p> */}
       <p className="footer__copyright">&copy; <span id="year">2025 </span>Free Speech</p>
-      <p className="footer__text">Горячо одобрено Министерством Свободы Слова</p>
+      <p className="footer__copyright">Горячо одобрено Министерством Свободы Слова</p>
     </div>
   );
 }

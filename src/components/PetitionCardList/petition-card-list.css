@@ -40,6 +40,7 @@
   line-height: 1.22;
   color: #000;
   /* max-width: 419px; */
+  box-sizing: border-box;
   margin: 0;
   padding: 0 0 16px 0;
   width: 50%;
@@ -95,18 +96,16 @@ div.rec-slider-container {
   min-height: 500px;
 }
 
-/* button.lgksPe,button.lgksPe:focus:enabled,button.lgksPe:hover:enabled,  */
 button.rec-arrow, button.rec-arrow:focus:enabled, button.rec-arrow:hover:enabled {
-  background-color: rgba(255,255,255,0.1);
+  background-color: rgba(255, 255, 255, 0);
   font-size: 0;
   box-shadow: none;
-  min-width: 22.92px;
   width: 22.92px;
   height: 36.67px;
 }
 
 button.rec-arrow:disabled {
-  background-color: rgba(255,255,255,0.1);
+  background-color: rgba(255,255,255,0);
   font-size: 0;
   box-shadow: none;
   min-width: 22.92px;
@@ -115,18 +114,8 @@ button.rec-arrow:disabled {
   opacity: 0.2;
 }
 
-/* button.iLquPE:disabled {
-  background-color: rgba(255,255,255,0.1);
-  font-size: 0;
-  box-shadow: none;
-  opacity: 0.2;
-  min-width: 22.92px;
-  width: 22.92px;
-  height: 36.67px;
-} */
-
 button.rec-arrow-right{
-  background: center/contain url('../../images/rightArrow.svg') no-repeat white;
+  background: center/contain url('../../images/rightArrow.svg') no-repeat;
 }
 
 button.rec-arrow-right:hover:enabled{
@@ -153,54 +142,102 @@ button.rec-dot{
   width: 16px;
   height: 16px;
   background-color: #C4C4C4;
-  /* box-shadow: 0 0 1px 3px rgba(233, 125, 24, 0.5); */
+  box-shadow: none ;
 }
 
 button.rec-dot_active,button.rec-dot:hover, button.rec-dot:active:enabled, button.rec-dot:focus:enabled {
-  box-shadow: 0 0 1px 3px #EE6A4D;
+  /* box-shadow: 0 0 1px 3px #EE6A4D; */
   background-color: #EE6A4D;
 }
 
-/* button.cJeRRR {
-  box-shadow: 0 0 1px 3px #EE6A4D;
-  background-color: #EE6A4D;
-} */
-/* 
-button.rec-dot:hover, button.rec-dot:active:enabled, button.rec-dot:focus:enabled  {
-  box-shadow: 0 0 1px 3px rgba(241, 118, 3, 0.774);
-} */
-
-@media screen and (max-width: 1000px) {
-  div.rec-carousel-wrapper {
-    width: 80%;
-  }
-
-  .petition-card-list {
-    max-width: 900px;
+@media screen and (min-width:768px) and (max-width: 1024px) {
+  
+  div.rec-slider-container {
+    max-width: 700px;
     min-height: 400px;
   }
 
-  button.rec-arrow-right, button.rec-arrow-left {
-    width: 40px;
-    height: 40px;
+  div.rec-pagination {
+    margin-top: -45px;
   }
-} 
 
-@media screen and (max-width: 768px) {
+  button.rec-dot {
+    width: 11.64px;
+    height: 11.2px;
+  }
+
+  button.rec-arrow, button.rec-arrow:focus:enabled, button.rec-arrow:hover:enabled, button.rec-arrow:disabled {
+    width: 16px;
+    height: 26px;
+  }
+
   .petition-card-list {
-    max-width: 700px;
-    
+    min-height: 811px;
+  }
+
+  .petition-card-list__options {
+    margin-bottom: -20px;
+    width: 644px;
   }
 
   .petition-card-list__button {
-    margin: 0;
-    padding: 10px;
+    font-size: 16px;
+    padding: 0 0 13px 0;
   }
-}
 
-@media screen and (max-width: 500px) {
+  .petion-card-list__title {
+    font-size: 32px;
+    margin: 161px 0 56px 0;
+  }
+
+  .petition-card-list__all-link {
+    font-size: 18.23px;
+    text-align: center;
+    margin: 64px 0 0 0;
+  }
+  
+} 
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  button.rec-dot {
+    width: 8px;
+    height: 7.62px;
+  }
+
+  button.rec-arrow, button.rec-arrow:focus:enabled, button.rec-arrow:hover:enabled, button.rec-arrow:disabled {
+    display: none;
+  }
+
   .petition-card-list__options {
-    margin-left: 0;
-    justify-content: space-between;
+    width: 216px;
+    margin-bottom: 24px;
+  }
+
+  .petition-card-list__button {
+    font-size: 10px;
+    padding: 0 0 9.78px 0;
+  }
+
+  .petition-card-list__button_active {
+    border-bottom: 1px solid #EE6A4D;;
+  }
+  
+  .petition-card-list__button:hover {
+    border-bottom: 1px solid #759196;
+  }
+  
+  .petition-card-list__button:active {
+    border-bottom: 1px solid #767596;
+  }
+
+  .petion-card-list__title {
+    font-size: 22px;
+    margin: 94px 0 40px 0;
+  }
+
+  .petition-card-list__all-link {
+    font-size: 12px;
+    text-align: center;
+    margin: 33px 0 0 0;
   }
 }
