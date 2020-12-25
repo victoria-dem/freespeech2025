@@ -68,6 +68,7 @@ const PetitionCardInfo = ({ petition, onLikeClick, isLoggedIn, nickname }) => {
         }
       </ul>
       <div className={likeContainerClassName}>
+        <div className="petition-card__poem-blur"></div>
         <p className="petition-card__like-text">{`Согласны с инициативой: `}</p>
         <button className={petitionLikeButtonClassName} onClick={handleLikeClick} disabled={!isLoggedIn}>
         </button>
