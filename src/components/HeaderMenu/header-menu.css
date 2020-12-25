@@ -53,6 +53,7 @@
 }
 
 .header__hamburger {
+    width: 100vw; /**/
     visibility: hidden;
     display: flex;
     flex-direction: column;
@@ -64,9 +65,9 @@
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
     z-index: 15;
-    background-color: #fff;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95));
     transition: visibility 0.4s ease-out;
-    padding-bottom: 20px;
+    padding-bottom: 35px;
 }
 
 .header__hamburger_visible {
@@ -80,7 +81,7 @@
     justify-content: flex-start;
     align-items: flex-start;
     list-style: none;
-    padding: 10px 0 0 0;
+    padding: 10px 0 0 40px;
     margin: 0;
 
 }
@@ -90,8 +91,8 @@
     font-weight: 400;
     font-style: normal;
     font-size: 18px;
-    line-height: 1.22;
-    padding: 8px 20px 10px 10px;
+    line-height: 24px;
+    padding: 8px 0 10px 0;
     color: #000;
     white-space: nowrap;
 }
@@ -118,6 +119,7 @@
     opacity: 0.8;
     transition: opacity 0.4s ease-out;
 }
+
 .header__hamburger-close:focus {
     border: none;
     outline: none;
@@ -127,6 +129,7 @@
     width: 24px;
     height: 24px;
     background-color: #fff;
+    margin-left: 28px;
 }
 
 .header__hamburger-cross-left {
@@ -144,6 +147,29 @@
     background-color: black;
     transform: rotate(90deg);
     Z-index: 2;
+}
+
+.header__nickname-hamburger {
+    display: none;
+}
+
+.header__nickname-hamburger_visible {
+    display: block;
+}
+
+.header__nickname-text_hamburger {
+    margin: 20px 0  0 40px;
+}
+
+.header__nickname-title_hamburger {
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.header__nickname_hamburger {
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: normal;
 }
 
 @media screen and (max-width: 1050px) and (min-width: 501px) {
@@ -168,6 +194,7 @@
 @media screen and (min-width: 501px) {
     .header__hamburger {
         display: none;
+        margin-bottom: 15px;
     }
 }
 
