@@ -12,6 +12,7 @@
 
 @media screen and (max-width: 500px) {
   .petition-form__default-picture-title {
+    margin: 21px 0 0 0;
     font-weight: 500;
     font-size: 12px;
     line-height: 15px;
@@ -26,3 +27,17 @@
   justify-content: space-between;
   margin: 16px 0 0 0;
 }
+
+
+@media screen and (max-width: 500px) {
+  .petition-form__default-pictures {
+    margin: 12px 0 0 0;
+  }
+}
+
+
+/*@media screen and (max-width: 253px) {*/
+/*  .petition-form__default-pictures {*/
+/*    width: 253px;*/
+/*  }*/
+/*}*/

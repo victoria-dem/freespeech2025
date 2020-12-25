@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext, useRef} from 'react';
 import {storage} from "../../utils/firebase";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
-import deleteButton from '../../images/delete-btn.svg'
+import deleteButton from '../../images/del_button.svg'
 import Loader from 'react-loader-spinner'
 import './petition-picture.css'
 

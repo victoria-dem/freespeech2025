@@ -19,6 +19,19 @@
   }
 }
 
+
+@media screen and (max-width: 500px) {
+  .petition-form__poem-preview {
+    background: unset;
+    /*background: url("../../images/blots_petition_tablet.svg") no-repeat center;*/
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    width: 253px;
+    /*position: relative;*/
+    /*margin-left: -50px;*/
+  }
+}
+
 .petition-form__poem-preview-title {
   margin: 66px 0 0 14px;
   padding: 0 0 0 0;
@@ -44,6 +57,7 @@
 
 @media screen and (max-width: 500px) {
   .petition-form__poem-preview-title {
+    margin: 63px 0 0 13px;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -53,7 +67,7 @@
 
 
 .petition-form__poem-box-default {
-  margin: 2px 0 0 9px;
+  margin: 2px 0 0 0;
   padding: 0 0 0 0;
   font-family: 'Montserrat', sans-serif;
   font-style: normal;
@@ -73,8 +87,16 @@
 }
 
 
+@media screen and (max-width: 950px) {
+  .petition-form__poem-box-default {
+    margin: -20px 0 0 12px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
 .petition-form__poem-box {
-  padding: 5px 5px 5px 5px;
+  padding: 13px 5px 5px 16px;
   width: 344px;
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
@@ -103,12 +125,16 @@
 }
 
 
+
 @media screen and (max-width: 500px) {
   .petition-form__poem-box {
-    width: 253px;
-    height: 106px;
+    width: 280px;
+    margin: 16px 0 0 0;
+    height: 220px;
     font-size: 12px;
     line-height: 18px;
+    background: url("../../images/blots_mobile.svg") no-repeat center;
+    /*overflow: unset;*/
   }
 }
 
@@ -125,6 +151,16 @@
   }
 }
 
+
+@media screen and (max-width: 500px) {
+  .petition-form__poem-all-lines {
+    margin: 0 0 0 43px;
+    padding: 0 0 0 0;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+}
 
 /*.petition-form__poem-box-blots {*/
 /*  display: none;*/
@@ -184,5 +220,31 @@
     opacity: 1;
     color: black;
     font-size: 16px;
+  }
+}
+
+
+@media screen and (max-width: 500px) {
+  .petition-form__poem-all-lines {
+    margin: -14px 0 0 11px;
+  }
+
+
+  .petition-form__poem-line_animation {
+    animation: poem-animation-in 2s linear both;
+  }
+
+
+  @keyframes poem-animation-in {
+    0% {
+      opacity: 0.1;
+      color: orange;
+      font-size: 6px;
+    }
+    100% {
+      opacity: 1;
+      color: black;
+      font-size: 12px;
+    }
   }
 }

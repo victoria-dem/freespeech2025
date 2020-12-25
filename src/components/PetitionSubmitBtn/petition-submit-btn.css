@@ -32,10 +32,11 @@
 
 @media screen and (max-width: 500px) {
   .petition-form__submit-btn {
+    margin: 0 0 0 47px;
     width: 157px;
     height: 44px;
-    font-size: 12px;
-    line-height: 18px;
+    font-size: 16px;
+    line-height: 20px;
   }
 }
 
