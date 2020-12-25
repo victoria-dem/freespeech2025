@@ -4,7 +4,6 @@
   flex-direction: row;
   border-top: 1px solid #BEBEBE;
   width: 100%;
-  /* max-width: 1440px; */
   box-sizing: border-box;
   padding: 0 40px;
   min-height: 84px;
@@ -13,9 +12,39 @@
 }
 
 .footer__copyright {
+  padding: 0;
+  margin: 0;
   font-weight: 400;
   font-style: normal;
   font-size: 16px;
   line-height: 1.22;
   color: #759196;
+}
+
+@media screen and (max-width: 800px) {
+
+  .footer{
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 80px;
+  }
+
+  .footer__copyright {
+    font-size: 14px;
+    line-height: 20px;
+    margin: 10px 0 0 0;
+  }
+
+}
+
+@media screen and (max-width: 500px) {
+  .footer{
+    min-height: 70px;
+  }
+
+  .footer__copyright {
+    font-size: 12px;
+    line-height: 16px;
+  }
 }
