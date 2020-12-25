@@ -57,6 +57,7 @@
 
 @media screen and (max-width: 500px) {
   .petition-form__poem-preview-title {
+    width: auto;
     margin: 63px 0 0 13px;
     font-size: 14px;
     font-style: normal;
