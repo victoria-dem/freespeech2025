@@ -82,12 +82,12 @@
 
 @media screen and (max-width: 950px) {
   .petition-form__poem-box-default {
-    margin: -16px 0 0 43px;
+    margin: -16px 0 0 49px;
   }
 }
 
 
-@media screen and (max-width: 950px) {
+@media screen and (max-width: 500px) {
   .petition-form__poem-box-default {
     margin: -20px 0 0 12px;
     font-size: 12px;
