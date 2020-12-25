@@ -58,7 +58,7 @@
 @media screen and (max-width: 500px) {
   .petition-form__poem-preview-title {
     width: auto;
-    margin: 63px 0 0 13px;
+    margin: 63px 0 0 0;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -90,7 +90,7 @@
 
 @media screen and (max-width: 500px) {
   .petition-form__poem-box-default {
-    margin: -20px 0 0 12px;
+    margin: -20px 0 0 0;
     font-size: 12px;
     line-height: 18px;
   }
@@ -227,7 +227,7 @@
 
 @media screen and (max-width: 500px) {
   .petition-form__poem-all-lines {
-    margin: -14px 0 0 11px;
+    margin: -14px 0 0 0;
   }
 
 

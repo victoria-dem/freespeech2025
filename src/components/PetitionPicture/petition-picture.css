@@ -191,8 +191,8 @@
 
 .petition-form__delete-btn:hover {
   background: url("../../images/del_button_hover.svg");
-}
 
+}
 
 .petition-form__delete-btn:active {
   background: url("../../images/del_button_click.svg");
