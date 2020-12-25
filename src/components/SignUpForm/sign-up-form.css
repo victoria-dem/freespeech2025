@@ -186,29 +186,6 @@
   max-width: 300px;
 }
 
-
-@media screen and (max-width: 580px) {
-  .form__input {
-    font-size: 12px;
-    line-height: 15px;
-    width: 220px;
-  }
-  .form__heading {
-    width: 200px;
-    font-size: 18px;
-    line-height: 22px;
-  }
-  .form__handler {
-    width: 260px;
-  }
-  .form__fields {
-    width: 220px;
-  }
-  .form__checkbox-label {
-    padding-left: 3px;
-  }
-}
-
 .form__disclaimer{
   color: #737072;
   font-weight: 400;
@@ -255,4 +232,59 @@
 
 .form__submit-button:disabled .sign-up__button {
   background-color: #bdbeb6;
+}
+
+
+@media screen and (max-width: 580px) {
+  .form__input {
+    font-size: 12px;
+    line-height: 15px;
+    width: 220px;
+  }
+  .form__heading {
+    width: 200px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .form__handler {
+    width: 260px;
+  }
+  .form__fields {
+    width: 220px;
+  }
+  .form__checkbox-label {
+    padding-left: 3px;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .form__input {
+    font-size: 12px;
+    line-height: 15px;
+    width: 220px;
+  }
+  .form__heading {
+    width: 200px;
+    font-size: 18px;
+    line-height: 22px;
+    margin-top: 0;
+  }
+  .form__handler {
+    width: 260px;
+  }
+  .form__fields {
+    width: 220px;
+  }
+  .form__checkbox-label {
+    padding-left: 7px;
+    text-align: left;
+    margin: 0;
+  }
+  .form__pseudo-item{
+    width: 20px;
+  }
+
+  .form__label {
+    height: 38px;
+  }
 }
