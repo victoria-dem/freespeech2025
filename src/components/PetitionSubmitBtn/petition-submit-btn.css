@@ -42,6 +42,7 @@
 
 .petition-form__submit-btn_active {
   background: rgba(0, 0, 0, 1);
+  transition: background-color 0.8s linear;
   color: #ffffff
 }
 
