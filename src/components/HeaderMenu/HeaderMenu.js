@@ -25,8 +25,6 @@ function HeaderMenu({showMenu, nickname, buttonVisibility}) {
             'header__list_hidden'}`
     );
 
-    console.log('buttonvisibility', buttonVisibility)
-
     return (
         <>
             <nav>
