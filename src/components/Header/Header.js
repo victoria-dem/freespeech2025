@@ -1,31 +1,31 @@
 import React, {useContext, useState} from 'react';
 import HeaderMenu from "../HeaderMenu/HeaderMenu";
 import "./header.css";
-import logo from "../../images/logo.svg"
+import logoPoet from "../../images/logoPoet.svg"
 import userIcon from "../../images/userIcon.svg"
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 
 
 function Header({handleAccountBtnClick, nickname, showMenu}) {
-    
+
     const currentUser = useContext(CurrentUserContext);
-    
+
     const [buttonVisibility, setButtonVisibility] = useState(false)
     setTimeout(() => {
         setButtonVisibility(true)
     }, 1000)
-    
+
     const userNickname = nickname.split(' ');
-    
+
     const headerClassName = (
         `header ${showMenu ?
             'header_menu-visible' :
             'header_menu-hidden'}`
     );
-    
+
     return (
         <header className={headerClassName}>
-            <img src={logo} alt="Logo" className="logo"/>
+            <img src={logoPoet} alt="Logo" className="logo"/>
             <HeaderMenu showMenu={showMenu}/>
             <div
                 className={buttonVisibility ? "header__nickname-content header__nickname-content_visibility" : "header__nickname-content"}>

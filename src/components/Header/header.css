@@ -174,7 +174,7 @@
 @media screen and (max-width: 500px) {
     .header {
         display: grid;
-        grid-template-columns: 33px 1fr 40px;
+        grid-template-columns: 48px 1fr 48px;
         height: 60px;
     }
 
