@@ -13,7 +13,7 @@ import Statistic from "../Statistic/Statistic";
 
 const Main = ({ onUpdateUser, isLoggedIn, petitions, onLikeClick,
     onAddPetition, onMyPetitionsChoose, onActualPetitionsChoose,
-    nickname, onAllPetitionsChoose, onDeletePetition }) => {
+    nickname, onAllPetitionsChoose, onDeletePetition, allPetitions }) => {
 
     const currentUser = useContext(CurrentUserContext);
     const [isAccountPageOpen, setIsAccountPageOpen] = useState(false)
@@ -123,7 +123,7 @@ const Main = ({ onUpdateUser, isLoggedIn, petitions, onLikeClick,
             <div className="main-page">
                 <Header handleAccountBtnClick={handleAccountBtnClick} nickname={nickname} showMenu={true}/>
                 <Banner />
-                <Statistic />
+                <Statistic allPetitions={allPetitions} />
                 <PetitionCardList petitions={petitions} onLikeClick={onLikeClick}
                     onMyPetitionsChoose={onMyPetitionsChoose} nickname={nickname}
                     onActualPetitionsChoose={onActualPetitionsChoose} isLoggedIn={isLoggedIn}
