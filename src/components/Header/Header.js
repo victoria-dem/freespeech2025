@@ -22,10 +22,7 @@ function Header({handleAccountBtnClick, nickname, showMenu}) {
             'header_menu-visible' :
             'header_menu-hidden'}`
     );
-
-    //TODO вынести отображение пользователя в отдельный компонет чтобы переиспользовать в выпадашке
-
-
+    //TODO вынести отображение пользователя в отдельный компонет чтобы переиспользовать в выпадающем меню
     return (
         <header className={headerClassName}>
             <img src={logoPoet} alt="Logo" className="logo"/>

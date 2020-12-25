@@ -1,12 +1,14 @@
 import "./statistic.css"
 
-function Statistic() {
+function Statistic({allPetitions}) {
+
+    const petitionsNumber = allPetitions.length
     return (
         <section className="statistic">
             <div className="statistic__list">
                 <div className="statistic__card statistic__card_place_one">
                     <div className="statistic__text-content">
-                        <p className="statistic__card-digits">25</p>
+                        <p className="statistic__card-digits">{petitionsNumber}</p>
                         <p className="statistic__card-text">важных инициатив опубликовано</p>
                     </div>
                 </div>
