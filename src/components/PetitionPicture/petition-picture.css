@@ -130,7 +130,6 @@
   color: #759196;
 }
 
-
 @media screen and (max-width: 500px) {
   .petition-form__button-text {
     font-size: 12px;
@@ -139,10 +138,6 @@
     left: 64px;
   }
 }
-
-
-
-
 
 .petition-form__pic-upload-link {
   margin: 0;
@@ -157,11 +152,17 @@
   transition: 2s ease;
 }
 
-
 .petition-form__progress-bar {
   position: absolute;
   top: 70px;
   left: 150px
+}
+
+@media screen and (max-width: 500px) {
+  .petition-form__progress-bar {
+    top: 56px;
+    left: 105px
+  }
 }
 
 .petition-form__progress-bar_invisible {
