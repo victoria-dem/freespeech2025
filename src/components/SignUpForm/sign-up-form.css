@@ -52,7 +52,9 @@
 
 .form__submit-text {
   margin-right: 10px;
-  font-weight: bold;
+  font-size: 17px;
+  line-height: 21px;
+  font-weight: 500;
 }
 
 .form__input {
@@ -74,11 +76,6 @@
 .form__input:focus {
   outline: none;
 }
-
-/*#email:-webkit-autofill {*/
-/*  background-color: white !important;*/
-/*}*/
-
 
 .form__input_position {
   margin-top: 5px;
@@ -154,11 +151,6 @@
   transition: opacity 0.4s ease-out;
 }
 
-/*.form__checkbox:checked + .form__pseudo-item {*/
-/*  background-image: url("../../images/form_rectangle_black.svg");*/
-/*  background-repeat: no-repeat;*/
-/*}*/
-
 .form__checkbox:hover + .form__pseudo-item {
   background-image: url("../../images/form-hover.svg");
   background-repeat: no-repeat;
@@ -168,8 +160,6 @@
   background-image: url("../../images/form-click.svg");
   background-repeat: no-repeat;
 }
-
-
 
 .form__pseudo-item {
   display: inline-block;
@@ -226,3 +216,43 @@
   padding: 0 28px 14px 28px;
 }
 
+.sign-up__button {
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form__submit-button:hover  .sign-up__button {
+  background-color: #ee6a4d;
+  transition: background-color 0.3s ease-out;
+}
+
+.form__submit-button:hover  .form__submit-text {
+  color: #ee6a4d;
+  transition: color 0.3s ease-out;
+}
+
+.form__submit-button:active  .sign-up__button {
+  background-color: #d84444;
+  width: 31px;
+  height: 31px;
+  border-radius: 50%;
+  transition: height, width, background-color 0.3s ease-out;
+}
+
+.form__submit-button:active  .form__submit-text {
+  color: #d84444;
+  transition: color 0.3s ease-out;
+}
+
+.form__submit-button:disabled .form__submit-text {
+  color: #bdbeb6;
+}
+
+.form__submit-button:disabled .sign-up__button {
+  background-color: #bdbeb6;
+}

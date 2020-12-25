@@ -1,5 +1,5 @@
 import './sign-out-form.css';
-import signInBtn from '../../images/signInBtn.svg'
+import arrowButton from '../../images/arrowButton.svg'
 
 
 const SignOutForm = ({onLogout, setIsAccountPageOpen,  isAccountPageOpen}) => {
@@ -14,7 +14,7 @@ const SignOutForm = ({onLogout, setIsAccountPageOpen,  isAccountPageOpen}) => {
                 <button type="button"  className="sign-out__submit-button" onClick={onLogout}>
                     <span
                         className="sign-out__message">Выйти</span>
-                    <img src={signInBtn} alt='Log out'/>
+                    <div className="sign-out__button"> <img src={arrowButton} alt='Log out'/></div>
                 </button>
             <button type="button"  className="sign-out__escape-button" onClick={onEscLogout}>
                 <p className="sign-out__escape-button-text">Пожалуй, останусь</p></button>

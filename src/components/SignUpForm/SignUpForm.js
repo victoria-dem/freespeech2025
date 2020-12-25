@@ -3,6 +3,7 @@ import './sign-up-form.css';
 import signInBtn from '../../images/signInBtn.svg'
 import signInBtnDis from '../../images/signInBtnDis.svg'
 import loginHover from '../../images/loginHover.svg'
+import arrowButton from "../../images/arrowButton.svg";
 
 
 const SignUpForm = ({
@@ -61,7 +62,6 @@ const SignUpForm = ({
                 <label htmlFor="checkBoxOne" className="form__label form__label_direction_right">
                     <input onChange={onChange} required className="form__checkbox" type="checkbox" id="checkBoxOne"
                            name="checkBoxOne"
-                        // checked={checkBoxOne}
                            value="checkBoxOne"/>
                     <span
                         className={checkBoxOneValid ? "form__pseudo-item form__pseudo-item_checked" : "form__pseudo-item"}/>
@@ -70,7 +70,6 @@ const SignUpForm = ({
                 <label htmlFor="checkBoxTwo" className='form__label'>
                     <input onChange={onChange} required
                            className="form__checkbox"
-                        // checked={checkBoxTwo}
                            type="checkbox" id="checkBoxTwo" name="checkBoxTwo" value="checkBoxTwo"/>
                     <span
     className={checkBoxTwoValid ? "form__pseudo-item form__pseudo-item_checked" : "form__pseudo-item"}/>
@@ -79,7 +78,6 @@ const SignUpForm = ({
                 <label htmlFor="checkBoxThree" className='form__label'>
                     <input onChange={onChange} required
                            className="form__checkbox"
-                        // checked={checkBoxThree}
                            type="checkbox" id="checkBoxThree" name="checkBoxThree" value="checkBoxThree"/>
                     <span
     className={checkBoxThreeValid ? "form__pseudo-item form__pseudo-item_checked" : "form__pseudo-item"}/>
@@ -92,7 +90,8 @@ const SignUpForm = ({
                     onClick={onSignUp}>
                     <span
                         className={isSubmitDisabled ? "form__submit-text form__submit-text_disabled" : "form__submit-text"}>Войти</span>
-                    <img  src={isSubmitDisabled ? signInBtnDis : signInBtn} alt='Button Sign-in'/>
+                    <div className="sign-up__button"> <img src={arrowButton} alt='Log out'/></div>
+                    {/*<img  src={isSubmitDisabled ? signInBtnDis : signInBtn} alt='Button Sign-in'/>*/}
                 </button>
             </form>
             <p className="form__disclaimer">Входя на сайт вы заранее соглашаетесь с любыми последствиями своих действий</p>
