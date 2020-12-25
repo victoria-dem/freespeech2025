@@ -80,6 +80,9 @@
   font-size: 25px;
   line-height: 1.22;
   transition: color 0.8s linear;
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
 }
 
 .petition-card-list__all-link:hover {
@@ -88,6 +91,14 @@
 
 .petition-card-list__all-link:active {
   color: #D84444;
+}
+
+.petition-card-list__all-link-arrow {
+  padding: 0;
+  margin: 0 0 0 12px;
+  width:18.41px;
+  height: 15.41px;
+  background: center/18.41px 15.41px url('../../images/toAllPetitionsArrow.svg') no-repeat;
 }
 
 /* стили карусели */
@@ -198,6 +209,15 @@ button.rec-dot_active,button.rec-dot:hover, button.rec-dot:active:enabled, butto
     font-size: 18.23px;
     text-align: center;
     margin: 64px 0 0 0;
+    max-width: 797px;
+  }
+
+  .petition-card-list__all-link-arrow {
+    padding: 0;
+    margin: 0 0 0 8.74px;
+    width: 13.42px;
+    height: 10.79px;
+    background: center/13.42px 10.79px url('../../images/toAllPetitionsArrow.svg') no-repeat;
   }
   
 } 
@@ -247,5 +267,14 @@ button.rec-dot_active,button.rec-dot:hover, button.rec-dot:active:enabled, butto
     font-size: 12px;
     text-align: center;
     margin: 33px 0 0 0;
+    justify-content: center;
+  }
+
+  .petition-card-list__all-link-arrow {
+    padding: 0;
+    margin: 0 0 0 5.5px;
+    width: 9.21px;
+    height: 7.71px;
+    background: center/9.21px 7.71px url('../../images/toAllPetitionsArrow.svg') no-repeat;
   }
 }

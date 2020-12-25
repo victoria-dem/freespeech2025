@@ -15,7 +15,9 @@ const PetitionsPage = ({ petitions, onLikeClick, onDislikeClick, isLoggedIn, nic
       <Header handleAccountBtnClick={()=>console.log('TODO:добавить обработчик логин-кнопки')} 
         nickname={''} showMenu={false}/>
       <NavLink to="/main" className="petitions-page__return-link" onClick={onReturn}></NavLink>
-      <h1 className="petitions-page__title">Все петиции</h1>
+      <h1 className="petitions-page__title">
+        <a id="all-petitions" name="all-petitions"></a>
+        Все петиции</h1>
       <p className="petitions-page__count">Всего: {petitions.length}</p>
       <div className="petitions-page__petitions">
         {

@@ -3,7 +3,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import IntroPage from './components/IntroPage/IntroPage';
 import Main from './components/Main/Main';
 import { useTransition, animated } from 'react-spring';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, } from 'react-router-dom';
 import { __RouterContext } from 'react-router';
 import { CurrentUserContext } from './contexts/CurrentUserContext';
 import { db } from './utils/firebase';
