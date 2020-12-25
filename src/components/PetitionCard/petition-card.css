@@ -204,11 +204,24 @@
   align-self: start;
   height: 192px;
   overflow-y: scroll;
+  position: relative;
 }
 
 ::-webkit-scrollbar {
   display: none;
 }
+/* .petition-card__poem::before{
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 1.2em;
+  bottom: 0px;
+  right: 0px;
+  filter:blur(10px);
+  background-color: rgba(0,0,0,0,25);
+  z-index: 10;
+  outline: 1px solid red;
+} */
 
 .petition-card__poem-line {
   font-family: 'Montserrat', sans-serif;
