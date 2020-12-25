@@ -123,7 +123,7 @@ const Main = ({ onUpdateUser, isLoggedIn, petitions, onLikeClick,
             <div className="main-page">
                 <Header handleAccountBtnClick={handleAccountBtnClick} nickname={nickname} showMenu={true}/>
                 <Banner />
-                {/*<Statistic />*/}
+                <Statistic />
                 <PetitionCardList petitions={petitions} onLikeClick={onLikeClick}
                     onMyPetitionsChoose={onMyPetitionsChoose} nickname={nickname}
                     onActualPetitionsChoose={onActualPetitionsChoose} isLoggedIn={isLoggedIn}

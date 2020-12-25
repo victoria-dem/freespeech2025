@@ -35,11 +35,6 @@
     color: #759196;
 }
 
-.sign-out__submit-button:hover {
-    opacity: 0.8;
-    transition: opacity 0.4s ease-out;
-}
-
 .sign-out__submit-button:focus {
     outline: none;
 }
@@ -65,3 +60,37 @@
 .sign-out__escape-button:focus {
     outline: none;
 }
+
+.sign-out__button {
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sign-out__submit-button:hover  .sign-out__button {
+    background-color: #ee6a4d;
+    transition: background-color 0.3s ease-out;
+}
+
+.sign-out__submit-button:hover  .sign-out__message {
+    color: #ee6a4d;
+    transition: color 0.3s ease-out;
+}
+
+.sign-out__submit-button:active  .sign-out__button {
+    background-color: #d84444;
+    width: 31px;
+    height: 31px;
+    border-radius: 50%;
+    transition: height, width, background-color 0.3s ease-out;
+}
+
+.sign-out__submit-button:active  .sign-out__message {
+    color: #d84444;
+    transition: color 0.3s ease-out;
+}
+
