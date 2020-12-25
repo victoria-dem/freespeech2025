@@ -1,5 +1,5 @@
 import {db} from './firebase'
-// import all_django from '../data/all_django.json'  /*  uncomment if needed to load json into firebase */
+import all_django from '../data/all_django.json'  /*  uncomment if needed to load json into firebase */
 
 function manageJson () {
     const punctuation = /[!"#$%&'()*+,./:;<=>?@[\]^_`{|}~]/g;
