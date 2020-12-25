@@ -54,9 +54,6 @@
 .petition-form__submit-btn_active:hover {
   background: rgba(238, 106, 77, 1);
   color: #ffffff
-
-  /*opacity: 0.8;*/
-  /*transition: 2s ease;*/
 }
 
 .petition-form__submit-btn_active:focus {
