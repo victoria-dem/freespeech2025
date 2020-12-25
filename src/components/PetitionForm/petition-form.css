@@ -27,7 +27,7 @@
 }
 
 
-@media screen and (max-width: 950px) {
+@media screen and (max-width: 1024px) {
   .petition-form__form-fields {
     margin: 0 0 0 0;
   }
