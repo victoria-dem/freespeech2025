@@ -10,6 +10,7 @@
 }
 
 .petion-card-list__title {
+  font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   font-style: normal;
   font-size: 45px;
@@ -25,15 +26,17 @@
   justify-content: flex-start;
   align-items: flex-end;
   margin: 0 0 39px 0;
-  min-height: 50px;
+  /* min-height: 50px; */
   width: 860px;
   border-bottom: 1px solid #000;
+  box-sizing: border-box;
 }
 
 .petition-card-list__button {
   border: none;
   box-shadow: none;
   background: none;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   font-style: normal;
   font-size: 25px;
@@ -41,15 +44,15 @@
   color: #000;
   /* max-width: 419px; */
   box-sizing: border-box;
-  margin: 0;
+  margin: 0 0 -1px 0;
   padding: 0 0 16px 0;
   width: 50%;
   outline: none;
-  transition: color 0.8s linear;
+  transition: color 0.3s linear;
 }
 
 .petition-card-list__button_active {
-  border-bottom: 2px solid #EE6A4D;;
+  border-bottom: 1px solid #EE6A4D;;
   color: #EE6A4D;
 }
 
@@ -71,6 +74,7 @@
   margin: 50px 0 0 0;
   max-width: 860px;
   width: 100%;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   font-style: normal;
   font-size: 25px;
@@ -122,7 +126,7 @@ button.rec-arrow-right:hover:enabled{
   background: center/contain url('../../images/rightArrowHover.svg') no-repeat;
 }
 
-button.rec-arrow-right:focus:enabled{
+button.rec-arrow-right:active{
   background: center/contain url('../../images/rightArrowClick.svg') no-repeat;
 }
 
@@ -134,7 +138,7 @@ button.rec-arrow-left:hover:enabled {
   background: center/contain url('../../images/leftArrowHover.svg') no-repeat;
 }
 
-button.rec-arrow-left:focus:enabled {
+button.rec-arrow-left:active {
   background: center/contain url('../../images/leftArrowClick.svg') no-repeat;
 }
 
@@ -206,6 +210,10 @@ button.rec-dot_active,button.rec-dot:hover, button.rec-dot:active:enabled, butto
 
   button.rec-arrow, button.rec-arrow:focus:enabled, button.rec-arrow:hover:enabled, button.rec-arrow:disabled {
     display: none;
+  }
+
+  .petition-card-list {
+    min-height: 657px;
   }
 
   .petition-card-list__options {
