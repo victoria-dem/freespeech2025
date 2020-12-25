@@ -1,17 +1,17 @@
 .petition-form {
   display: grid;
-  margin: 30px auto 183px;
+  margin: 88px auto 183px;
   grid-template-areas:
       "title title title"
       "steps input output"
       "steps button button";
 }
 
-@media screen and (max-width: 950px) {
+@media screen and (max-width: 1024px) {
   .petition-form {
     /*border: 1px solid red;*/
     display: grid;
-    margin: 180px auto 60px;
+    margin: 88px auto 60px;
     grid-template-areas:
        "title title"
        "steps input"
@@ -47,7 +47,7 @@
 }
 
 
-@media screen and (max-width: 950px) {
+@media screen and (max-width: 1024px) {
   .petition-form__title {
     margin: 0 0 62px 38px;
     padding: 0 0 0 0;

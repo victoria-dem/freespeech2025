@@ -4,7 +4,7 @@
   margin: 5px 0 0 0;
 }
 
-@media screen and (max-width: 950px) {
+@media screen and (max-width: 1024px) {
   .petition-form__steps {
     margin: 0 0 0 0;
   }
@@ -51,7 +51,7 @@
 }
 
 
-@media screen and (max-width: 950px) {
+@media screen and (max-width: 1024px) {
   .petition-form__step-connector_position_third {
     height: 703px;
   }
