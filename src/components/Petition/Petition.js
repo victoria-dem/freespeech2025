@@ -99,8 +99,6 @@ function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
             setIsLoaded(true)
             setIsPetitionPublished(false)
             const timestamp = Date.now().toString();
-            const time = new Date();
-            time.setFullYear(2025);
             const data = {
                 uid: currentUser.uid,
                 petition: poemText,
@@ -110,7 +108,6 @@ function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
                 picName: pictureData.picName,
                 picBucket: pictureData.picBucket,
                 timestamp: timestamp,
-                futureTime: time,
                 likes: [],
                 disLikes: [],
                 url: url,

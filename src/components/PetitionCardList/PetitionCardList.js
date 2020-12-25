@@ -40,7 +40,7 @@ const PetitionCardList = ({ petitions, onLikeClick, onMyPetitionsChoose, nicknam
           onClick={handleMyPetitionsButtonClick}>Мои инициативы</button>
       </div>
       {isListEmpty ? <EmptyPetition/> :
-        <Carousel itemPosition='center' enableSwipe={true}>
+        <Carousel itemPosition='center' enableSwipe={true} enableMouseSwipe={true} >
           {
             petitions.map((petition) => {
               return (

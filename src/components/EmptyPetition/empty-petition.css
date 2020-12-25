@@ -6,7 +6,7 @@
   width: 860px;
   height: 450px;
   border: 1px solid #000;
-  margin: 39px auto 0;
+  margin: 0 auto 0;
   padding: 33px 21px;
   border-radius: 16px;
   backdrop-filter: blur(20px);
@@ -17,6 +17,7 @@
 
 .empty-petition__text {
   max-width: 819px;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   font-style: normal;
   font-size: 16px;
@@ -33,6 +34,7 @@
   border-radius: 16px;
   background-color: black;
   color: #fff;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   font-style: normal;
   font-size: 20px;
@@ -55,16 +57,18 @@
 @media screen and (min-width:768px) and (max-width:1024px) {
   .empty-petition {
     width: 644px;
+    height: 328px;
+    margin-top: 65px;
     background: center/240px 120px url('../../images/myPetitionPic.svg') no-repeat rgba(255,255,255,0.1);
   }
-
+/* 
   .empty-petition__link {
 
   }
 
   .empty-petition__text {
     
-  }
+  } */
 }
 
 @media screen and (min-width:320px) and (max-width:767px) {

@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import SimpleDateTime from 'react-simple-timestamp-to-date';
 import like from '../../images/like.svg';
+import { capitalize } from '../../utils/utils';
 
 const PetitionCardInfo = ({ petition, onLikeClick, isLoggedIn, nickname }) => {
   const currentUser = useContext(CurrentUserContext);
@@ -21,6 +22,19 @@ const PetitionCardInfo = ({ petition, onLikeClick, isLoggedIn, nickname }) => {
       'petition-card__moderation_in-progress' :
       'petition-card__moderation_done'}`
   );
+
+  const likeContainerClassName = (
+    `petition-card__like-container ${isOnModeration ?
+      'petition-card__like-container_hidden' :
+      'petition-card__like-container_visible'}`
+  );
+
+  const challengeContainerClassName = (
+    `petition-card__challenge-container ${isOnModeration ?
+      'petition-card__challenge-container_hidden' :
+      'petition-card__challenge-container_visible'}`
+  );
+
   const likeChallenge = 20;
 
   const handleLikeClick = () => {
@@ -31,26 +45,14 @@ const PetitionCardInfo = ({ petition, onLikeClick, isLoggedIn, nickname }) => {
     setIsOnModeration(!petition.data.isPublic);
   }, []);
 
-  let time = Number(petition.data.timestamp);
-  let futureTime = petition.data.futureTime;
-  // if(futureTime) {console.log('sec',futureTime.seconds);}
-
-  const capitalize = (str) => {
-    let newStr = '';
-    if (str !== '') {
-      newStr = str.trim().split(' ').map((element) => element.charAt(0).toUpperCase() + element.slice(1));
-      newStr = newStr.join(' ');
-    }
-
-    return newStr;
-  }
+  let time = new Date(Number(petition.data.timestamp));
+  time.setFullYear(2025);
 
   return (
     <div className="petition-card__info">
       <p className="petition-card__name">{petition.data.nick ? petition.data.nick : ''}</p>
       <p className="petition-card__timestamp">
         <SimpleDateTime dateFormat="DMY" dateSeparator="." showTime="0">
-          {/* {futureTime ? Number(futureTime.seconds): (time/1000)} */}
           {Number(time / 1000)}
         </SimpleDateTime>
         <span className={moderationClassName}>&bull; На модерации</span>
@@ -65,15 +67,13 @@ const PetitionCardInfo = ({ petition, onLikeClick, isLoggedIn, nickname }) => {
             'Вы не ввели жалобу'
         }
       </ul>
-      <div className="petition-card__like-container">
+      <div className={likeContainerClassName}>
         <p className="petition-card__like-text">{`Согласны с инициативой: `}</p>
-        <button className={petitionLikeButtonClassName} onClick={handleLikeClick} disabled={!isLoggedIn}
-          // style={{ background: `center/contain url(${like}) no-repeat` }}
-          >
+        <button className={petitionLikeButtonClassName} onClick={handleLikeClick} disabled={!isLoggedIn}>
         </button>
         <p className="petition-card__like-text petition-card__like-text_count">{petition.data.likes.length}</p>
       </div>
-      <div className="petition-card__challenge-container">
+      <div className={challengeContainerClassName}>
         <p className="petition-card__like-text">До рассмотрения осталось: </p>
         <p className="petition-card__challenge">{likeChallenge - petition.data.likes.length}</p>
       </div>
