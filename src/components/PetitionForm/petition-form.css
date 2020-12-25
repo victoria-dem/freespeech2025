@@ -5,6 +5,14 @@
   position: relative;
 }
 
+
+@media screen and (max-width: 500px) {
+  .petition-form__form {
+    width: 253px;
+  }
+}
+
+
 .petition-form__form-fields {
   border: none;
   outline: none;
@@ -59,6 +67,8 @@
 
 @media screen and (max-width: 500px) {
   .petition-form__form-input {
+    margin: 0 0 31px 0;
+    padding: 8px;
     width: 192px;
     height: 32px;
     border-radius: 12px;
@@ -96,13 +106,6 @@
 }
 
 
-@media screen and (max-width: 500px) {
-  .petition-form__form-input_size {
-    width: 253px;
-    height: 76px;
-    resize: none;
-  }
-}
 
 .petition-form__form-error {
   padding: 0;
@@ -122,4 +125,32 @@
 
 .petition-form__form-error_position {
   top: 107px;
+}
+
+@media screen and (max-width: 500px) {
+  .petition-form__form-input_size {
+    width: 253px;
+    height: 76px;
+    resize: none;
+  }
+
+  .petition-form__form-error {
+    padding: 0;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 9px;
+    line-height: 10px;
+    color: #ff0000;
+    transition: opacity 0.3s;
+    position: absolute;
+    text-align: left;
+    top: 34px;
+    left: 0;
+  }
+
+  .petition-form__form-error_position {
+    top: 78px;
+  }
 }

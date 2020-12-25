@@ -55,6 +55,17 @@
   box-sizing: border-box;
 }
 
+
+@media screen and (max-width: 500px) {
+  .petition-form__user-picture {
+    width: 253px;
+    height: 134px;
+  }
+}
+
+
+
+
 .petition-form__picture {
   display: none;
 }
@@ -75,8 +86,9 @@
 
 @media screen and (max-width: 500px) {
   .petition-form__button {
-    width: 47px;
-    height: 47px;
+    top: 64px;
+    left: 107px;
+    background: url("../../images/pic_download_mobile.svg") no-repeat;
   }
 }
 
@@ -123,6 +135,8 @@
   .petition-form__button-text {
     font-size: 12px;
     line-height: 15px;
+    top: 39px;
+    left: 64px;
   }
 }
 
