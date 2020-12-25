@@ -1,5 +1,5 @@
 .statistic {
-margin: 60px auto 0;
+    margin: -400px auto 0;
 }
 
 .statistic__card {
@@ -13,7 +13,6 @@ margin: 60px auto 0;
 
 .statistic__card_place_one {
     background-image: url("../../images/statistic-1.svg");
-
 }
 
 .statistic__card_place_two {
@@ -31,12 +30,12 @@ margin: 60px auto 0;
     display: grid;
     grid-template-columns: repeat(3, minmax(100px,385px));
 }
+
 .statistic__text-content {
     max-height: 200px;
     margin: auto;
     display: flex;
     flex-direction: column;
-
 }
 
 .statistic__card-text {
@@ -47,7 +46,6 @@ margin: 60px auto 0;
     line-height: 29px;
     font-weight: 400;
     max-width: 146px;
-
 }
 
 .statistic__card-digits {
@@ -60,10 +58,95 @@ margin: 60px auto 0;
     max-width: 146px;
 }
 
+@media screen and (max-width: 1370px) {
+    .statistic {
+        margin-top: -300px;
+    }
+}
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1155px) {
+    .statistic__card {
+        height: calc(100vw / 3);
+    }
+}
+
+@media screen and (max-width: 1117px) {
+    .statistic__card-text {
+        font-size: 16px;
+        line-height: 19px;
+        max-width: 146px;
+    }
+
+    .statistic__card-digits {
+        font-size: 32px;
+        line-height: 39px;
+        max-width: 146px;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .statistic {
+        margin-top: -230px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .statistic {
+        margin-top: -170px;
+    }
+}
+
+@media screen and (max-width: 672px) {
+    .statistic {
+        margin-top: -170px;
+    }
+
+    .statistic__card-text {
+        font-size: 11px;
+        line-height: 14px;
+        max-width: 146px;
+    }
+
+    .statistic__card-digits {
+        font-size: 20px;
+        line-height: 24px;
+        max-width: 146px;
+    }
+
     .statistic__list {
-        width: calc(100vw - 40px)
+        display: flex;
+        flex-direction: column;
+    }
+
+    .statistic__card {
+        height: 200px;
+        width: 200px;
+    }
+}
+
+@media screen and (max-width: 572px) {
+    .statistic {
+        margin-top: -100px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .statistic {
+        margin-top: -80px;
+    }
+
+    .statistic__list {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .statistic__card {
+        height: 143px;
+        width: 143px;
+    }
+
+    .statistic__text-content {
+        max-width: 80px;
     }
 }
 

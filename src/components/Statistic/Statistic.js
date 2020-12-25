@@ -7,7 +7,7 @@ function Statistic() {
                 <div className="statistic__card statistic__card_place_one">
                     <div className="statistic__text-content">
                         <p className="statistic__card-digits">25</p>
-                        <p className="statistic__card-text">петиций опубликовано на сегодня</p>
+                        <p className="statistic__card-text">важных инициатив опубликовано</p>
                     </div>
                 </div>
                 <div className="statistic__card statistic__card_place_two">
