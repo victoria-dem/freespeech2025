@@ -23,10 +23,13 @@ function Header({handleAccountBtnClick, nickname, showMenu}) {
             'header_menu-hidden'}`
     );
 
+    //TODO вынести отображение пользователя в отдельный компонет чтобы переиспользовать в выпадашке
+
+
     return (
         <header className={headerClassName}>
             <img src={logoPoet} alt="Logo" className="logo"/>
-            <HeaderMenu showMenu={showMenu}/>
+            <HeaderMenu showMenu={showMenu} nickname={nickname} buttonVisibility={buttonVisibility}/>
             <div
                 className={buttonVisibility ? "header__nickname-content header__nickname-content_visibility" : "header__nickname-content"}>
                 {nickname ?
