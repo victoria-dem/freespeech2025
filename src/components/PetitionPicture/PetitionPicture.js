@@ -4,6 +4,7 @@ import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import deleteButton from '../../images/del_button.svg'
 import Loader from 'react-loader-spinner'
 import './petition-picture.css'
+import loader from '../../images/spinner.svg'
 
 function PetitionPicture({
                              getPetitionPicData,
@@ -126,13 +127,14 @@ function PetitionPicture({
             
             {isPictureChosen && !isPicUploaded &&
             <div className="petition-form__progress-bar">
-                <Loader
-                    type="TailSpin"
-                    color="#3348d0"
-                    height={40}
-                    width={40}
-                    timeout={13000}
-                />
+                <img className="petition-form__progress-bar-loader" src={loader} alt='loader'/>
+                {/*<Loader*/}
+                {/*    type="TailSpin"*/}
+                {/*    color="#3348d0"*/}
+                {/*    height={40}*/}
+                {/*    width={40}*/}
+                {/*    timeout={13000}*/}
+                {/*/>*/}
             </div>
             }
             {isPictureReady &&
