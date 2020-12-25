@@ -177,10 +177,8 @@ function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
             <PetitionSubmitBtn
                 getSubmitPetitionEvent={getSubmitPetitionEvent}
                 isTextReadyToRender={isTextReadyToRender}
-                isLoaded={isLoaded}
                 isPictureReady={isPictureReady}
                 isPetitionPublished={isPetitionPublished}
-                isPetitionSubmitted={isPetitionSubmitted}
                 resetPublishState={resetPublishState}
             />
             <PetitionTextPreview
