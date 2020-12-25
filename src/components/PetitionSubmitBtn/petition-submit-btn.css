@@ -8,8 +8,9 @@
   margin: 62px 0 0 0;
   text-align: center;
   cursor: pointer;
-  padding: 12px 28px;
-  width: 157px;
+  padding: 12px 22.5px;
+  /*width: 157px;*/
+  width: 175px;
   height: 48px;
   background: rgba(196, 196, 196, 0.2);
   border-radius: 16px;
@@ -33,7 +34,9 @@
 @media screen and (max-width: 500px) {
   .petition-form__submit-btn {
     margin: 0 0 0 47px;
-    width: 157px;
+    /*width: 157px;*/
+    width: 175px;
+    padding: 12px 33.5px;
     height: 44px;
     font-size: 16px;
     line-height: 20px;
@@ -55,6 +58,13 @@
   background: rgba(238, 106, 77, 1);
   color: #ffffff
 }
+
+.petition-form__submit-btn_published {
+  background: unset;
+  background: rgb(32, 124, 74);
+  color: #ffffff;
+}
+
 
 .petition-form__submit-btn_active:focus {
   border: none;
