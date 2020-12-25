@@ -9,8 +9,6 @@ import { db, storage } from "../../utils/firebase";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import PetitionSteps from "../PetitionSteps/PetitionSteps";
 
-// import PetitionStatus from "../PetitionStatus/PetitionStatus";
-
 function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
     const currentUser = useContext(CurrentUserContext);
     const [poemText, setPoemText] = useState('')
@@ -18,16 +16,13 @@ function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
     const [isTextReadyToRender, setIsTextReadyToRender] = useState(false)
     const [pictureData, setPictureData] = useState({})
     const [isPetitionSubmitted, setIsPetitionSubmitted] = useState(false)
-    const [isLoaded, setIsLoaded] = useState(false)
     const [isPetitionPublished, setIsPetitionPublished] = useState(false)
     const [isPictureReady, setIsPictureReady] = useState(false)
     const [resetTextInputs, setResetTextInputs] = useState(false)
     const [url, setUrl] = useState('')
     const [isPublic, setIsPublic] = useState(false)
     const [isAnimationIn, setIsAnimationIn] = React.useState(false)
-    const [isAnimationOut, setIsAnimationOut] =useState(false)
     const [isDefaultPictureChosen, setIsDefaultPictureChosen] =useState(false)
-    // const [status, setStatus] = useState('Просто контролируем каждое ваше нажатие клавиш. Может ну его, связываться с нами ...')
 
     const handleDeletePicture = () => {
         if (url) {
@@ -100,7 +95,7 @@ function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
     // создание записи в db
     useEffect(() => {
         if (isPetitionSubmitted && currentUser.uid) {
-            setIsLoaded(true)
+            // setIsLoaded(true)
             setIsPetitionPublished(false)
             const timestamp = Date.now().toString();
             const data = {
@@ -121,8 +116,6 @@ function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
                 .add(data)
                 .then(function (docRef) {
                     console.log("Document written with ID: ", docRef.id);
-                    setIsLoaded(false)
-                    // setIsPetitionPublished(true)
                     onAddPetition({ data: data, id: docRef.id });
                 }).then(function () {
                     setIsPetitionPublished(true)
@@ -133,8 +126,6 @@ function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
                     // TODO: подумать правильно ли то, что этот находится в finally а не в then
                     // TODO: резон для этого в том, что я хочу чтобы даже если ошибка возникла мы
                     //  TODO:все равно проресетили все стейты и были готовы к приему новой петиции
-                    console.log('reset petition form')
-                    // setIsPetitionPublished(false)
                     setIsTextReadyToRender(false)
                     setIsPictureReady(false)
                     setUrl('')
@@ -142,13 +133,9 @@ function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
                     setTagText('')
                     setResetTextInputs(!resetTextInputs)
                     setIsPetitionSubmitted(false)
-                    // setStatus('Просто контролируем каждое ваше нажатие клавиш. Может ну его, связываться с нами ...')
                 }))
         }
     }, [isPetitionSubmitted])
-
-
-    
 
     return (
         <section className="petition-form">
@@ -185,7 +172,6 @@ function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
                 poemText={poemText}
                 isTextReadyToRender={isTextReadyToRender}
                 isAnimationIn={isAnimationIn}
-                isAnimationOut={isAnimationOut}
             />
         </section>
     )

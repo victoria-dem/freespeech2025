@@ -16,13 +16,10 @@ function PetitionSubmitBtn(props) {
     const [isSubmitBtnAvailable, setIsSubmitBtnAvailable] = useState(false)
     const [justPublished, setJustPublished] = useState(false)
     
-    
     const handleSubmitPetition = e => {
         e.preventDefault();
         getSubmitPetitionEvent(true)
     }
-    
-    console.log(isPetitionPublished)
     
     useEffect(() => {
         if (isPetitionPublished) {

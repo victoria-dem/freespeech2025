@@ -4,7 +4,7 @@ import PoemLine from "../PoemLine/PoemLine";
 import {v4 as uuidv4} from 'uuid';
 import './petition-text-preview.css'
 
-function PetitionTextPreview({poemText, isTextReadyToRender, isAnimationIn, isAnimationOut}) {
+function PetitionTextPreview({poemText, isTextReadyToRender, isAnimationIn}) {
     
     return (
         <div className="petition-form__poem-preview">
@@ -12,11 +12,10 @@ function PetitionTextPreview({poemText, isTextReadyToRender, isAnimationIn, isAn
             <div className="petition-form__poem-box">
                 {!isTextReadyToRender ? <p className="petition-form__poem-box-default">появится здесь</p> : null}
                 <div className="petition-form__poem-all-lines">
-                    {((poemText && isTextReadyToRender) || isAnimationOut) && poemText.map((line) => <PoemLine
+                    {poemText && isTextReadyToRender && poemText.map((line) => <PoemLine
                         key={uuidv4()}
                         line={line}
                         isAnimationIn={isAnimationIn}
-                        isAnimationOut={isAnimationOut}
                     />)}
                 </div>
             </div>
