@@ -45,6 +45,10 @@ function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
         setIsTextReadyToRender(petitionTextData.isPetitionReady)
     }
     
+    const resetPublishState = (state) => {
+        setIsPetitionPublished(state)
+    }
+    
     useEffect(() => {
         if (isTextReadyToRender && poemText) {
             setIsAnimationIn(true)
@@ -118,7 +122,7 @@ function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
                 .then(function (docRef) {
                     console.log("Document written with ID: ", docRef.id);
                     setIsLoaded(false)
-                    setIsPetitionPublished(true)
+                    // setIsPetitionPublished(true)
                     onAddPetition({ data: data, id: docRef.id });
                 }).then(function () {
                     setIsPetitionPublished(true)
@@ -130,7 +134,7 @@ function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
                     // TODO: резон для этого в том, что я хочу чтобы даже если ошибка возникла мы
                     //  TODO:все равно проресетили все стейты и были готовы к приему новой петиции
                     console.log('reset petition form')
-                    setIsPetitionPublished(false)
+                    // setIsPetitionPublished(false)
                     setIsTextReadyToRender(false)
                     setIsPictureReady(false)
                     setUrl('')
@@ -177,6 +181,7 @@ function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
                 isPictureReady={isPictureReady}
                 isPetitionPublished={isPetitionPublished}
                 isPetitionSubmitted={isPetitionSubmitted}
+                resetPublishState={resetPublishState}
             />
             <PetitionTextPreview
                 poemText={poemText}

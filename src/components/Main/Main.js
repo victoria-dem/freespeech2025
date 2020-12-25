@@ -85,7 +85,7 @@ const Main = ({ onUpdateUser, isLoggedIn, petitions, onLikeClick,
             checkBoxThreeValid: false
         })
     }
-    console.log({values})
+    // console.log({values})
     const handleSignUpChange = e => {
         const { name, value } = e.target;
         setValues({ ...values, [name]: value });

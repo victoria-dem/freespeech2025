@@ -137,12 +137,20 @@ function PetitionPicture({
                 {/*/>*/}
             </div>
             }
+            {/*{isPictureReady &&*/}
+            {/*<img className="petition-form__delete-btn"*/}
+            {/*     src={deleteButton}*/}
+            {/*     alt="delete-btn"*/}
+            {/*     onClick={handleDeleteButtonClick}*/}
+            {/*/>}*/}
+    
             {isPictureReady &&
-            <img className="petition-form__delete-btn"
-                 src={deleteButton}
-                 alt="delete-btn"
-                 onClick={handleDeleteButtonClick}
+            <div
+                className="petition-form__delete-btn"
+                onClick={handleDeleteButtonClick}
             />}
+
+
         </div>
     )
 }

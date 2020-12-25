@@ -179,13 +179,23 @@
 }
 
 .petition-form__delete-btn {
-  width: 16px;
-  height: 17px;
+  width: 24px;
+  height: 24px;
   position: absolute;
   top: 16px;
   right: 16px;
   z-index: 2;
   cursor: pointer;
+  background: url("../../images/del_button.svg");
+}
+
+.petition-form__delete-btn:hover {
+  background: url("../../images/del_button_hover.svg");
+}
+
+
+.petition-form__delete-btn:active {
+  background: url("../../images/del_button_click.svg");
 }
 
 .petition-form__delete-btn_invisible {
