@@ -208,6 +208,7 @@
         grid-row-end: 1;
         grid-column-start:1;
         grid-column-end: 1;
+        justify-self: center;
         width: 23px;
         height: 23px;
         border: none;
