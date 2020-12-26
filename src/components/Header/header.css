@@ -39,7 +39,6 @@
   transition: opacity 2.5s ease-in;
 }
 
-
 .header__button:hover {
   opacity: 0.8;
   transition: opacity 0.4s ease-out;
