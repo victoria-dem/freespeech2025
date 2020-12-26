@@ -39,7 +39,9 @@ function Header({handleAccountBtnClick, nickname, showMenu}) {
                         </div>
                     </> : null}
             </div>
-            <button type='button' className="header__button" onClick={handleAccountBtnClick}>
+            <button type='button'
+                    className={buttonVisibility ? "header__button header__button_visibility" : "header__button"}
+                    onClick={handleAccountBtnClick}>
                 <div className={!currentUser.uid ? "header__button-image header__button-image_login"
                     : "header__button-image header__button-image_logout"}/>
             </button>

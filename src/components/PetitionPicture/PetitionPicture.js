@@ -87,9 +87,9 @@ function PetitionPicture({
                     Для того чтобы создать инициативу,
                 </p>
                 <p className="petition-form__anonymous-user-msg-text">
-                    <div className="petition-form__anonymous-user-msg-link" onClick={handleAccountBtnClick}>
+                    <span className="petition-form__anonymous-user-msg-link" onClick={handleAccountBtnClick}>
                         залогиньтесь
-                    </div> пожалуйста.
+                    </span> пожалуйста.
                 </p>
             </div>}
             
@@ -105,7 +105,7 @@ function PetitionPicture({
                         onClick={handlePictureUpload}>
                 </button>
                 <span className="petition-form__button-text">
-                    <div className="petition-form__pic-upload-link" onClick={handlePictureUpload}>Загрузите картинку</div>
+                    <span className="petition-form__pic-upload-link" onClick={handlePictureUpload}>Загрузите картинку</span>
                 </span>
             </>}
             
