@@ -20,22 +20,6 @@ function Popup(props) {
         formValues,
         setIsAccountPageOpen
     } = props
-    // const [scrollPosition, setScrollPosition] = useState(0);
-    // const handleScroll = () => {
-    //     const position = window.pageYOffset;
-    //     setScrollPosition(position);
-    // };
-
-    // useEffect(() => {
-    //     window.addEventListener('scroll', handleScroll, {passive: true});
-    //     return () => {
-    //         window.removeEventListener('scroll', handleScroll);
-    //     };
-    // }, []);
-
-    // const styleContainer = {
-    //     marginTop: scrollPosition + (window.innerHeight / 100) * 20 + 'px'
-    // }
 
    function renderInsightPopup(popupContain) {
         switch (popupContain) {

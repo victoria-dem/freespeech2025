@@ -17,7 +17,6 @@ const Main = ({ onUpdateUser, isLoggedIn, petitions, onLikeClick,
 
     const currentUser = useContext(CurrentUserContext);
     const [isAccountPageOpen, setIsAccountPageOpen] = useState(false)
-    const [isLinkSent, setIsLinkSent] = useState(false)
     const [isSignUpClicked, setIsSignUpClicked] = useState(false)
     const [isLogOutClicked, setIsLogOutClicked] = useState(false)
     const [values, setValues] = useState({
@@ -40,8 +39,6 @@ const Main = ({ onUpdateUser, isLoggedIn, petitions, onLikeClick,
             auth.sendSignInLinkToEmail(values.email, actionCodeSettings)
                 .then(function () {
                     window.localStorage.setItem('emailForSignIn', values.email);
-                    emailLinkStatus(true)
-                    console.log('The link was successfully sent')
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -53,7 +50,6 @@ const Main = ({ onUpdateUser, isLoggedIn, petitions, onLikeClick,
     useEffect(() => {
         if (isLogOutClicked) {
             auth.signOut().then(function () {
-                console.log('Sign-out successful');
                 onUpdateUser({});
             }).catch(function (error) {
                 console.log(error);
@@ -72,10 +68,6 @@ const Main = ({ onUpdateUser, isLoggedIn, petitions, onLikeClick,
         currentUser.uid ? setPopupContain("sign-out") : setPopupContain("sign-in");
     }
 
-    const emailLinkStatus = (props) => {
-        setIsLinkSent(props)
-    }
-
     const closePopup = () => {
         setIsAccountPageOpen(!isAccountPageOpen)
         setFormValidity({
@@ -85,20 +77,16 @@ const Main = ({ onUpdateUser, isLoggedIn, petitions, onLikeClick,
             checkBoxThreeValid: false
         })
     }
-    // console.log({values})
+    
     const handleSignUpChange = e => {
         const { name, value } = e.target;
         setValues({ ...values, [name]: value });
         validation(e);
-
     }
-
 
     function validation(e) {
         const validatedFieldName = [e.target.name] + 'Valid'
-        // setFormValidity(prevData => ({ ...prevData, [validatedFieldName]: e.target.validity.valid }))
         setFormValidity({ ...formValidity, [validatedFieldName]: e.target.validity.valid })
-        console.log( e.target.validity.valid)
         if (e.target.name === 'email' && !e.target.validity.valid) {
             setEmailErrorText("Введите правильный почтовый адрес")
         } else if (e.target.name === 'email' && e.target.validity.valid) {

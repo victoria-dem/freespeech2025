@@ -1,10 +1,7 @@
 import React, { useEffect } from 'react';
-import './auth.css'
 import { auth } from '../../utils/firebase'
 
-
 function Auth({ onUpdateUser, isLoggedIn, onCheckLogin }) {
-
     // определяем юзер на сайте или нет
     useEffect(() => {
         auth.onAuthStateChanged(function (user) {
@@ -34,12 +31,8 @@ function Auth({ onUpdateUser, isLoggedIn, onCheckLogin }) {
             }
         }
     }, [])
-    
 
-    return (
-        <>
-        </>
-    )
+    return <></>
 }
 
 export default Auth;

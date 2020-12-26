@@ -1,8 +1,5 @@
 import React, {useEffect} from 'react';
 import './sign-up-form.css';
-import signInBtn from '../../images/signInBtn.svg'
-import signInBtnDis from '../../images/signInBtnDis.svg'
-import loginHover from '../../images/loginHover.svg'
 import arrowButton from "../../images/arrowButton.svg";
 
 
@@ -18,7 +15,6 @@ const SignUpForm = ({
                     }) => {
 
     const {
-        emailValid,
         checkBoxOneValid,
         checkBoxTwoValid,
         checkBoxThreeValid
@@ -35,10 +31,7 @@ const SignUpForm = ({
 
     }, [isAccountPageOpen]);
 
-    console.log('formvalues', formValues.checkBoxOne)
-
-    const {email, checkBoxOne, checkBoxTwo, checkBoxThree} = formValues;
-    console.log(formValidity)
+    const {email} = formValues;
     const isSubmitDisabled = !Object.values(formValidity).every(Boolean);
 
     return (
@@ -91,7 +84,6 @@ const SignUpForm = ({
                     <span
                         className={isSubmitDisabled ? "form__submit-text form__submit-text_disabled" : "form__submit-text"}>Войти</span>
                     <div className="sign-up__button"> <img src={arrowButton} alt='Log out'/></div>
-                    {/*<img  src={isSubmitDisabled ? signInBtnDis : signInBtn} alt='Button Sign-in'/>*/}
                 </button>
             </form>
             <p className="form__disclaimer">Входя на сайт вы заранее соглашаетесь с любыми последствиями своих действий</p>

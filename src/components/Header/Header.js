@@ -11,6 +11,7 @@ function Header({handleAccountBtnClick, nickname, showMenu}) {
     const currentUser = useContext(CurrentUserContext);
 
     const [buttonVisibility, setButtonVisibility] = useState(false)
+    
     setTimeout(() => {
         setButtonVisibility(true)
     }, 1000)
@@ -22,7 +23,7 @@ function Header({handleAccountBtnClick, nickname, showMenu}) {
             'header_menu-visible' :
             'header_menu-hidden'}`
     );
-    //TODO вынести отображение пользователя в отдельный компонет чтобы переиспользовать в выпадающем меню
+    //TODO вынести отображение пользователя в отдельный компонент, чтобы переиспользовать в выпадающем меню
     return (
         <header className={headerClassName}>
             <img src={logoPoet} alt="Logo" className="logo"/>

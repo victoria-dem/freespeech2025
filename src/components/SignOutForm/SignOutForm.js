@@ -1,7 +1,6 @@
 import './sign-out-form.css';
 import arrowButton from '../../images/arrowButton.svg'
 
-
 const SignOutForm = ({onLogout, setIsAccountPageOpen,  isAccountPageOpen}) => {
 
     function onEscLogout() {

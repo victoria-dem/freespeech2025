@@ -39,10 +39,8 @@
     }
 }
 
-
 .popup__button-close {
     position: absolute;
-    /*right: calc(100vw - 800px);*/
     top: 10px;
     right: 10px;
     padding: 0;
@@ -58,7 +56,6 @@
 
 @media screen and (max-width: 600px) {
     .popup__button-close {
-        /*margin: 17px 10px 0 258px;*/
     }
 }
 

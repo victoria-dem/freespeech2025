@@ -83,7 +83,6 @@
     list-style: none;
     padding: 10px 0 0 40px;
     margin: 0;
-
 }
 
 .header__list-item-hamburger {
@@ -189,7 +188,6 @@
         grid-column-start:2;
         grid-column-end: 2;
     }
-
 }
 
 @media screen and (min-width: 501px) {
@@ -203,6 +201,7 @@
     .header__list {
         display: none;
     }
+
     .header__hamburger-open {
         display: block;
         grid-row-start: 1;
@@ -214,6 +213,7 @@
         border: none;
         background: transparent;
     }
+
     .header__hamburger-open:hover {
         cursor: pointer;
         opacity: 0.8;
