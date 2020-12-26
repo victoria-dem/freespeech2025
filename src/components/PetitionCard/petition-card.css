@@ -381,7 +381,8 @@ div.rec-item-wrapper {
 
   .petition-card__name {
     font-size: 12px;
-    max-width: 130px;
+    max-width: 170px;
+    min-height: 28px;
   }
 
   .petition-card__timestamp {
@@ -479,7 +480,8 @@ div.rec-item-wrapper {
 
   .petition-card__name {
     font-size: 8px;
-    max-width: 120px;
+    max-width: 150px;
+    min-height: 18px;
   }
 
   .petition-card__timestamp {
