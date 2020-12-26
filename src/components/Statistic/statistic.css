@@ -49,6 +49,7 @@
 }
 
 .statistic__card-digits {
+    opacity: 0;
     padding: 0;
     margin: auto;
     font-family: 'Montserrat',  sans-serif;
@@ -56,6 +57,11 @@
     line-height: 55px;
     font-weight: 400;
     max-width: 146px;
+}
+
+.statistic__card-digits_visible {
+    opacity: 1;
+    transition: opacity 0.4s linear;
 }
 
 @media screen and (max-width: 1370px) {

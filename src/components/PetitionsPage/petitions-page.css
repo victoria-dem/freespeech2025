@@ -59,6 +59,39 @@
   background: center/contain url('../../images/backClick.svg') no-repeat;
 }
 
+.header_petition{
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  padding: 5px 30px 0 20px;
+  border-bottom: #cbc8c8 1px solid;
+  margin: 0 20px 0 20px;
+
+ }
+
+.header__nickname-petition {
+  display: flex;
+}
+
+.header__nickname-pet {
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+}
+
+.logo-pet {
+  padding: 0 10px 0 20px;
+}
+
 @media screen and (min-width:768px) and (max-width: 1024px) {
   .petitions-page__title {
     font-size: 38px;
@@ -80,9 +113,27 @@
     top: 121px;
     left: 37px;
   }
+
+  .header__user-icon-petition {
+    height: 28px;
+  }
+
+  .header__nickname-pet {
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .logo-pet {
+    width: 55px;
+  }
 }
 
 @media screen and (min-width:320px) and (max-width: 767px) {
+  .header_petition{
+    height: 60px;
+    padding: 5px 30px 0 0;
+  }
+
   .petitions-page__title {
     font-size: 20px;
     padding: 22px 0 32px;
@@ -105,5 +156,23 @@
     height: 17.83px;
     top: 89.91px;
     left: 16px;
+  }
+
+  .header__user-icon-petition {
+    display: none;
+  }
+
+  .header__nickname-pet {
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .logo-pet {
+    width: 55px;
+    padding: 0;
+  }
+
+  .header_petition{
+    padding: 0;
   }
 }
