@@ -55,7 +55,8 @@ const PetitionCardList = ({ petitions, onLikeClick, onMyPetitionsChoose, onActua
           </Carousel>
       }
       <NavLink to="/petitions" className="petition-card-list__all-link" onClick={onAllPetitionsChoose}>
-        Все инициативы <div className="petition-card-list__all-link-arrow"></div>
+        Все инициативы 
+        <div className="petition-card-list__all-link-arrow"></div>
       </NavLink>
     </div>
   );
