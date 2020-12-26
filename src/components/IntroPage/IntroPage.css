@@ -148,6 +148,9 @@
   .intro-page {
     background-position: right -52.5vw bottom -30px;
   }
+  .into-page__button {
+    margin: 0 0 106px 0;
+  }
 }
 
 /* iphone 8 */
