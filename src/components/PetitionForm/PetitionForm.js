@@ -59,6 +59,7 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
     })
 
     const handleChange = e => {
+        e.preventDefault()
         setIsKeyPressed(!isKeyPressed)
         const {name, value} = e.target;
         setPetitionValues(currentValue => {
