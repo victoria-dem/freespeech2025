@@ -193,6 +193,7 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
                             minLength="4"
                             maxLength="20"
                             required
+                            onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
                             onChange={handleChange}
                             onFocus={handleFocus}
                             onBlur={handleOnBlur}
