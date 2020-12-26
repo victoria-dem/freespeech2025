@@ -67,6 +67,7 @@
   height: 53px;
   border-radius: 16px;
   display: flex;
+  text-decoration: none;
 }
 
 .banner__link-button:hover {
@@ -189,6 +190,7 @@
     width: 118px;
     height: 35px;
     border-radius: 16px;
+    text-decoration: none;
   }
 
   .banner__link {
