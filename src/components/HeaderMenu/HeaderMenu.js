@@ -3,7 +3,6 @@ import './header-menu.css';
 import hamburger from '../../images/hamburger.svg'
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 
-
 function HeaderMenu({showMenu, nickname, buttonVisibility}) {
     const currentUser = useContext(CurrentUserContext);
     const userNickname = nickname.split(' ');
@@ -48,7 +47,7 @@ function HeaderMenu({showMenu, nickname, buttonVisibility}) {
                 <button type='button' onClick={handleHamburgerCloseClick} className="header__hamburger-close">
                     <div className="header__hamburger-close-btn">
                         <div className="header__hamburger-cross-left">
-                            <div className="header__hamburger-cross-right"></div>
+                            <div className="header__hamburger-cross-right"/>
                         </div>
                     </div>
                 </button>

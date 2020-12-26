@@ -21,6 +21,7 @@ function PetitionsPage ({
             setNick( auth.currentUser.displayName);
         }
     })
+    
     const userNickname = nick.split(' ');
     //TODO попробовать переиспользовать компонент header
     return (
@@ -41,10 +42,10 @@ function PetitionsPage ({
                         </div> : null}
                 </div>
             </header>
-            <NavLink to="/main" className="petitions-page__return-link" onClick={onReturn}></NavLink>
+            <NavLink to="/main" className="petitions-page__return-link" onClick={onReturn}/>
             <h1 className="petitions-page__title">
-                <a id="all-petitions" name="all-petitions"></a>
-                Все петиции</h1>
+                <a id="all-petitions" name="all-petitions"/>
+                Все инициативы</h1>
             <p className="petitions-page__count">Всего: {petitions.length}</p>
             <div className="petitions-page__petitions">
                 {

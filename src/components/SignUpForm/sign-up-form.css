@@ -44,6 +44,7 @@
 .form__submit-button:hover {
   opacity: 0.8;
   transition: opacity 0.4s ease-out;
+  cursor: pointer;
 }
 
 .form__submit-button:focus {
@@ -154,6 +155,7 @@
 .form__checkbox:hover + .form__pseudo-item {
   background-image: url("../../images/form-hover.svg");
   background-repeat: no-repeat;
+  cursor: pointer;
 }
 
 .form__checkbox:active + .form__pseudo-item {
@@ -206,11 +208,13 @@
 .form__submit-button:hover  .sign-up__button {
   background-color: #ee6a4d;
   transition: background-color 0.3s ease-out;
+  cursor: pointer;
 }
 
 .form__submit-button:hover  .form__submit-text {
   color: #ee6a4d;
   transition: color 0.3s ease-out;
+  cursor: pointer;
 }
 
 .form__submit-button:active  .sign-up__button {
@@ -233,7 +237,6 @@
 .form__submit-button:disabled .sign-up__button {
   background-color: #bdbeb6;
 }
-
 
 @media screen and (max-width: 580px) {
   .form__input {

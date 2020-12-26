@@ -1,4 +1,3 @@
-
 .petition-form__default-picture {
   overflow: hidden;
   object-fit: cover;
@@ -8,15 +7,9 @@
   border-radius: 16px;
 }
 
-
-
-
-
-
 .petition-form__default-picture_cursor {
   cursor: pointer;
 }
-
 
 .petition-form__default-picture:first-child {
   margin-right: 16px;
@@ -26,13 +19,11 @@
   margin-left: 16px;
 }
 
-
 @media screen and (max-width: 500px) {
   .petition-form__default-picture {
     width: 76px;
     height: 70px;
   }
-
 
   .petition-form__default-picture:first-child {
     margin-right: 12px;
@@ -41,5 +32,4 @@
   .petition-form__default-picture:last-child {
     margin-left: 12px;
   }
-
 }
