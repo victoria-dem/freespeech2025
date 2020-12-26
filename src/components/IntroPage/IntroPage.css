@@ -115,7 +115,7 @@
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 599px) {
+@media screen and (max-width: 599px) {
   .intro-page {
     padding: 44px 20px 10px;
     /* background-position: right -70px bottom -30px; */

@@ -143,7 +143,7 @@
   }
 }
 
-@media screen and (min-width:320px) and (max-width: 767px) {
+@media screen and (max-width: 767px) {
   .header_petition{
     height: 60px;
     padding: 5px 30px 0 0;
