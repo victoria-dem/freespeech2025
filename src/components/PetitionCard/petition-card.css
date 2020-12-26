@@ -313,6 +313,7 @@ div.rec-item-wrapper {
 
   .petition-card__timestamp {
     font-size: 12px;
+    margin: 0;
   }
 
   .petition-card__tag {
