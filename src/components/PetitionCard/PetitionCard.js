@@ -4,7 +4,7 @@ import pic from '../../images/backgroundIntro.jpg';
 import PetitionCardInfo from '../PetitionCardInfo/PetitionCardInfo';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-const PetitionCard = ({petition, onLikeClick, isLoggedIn, nickname, onDeletePetition}) => {
+const PetitionCard = ({petition, onLikeClick, isLoggedIn, onDeletePetition}) => {
     const currentUser = useContext(CurrentUserContext);
     const isOwn = petition.data.uid === currentUser.uid;
     const petitionDeleteButtonClassName = (
@@ -21,8 +21,7 @@ const PetitionCard = ({petition, onLikeClick, isLoggedIn, nickname, onDeletePeti
             <div className="petition-card__image" style={{
                 background: `center/cover url(${petition.data.url? petition.data.url : pic})`
             }}/>
-           <PetitionCardInfo petition={petition} onLikeClick={onLikeClick} isLoggedIn={isLoggedIn}
-                nickname={nickname} />
+           <PetitionCardInfo petition={petition} onLikeClick={onLikeClick} isLoggedIn={isLoggedIn} />
             <button className={petitionDeleteButtonClassName}
                 onClick={handleDeletePetition}></button>
         </div>

@@ -6,7 +6,7 @@ import SimpleDateTime from 'react-simple-timestamp-to-date';
 import like from '../../images/like.svg';
 import { capitalize } from '../../utils/utils';
 
-const PetitionCardInfo = ({ petition, onLikeClick, isLoggedIn, nickname }) => {
+const PetitionCardInfo = ({ petition, onLikeClick, isLoggedIn }) => {
   const currentUser = useContext(CurrentUserContext);
   const [isOwn, setIsOwn] = useState(false);
   const [isOnModeration, setIsOnModeration] = useState(false);

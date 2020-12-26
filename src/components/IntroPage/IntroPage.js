@@ -4,9 +4,12 @@ import { Link } from 'react-router-dom';
 const IntroPage = () => {
   return (
     <div className="intro-page">
-      <p className="intro-page__text">Это машина времени. Хотите оказаться в 2025 году и отправить 
-        вашу просьбу правительству будущего?</p>
-      <Link to="/main" className="into-page__button">Поехали!</Link>
+      <div>
+        <h1 className="intro-page__title">Перенесись в 2025</h1>
+        <p className="intro-page__text">и задай свой вопрос</p>
+        <p className="intro-page__text">правительству будущего!</p>
+      </div>
+      <Link to="/main" className="into-page__button">Вперед</Link>
     </div>
   );
 }

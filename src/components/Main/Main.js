@@ -13,7 +13,7 @@ import Statistic from "../Statistic/Statistic";
 
 const Main = ({ onUpdateUser, isLoggedIn, petitions, onLikeClick,
     onAddPetition, onMyPetitionsChoose, onActualPetitionsChoose,
-    nickname, onAllPetitionsChoose, onDeletePetition, allPetitions }) => {
+    nickname, onAllPetitionsChoose, onDeletePetition, allPetitions, isLoading }) => {
 
     const currentUser = useContext(CurrentUserContext);
     const [isAccountPageOpen, setIsAccountPageOpen] = useState(false)
@@ -113,9 +113,9 @@ const Main = ({ onUpdateUser, isLoggedIn, petitions, onLikeClick,
                 <Banner />
                 <Statistic allPetitions={allPetitions} />
                 <PetitionCardList petitions={petitions} onLikeClick={onLikeClick}
-                    onMyPetitionsChoose={onMyPetitionsChoose} nickname={nickname}
+                    onMyPetitionsChoose={onMyPetitionsChoose}
                     onActualPetitionsChoose={onActualPetitionsChoose} isLoggedIn={isLoggedIn}
-                    onAllPetitionsChoose={onAllPetitionsChoose} onDeletePetition={onDeletePetition}/>
+                    onAllPetitionsChoose={onAllPetitionsChoose} onDeletePetition={onDeletePetition} isLoading={isLoading} />
                 <Petition onAddPetition={onAddPetition} nickname={nickname} handleAccountBtnClick={handleAccountBtnClick}/>
                 <Popup
                     onClose={closePopup}

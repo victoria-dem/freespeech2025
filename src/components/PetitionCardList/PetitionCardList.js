@@ -7,10 +7,11 @@ import { config } from 'react-spring';
 import './petition-card-list.css';
 import { NavLink } from 'react-router-dom';
 import EmptyPetition from '../EmptyPetition/EmptyPetition';
+import loader from '../../images/spinner.svg';
 
-const PetitionCardList = ({ petitions, onLikeClick, onMyPetitionsChoose, nickname, 
-  onActualPetitionsChoose, isLoggedIn, onAllPetitionsChoose, onDeletePetition }) => {
-  
+const PetitionCardList = ({ petitions, onLikeClick, onMyPetitionsChoose, onActualPetitionsChoose,
+  isLoggedIn, onAllPetitionsChoose, onDeletePetition, isLoading }) => {
+
   const [isActButtonClicked, setIsActButtonClicked] = useState(true);
   const [isMyButtonClicked, setIsMyButtonClicked] = useState(false);
   const handleMyPetitionsButtonClick = () => {
@@ -26,7 +27,7 @@ const PetitionCardList = ({ petitions, onLikeClick, onMyPetitionsChoose, nicknam
   }
 
   const isListEmpty = petitions.length === 0;
-  
+
   return (
     <div className="petition-card-list">
       <h2 className="petion-card-list__title">
@@ -39,21 +40,23 @@ const PetitionCardList = ({ petitions, onLikeClick, onMyPetitionsChoose, nicknam
         <button type="button" className={`petition-card-list__button ${isMyButtonClicked && 'petition-card-list__button_active'}`}
           onClick={handleMyPetitionsButtonClick}>Мои инициативы</button>
       </div>
-      {isListEmpty ? <EmptyPetition/> :
-        <Carousel itemPosition='center' enableSwipe={true} enableMouseSwipe={true} >
-          {
-            petitions.map((petition) => {
-              return (
-                <PetitionCard key={uuidv4()} petition={petition} onLikeClick={onLikeClick}
-                isLoggedIn={isLoggedIn} nickname={nickname} onDeletePetition={onDeletePetition}/>
-              )
-            })
-          }
-        </Carousel>
+      {isLoading ?
+        <img className="petition-card-list__progress-bar-loader" src={loader} alt="loader"></img> :
+        isListEmpty ? <EmptyPetition /> :
+          <Carousel itemPosition='center' enableSwipe={true} enableMouseSwipe={true} >
+            {
+              petitions.map((petition) => {
+                return (
+                  <PetitionCard key={uuidv4()} petition={petition} onLikeClick={onLikeClick}
+                    isLoggedIn={isLoggedIn} onDeletePetition={onDeletePetition} />
+                )
+              })
+            }
+          </Carousel>
       }
-        <NavLink to="/petitions" className="petition-card-list__all-link" onClick={onAllPetitionsChoose}>
-          Все инициативы <div className="petition-card-list__all-link-arrow"></div>
-        </NavLink>
+      <NavLink to="/petitions" className="petition-card-list__all-link" onClick={onAllPetitionsChoose}>
+        Все инициативы <div className="petition-card-list__all-link-arrow"></div>
+      </NavLink>
     </div>
   );
 }

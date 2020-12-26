@@ -48,6 +48,7 @@
   padding: 0 0 16px 0;
   width: 50%;
   outline: none;
+  cursor: pointer;
   transition: color 0.3s linear;
 }
 
@@ -83,6 +84,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: baseline;
+  cursor: pointer;
 }
 
 .petition-card-list__all-link:hover {
@@ -117,13 +119,13 @@ button.rec-arrow, button.rec-arrow:focus:enabled, button.rec-arrow:hover:enabled
   box-shadow: none;
   width: 22.92px;
   height: 36.67px;
+  cursor: pointer;
 }
 
 button.rec-arrow:disabled {
   background-color: rgba(255,255,255,0);
   font-size: 0;
   box-shadow: none;
-  min-width: 22.92px;
   width: 22.92px;
   height: 36.67px;
   opacity: 0.2;
@@ -164,6 +166,16 @@ button.rec-dot{
 button.rec-dot_active,button.rec-dot:hover, button.rec-dot:active:enabled, button.rec-dot:focus:enabled {
   box-shadow: 0 0 1px 1px #EE6A4D;
   background-color: #EE6A4D;
+}
+
+@keyframes spin {
+  from {transform:rotate(0deg);}
+  to {transform:rotate(360deg);}
+}
+
+.petition-card-list__progress-bar-loader{
+  margin: 200px auto 200px;
+  animation: spin 5s linear 0s infinite;
 }
 
 @media screen and (min-width:768px) and (max-width: 1024px) {
@@ -220,10 +232,14 @@ button.rec-dot_active,button.rec-dot:hover, button.rec-dot:active:enabled, butto
     height: 10.79px;
     background: center/13.42px 10.79px url('../../images/toAllPetitionsArrow.svg') no-repeat;
   }
+
+  .petition-card-list__progress-bar-loader{
+    margin: 164px auto 164px;
+  }
   
 } 
 
-@media screen and (min-width: 500px) and (max-width: 767px) {
+@media screen and (min-width: 501px) and (max-width: 767px) {
   button.rec-dot {
     width: 11.65px;
     height: 11.2px;
@@ -244,7 +260,7 @@ button.rec-dot_active,button.rec-dot:hover, button.rec-dot:active:enabled, butto
   }
 
   .petition-card-list__button {
-    font-size: 14px;
+    font-size: 16px;
     padding: 0 0 9.78px 0;
   }
 
@@ -261,12 +277,12 @@ button.rec-dot_active,button.rec-dot:hover, button.rec-dot:active:enabled, butto
   }
 
   .petion-card-list__title {
-    font-size: 22px;
+    font-size: 32px;
     margin: 65px 0 40px 0;
   }
 
   .petition-card-list__all-link {
-    font-size: 18px;
+    font-size: 18.32px;
     text-align: center;
     margin: 64px 0 0 0;
     justify-content: center;
@@ -279,9 +295,13 @@ button.rec-dot_active,button.rec-dot:hover, button.rec-dot:active:enabled, butto
     height: 10.79px;
     background: center/13.42px 10.79px url('../../images/toAllPetitionsArrow.svg') no-repeat;
   }
+
+  .petition-card-list__progress-bar-loader{
+    margin: 294px auto 294px;
+  }
 }
 
-@media screen and (min-width: 320px) and (max-width: 499px) {
+@media screen and (min-width: 320px) and (max-width: 500px) {
   button.rec-dot {
     width: 8px;
     height: 7.62px;
@@ -336,6 +356,10 @@ button.rec-dot_active,button.rec-dot:hover, button.rec-dot:active:enabled, butto
     width: 9.21px;
     height: 7.71px;
     background: center/9.21px 7.71px url('../../images/toAllPetitionsArrow.svg') no-repeat;
+  }
+
+  .petition-card-list__progress-bar-loader{
+    margin: 228px auto 228px;
   }
 }
 

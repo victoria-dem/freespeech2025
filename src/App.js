@@ -31,6 +31,7 @@ function App() {
 
     const [currentUser, setCurrentUser] = useState({}); // {email: ... , uid: ... }
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [petitions, setPetitions] = useState([]);
     const [areMyPetitionsChosen, setAreMyPetitionsChosen] = useState(false);
     const [myPetitions, setMyPetitions] = useState([]);
@@ -106,6 +107,7 @@ function App() {
     //получить последние по дате публикации 6 петиций и добавить их в стейт petitions
     const setLatestPetitions = () => {
         let cleanUp = false;
+        setIsLoading(true);
         //только после проверки на авторизацию
         if (hasCheckedLogin) {
             Promise.all([
@@ -150,7 +152,10 @@ function App() {
                     }
                 }
             })
-                .catch(err => console.log(err));
+                .catch(err => console.log(err))
+                .finally(()=>{
+                    setIsLoading(false);
+                });
             return () => cleanUp = true;
         }
     }
@@ -158,6 +163,7 @@ function App() {
     //получить петиции текущего юзера и добавить их в стейт myPetitions
     const setUserPetitions = () => {
         setMyPetitions([]);
+        setIsLoading(true);
         db.collection("petitions")
             .where("uid", "==", currentUser.uid)
             .orderBy("timestamp", "desc")
@@ -168,7 +174,10 @@ function App() {
                     //setMyPetitions([{ data: doc.data(), id: doc.id },...myPetitions]);
                 })
             })
-            .catch((err) => console.log(err));
+            .catch((err) => console.log(err))
+            .finally(()=> {
+                setIsLoading(false);
+            });
     }
 
     useEffect(() => {
@@ -184,6 +193,7 @@ function App() {
     useEffect(() => {
         // if (hasCheckedLogin) {
         setAllPetitions([]);
+        setIsLoading(true);
         db.collection("petitions")
             .orderBy("timestamp", "desc")
             .get()
@@ -193,6 +203,10 @@ function App() {
                         setAllPetitions(petitions => [...petitions, { data: doc.data(), id: doc.id }]);
                     }
                 });
+            })
+            .catch((err) => {console.log(err)})
+            .finally(()=>{
+                setIsLoading(false);
             })
         // }
         // }, [ hasCheckedLogin, isUserLoggedIn]);
@@ -340,12 +354,13 @@ function App() {
                         onAllPetitionsChoose={handleAllPetitionsChoose}
                         onDeletePetition={handleDeletePetition}
                         allPetitions={allPetitions}
+                        isLoading={isLoading}
                     />
                 </Route>
                 <Route exact path="/petitions">
                     <PetitionsPage petitions={allPetitions} onLikeClick={handleLikeClick}
                         onDislikeClick={handleDislikeClick} isLoggedIn={isUserLoggedIn} nickname={nickname}
-                        onReturn={handleReturn} onDeletePetition={handleDeletePetition} />
+                        onReturn={handleReturn} onDeletePetition={handleDeletePetition} isLoading={isLoading} />
                 </Route>
                 {/*</Switch>*/}
                 {/*</animated.div>*/}
