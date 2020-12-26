@@ -2,7 +2,6 @@ import React, {useEffect} from 'react';
 import './sign-up-form.css';
 import arrowButton from "../../images/arrowButton.svg";
 
-
 const SignUpForm = ({
                         onChange,
                         onSignUp,
