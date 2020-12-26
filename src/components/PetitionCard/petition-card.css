@@ -39,7 +39,8 @@ div.rec-item-wrapper {
   margin: 0;
   padding: 0;
   text-align: start;
-  max-width: 210px;
+  max-width: 240px;
+  min-height: 38px;
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   font-style: normal;
@@ -60,7 +61,7 @@ div.rec-item-wrapper {
   line-height: 1.22;
   color: #759196;
   display: flex;
-  width: 210px;
+  width: 228px;
   justify-content: start;
   align-items: flex-end;
 }
@@ -81,6 +82,25 @@ div.rec-item-wrapper {
 }
 
 .petition-card__moderation_done {
+  display: none;
+}
+
+.petition-card__consideration {
+  margin: 0;
+  padding: 0 0 0 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 1.22;
+  color: #759196;
+}
+
+.petition-card__consideration_in-progress {
+  display: block;
+}
+
+.petition-card__consideration_not-in-progress {
   display: none;
 }
 
@@ -321,6 +341,10 @@ div.rec-item-wrapper {
     font-size: 12px;
   }
 
+  .petition-card__consideration {
+    font-size: 12px;
+  }
+
   .petition-card__like-container {
      margin-bottom: 3px;
   }
@@ -414,6 +438,10 @@ div.rec-item-wrapper {
   }
 
   .petition-card__moderation {
+    font-size: 12px;
+  }
+
+  .petition-card__consideration {
     font-size: 12px;
   }
 
@@ -513,6 +541,10 @@ div.rec-item-wrapper {
   }
 
   .petition-card__moderation {
+    font-size: 8px;
+  }
+
+  .petition-card__consideration {
     font-size: 8px;
   }
 
