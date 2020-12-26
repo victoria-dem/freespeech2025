@@ -48,6 +48,7 @@
   left: 67px;
   width: 36px;
   height: 30px;
+  cursor: pointer;
   background: center/contain url('../../images/back.svg') no-repeat;
 }
 
@@ -92,6 +93,16 @@
   padding: 0 10px 0 20px;
 }
 
+@keyframes spin {
+  from {transform:rotate(0deg);}
+  to {transform:rotate(360deg);}
+}
+
+.petitions-page__progress-bar-loader {
+  margin: 200px auto 200px;
+  animation: spin 5s linear 0s infinite;
+}
+
 @media screen and (min-width:768px) and (max-width: 1024px) {
   .petitions-page__title {
     font-size: 38px;
@@ -125,6 +136,10 @@
 
   .logo-pet {
     width: 55px;
+  }
+
+  .petitions-page__progress-bar-loader {
+    margin: 164px auto 164px;
   }
 }
 
@@ -174,5 +189,9 @@
 
   .header_petition{
     padding: 0;
+  }
+
+  .petitions-page__progress-bar-loader {
+    margin: 228px auto 228px;
   }
 }

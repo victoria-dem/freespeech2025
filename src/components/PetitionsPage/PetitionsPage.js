@@ -7,11 +7,12 @@ import {CurrentUserContext} from '../../contexts/CurrentUserContext';
 import Footer from '../Footer/Footer';
 import logoPoet from "../../images/logoPoet.svg";
 import userIcon from "../../images/userIcon.svg";
-import { auth } from '../../utils/firebase'
+import { auth } from '../../utils/firebase';
+import loader from '../../images/spinner.svg';
 
 function PetitionsPage ({
                            petitions, onLikeClick, onDislikeClick, isLoggedIn, onReturn,
-                           onDeletePetition
+                           onDeletePetition, isLoading
                        })  {
     const [nick,setNick] = useState('')
     const currentUser = useContext(CurrentUserContext);
@@ -48,11 +49,11 @@ function PetitionsPage ({
                 Все инициативы</h1>
             <p className="petitions-page__count">Всего: {petitions.length}</p>
             <div className="petitions-page__petitions">
-                {
+                { isLoading ? <img className="petitions-page__progress-bar-loader" src={loader} alt="loader"></img> :
                     petitions.map((petition) => {
                         return (
                             <PetitionCard key={uuidv4()} petition={petition} onLikeClick={onLikeClick}
-                                          onDislikeClick={onDislikeClick} isLoggedIn={isLoggedIn} nickname={nick}
+                                          onDislikeClick={onDislikeClick} isLoggedIn={isLoggedIn}
                                           onDeletePetition={onDeletePetition}/>
                         )
                     })

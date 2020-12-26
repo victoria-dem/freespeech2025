@@ -12,8 +12,9 @@
   position: relative;
   align-self: center;
 }
-.rec-item-wrapper {
-  min-height: 460px;
+
+div.rec-item-wrapper {
+  min-height: 470px;
 }
 .petition-card__image {
   object-fit: cover;
@@ -60,7 +61,7 @@
   color: #759196;
   display: flex;
   width: 210px;
-  justify-content: space-between;
+  justify-content: start;
   align-items: flex-end;
 }
 
@@ -152,6 +153,7 @@
   width: 24.17px;
   margin: 0 5.42px 0 18.42px;
   padding: 0;
+  cursor: pointer;
   background: center/contain url('../../images/like.svg') no-repeat white;
 }
 
@@ -245,6 +247,7 @@
   font-size: 24px;
   width: 28px;
   height: 28px;
+  cursor: pointer;
   background: center/contain url('../../images/deleteButton.svg') no-repeat;
 }
 
@@ -266,10 +269,10 @@
 }
 
 @media screen and (min-width:768px) and (max-width: 1024px) {
+
   .petition-card {
     width: 644px;
     height: 328px;
-    box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.15);
   }
 
   .petition-card__image {
@@ -349,7 +352,7 @@
   }
 }
 
-@media screen and (min-width: 500px) and (max-width: 767px) {
+@media screen and (min-width: 501px) and (max-width: 767px) {
   button.rec-arrow {
     display: none;
   }
@@ -448,16 +451,19 @@
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 499px) {
+@media screen and (min-width: 320px) and (max-width: 500px) {
   button.rec-arrow {
     display: none;
+  }
+
+  div.rec-item-wrapper {
+    min-height: 475px;
   }
 
   .petition-card {
     flex-direction: column;
     width: 214px;
     min-height: 457px;
-    box-shadow: 1px 0.1px 0 0.5px rgba(0,0,0,0.15);
   }
 
   .petition-card__image {
