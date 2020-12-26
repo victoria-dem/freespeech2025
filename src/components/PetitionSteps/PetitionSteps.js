@@ -13,8 +13,6 @@ function PetitionSteps() {
             <div className="petition-form__step petition-form__step_blot_forth"><p className="petition-form__step-num">4</p></div>
         </>
     )
-    
-    
 }
 
 export default PetitionSteps

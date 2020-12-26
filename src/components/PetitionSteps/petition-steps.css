@@ -10,8 +10,6 @@
   }
 }
 
-
-
 @media screen and (max-width: 500px) {
   .petition-form__steps {
     display: none;
@@ -50,14 +48,11 @@
   height: 377px;
 }
 
-
 @media screen and (max-width: 1024px) {
   .petition-form__step-connector_position_third {
     height: 703px;
   }
 }
-
-
 
 .petition-form__step-connector_position_forth {
   height: 124px;

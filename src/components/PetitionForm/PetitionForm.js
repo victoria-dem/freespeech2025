@@ -40,12 +40,10 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
     const [searchWord, setSearchWord] = useState('')
     const [isPoemReady, setIsPoemReady] = useState(false)
     const [isPetitionReady, setIsPetitionReady] = useState(false)
-    
     const [errorMessage, setErrorMessage] = useState({
         errorMessageTag: '',
         errorMessageText: ''
     })
-    
     const [errors, setErrors] = useState({
         petitionTag: {
             required: true,
@@ -58,11 +56,6 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
             minLength: true,
         }
     })
-    // console.log('isTagReady', 'isPoemReady', 'isPetitionReady','poemText')
-    // console.log(isTagReady, isPoemReady, isPetitionReady, poemText)
-    
-    // console.log(!errorMessage.errorMessageTag, !errorMessage.errorMessageText)
-    
     
     const handleChange = e => {
         setIsKeyPressed(!isKeyPressed)
@@ -73,11 +66,6 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
                 [name]: value
             }
         });
-        // if ((e.target.name === 'petition') && e.target.value.length > 10) {
-        //     setIsPetitionReady(true)
-        // } else {
-        //     setIsPetitionReady(false)
-        // }
     }
     
     const handleFocus = e => {
@@ -93,7 +81,6 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
         }
     }
     
-    
     // здесь надо добавить валидность двух полей
     useEffect(() => {
         if (isPoemReady &&
@@ -108,7 +95,6 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
             setIsPetitionReady(false)
         }
     }, [isPoemReady, petitionValues, isTagReady, errorMessage])
-    
     
     useEffect(() => {
         if (isTagReady) {
