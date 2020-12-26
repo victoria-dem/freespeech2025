@@ -35,12 +35,12 @@
 }
 
 .banner__link {
-  padding: 10px 20px;
+  /* padding: 10px 20px; */
   text-decoration: none;
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
   font-size: 24px;
-  line-height: 29px;
+  line-height: 0;
   margin: auto;
   color:#fff;
   background-color: #000;
@@ -106,9 +106,9 @@
   }
 
   .banner__link {
-    padding: 5px 8px;
+    /* padding: 5px 8px; */
     font-size: 20px;
-    line-height: 24px;
+    line-height: 0;
     margin: auto;
     color:#fff;
     background-color: #000;
@@ -192,9 +192,9 @@
   }
 
   .banner__link {
-    padding: 2px 2px;
+    /* padding: 2px 2px; */
     font-size: 14px;
-    line-height: 15px;
+    line-height: 0;
     margin: auto;
     color:#fff;
     background-color: #000;
