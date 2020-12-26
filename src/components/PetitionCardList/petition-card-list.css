@@ -285,6 +285,14 @@ button.rec-dot_active,button.rec-dot:hover, button.rec-dot:active:enabled, butto
     background-size: 13.42px 10.79px;
   }
 
+  .petition-card-list__all-link:hover {
+    background: right/13.42px 10.79px url('../../images/allPetitionsArrowClick.svg') no-repeat;
+  }
+
+  .petition-card-list__all-link:active {
+    background: right/13.42px 10.79px url('../../images/allPetitionsArrowClick.svg') no-repeat;
+  }
+
   .petition-card-list__progress-bar-loader{
     margin: 294px auto 294px;
   }
@@ -348,6 +356,14 @@ button.rec-dot_active,button.rec-dot:hover, button.rec-dot:active:enabled, butto
     padding-right: 10px;
     background-size: 9.21px 7.71px;
     max-width: 123px;
+  }
+
+  .petition-card-list__all-link:hover {
+    background: right/9.21px 7.71px url('../../images/allPetitionsArrowClick.svg') no-repeat;
+  }
+
+  .petition-card-list__all-link:active {
+    background: right/9.21px 7.71px url('../../images/allPetitionsArrowClick.svg') no-repeat;
   }
 
   .petition-card-list__progress-bar-loader{
