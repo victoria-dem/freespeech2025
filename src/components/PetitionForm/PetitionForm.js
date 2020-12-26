@@ -4,6 +4,7 @@ import {db} from '../../utils/firebase'
 import petitionTextPrep from "../../utils/petitionTextPrep";
 import petitionDefaultTextPrep from "../../utils/petitionDefaultTextPrep";
 import cn from 'classnames';
+import {obsceneVocabulary} from '../../data/data'
 
 const validators = {
     petitionTag: {
@@ -17,7 +18,7 @@ const validators = {
             return !/(^[а-яА-ЯёЁ]+$)|(^\s+)([а-яА-ЯёЁ]+$)|(^\s+)([а-яА-ЯёЁ]+)(\s+$)|(^[а-яА-ЯёЁ]+)(\s+$)/.test(value)
         },
         forbidden: (value) => {
-            return /^(хуй)|^(оху)|^(пизд)|^(еб)|^(хер)|^(аху)|^(поеб)|^(уеб)|^(похуй)|^(похуи)|^(бляд)|^(побляд)|^(хуе)|^(хуя)|^(хуи)|^(проеб)/.test(value)
+            return obsceneVocabulary.test(value)
         }
     },
     petition: {
