@@ -83,13 +83,13 @@ function PetitionPicture({
              style={{border: (isPicUploaded && isPictureChosen) || (isDefaultPictureChosen && isPictureReady) ? 'none' : '1px dashed #C4C4C4'}}>
             {!currentUser.uid &&
             <div className="petition-form__anonymous-user-msg">
-                <p className="petition-form__anonymous-user-msg-text">
-                    Для того чтобы создать инициативу,
+                <p className="petition-form__anonymous-user-msg-text">{`Войдите в `}
+                    <span className="petition-form__anonymous-user-msg-link" onClick={handleAccountBtnClick}>
+                        аккаунт
+                    </span>,
                 </p>
                 <p className="petition-form__anonymous-user-msg-text">
-                    <span className="petition-form__anonymous-user-msg-link" onClick={handleAccountBtnClick}>
-                        залогиньтесь
-                    </span> пожалуйста.
+                    чтобы добавить фото.
                 </p>
             </div>}
             

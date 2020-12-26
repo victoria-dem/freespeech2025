@@ -65,21 +65,6 @@
 }
 
 
-@media screen and (max-width: 500px) {
-  .petition-form__form-input {
-    margin: 0 0 31px 0;
-    padding: 8px;
-    width: 192px;
-    height: 32px;
-    border-radius: 12px;
-    font-size: 12px;
-    line-height: 15px;
-  }
-}
-
-
-
-
 .petition-form__form-input::placeholder {
 
 }
@@ -106,7 +91,6 @@
 }
 
 
-
 .petition-form__form-error {
   padding: 0;
   margin: 0;
@@ -128,6 +112,16 @@
 }
 
 @media screen and (max-width: 500px) {
+  .petition-form__form-input {
+    margin: 0 0 31px 0;
+    padding: 8px;
+    width: 192px;
+    height: 32px;
+    border-radius: 12px;
+    font-size: 16px;
+    line-height: 18px;
+  }
+
   .petition-form__form-input_size {
     width: 253px;
     height: 76px;
