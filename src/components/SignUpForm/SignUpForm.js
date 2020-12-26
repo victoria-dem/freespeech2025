@@ -2,7 +2,6 @@ import React, {useEffect} from 'react';
 import './sign-up-form.css';
 import arrowButton from "../../images/arrowButton.svg";
 
-
 const SignUpForm = ({
                         onChange,
                         onSignUp,
@@ -86,7 +85,7 @@ const SignUpForm = ({
                     <div className="sign-up__button"> <img src={arrowButton} alt='Log out'/></div>
                 </button>
             </form>
-            <p className="form__disclaimer">Входя на сайт вы заранее соглашаетесь с любыми последствиями своих действий</p>
+            <p className="form__disclaimer">Входя на сайт, вы заранее соглашаетесь с любыми последствиями своих действий</p>
         </>
     );
 }

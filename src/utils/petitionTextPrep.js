@@ -2,7 +2,6 @@ function petitionTextPrep(docIds, setPoemText, tagText) {
     const randomPoemObj = docIds[Math.floor(Math.random() * docIds.length)]
     const randomPoem = Object.values(randomPoemObj)[0]
     const randomPoemLength = randomPoem.length
-    console.log('randomPoem=', randomPoem)
     // TODO: стих меньше 6 строк
     // TODO: если стих не найден
     let baseString = -1
@@ -12,7 +11,7 @@ function petitionTextPrep(docIds, setPoemText, tagText) {
     let string = ''
     // TODO: надо протестировать на стихах разной длины и там, где нужное слово находиться вначале и в конце
     // TODO: точно есть ошибка на стихах, где ключевое слово встречается в последней строке
-    
+
     randomPoem.forEach((line, i, arr) => {
         string = line.toLowerCase()
         if ((string.indexOf(tagText) !== -1) && (baseString === -1)) {
@@ -29,7 +28,7 @@ function petitionTextPrep(docIds, setPoemText, tagText) {
             }
         }
     })
-    
+
     for (let i = firstLine; i < lastLine; i++) {
         poemText.push(randomPoem[i])
     }

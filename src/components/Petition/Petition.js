@@ -33,17 +33,17 @@ function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
         // TODO: надо получить текущее имя файла и запустить удаление этого файла, если он не принадлежит к массиву заглушек
         // TODO: затем внутри then очистить объект pictureData setPictureData({}) и убрать эту очистку из предыдущего if
     }
-    
+
     const getPetitionTextData = (petitionTextData) => {
         setPoemText(petitionTextData.poemText)
         setTagText(petitionTextData.tagText)
         setIsTextReadyToRender(petitionTextData.isPetitionReady)
     }
-    
+
     const resetPublishState = (state) => {
         setIsPetitionPublished(state)
     }
-    
+
     useEffect(() => {
         if (isTextReadyToRender && poemText) {
             setIsAnimationIn(true)
@@ -52,8 +52,8 @@ function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
             }, 3000)
         }
     }, [isTextReadyToRender, poemText])
-    
-    
+
+
     const getPetitionPicData = ({ picRef, isPicUploaded }) => {
         setPictureData(picRef)
         setIsPictureReady(isPicUploaded)
@@ -73,7 +73,7 @@ function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
             setIsPublic(true)
         }
     }
-    
+
     const getSubmitPetitionEvent = (isBtnClicked) => {
         setIsPetitionSubmitted(isBtnClicked)
     }
@@ -115,7 +115,6 @@ function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
             db.collection("petitions")
                 .add(data)
                 .then(function (docRef) {
-                    console.log("Document written with ID: ", docRef.id);
                     onAddPetition({ data: data, id: docRef.id });
                 }).then(function () {
                     setIsPetitionPublished(true)

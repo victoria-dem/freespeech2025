@@ -29,12 +29,12 @@ const validators = {
 }
 
 function PetitionForm({getPetitionTextData, resetTextInputs}) {
-    
+
     const [petitionValues, setPetitionValues] = React.useState({
         petitionTag: '',
         petition: '',
     })
-    
+
     const [poemText, setPoemText] = React.useState('')
     const [isKeyPressed, setIsKeyPressed] = useState(false)
     const [isTagReady, setIsTagReady] = useState(false)
@@ -57,7 +57,7 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
             minLength: true,
         }
     })
-    
+
     const handleChange = e => {
         setIsKeyPressed(!isKeyPressed)
         const {name, value} = e.target;
@@ -68,20 +68,20 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
             }
         });
     }
-    
+
     const handleFocus = e => {
         setIsKeyPressed(!isKeyPressed)
         setIsTagReady(false)
         setIsPoemReady(false)
     }
-    
+
     const handleOnBlur = e => {
         setIsKeyPressed(!isKeyPressed)
         if (petitionValues.petitionTag) {
             setIsTagReady(true)
         }
     }
-    
+
     // здесь надо добавить валидность двух полей
     useEffect(() => {
         if (isPoemReady &&
@@ -96,23 +96,23 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
             setIsPetitionReady(false)
         }
     }, [isPoemReady, petitionValues, isTagReady, errorMessage])
-    
+
     useEffect(() => {
         if (isTagReady) {
             // TODO: trim space
-            setSearchWord(petitionValues.petitionTag.toLowerCase())
+            setSearchWord(petitionValues.petitionTag.toLowerCase().trim())
             // setIsTagReady(false)
         } else {
             setPoemText('')
         }
     }, [isTagReady])
-    
+
     useEffect(() => {
         if (isPoemReady) {
             getPetitionTextData({poemText: poemText, tagText: searchWord, isPetitionReady: isPetitionReady})
         }
     }, [isPetitionReady, poemText])
-    
+
     useEffect(() => {
         if (searchWord) {
             const poemsRef = db.collection("poems");
@@ -136,11 +136,10 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
                 )
                 .catch(function (error) {
                     console.log("Error getting documents: ", error);
-                }).finally(() => console.log('poem is cooked')
-            );
+                });
         }
     }, [searchWord])
-    
+
     useEffect(function validateInputs() {
         // console.log('validating')
         const petitionTagValidationResult = Object.keys(validators.petitionTag).map(errorKey => {
@@ -153,11 +152,11 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
                 return {[errorKey]: errorResult};
             }
         ).reduce((acc, el) => ({...acc, ...el}), {})
-        
+
         setErrors({
             petitionTag: petitionTagValidationResult,
             petition: petitionValidationResult
-            
+
         })
         if (errors.petitionTag.minLength && petitionValues.petitionTag) {
             setErrorMessage({...errorMessage, errorMessageTag: 'Минимальная длина 4 символа. Только русские буквы'});
@@ -171,14 +170,14 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
             setErrorMessage({errorMessageText: '', errorMessageTag: ''})
         }
     }, [isKeyPressed]);
-    
+
     useEffect(() => {
         setPetitionValues({
             petitionTag: '',
             petition: '',
         })
     }, [resetTextInputs])
-    
+
     return (
         <>
             <form className="petition-form__form" name="form-petition" noValidate>

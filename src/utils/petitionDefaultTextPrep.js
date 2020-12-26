@@ -14,10 +14,9 @@ function petitionDefaultTextPrep(setIsPoemReady, setPoemText) {
         'Развяжи мне язык, как осенние вязы развязываешь',
         'в листопад...']
     ]
-    
+
     const defaultPoemNun=Math.floor(Math.random()*defaultPoems.length)
-    console.log(defaultPoemNun);
-    
+
     setPoemText(defaultPoems[defaultPoemNun])
     setIsPoemReady(true)
 }
