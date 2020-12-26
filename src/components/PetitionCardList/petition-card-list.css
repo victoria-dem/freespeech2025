@@ -71,7 +71,7 @@
   text-decoration: none;
   color: black;
   text-align: right;
-  padding: 0;
+  padding: 0 30.41px 0 0;
   margin: 50px 0 0 0;
   max-width: 860px;
   width: 100%;
@@ -80,27 +80,22 @@
   font-style: normal;
   font-size: 25px;
   line-height: 1.22;
-  transition: color 0.8s linear;
+  transition: color background-image 0.3s linear;
   display: flex;
   justify-content: flex-end;
   align-items: baseline;
   cursor: pointer;
+  background: right/18.41px 15.41px url('../../images/toAllPetitionsArrow.svg') no-repeat;
 }
 
 .petition-card-list__all-link:hover {
   color: #EE6A4D;
+  background: right/18.41px 15.41px url('../../images/allPetitionsArrowHover.svg') no-repeat;
 }
 
 .petition-card-list__all-link:active {
   color: #D84444;
-}
-
-.petition-card-list__all-link-arrow {
-  padding: 0;
-  margin: 0 0 0 12px;
-  width:18.41px;
-  height: 15.41px;
-  background: center/18.41px 15.41px url('../../images/toAllPetitionsArrow.svg') no-repeat;
+  background: right/18.41px 15.41px url('../../images/allPetitionsArrowClick.svg') no-repeat;
 }
 
 /* стили карусели */
@@ -225,14 +220,6 @@ button.rec-dot_active,button.rec-dot:hover, button.rec-dot:active:enabled, butto
     max-width: 711px;
   }
 
-  .petition-card-list__all-link-arrow {
-    padding: 0;
-    margin: 0 0 0 8.74px;
-    width: 13.42px;
-    height: 10.79px;
-    background: center/13.42px 10.79px url('../../images/toAllPetitionsArrow.svg') no-repeat;
-  }
-
   .petition-card-list__progress-bar-loader{
     margin: 164px auto 164px;
   }
@@ -292,15 +279,10 @@ button.rec-dot_active,button.rec-dot:hover, button.rec-dot:active:enabled, butto
     font-size: 18.32px;
     text-align: center;
     margin: 64px 0 0 0;
+    padding-right: 14px;
     justify-content: center;
-  }
-
-  .petition-card-list__all-link-arrow {
-    padding: 0;
-    margin: 0 0 0 5.5px;
-    width: 13.42px;
-    height: 10.79px;
-    background: center/13.42px 10.79px url('../../images/toAllPetitionsArrow.svg') no-repeat;
+    max-width: 186px;
+    background-size: 13.42px 10.79px;
   }
 
   .petition-card-list__progress-bar-loader{
@@ -363,14 +345,9 @@ button.rec-dot_active,button.rec-dot:hover, button.rec-dot:active:enabled, butto
     text-align: center;
     margin: 33px 0 0 0;
     justify-content: center;
-  }
-
-  .petition-card-list__all-link-arrow {
-    padding: 0;
-    margin: 0 0 0 5.5px;
-    width: 9.21px;
-    height: 7.71px;
-    background: center/9.21px 7.71px url('../../images/toAllPetitionsArrow.svg') no-repeat;
+    padding-right: 10px;
+    background-size: 9.21px 7.71px;
+    max-width: 123px;
   }
 
   .petition-card-list__progress-bar-loader{
