@@ -11,6 +11,9 @@ const PetitionCardInfo = ({ petition, onLikeClick, isLoggedIn }) => {
   const [isOwn, setIsOwn] = useState(false);
   const [isOnModeration, setIsOnModeration] = useState(false);
   const isLiked = petition.data.likes.some((i) => i.uid === currentUser.uid);
+  const likeChallenge = 5;
+  // const isAchieved = petition.like.length > likeChallenge;
+  const isAchieved = (petition.data.likes.length > likeChallenge);
   const petitionLikeButtonClassName = (
     `petition-card__like ${isLiked ?
       'petition-card__like_active' :
@@ -23,6 +26,12 @@ const PetitionCardInfo = ({ petition, onLikeClick, isLoggedIn }) => {
       'petition-card__moderation_done'}`
   );
 
+  const considerationClassName = (
+    `petition-card__consideration ${isAchieved ?
+      'petition-card__consideration_in-progress' :
+      'petition-card__consideration_not-in-progress'}`
+  );
+
   const likeContainerClassName = (
     `petition-card__like-container ${isOnModeration ?
       'petition-card__like-container_hidden' :
@@ -30,12 +39,10 @@ const PetitionCardInfo = ({ petition, onLikeClick, isLoggedIn }) => {
   );
 
   const challengeContainerClassName = (
-    `petition-card__challenge-container ${isOnModeration ?
+    `petition-card__challenge-container ${isOnModeration || isAchieved ?
       'petition-card__challenge-container_hidden' :
       'petition-card__challenge-container_visible'}`
   );
-
-  const likeChallenge = 20;
 
   const handleLikeClick = () => {
     onLikeClick(petition);
@@ -56,6 +63,7 @@ const PetitionCardInfo = ({ petition, onLikeClick, isLoggedIn }) => {
           {Number(time / 1000)}
         </SimpleDateTime>
         <span className={moderationClassName}>&bull; На модерации</span>
+        <span className={considerationClassName}>&bull; На рассмотрении</span>
       </p>
       <p className="petition-card__tag">{`${capitalize(petition.data.petitionTag)}`}</p>
       <ul className="petition-card__poem">
@@ -74,11 +82,10 @@ const PetitionCardInfo = ({ petition, onLikeClick, isLoggedIn }) => {
         </button>
         <p className="petition-card__like-text petition-card__like-text_count">{petition.data.likes.length}</p>
       </div>
-      <div className={challengeContainerClassName}>
-        <p className="petition-card__like-text">До рассмотрения осталось: </p>
-        <p className="petition-card__challenge">{likeChallenge - petition.data.likes.length}</p>
-      </div>
-
+        <div className={challengeContainerClassName}>
+          <p className="petition-card__like-text">До рассмотрения осталось: </p>
+          <p className="petition-card__challenge">{likeChallenge - petition.data.likes.length}</p>
+        </div>
     </div>
   );
 }
