@@ -9,25 +9,29 @@ https://freespeech2025.com
 Дизайн сайта доступен по адресу:
 https://bit.ly/3aJgBnD
 
-##Цель проекта
+#О проекте
+###Цель проекта
 Дать возможность пользователю в 2025 году создать инициативу / петицию используя эзопов язык классической поэзии.
 
-##Целевая аудитория
+###Целевая аудитория
 Любой взрослый гражданин.
 
-##Модерация
+###Модерация
 Единственная единица контента, которая появляется на сайте без модерации - ключевое слово. Для этих слов реализована проверка на обсценную лексику.
 Если пользователь в качестве иллюстрации использует свою картинку, то такая инициатива публикуется на сайте, но доступна только данному пользователю.
 
+#Доступные скрипты
+### Режим разработчика
+npm start
 
-#Сборка проекта
+###Сборка проекта
 npm run build
 
-#Публикация проекта
+###Публикация проекта
 firebase deploy
 
-
-#Backend
+#Инфраструктура
+###Backend
 В качестве backend использована облачная платформа Firebase. Средствами этой платформы решены следующие задачи:
 •	авторизации посетителей сайта (passwordless authentication with email link);
 •	хранение базы данных со стихами и работа с ней (Cloud Firestore);
@@ -35,106 +39,24 @@ firebase deploy
 •	хранение картинок, загруженных пользователями (Storage);
 •	хостинг сайта (Hosting).
 
-#Frontend
+###Frontend
 Проект реализован на технологиях HTML5, CSS3, ReactJS (функциональный подход)
 При оформлении стилей использовалась методология BEM.
 
-###Дополнительные компоненты:
+####Дополнительные компоненты:
 •	react-elastic-carousel (для карусели карточек);
+
 •	react-simple-timestamp-to-date (для преобразования timestamp в дату);
+
 •	react-router-dom (для навигации);
+
 •	uuid (для генерации ключей);
+
 •	classnames (для управления классами)
 
-###Разрешения / Браузеры /SEO
-•	Сайт корректно отображается на всех стандартных разрешениях: от 320px до 1440px и выше
-•	Корректная работа всей функциональности сайта протестирована на браузерах Chrome, Safari под операционными системами MacOS, iOS, Android, Windows
-•	Проведены начальные SEO мероприятия: сделаны метатеги, добавлена favicon
+####Разрешения / Браузеры /SEO
+•	Сайт корректно отображается на всех стандартных разрешениях: от 320px до 1440px и выше.
 
+•	Корректная работа всей функциональности сайта протестирована на браузерах Chrome, Safari под операционными системами MacOS, iOS, Android, Windows.
 
-
-
-
-
-
-
-# freespeech2025
-сайт доступен по адресу freespeech2025.com
-
-=======
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-
-## Deploy
-### `npm run build`
-
-### `firebase deploy`
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+•	Проведены начальные SEO мероприятия: сделаны метатеги, добавлена favicon.
