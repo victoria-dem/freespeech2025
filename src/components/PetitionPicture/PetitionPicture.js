@@ -1,8 +1,6 @@
 import React, {useState, useEffect, useContext, useRef} from 'react';
 import {storage} from "../../utils/firebase";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
-import deleteButton from '../../images/del_button.svg'
-import Loader from 'react-loader-spinner'
 import './petition-picture.css'
 import loader from '../../images/spinner.svg'
 
@@ -26,8 +24,6 @@ function PetitionPicture({
     })
     const hiddenFileInput = useRef(null);
     
-    // console.log(isPictureChosen, isPicUploaded)
-    
     const handleChoosePicture = e => {
         setPicture(e.target.files[0])
         setIsPictureChosen(true)
@@ -39,7 +35,6 @@ function PetitionPicture({
     
     const resetFileInput = e => {
         e.target.value = null;
-        // TODO: избыточный код???
         setPicture([])
         setIsPictureChosen(false)
         setIsPicUploaded(false)
@@ -64,7 +59,6 @@ function PetitionPicture({
             //  надо попробовать загружать ее под именем timestamp+имя
             thisRef.put(picture).then(function (snapshot) {
                 setIsPicUploaded(true)
-                // const percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
             }).catch((err) => console.log(err));
         }
     }, [isPictureChosen, picture])
@@ -93,9 +87,9 @@ function PetitionPicture({
                     Для того чтобы создать инициативу,
                 </p>
                 <p className="petition-form__anonymous-user-msg-text">
-                    <a className="petition-form__anonymous-user-msg-link" onClick={handleAccountBtnClick}>
+                    <div className="petition-form__anonymous-user-msg-link" onClick={handleAccountBtnClick}>
                         залогиньтесь
-                    </a> пожалуйста.
+                    </div> пожалуйста.
                 </p>
             </div>}
             
@@ -111,7 +105,7 @@ function PetitionPicture({
                         onClick={handlePictureUpload}>
                 </button>
                 <span className="petition-form__button-text">
-                    <a className="petition-form__pic-upload-link" onClick={handlePictureUpload}>Загрузите картинку</a>
+                    <div className="petition-form__pic-upload-link" onClick={handlePictureUpload}>Загрузите картинку</div>
                 </span>
             </>}
             
@@ -128,29 +122,14 @@ function PetitionPicture({
             {isPictureChosen && !isPicUploaded &&
             <div className="petition-form__progress-bar">
                 <img className="petition-form__progress-bar-loader" src={loader} alt='loader'/>
-                {/*<Loader*/}
-                {/*    type="TailSpin"*/}
-                {/*    color="#3348d0"*/}
-                {/*    height={40}*/}
-                {/*    width={40}*/}
-                {/*    timeout={13000}*/}
-                {/*/>*/}
             </div>
             }
-            {/*{isPictureReady &&*/}
-            {/*<img className="petition-form__delete-btn"*/}
-            {/*     src={deleteButton}*/}
-            {/*     alt="delete-btn"*/}
-            {/*     onClick={handleDeleteButtonClick}*/}
-            {/*/>}*/}
-    
+            
             {isPictureReady &&
             <div
                 className="petition-form__delete-btn"
                 onClick={handleDeleteButtonClick}
             />}
-
-
         </div>
     )
 }

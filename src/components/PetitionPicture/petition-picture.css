@@ -7,8 +7,6 @@
   box-sizing: border-box;
 }
 
-
-
 @media screen and (max-width: 500px) {
   .petition-form__user-picture-element {
     width: 253px;
@@ -16,12 +14,10 @@
   }
 }
 
-
 .petition-form__anonymous-user-msg {
   margin: 20px 0 0 0;
-  padding: 0 0 0 0;
+  padding: 0;
 }
-
 
 .petition-form__anonymous-user-msg-text {
   margin: 5px 0 0 0;
@@ -48,13 +44,11 @@
   position: absolute;
   top: 0;
   left: 0;
-  /*position: relative;*/
   width: 344px;
   height: 190px;
   border-radius: 16px;
   box-sizing: border-box;
 }
-
 
 @media screen and (max-width: 500px) {
   .petition-form__user-picture {
@@ -62,9 +56,6 @@
     height: 134px;
   }
 }
-
-
-
 
 .petition-form__picture {
   display: none;
@@ -83,7 +74,6 @@
   cursor: pointer;
 }
 
-
 @media screen and (max-width: 500px) {
   .petition-form__button {
     top: 64px;
@@ -91,8 +81,6 @@
     background: url("../../images/pic_download_mobile.svg") no-repeat;
   }
 }
-
-
 
 .petition-form__button:focus {
   border: none;
@@ -110,7 +98,6 @@
 .petition-form__button:visited {
   border: none;
 }
-
 
 .petition-form__picture_invisible {
   display: none;
@@ -191,7 +178,6 @@
 
 .petition-form__delete-btn:hover {
   background: url("../../images/del_button_hover.svg");
-
 }
 
 .petition-form__delete-btn:active {
