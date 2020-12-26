@@ -1,207 +1,217 @@
 .header {
-    display: grid;
-    max-width: 100vw;
-    align-items: center;
-    border-bottom: #cbc8c8 1px solid;
-    grid-template-columns: 100px 2fr 1fr 40px;
-    position: relative;
-    height: 100px;
-    padding: 5px 30px 0 30px;
+  display: grid;
+  max-width: 100vw;
+  align-items: center;
+  border-bottom: #cbc8c8 1px solid;
+  grid-template-columns: 100px 2fr 1fr 40px;
+  position: relative;
+  height: 100px;
+  padding: 5px 30px 0 30px;
 }
 
 .header_menu-visible {
-    display: grid;
+  display: grid;
 }
 
 .header__nickname-title_hamburger {
-    font-size: 12px;
-    line-height: 14px;
-    color: #000;
+  font-size: 12px;
+  line-height: 14px;
+  color: #000;
 }
 
 .header_menu-hidden {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    max-width: 1440px;
-    width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 1440px;
+  width: 100%;
 }
 
 .header__button {
-    outline: none;
-    background-color: #fff;
-    border: none;
+  outline: none;
+  background-color: #fff;
+  border: none;
+  opacity: 0;
 }
 
+.header__button_visibility {
+  opacity: 1;
+  transition: opacity 2.5s ease-in;
+}
+
+
 .header__button:hover {
-    opacity: 0.8;
-    transition: opacity 0.4s ease-out;
-    cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.4s ease-out;
+  cursor: pointer;
 }
 
 .header__button:focus {
-    outline: none;
+  outline: none;
 }
 
 .header__nickname-title {
-    margin: 0;
-    padding: 0;
-    text-align: left;
-    color: #759196;
-    font-weight: 400;
-    font-size: 12px;
-    font-family: 'Montserrat', sans-serif;
-    line-height: 14px;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  color: #759196;
+  font-weight: 400;
+  font-size: 12px;
+  font-family: 'Montserrat', sans-serif;
+  line-height: 14px;
 }
 
 .header__nickname {
-    margin: 0;
-    padding: 0;
-    text-align: left;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 19px;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
 }
 
 .header__nickname-content {
-    justify-self: end;
-    opacity: 0;
-    display: flex;
+  justify-self: end;
+  opacity: 0;
+  display: flex;
 }
 
 .header__nickname-content_visibility {
-    opacity: 1;
-    transition: opacity 1s linear;
+  opacity: 1;
+  transition: opacity 2s linear;
 }
 
 .logo {
-    padding: 0 10px 0 10px;
-    margin-right: 15px;
+  padding: 0 10px 0 10px;
+  margin-right: 15px;
 }
 
 .header__nickname-text {
-    display: flex;
-    flex-direction: column;
-    padding-right: 40px;
+  display: flex;
+  flex-direction: column;
+  padding-right: 40px;
 }
 
 .header__user-icon {
-    padding-right: 16px;
+  padding-right: 16px;
 }
 
 .header__button-image {
-    height: 34px;
-    width: 34px;
-    position: center;
+  height: 34px;
+  width: 34px;
+  position: center;
 }
 
 .header__button-image_login {
-    background-image: url("../../images/login.svg");
-    background-repeat: no-repeat;
+  background-image: url("../../images/login.svg");
+  background-repeat: no-repeat;
 }
 
 .header__button-image_login:hover {
-    background-image: url("../../images/login-pink.svg");
-    background-repeat: no-repeat;
+  background-image: url("../../images/login-pink.svg");
+  background-repeat: no-repeat;
 }
 
 .header__button-image_login:active {
-    background-image: url("../../images/login-red.svg");
-    background-repeat: no-repeat;
+  background-image: url("../../images/login-red.svg");
+  background-repeat: no-repeat;
 }
 
 .header__button-image_logout {
-    background-image: url("../../images/logout.svg");
-    background-repeat: no-repeat;
+  background-image: url("../../images/logout.svg");
+  background-repeat: no-repeat;
 }
 
 .header__button-image_logout:hover {
-    background-image: url("../../images/logout-pink.svg");
-    background-repeat: no-repeat;
+  background-image: url("../../images/logout-pink.svg");
+  background-repeat: no-repeat;
 }
 
 .header__button-image_logout:active {
-    background-image: url("../../images/logout-red.svg");
-    background-repeat: no-repeat;
+  background-image: url("../../images/logout-red.svg");
+  background-repeat: no-repeat;
 }
 
 
 @media screen and (max-width: 1086px) and (min-width: 822px) {
-    .logo{
-        width: 55px;
-    }
+  .logo {
+    width: 55px;
+  }
 
-.header{
+  .header {
     height: 81px;
     grid-template-columns: 60px 1.5fr 1fr 50px;
     position: relative;
     padding: 5px 10px 0 10px;
-}
+  }
 
-.header__user-icon {
+  .header__user-icon {
     height: 28px;
     align-self: center;
     justify-self: center;
-}
+  }
 
-    .header__nickname-title {
-        font-size: 12px;
-        line-height: 14px;
-    }
-    .header__nickname {
-        font-size: 14px;
-        line-height: 17px;
-    }
+  .header__nickname-title {
+    font-size: 12px;
+    line-height: 14px;
+  }
 
-    .header__button-image {
-        height: 28px;
-        background-size: contain;
-    }
+  .header__nickname {
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .header__button-image {
+    height: 28px;
+    background-size: contain;
+  }
 }
 
 @media screen and (max-width: 821px) and (min-width: 501px) {
-    .header {
-        display: grid;
-        grid-template-columns: 60px 1fr 50px;
-    }
-    .header__nickname-content {
-        display: none;
-    }
-    .logo{
-        width: 55px;
-    }
+  .header {
+    display: grid;
+    grid-template-columns: 60px 1fr 50px;
+  }
+
+  .header__nickname-content {
+    display: none;
+  }
+
+  .logo {
+    width: 55px;
+  }
 
 }
 
 @media screen and (max-width: 500px) {
-    .header {
-        display: grid;
-        grid-template-columns: 48px 1fr 48px;
-        height: 60px;
-        padding: 5px 30px 0 0;
-    }
+  .header {
+    display: grid;
+    grid-template-columns: 48px 1fr 48px;
+    height: 60px;
+    padding: 5px 30px 0 0;
+  }
 
-    .logo {
-        grid-row-start: 1;
-        grid-row-end: 1;
-        grid-column-start: 2;
-        grid-column-end: 2;
-        justify-self: center;
-        width: 55px;
-    }
+  .logo {
+    grid-row-start: 1;
+    grid-row-end: 1;
+    grid-column-start: 2;
+    grid-column-end: 2;
+    justify-self: center;
+    width: 55px;
+  }
 
-    .header__nickname-content {
-        display: none;
-    }
+  .header__nickname-content {
+    display: none;
+  }
 
-    .header__button {
-        grid-row-start: 1;
-        grid-row-end: 1;
-        grid-column-start: 3;
-        grid-column-end: 3;
-    }
+  .header__button {
+    grid-row-start: 1;
+    grid-row-end: 1;
+    grid-column-start: 3;
+    grid-column-end: 3;
+  }
 }
