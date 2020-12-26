@@ -8,8 +8,7 @@ function Banner() {
             <div className="banner__overlay">
                 {/*<img className="banner__image" src={banner} alt="banner"/>*/}
                 <div className="banner__text-container">
-                    <h1 className="banner__title">Цензура больше не проблема! Опубликуем инициативу цитатой великого
-                        классика</h1>
+                    <h1 className="banner__title">Цензура больше не проблема! Опубликуем инициативу цитируя великих классиков</h1>
                     <div className="banner__link-button">
                         <a className="banner__link" href="#petition-form">Написать</a>
                     </div>
