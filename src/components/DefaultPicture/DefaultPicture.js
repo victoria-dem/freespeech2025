@@ -12,7 +12,7 @@ function DefaultPicture({url, getDefaultPetitionPicData, isTextReadyToRender}){
     
     function handleDefaultPictureClick(e) {
         e.preventDefault();
-        if (isTextReadyToRender && currentUser.uid) {
+        if (isTextReadyToRender) {
             const filePath = e.target.src
             setDefaultPicName([...filePath.matchAll(/o\/(.*)\?/g)][0][1])
         }
@@ -33,7 +33,7 @@ function DefaultPicture({url, getDefaultPetitionPicData, isTextReadyToRender}){
         <>
             <img
                 className={cn("petition-form__default-picture", {"petition-form__default-picture_cursor" : isReadyToClick})}
-                src={isTextReadyToRender && currentUser.uid ? url : greyPic}
+                src={isTextReadyToRender ? url : greyPic}
                 alt={'картинка по умолчанию'}
                 onClick={handleDefaultPictureClick}/>
         </>

@@ -24,6 +24,8 @@ function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
     const [isAnimationIn, setIsAnimationIn] = React.useState(false)
     const [isDefaultPictureChosen, setIsDefaultPictureChosen] =useState(false)
 
+    console.log(isPictureReady)
+    
     const handleDeletePicture = () => {
         if (url) {
             setUrl('')
@@ -94,12 +96,15 @@ function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
 
     // создание записи в db
     useEffect(() => {
-        if (isPetitionSubmitted && currentUser.uid) {
+        console.log('we are here')
+        
+        // if (isPetitionSubmitted && currentUser.uid) {
+        if (isPetitionSubmitted) {
             // setIsLoaded(true)
             setIsPetitionPublished(false)
             const timestamp = Date.now().toString();
             const data = {
-                uid: currentUser.uid,
+                uid: currentUser.uid || '000000',
                 petition: poemText,
                 petitionTag: tagText,
                 isPublic: isPublic,
@@ -110,7 +115,7 @@ function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
                 likes: [],
                 disLikes: [],
                 url: url,
-                nick: nickname
+                nick: nickname || 'Анонимный пиит'
             }
             db.collection("petitions")
                 .add(data)
