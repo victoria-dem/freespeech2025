@@ -23,7 +23,7 @@ function DefaultPicture({url, getDefaultPetitionPicData, isTextReadyToRender}){
     },[defaultPicName])
     
     useEffect(()=>{
-        if (isTextReadyToRender && currentUser.uid) {
+        if (isTextReadyToRender) {
             setIsReadyToClick(true)
         }
         
