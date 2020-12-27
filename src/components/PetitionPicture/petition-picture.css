@@ -21,7 +21,18 @@
 
 .petition-form__anonymous-user-msg-text {
   margin: 5px 0 0 0;
-  padding: 0;
+  padding: 0 0 0 16px;
+
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0;
+  text-align: left;
+  color: #575D68;
+
+
 }
 
 .petition-form__anonymous-user-msg-link {
