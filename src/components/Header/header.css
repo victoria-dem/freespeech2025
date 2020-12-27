@@ -200,6 +200,7 @@
     grid-column-end: 2;
     justify-self: center;
     width: 55px;
+    margin: 0px;
   }
 
   .header__nickname-content {
@@ -211,5 +212,9 @@
     grid-row-end: 1;
     grid-column-start: 3;
     grid-column-end: 3;
+  }
+
+  .header__button-image {
+    width: 100%;
   }
 }

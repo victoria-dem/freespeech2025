@@ -104,7 +104,7 @@
 }
 
 .header__hamburger-close {
-    width: 23px;
+    /* width: 23px; */
     height: 23px;
     border: none;
     background-color: #fff;
