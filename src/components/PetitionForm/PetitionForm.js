@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import './petition-form.css'
 import {db} from '../../utils/firebase'
 import petitionTextPrep from "../../utils/petitionTextPrep";
 import petitionDefaultTextPrep from "../../utils/petitionDefaultTextPrep";
 import cn from 'classnames';
 import {obsceneVocabulary} from '../../data/data'
+import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 
 const validators = {
     petitionTag: {
@@ -29,7 +30,7 @@ const validators = {
 }
 
 function PetitionForm({getPetitionTextData, resetTextInputs}) {
-
+    const currentUser = useContext(CurrentUserContext);
     const [petitionValues, setPetitionValues] = React.useState({
         petitionTag: '',
         petition: '',
@@ -199,6 +200,7 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
                             onBlur={handleOnBlur}
                             value={petitionValues.petitionTag}
                             autoComplete="off"
+                            disabled={!currentUser.uid}
                         />
                         <span className="petition-form__form-error">{errorMessage.errorMessageTag}</span>
                     </label>
@@ -215,6 +217,7 @@ function PetitionForm({getPetitionTextData, resetTextInputs}) {
                             onChange={handleChange}
                             value={petitionValues.petition}
                             autoComplete="off"
+                            disabled={!currentUser.uid}
                         />
                         <span className="petition-form__form-error petition-form__form-error_position">
                             {errorMessage.errorMessageText}
