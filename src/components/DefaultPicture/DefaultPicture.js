@@ -1,12 +1,10 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect} from 'react';
 import greyPic from '../../images/grey_default_pic.png'
-import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import cn from 'classnames';
 import './default-picture.css'
 
-function DefaultPicture({url, getDefaultPetitionPicData, isTextReadyToRender}){
+function DefaultPicture({url, getDefaultPetitionPicData, isTextReadyToRender, setIsAnimationIn}){
     
-    const currentUser = useContext(CurrentUserContext);
     const [defaultPicName, setDefaultPicName] = useState('')
     const [isReadyToClick, setIsReadyToClick] = useState(false)
     
@@ -19,23 +17,32 @@ function DefaultPicture({url, getDefaultPetitionPicData, isTextReadyToRender}){
     }
     
     useEffect(()=>{
+        if (defaultPicName) {
+            setIsAnimationIn(false)
+        }
+    }, [defaultPicName])
+    
+    useEffect(()=>{
         getDefaultPetitionPicData(defaultPicName)
     },[defaultPicName])
     
-    useEffect(()=>{
-        if (isTextReadyToRender) {
-            setIsReadyToClick(true)
-        }
-        
-    }, [isTextReadyToRender])
-
+    // useEffect(()=>{
+    //     if (isTextReadyToRender) {
+    //             setIsReadyToClick(true)
+    //     } else {
+    //         setIsReadyToClick(false)
+    //     }
+    //
+    // }, [isTextReadyToRender])
+// console.log('default')
     return(
         <>
             <img
-                className={cn("petition-form__default-picture", {"petition-form__default-picture_cursor" : isReadyToClick})}
+                className={cn("petition-form__default-picture", {"petition-form__default-picture_cursor" : isTextReadyToRender})}
                 src={isTextReadyToRender ? url : greyPic}
                 alt={'картинка по умолчанию'}
-                onClick={handleDefaultPictureClick}/>
+                onClick={handleDefaultPictureClick}
+            />
         </>
     )
 }

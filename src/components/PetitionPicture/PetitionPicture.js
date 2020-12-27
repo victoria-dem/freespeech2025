@@ -11,7 +11,8 @@ function PetitionPicture({
                              isPetitionPublished,
                              isPictureReady,
                              isDefaultPictureChosen,
-                             handleAccountBtnClick
+                             handleAccountBtnClick,
+                             setIsAnimationIn
                          }) {
     const currentUser = useContext(CurrentUserContext);
     const [picture, setPicture] = useState({})
@@ -29,6 +30,9 @@ function PetitionPicture({
         setIsPictureChosen(true)
     }
     
+    
+    
+    
     const handlePictureUpload = (e) => {
         hiddenFileInput.current.click();
     }
@@ -44,6 +48,13 @@ function PetitionPicture({
         handleDeletePicture()
         setIsPictureChosen(false)
     }
+    
+    useEffect(()=>{
+        if (isPictureChosen) {
+            setIsAnimationIn(false)
+        }
+    }, [isPictureChosen])
+    
     
     useEffect(() => {
         // TODO: подумать надо ли нам сделать внутренний bucket для картинок

@@ -43,13 +43,10 @@ function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
     const resetPublishState = (state) => {
         setIsPetitionPublished(state)
     }
-
+    
     useEffect(() => {
         if (isTextReadyToRender && poemText) {
             setIsAnimationIn(true)
-            setTimeout(()=>{
-                setIsAnimationIn(false)
-            }, 3000)
         }
     }, [isTextReadyToRender, poemText])
 
@@ -153,10 +150,13 @@ function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
                     isPictureReady={isPictureReady}
                     isDefaultPictureChosen={isDefaultPictureChosen}
                     handleAccountBtnClick={handleAccountBtnClick}
+                    setIsAnimationIn={setIsAnimationIn}
                 />
                 <PetitionDefaultPictures
                     getDefaultPetitionPicData={getDefaultPetitionPicData}
-                    isTextReadyToRender={isTextReadyToRender} />
+                    isTextReadyToRender={isTextReadyToRender}
+                    setIsAnimationIn={setIsAnimationIn}
+                />
             </div>
             <PetitionSubmitBtn
                 getSubmitPetitionEvent={getSubmitPetitionEvent}

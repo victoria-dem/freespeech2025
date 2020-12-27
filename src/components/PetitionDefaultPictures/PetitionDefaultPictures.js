@@ -5,7 +5,7 @@ import getDefaultPictures from "../../utils/defaultPictures";
 import {v4 as uuidv4} from 'uuid';
 import DefaultPicture from "../DefaultPicture/DefaultPicture"
 
-function PetitionDefaultPictures({getDefaultPetitionPicData, isTextReadyToRender, handleIsPublicState}) {
+function PetitionDefaultPictures({getDefaultPetitionPicData, isTextReadyToRender, handleIsPublicState, setIsAnimationIn}) {
     
     const [defaultPicUrls, setDefaultPicUrls] = useState([])
     const picDataSet = getDefaultPictures()
@@ -38,6 +38,7 @@ function PetitionDefaultPictures({getDefaultPetitionPicData, isTextReadyToRender
                                                              getDefaultPetitionPicData={getDefaultPetitionPicData}
                                                              isTextReadyToRender={isTextReadyToRender}
                                                              handleIsPublicState={handleIsPublicState}
+                                                             setIsAnimationIn={setIsAnimationIn}
                     />
                 )}
             </div>
