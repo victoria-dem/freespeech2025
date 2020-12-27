@@ -89,7 +89,7 @@ function PetitionPicture({
                     </span>,
                 </p>
                 <p className="petition-form__anonymous-user-msg-text">
-                    чтобы добавить фото.
+                    чтобы поставить свою иллюстрацию.
                 </p>
             </div>}
             
