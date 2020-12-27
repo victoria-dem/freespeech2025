@@ -13,7 +13,7 @@ const PetitionCardInfo = ({ petition, onLikeClick, isLoggedIn }) => {
   const isLiked = petition.data.likes.some((i) => i.uid === currentUser.uid);
   const likeChallenge = 5;
   // const isAchieved = petition.like.length > likeChallenge;
-  const isAchieved = (petition.data.likes.length > likeChallenge);
+  const isAchieved = (petition.data.likes.length >= likeChallenge);
   const petitionLikeButtonClassName = (
     `petition-card__like ${isLiked ?
       'petition-card__like_active' :
