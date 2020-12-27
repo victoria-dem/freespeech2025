@@ -62,7 +62,6 @@ function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
 
     const getDefaultPetitionPicData = (defaultPicName) => {
         if (defaultPicName) {
-            console.log('default picture chosen')
             setIsDefaultPictureChosen(true)
             setPictureData({
                 picFullPath: defaultPicName,
