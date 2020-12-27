@@ -61,7 +61,7 @@ div.rec-item-wrapper {
   line-height: 1.22;
   color: #759196;
   display: flex;
-  width: 228px;
+  max-width: 343px;
   justify-content: start;
   align-items: flex-end;
 }
@@ -314,6 +314,7 @@ div.rec-item-wrapper {
   .petition-card__timestamp {
     font-size: 12px;
     margin: 0;
+    max-width: 250px;
   }
 
   .petition-card__tag {
@@ -413,6 +414,7 @@ div.rec-item-wrapper {
   .petition-card__timestamp {
     font-size: 12px;
     margin-top: 4px;
+    max-width: 250px;
   }
 
   .petition-card__tag {
@@ -516,6 +518,7 @@ div.rec-item-wrapper {
   .petition-card__timestamp {
     font-size: 8px;
     margin-top: 4px;
+    max-width: 166px;
   }
 
   .petition-card__tag {
