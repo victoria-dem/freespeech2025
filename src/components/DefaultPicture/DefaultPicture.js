@@ -27,7 +27,7 @@ function DefaultPicture({url, getDefaultPetitionPicData, isTextReadyToRender}){
             setIsReadyToClick(true)
         }
         
-    }, [currentUser.uid, isTextReadyToRender])
+    }, [isTextReadyToRender])
 
     return(
         <>
