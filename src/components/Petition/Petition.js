@@ -23,8 +23,6 @@ function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
     const [isPublic, setIsPublic] = useState(false)
     const [isAnimationIn, setIsAnimationIn] = React.useState(false)
     const [isDefaultPictureChosen, setIsDefaultPictureChosen] =useState(false)
-
-    console.log(isPictureReady)
     
     const handleDeletePicture = () => {
         if (url) {
@@ -96,11 +94,7 @@ function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
 
     // создание записи в db
     useEffect(() => {
-        console.log('we are here')
-        
-        // if (isPetitionSubmitted && currentUser.uid) {
         if (isPetitionSubmitted) {
-            // setIsLoaded(true)
             setIsPetitionPublished(false)
             const timestamp = Date.now().toString();
             const data = {
