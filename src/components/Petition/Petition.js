@@ -115,7 +115,7 @@ function Petition({ onAddPetition, nickname, handleAccountBtnClick }) {
                 likes: [],
                 disLikes: [],
                 url: url,
-                nick: nickname || 'Анонимный пиит'
+                nick: nickname || 'Анонимный автор'
             }
             db.collection("petitions")
                 .add(data)
